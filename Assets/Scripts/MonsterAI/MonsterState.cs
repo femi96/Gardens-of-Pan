@@ -11,8 +11,6 @@ public class MonsterState : ScriptableObject {
 	public MonsterAction[] actions;
 	public MonsterFactor[] factors;
 
-	[HideInInspector]public bool done = false;
-
 
 	// Called each update to run state
 	public void UpdateState(Monster mon) {

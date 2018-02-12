@@ -30,6 +30,7 @@ public class Monster : Unit {
 	public MonsterState[] states;
 	public float stateTime;
 
+	[HideInInspector]public bool stateDone = false;
 	[HideInInspector]public Dictionary<MonsterState, int> statesSinceState;
 	[HideInInspector]public MonsterState possibleState;
 	[HideInInspector]public Vector3 moveDestination;
@@ -57,7 +58,7 @@ public class Monster : Unit {
 
 		// MonsterAI state updates
 		stateTime += Time.deltaTime;
-		if(currentState == null || currentState.done) { ChangeState(); }
+		if(currentState == null || stateDone) { ChangeState(); }
 		currentState.UpdateState(this);
 
 		// Movement updates
@@ -179,7 +180,7 @@ public class Monster : Unit {
 		currentState = nextState;
 
 		// Update current state and setup to run
-		currentState.done = false;
+		stateDone = false;
 		stateTime = 0f;
 		statesSinceState[currentState] = 0;
 	}

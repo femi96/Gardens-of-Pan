@@ -28,9 +28,9 @@ public class MA_Wander : MonsterAction {
 		// Check if reached
 		mon.moveDestination.y = mon.transform.position.y;
 		float dist = (mon.moveDestination - mon.transform.position).magnitude;
-		if(dist < mon.radius) { mon.currentState.done = true; }
+		if(dist < mon.radius) { mon.stateDone = true; }
 
 		// State exit procedure
-		if(mon.currentState.done) { mon.moving = false; }
+		if(mon.stateDone) { mon.moving = false; }
 	}
 }

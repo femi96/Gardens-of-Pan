@@ -14,7 +14,7 @@ public class MA_Timeout : MonsterAction {
 	// Ends current state after set time
 	public override void Act(Monster mon) {
 		if(mon.stateTime > timeout) {
-			mon.currentState.done = true;
+			mon.stateDone = true;
 		}
 	}
 }
