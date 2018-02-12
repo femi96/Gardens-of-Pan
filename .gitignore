@@ -18,7 +18,6 @@ Assets/AssetStoreTools*
 Icon?
 ehthumbs.db
 Thumbs.db
-*.sublime-workspace
 *.sln
 *.sublime-workspace
 *.sublime-project
