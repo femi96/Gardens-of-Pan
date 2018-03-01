@@ -10,12 +10,18 @@ public class Chunk : MonoBehaviour {
 	public GameObject[] blocksPrefabs;
 
 	// Block variables:
+	[Header("Blocks")]
 	public Block[,] blockMap;		// holds block info, accessible
 	private GameObject[,] chunkMap;	// holds block gameObject in scene
 
 	private Transform blockContainer;
 	private Garden garden;
 	private int gardenSize;
+
+	// Spawns variables:
+	[Header("Spawns")]
+	public SpawnPoint[,] xSpawnPoints;
+	public SpawnPoint[,] zSpawnPoints;
 
 
 	// Unity MonoBehavior Functions:
@@ -95,5 +101,22 @@ public class Chunk : MonoBehaviour {
 		GameObject go = Instantiate(newBlock, new Vector3(px, -0.5f, pz), Quaternion.identity, blockContainer);
 		go.name = "Chunk ("+x+", "+z+")";
 		chunkMap[x, z] = go;
+	}
+
+	// Update spawn point based on block change
+	public void UpdateSpawnPoint(int x, int z) {
+		if(true) {
+			UpdateAllSpawnPoints();
+		}
+	}
+
+	// Update spawn points from block data
+	public void UpdateAllSpawnPoints() {
+		xSpawnPoints = new SpawnPoint[gardenSize, 2];
+		zSpawnPoints = new SpawnPoint[2, gardenSize];
+
+		for(int x = 0; x < gardenSize; x++) {
+			xSpawnPoints[x, 0] = new SpawnPoint();
+		}
 	}
 }

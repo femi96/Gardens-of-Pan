@@ -9,11 +9,13 @@ public class SpawnPoint {
 	// Spawn point variables:
 	public Vector3 spawnPosition;
 	public Quaternion spawnRotation;
+	public Block block;
 
 
 	// Constructor:
-	public SpawnPoint(Vector3 pos, Quaternion rot) {
+	public SpawnPoint(Block b, Vector3 pos, Quaternion rot) {
 		spawnPosition = pos;
 		spawnRotation = rot;
+		block = b;
 	}
 }

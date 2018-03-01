@@ -11,6 +11,8 @@ public class Garden : MonoBehaviour {
 	public string gardenName;
 	public int gardenSize = 4;
 
+	public Chunk chunk;
+
 	// Day/Night variables:
 	[Header("Day/Night")]
 	public float gardenTime;
@@ -23,10 +25,7 @@ public class Garden : MonoBehaviour {
 
 	private Light dayLight;
 
-	// Spawns
-	[Header("Spawns")]
-
-	// Units
+	// Units variables:
 	[Header("Units")]
 	public float unitSizeLimit;
 	public List<Unit> units = new List<Unit>();
@@ -39,7 +38,7 @@ public class Garden : MonoBehaviour {
 
 		// Awake with components
 		// wild = GetComponent<Wild>();			// Awake w wild component
-		// chunk = GetComponent<Chunk>();		// Awake w chunk component
+		chunk = GetComponent<Chunk>();		// Awake w chunk component
 		unitsCont = transform.Find("Units");	// Awake w units container child
 
 		dayLight = transform.Find("DayLight").GetComponent<Light>();
@@ -73,11 +72,6 @@ public class Garden : MonoBehaviour {
 	}
 
 	void FixedUpdate() {}
-
-	// Update spawn points from block data
-	public void UpdateSpawnPoints() {
-
-	}
 
 	// Get total size of all units
 	public float UnitSizeCount() {
