@@ -3,11 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class DestroyTimeout : MonoBehaviour {
-	// DestroyTimeout: Controller that destroys gameObject after a set time
+	// DestroyTimeout:
+	//		Controller that destroys gameObject after a set time
 	
 
-	// Time variables:
+	// Assigned in Editor:
 	public float timeoutSeconds = 3f;
+
+	// Time variables:
 	private float time;
 
 

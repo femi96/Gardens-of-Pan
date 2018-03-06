@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Monster : Unit {
-	// Monster: Class for monsters in the garden
+	// Monster: 
+	//		Controller that handles a monster in the garden
 	
 
 	// Monster variables:

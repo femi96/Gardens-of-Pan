@@ -7,9 +7,9 @@ public class SpawnPoint {
 	
 
 	// Spawn point variables:
-	public Vector3 spawnPosition;
-	public Quaternion spawnRotation;
-	public Block block;
+	private Vector3 spawnPosition;
+	private Quaternion spawnRotation;
+	private Block block;
 
 
 	// Constructor:

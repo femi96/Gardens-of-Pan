@@ -3,7 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Garden : MonoBehaviour {
-	// Garden: Controller that handles the garden data
+	// Garden: 
+	//		Controller that handles the garden data.
+	//		Meta garden data: size, name
+	//		Time: time, day, night, lighting
+	//		Units: units in garden
 	
 
 	// Garden variables:
@@ -11,24 +15,22 @@ public class Garden : MonoBehaviour {
 	public string gardenName;
 	public int gardenSize = 4;
 
-	public Chunk chunk;
-
 	// Day/Night variables:
 	[Header("Day/Night")]
-	public float gardenTime;
+	private float gardenTime;
 	private float dayTime = 20f;
 	private float nightTime = 15f;
 	private float cycleTime;
 
-	public float dayLightIntensity;
+	private float dayLightIntensity;
 	private float dayLightMagnitude = 0.75f;
 
 	private Light dayLight;
 
 	// Units variables:
 	[Header("Units")]
-	public float unitSizeLimit;
-	public List<Unit> units = new List<Unit>();
+	private float unitSizeLimit = 4;
+	private List<Unit> units = new List<Unit>();
 
 	private Transform unitsCont; // Unit Container
 
@@ -38,7 +40,7 @@ public class Garden : MonoBehaviour {
 
 		// Awake with components
 		// wild = GetComponent<Wild>();			// Awake w wild component
-		chunk = GetComponent<Chunk>();		// Awake w chunk component
+		// chunk = GetComponent<Chunk>();		// Awake w chunk component
 		unitsCont = transform.Find("Units");	// Awake w units container child
 
 		dayLight = transform.Find("DayLight").GetComponent<Light>();

@@ -5,16 +5,20 @@ using UnityEngine;
 using System.Reflection;
 
 public class Wild : MonoBehaviour {
-	// Wild: Controller that handles wilderness data. Contains wild monsters and visit times.
+	// Wild:
+	//		Controller that handles wilderness data.
+	//		Contains wild monsters and visit times.
 
 
-	// Visit variables:
-	private int visitTime = 0;
+	// Assigned in Editor:
+	public GameObject[] wildMonsterPrefabs;
 
 	// Wild monster variables
-	public GameObject[] wildMonsters;
 	private int monsterInd = 0;
 	private Garden garden;
+	
+	// Visit variables:
+	private int visitTime = 0;
 
 	// Unity MonoBehavior Functions:
 	void Awake() {
@@ -43,13 +47,13 @@ public class Wild : MonoBehaviour {
 	public void GetWildMonster() {
 
 		// Wrap wild monster index
-		if(monsterInd >= wildMonsters.Length) {
+		if(monsterInd >= wildMonsterPrefabs.Length) {
 			monsterInd = 0;
 			return;
 		}
 
 		// Add monster if there is space and requirement is met
-		GameObject monster = wildMonsters[monsterInd];
+		GameObject monster = wildMonsterPrefabs[monsterInd];
 		if(monster.GetComponent<Monster>().RoomInGarden(garden) && monster.GetComponent<Monster>().CanVisit(garden)) {
 			garden.AddMonster(monster);
 			visitTime = 0;

@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Chunk : MonoBehaviour {
-	// Chunk: Controller for blocks
+	// Chunk:
+	//		Controller hold and changes blocks for garden
+	//		Chunks are the gameObject representations of block data
 	
 
 	// Assigned in Editor:
@@ -11,17 +13,17 @@ public class Chunk : MonoBehaviour {
 
 	// Block variables:
 	[Header("Blocks")]
-	public Block[,] blockMap;		// holds block info, accessible
-	private GameObject[,] chunkMap;	// holds block gameObject in scene
+	private Block[,] blockMap;		// Grid location to block data @ location
+	private GameObject[,] chunkMap;	// Grid location to chunks
 
-	private Transform blockContainer;
+	private Transform blockContainer; // Parent transform of chunks
 	private Garden garden;
 	private int gardenSize;
 
 	// Spawns variables:
 	[Header("Spawns")]
-	public SpawnPoint[,] xSpawnPoints;
-	public SpawnPoint[,] zSpawnPoints;
+	private SpawnPoint[,] xSpawnPoints;
+	private SpawnPoint[,] zSpawnPoints;
 
 
 	// Unity MonoBehavior Functions:
@@ -58,7 +60,7 @@ public class Chunk : MonoBehaviour {
 		int x = Mathf.RoundToInt(Mathf.Floor(v.x + g)); // Get x from v
 		int z = Mathf.RoundToInt(Mathf.Floor(v.z + g)); // Get z from v
 
-		return blockMap[x, z].type;
+		return blockMap[x, z].GetBlockType();
 	}
 
 	// Sets BlockType of block at Vector3 v to BlockType t
@@ -67,7 +69,7 @@ public class Chunk : MonoBehaviour {
 		int x = Mathf.RoundToInt(Mathf.Floor(v.x + g)); // Get x from v
 		int z = Mathf.RoundToInt(Mathf.Floor(v.z + g)); // Get z from v
 
-		blockMap[x, z].type = t;
+		blockMap[x, z].SetBlockType(t);
 
 		UpdateChunk(x, z);
 	}
@@ -82,7 +84,7 @@ public class Chunk : MonoBehaviour {
 
 		// Base prefab on BlockType
 		GameObject newBlock = blocksPrefabs[0];
-		switch(blockMap[x, z].type) {
+		switch(blockMap[x, z].GetBlockType()) {
 			case BlockType.Dirt:
 				newBlock = blocksPrefabs[1]; break;
 			case BlockType.Grass:
@@ -116,7 +118,7 @@ public class Chunk : MonoBehaviour {
 		zSpawnPoints = new SpawnPoint[2, gardenSize];
 
 		for(int x = 0; x < gardenSize; x++) {
-			xSpawnPoints[x, 0] = new SpawnPoint();
+			// xSpawnPoints[x, 0] = new SpawnPoint();
 		}
 	}
 }
