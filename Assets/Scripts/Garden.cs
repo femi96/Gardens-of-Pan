@@ -11,12 +11,10 @@ public class Garden : MonoBehaviour {
 	
 
 	// Garden variables:
-	[Header("Garden")]
 	public string gardenName;
 	public int gardenSize = 4;
 
 	// Day/Night variables:
-	[Header("Day/Night")]
 	private float gardenTime;
 	private float dayTime = 20f;
 	private float nightTime = 15f;
@@ -28,7 +26,6 @@ public class Garden : MonoBehaviour {
 	private Light dayLight;
 
 	// Units variables:
-	[Header("Units")]
 	private float unitSizeLimit = 4;
 	private List<Unit> units = new List<Unit>();
 

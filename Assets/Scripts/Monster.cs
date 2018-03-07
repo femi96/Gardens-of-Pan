@@ -9,17 +9,16 @@ public class Monster : Unit {
 
 	// Monster variables:
 	[Header("Monster")]
-	public bool owned = false;
+	public Garden garden;
+	private bool owned = false;
 
-	[HideInInspector]public Garden garden;
-
-	// Movement variables:
+	// Movement variables (prefab):
 	[Header("Movement")]
-	public bool isGrounded;
 	public float radius = 0.25f;
 	public float height = 0.25f;
 	public float moveSpeed = 0.5f;
 
+	private bool isGrounded;
 	private Vector3 velocity = new Vector3(0, 0, 0);
 	private static float gravity = 0.1f;
 	private int gLayer = 1 << 8;
@@ -29,7 +28,7 @@ public class Monster : Unit {
 	[Header("MonsterAI")]
 	public MonsterState currentState;
 	public MonsterState[] states;
-	public float stateTime;
+	private float stateTime;
 
 	[HideInInspector]public bool stateDone = false;
 	[HideInInspector]public Dictionary<MonsterState, int> statesSinceState;

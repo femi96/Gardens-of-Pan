@@ -12,7 +12,6 @@ public class Chunk : MonoBehaviour {
 	public GameObject[] blocksPrefabs;
 
 	// Block variables:
-	[Header("Blocks")]
 	private Block[,] blockMap;		// Grid location to block data @ location
 	private GameObject[,] chunkMap;	// Grid location to chunks
 
@@ -21,7 +20,6 @@ public class Chunk : MonoBehaviour {
 	private int gardenSize;
 
 	// Spawns variables:
-	[Header("Spawns")]
 	private SpawnPoint[,] xSpawnPoints;
 	private SpawnPoint[,] zSpawnPoints;
 

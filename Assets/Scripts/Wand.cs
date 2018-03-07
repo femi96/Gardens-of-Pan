@@ -5,7 +5,8 @@ using UnityEngine.UI;
 using System.Linq;
 
 public class Wand : MonoBehaviour {
-	// Wand: Controller that handles the player wand
+	// Wand:
+	//		Controller that handles the player wand and player's inputs
 	
 
 	// Assigned in Editor:
@@ -14,18 +15,17 @@ public class Wand : MonoBehaviour {
 
 	// Wand shape variables:
 	[Header("Wand Shape")]
-	public GameObject wandShape;
+	private GameObject wandShape;
 	private Transform[] wandShapePieces;
 
 	// Movement variables:
-	[Header("Movement")]
-	public float radius = 0.2f;
-	public float speed = 4f;
+	private float radius = 0.2f;
+	private float speed = 4f;
 
-	public GameObject targetUnit;
+	private GameObject targetUnit;
 
-	private int gLayer = 1 << 8;
-	private int wLayer = 1 << 9;
+	private const int gLayer = 1 << 8;
+	private const int wLayer = 1 << 9;
 
 	// Tools variables:
 	[Header("Tools")]
@@ -64,6 +64,7 @@ public class Wand : MonoBehaviour {
 	void Start() {
 
 		// Setup wand shape
+		wandShape = transform.Find("WandShape").gameObject;
 		wandShapePieces = wandShape.GetComponentsInChildren<Transform>();
 		wandShapePieces = wandShapePieces.Skip(1).ToArray(); 
 
