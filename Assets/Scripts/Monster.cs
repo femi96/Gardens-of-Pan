@@ -30,12 +30,12 @@ public class Monster : Unit {
 	public MonsterState[] states;
 	private float stateTime;
 
-	[HideInInspector]public bool stateDone = false;
-	[HideInInspector]public Dictionary<MonsterState, int> statesSinceState;
-	[HideInInspector]public MonsterState possibleState;
-	[HideInInspector]public Vector3 moveDestination;
-	[HideInInspector]public Vector3 moveDirection;
-	[HideInInspector]public bool moving = false;
+	public bool stateDone = false;
+	public Dictionary<MonsterState, int> statesSinceState;
+	public MonsterState possibleState;
+	public Vector3 moveDestination;
+	public Vector3 moveDirection;
+	public bool moving = false;
 
 
 	// Unity MonoBehavior Functions:
