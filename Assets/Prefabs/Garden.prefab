@@ -177,7 +177,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ae0b661aa23f1546b61e7657568bd70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wildMonsters:
+  wildMonsterPrefabs:
   - {fileID: 1541386915088780, guid: 0f617659039928045aeaf484a9c8e552, type: 2}
 --- !u!114 &114646340764436118
 MonoBehaviour:
@@ -209,7 +209,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gardenName: Pan
   gardenSize: 4
-  gardenTime: 0
-  dayLightIntensity: 0
-  unitSizeLimit: 2
-  units: []

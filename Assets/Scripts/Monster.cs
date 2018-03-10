@@ -28,7 +28,7 @@ public class Monster : Unit {
 	[Header("MonsterAI")]
 	public MonsterState currentState;
 	public MonsterState[] states;
-	private float stateTime;
+	public float stateTime;
 
 	public bool stateDone = false;
 	public Dictionary<MonsterState, int> statesSinceState;
@@ -87,6 +87,11 @@ public class Monster : Unit {
 	// Updates unit size
 	public virtual void UpdateSize() {
 		size = 0;
+	}
+
+	// Returns if monster is owned
+	public bool Owned() {
+		return owned;
 	}
 
 	// Applies gravity and normal forces to velocity
