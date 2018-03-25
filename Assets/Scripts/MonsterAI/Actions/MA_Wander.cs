@@ -2,35 +2,36 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu (menuName = "MonsterAI/MonsterActions/Wander")]
+[CreateAssetMenu(menuName = "MonsterAI/MonsterActions/Wander")]
 public class MA_Wander : MonsterAction {
-	// MonsterAction: MonsterAI component scripting monster actions.
+  // MonsterAction: MonsterAI component scripting monster actions.
 
 
-	// Sets a random destination in the garden and enable movement towards it
-	public override void Act(Monster mon) {
-		
-		// If no destination, pick one randomly
-		if(!mon.moving) {
-			mon.moving = true;
-			float limit = (mon.garden.gardenSize / 2f) - mon.radius;
-			mon.moveDestination = new Vector3(Random.Range(-limit, limit), 0, Random.Range(-limit, limit));
-		}
+  // Sets a random destination in the garden and enable movement towards it
+  public override void Act(Monster mon) {
 
-		// If monster path isnt valid, update path
+    // If no destination, pick one randomly
+    if (!mon.moving) {
+      mon.moving = true;
+      float limit = (mon.garden.gardenSize / 2f) - mon.radius;
+      mon.moveDestination = new Vector3(Random.Range(-limit, limit), 0, Random.Range(-limit, limit));
+    }
 
-		// Get next step on path
-		Vector3 step = mon.moveDestination - mon.transform.position;
+    // If monster path isnt valid, update path
 
-		// Set next movement to next step
-		mon.moveDirection = step;
+    // Get next step on path
+    Vector3 step = mon.moveDestination - mon.transform.position;
 
-		// Check if reached
-		mon.moveDestination.y = mon.transform.position.y;
-		float dist = (mon.moveDestination - mon.transform.position).magnitude;
-		if(dist < mon.radius) { mon.stateDone = true; }
+    // Set next movement to next step
+    mon.moveDirection = step;
 
-		// State exit procedure
-		if(mon.stateDone) { mon.moving = false; }
-	}
+    // Check if reached
+    mon.moveDestination.y = mon.transform.position.y;
+    float dist = (mon.moveDestination - mon.transform.position).magnitude;
+
+    if (dist < mon.radius) { mon.stateDone = true; }
+
+    // State exit procedure
+    if (mon.stateDone) { mon.moving = false; }
+  }
 }

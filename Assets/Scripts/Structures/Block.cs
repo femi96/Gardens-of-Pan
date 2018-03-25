@@ -3,27 +3,27 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Block {
-	// Block:
-	//		Abstract data type for tile blocks
-	//		Contains a block's type and visual variant
-	
-
-	// Block info variables:
-	private BlockType type;
-	private int variant = 0;
+  // Block:
+  //    Abstract data type for tile blocks
+  //    Contains a block's type and visual variant
 
 
-	// Constructor:
-	public Block(BlockType t) {
-		type = t;
-	}
+  // Block info variables:
+  private BlockType type;
+  private int variant = 0;
 
-	public BlockType GetBlockType() {
-		return type;
-	}
 
-	public void SetBlockType(BlockType t) {
-		type = t;
-	}
+  // Constructor:
+  public Block(BlockType t) {
+    type = t;
+  }
+
+  public BlockType GetBlockType() {
+    return type;
+  }
+
+  public void SetBlockType(BlockType t) {
+    type = t;
+  }
 
 }

@@ -3,120 +3,126 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Chunk : MonoBehaviour {
-	// Chunk:
-	//		Controller hold and changes blocks for garden
-	//		Chunks are the gameObject representations of block data
-	
-
-	// Assigned in Editor:
-	public GameObject[] blocksPrefabs;
-
-	// Block variables:
-	private Block[,] blockMap;		// Grid location to block data @ location
-	private GameObject[,] chunkMap;	// Grid location to chunks
-
-	private Transform blockContainer; // Parent transform of chunks
-	private Garden garden;
-	private int gardenSize;
-
-	// Spawns variables:
-	private SpawnPoint[,] xSpawnPoints;
-	private SpawnPoint[,] zSpawnPoints;
+  // Chunk:
+  //		Controller hold and changes blocks for garden
+  //		Chunks are the gameObject representations of block data
 
 
-	// Unity MonoBehavior Functions:
-	void Awake() {
+  // Assigned in Editor:
+  public GameObject[] blocksPrefabs;
 
-		// Awake with components
-		blockContainer = transform.Find("BlockContainer");
-		garden = GetComponent<Garden>();
-		gardenSize = garden.gardenSize;
-	}
+  // Block variables:
+  private Block[,] blockMap;		// Grid location to block data @ location
+  private GameObject[,] chunkMap;	// Grid location to chunks
 
-	void Start() {
+  private Transform blockContainer; // Parent transform of chunks
+  private Garden garden;
+  private int gardenSize;
 
-		// Create blockMap as Rough Blocks
-		blockMap = new Block[gardenSize, gardenSize];
-		for(int z = 0; z < gardenSize; z++) {
-			for(int x = 0; x < gardenSize; x++) {
-				blockMap[x, z] = new Block(BlockType.Rough);
-			}
-		}
+  // Spawns variables:
+  private SpawnPoint[,] xSpawnPoints;
+  private SpawnPoint[,] zSpawnPoints;
 
-		// Update chunkMap from blockMap
-		chunkMap = new GameObject[gardenSize, gardenSize];
-		for(int z = 0; z < gardenSize; z++) {
-			for(int x = 0; x < gardenSize; x++) {
-				UpdateChunk(x, z);
-			}
-		}
-	}
 
-	// Return BlockType of block at Vector3 v
-	public BlockType GetType(Vector3 v) {
-		float g = gardenSize/2f;
-		int x = Mathf.RoundToInt(Mathf.Floor(v.x + g)); // Get x from v
-		int z = Mathf.RoundToInt(Mathf.Floor(v.z + g)); // Get z from v
+  // Unity MonoBehavior Functions:
+  void Awake() {
 
-		return blockMap[x, z].GetBlockType();
-	}
+    // Awake with components
+    blockContainer = transform.Find("BlockContainer");
+    garden = GetComponent<Garden>();
+    gardenSize = garden.gardenSize;
+  }
 
-	// Sets BlockType of block at Vector3 v to BlockType t
-	public void SetType(Vector3 v, BlockType t) {
-		float g = gardenSize/2f;
-		int x = Mathf.RoundToInt(Mathf.Floor(v.x + g)); // Get x from v
-		int z = Mathf.RoundToInt(Mathf.Floor(v.z + g)); // Get z from v
+  void Start() {
 
-		blockMap[x, z].SetBlockType(t);
+    // Create blockMap as Rough Blocks
+    blockMap = new Block[gardenSize, gardenSize];
 
-		UpdateChunk(x, z);
-	}
+    for (int z = 0; z < gardenSize; z++) {
+      for (int x = 0; x < gardenSize; x++) {
+        blockMap[x, z] = new Block(BlockType.Rough);
+      }
+    }
 
-	// Update chunk at x, z from block data
-	private void UpdateChunk(int x, int z) {
+    // Update chunkMap from blockMap
+    chunkMap = new GameObject[gardenSize, gardenSize];
 
-		// Clear the old chunk gameObject
-		if(chunkMap[x, z] != null) {
-			Destroy(chunkMap[x, z]);
-		}
+    for (int z = 0; z < gardenSize; z++) {
+      for (int x = 0; x < gardenSize; x++) {
+        UpdateChunk(x, z);
+      }
+    }
+  }
 
-		// Base prefab on BlockType
-		GameObject newBlock = blocksPrefabs[0];
-		switch(blockMap[x, z].GetBlockType()) {
-			case BlockType.Dirt:
-				newBlock = blocksPrefabs[1]; break;
-			case BlockType.Grass:
-				newBlock = blocksPrefabs[2]; break;
-			case BlockType.Water:
-				newBlock = blocksPrefabs[3]; break;
-			case BlockType.Sand:
-				newBlock = blocksPrefabs[4]; break;
-		}
+  // Return BlockType of block at Vector3 v
+  public BlockType GetType(Vector3 v) {
+    float g = gardenSize / 2f;
+    int x = Mathf.RoundToInt(Mathf.Floor(v.x + g)); // Get x from v
+    int z = Mathf.RoundToInt(Mathf.Floor(v.z + g)); // Get z from v
 
-		// Create new chunk gameObject
-		float g = gardenSize/2f;
-		float px = x - g + 0.5f;
-		float pz = z - g + 0.5f;
+    return blockMap[x, z].GetBlockType();
+  }
 
-		GameObject go = Instantiate(newBlock, new Vector3(px, -0.5f, pz), Quaternion.identity, blockContainer);
-		go.name = "Chunk ("+x+", "+z+")";
-		chunkMap[x, z] = go;
-	}
+  // Sets BlockType of block at Vector3 v to BlockType t
+  public void SetType(Vector3 v, BlockType t) {
+    float g = gardenSize / 2f;
+    int x = Mathf.RoundToInt(Mathf.Floor(v.x + g)); // Get x from v
+    int z = Mathf.RoundToInt(Mathf.Floor(v.z + g)); // Get z from v
 
-	// Update spawn point based on block change
-	public void UpdateSpawnPoint(int x, int z) {
-		if(true) {
-			UpdateAllSpawnPoints();
-		}
-	}
+    blockMap[x, z].SetBlockType(t);
 
-	// Update spawn points from block data
-	public void UpdateAllSpawnPoints() {
-		xSpawnPoints = new SpawnPoint[gardenSize, 2];
-		zSpawnPoints = new SpawnPoint[2, gardenSize];
+    UpdateChunk(x, z);
+  }
 
-		for(int x = 0; x < gardenSize; x++) {
-			// xSpawnPoints[x, 0] = new SpawnPoint();
-		}
-	}
+  // Update chunk at x, z from block data
+  private void UpdateChunk(int x, int z) {
+
+    // Clear the old chunk gameObject
+    if (chunkMap[x, z] != null) {
+      Destroy(chunkMap[x, z]);
+    }
+
+    // Base prefab on BlockType
+    GameObject newBlock = blocksPrefabs[0];
+
+    switch (blockMap[x, z].GetBlockType()) {
+    case BlockType.Dirt:
+      newBlock = blocksPrefabs[1]; break;
+
+    case BlockType.Grass:
+      newBlock = blocksPrefabs[2]; break;
+
+    case BlockType.Water:
+      newBlock = blocksPrefabs[3]; break;
+
+    case BlockType.Sand:
+      newBlock = blocksPrefabs[4]; break;
+    }
+
+    // Create new chunk gameObject
+    float g = gardenSize / 2f;
+    float px = x - g + 0.5f;
+    float pz = z - g + 0.5f;
+
+    GameObject go = Instantiate(newBlock, new Vector3(px, -0.5f, pz), Quaternion.identity, blockContainer);
+    go.name = "Chunk (" + x + ", " + z + ")";
+    chunkMap[x, z] = go;
+  }
+
+  // Update spawn point based on block change
+  public void UpdateSpawnPoint(int x, int z) {
+    if (true) {
+      UpdateAllSpawnPoints();
+    }
+  }
+
+  // Update spawn points from block data
+  public void UpdateAllSpawnPoints() {
+    xSpawnPoints = new SpawnPoint[gardenSize, 2];
+    zSpawnPoints = new SpawnPoint[2, gardenSize];
+
+    for (int x = 0; x < gardenSize; x++) {
+      // xSpawnPoints[x, 0] = new SpawnPoint();
+    }
+  }
 }

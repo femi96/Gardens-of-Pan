@@ -5,59 +5,61 @@ using UnityEngine;
 using System.Reflection;
 
 public class Wild : MonoBehaviour {
-	// Wild:
-	//		Controller that handles wilderness data.
-	//		Contains wild monsters and visit times.
+  // Wild:
+  //		Controller that handles wilderness data.
+  //		Contains wild monsters and visit times.
 
 
-	// Assigned in Editor:
-	public GameObject[] wildMonsterPrefabs;
+  // Assigned in Editor:
+  public GameObject[] wildMonsterPrefabs;
 
-	// Wild monster variables
-	private int monsterInd = 0;
-	private Garden garden;
-	
-	// Visit variables:
-	private int visitTime = 0;
+  // Wild monster variables
+  private int monsterInd = 0;
+  private Garden garden;
 
-	// Unity MonoBehavior Functions:
-	void Awake() {
+  // Visit variables:
+  private int visitTime = 0;
 
-		// Awake with components
-		garden = GetComponent<Garden>();
-	}
+  // Unity MonoBehavior Functions:
+  void Awake() {
 
-	void Start() {}
-	
-	void Update() {}
+    // Awake with components
+    garden = GetComponent<Garden>();
+  }
 
-	void FixedUpdate() {
+  void Start() {}
 
-		// Visit 
-		if(visitTime == 50) {
-			visitTime -= 10;
-			GetWildMonster();
-		} else {
-			visitTime += 1;
-		}
-	}
+  void Update() {}
+
+  void FixedUpdate() {
+
+    // Visit
+    if (visitTime == 50) {
+      visitTime -= 10;
+      GetWildMonster();
+    } else {
+      visitTime += 1;
+    }
+  }
 
 
-	// Tries to add a wild monster to the garden
-	public void GetWildMonster() {
+  // Tries to add a wild monster to the garden
+  public void GetWildMonster() {
 
-		// Wrap wild monster index
-		if(monsterInd >= wildMonsterPrefabs.Length) {
-			monsterInd = 0;
-			return;
-		}
+    // Wrap wild monster index
+    if (monsterInd >= wildMonsterPrefabs.Length) {
+      monsterInd = 0;
+      return;
+    }
 
-		// Add monster if there is space and requirement is met
-		GameObject monster = wildMonsterPrefabs[monsterInd];
-		if(monster.GetComponent<Monster>().RoomInGarden(garden) && monster.GetComponent<Monster>().CanVisit(garden)) {
-			garden.AddMonster(monster);
-			visitTime = 0;
-		}
-		monsterInd += 1;
-	}
+    // Add monster if there is space and requirement is met
+    GameObject monster = wildMonsterPrefabs[monsterInd];
+
+    if (monster.GetComponent<Monster>().RoomInGarden(garden) && monster.GetComponent<Monster>().CanVisit(garden)) {
+      garden.AddMonster(monster);
+      visitTime = 0;
+    }
+
+    monsterInd += 1;
+  }
 }
