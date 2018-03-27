@@ -4,26 +4,22 @@ using UnityEngine;
 
 public class Block {
   // Block:
-  //    Abstract data type for tile blocks
+  //    Immutable abstract data type for tile blocks
   //    Contains a block's type and visual variant
 
 
   // Block info variables:
   private BlockType type;
-  private int variant = 0;
+  private int variant;
 
 
-  // Constructor:
+  // Creates block with BlockType t
   public Block(BlockType t) {
     type = t;
   }
 
+  // Returns BlockType of block
   public BlockType GetBlockType() {
     return type;
   }
-
-  public void SetBlockType(BlockType t) {
-    type = t;
-  }
-
 }
