@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Chunk : MonoBehaviour {
-  // Chunk:
+public class GardenBoard : MonoBehaviour {
+  // GardenBoard:
   //    Controller hold and changes blocks for garden
   //    Chunks are the gameObject representations of block data
 

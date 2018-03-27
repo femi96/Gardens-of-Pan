@@ -6,12 +6,12 @@ using System.Linq;
 
 public class Wand : MonoBehaviour {
   // Wand:
-  //		Controller that handles the player wand and player's inputs
+  //    Controller that handles the player wand and player's inputs
 
 
   // Assigned in Editor:
   public Garden garden;
-  public Chunk chunk;
+  public GardenBoard gardenBoard;
 
   // Wand shape variables:
   [Header("Wand Shape")]
@@ -136,10 +136,10 @@ public class Wand : MonoBehaviour {
     float x = Input.GetAxis("Horizontal");
     float z = Input.GetAxis("Vertical");
 
-    moveDirection = Vector3.Normalize(moveDirection);							// Don't normalize your inputs
-    Vector3 moveDirectionF = moveDirection * z;									// Project z onto forward direction vector
-    Vector3 moveDirectionR = new Vector3(moveDirection.z, 0, -moveDirection.x);	// Create right vector
-    moveDirectionR *= x;														// Project x onto right direction vector
+    moveDirection = Vector3.Normalize(moveDirection);             // Don't normalize your inputs
+    Vector3 moveDirectionF = moveDirection * z;                 // Project z onto forward direction vector
+    Vector3 moveDirectionR = new Vector3(moveDirection.z, 0, -moveDirection.x); // Create right vector
+    moveDirectionR *= x;                            // Project x onto right direction vector
 
     moveDirection = moveDirectionF + moveDirectionR;
     moveDirection *= spd;
@@ -244,45 +244,45 @@ public class Wand : MonoBehaviour {
 
     // Apply tool action to appropriate effect
     Vector3 v = transform.position;
-    BlockType gotType = chunk.GetType(v);
+    BlockType gotType = gardenBoard.GetType(v);
 
     switch (t) {
     case "Dig":
       if (gotType == BlockType.Dirt || gotType == BlockType.Grass || gotType == BlockType.Sand)
-        chunk.SetType(v, BlockType.Water);
+        gardenBoard.SetType(v, BlockType.Water);
 
       Instantiate(dirtCloud, transform.position, Quaternion.identity, effectContainer);
       break;
 
     case "Flatten":
       if (gotType == BlockType.Rough)
-        chunk.SetType(v, BlockType.Dirt);
+        gardenBoard.SetType(v, BlockType.Dirt);
 
       Instantiate(dirtCloud, transform.position, Quaternion.identity, effectContainer);
       break;
 
     case "Fill":
       if (gotType == BlockType.Water)
-        chunk.SetType(v, BlockType.Dirt);
+        gardenBoard.SetType(v, BlockType.Dirt);
 
       break;
 
     case "Plant Grass":
       if (gotType == BlockType.Dirt || gotType == BlockType.Sand)
-        chunk.SetType(v, BlockType.Grass);
+        gardenBoard.SetType(v, BlockType.Grass);
 
       Instantiate(grassCloud, transform.position, Quaternion.identity, effectContainer);
       break;
 
     case "Remove":
       if (gotType == BlockType.Grass || gotType == BlockType.Sand)
-        chunk.SetType(v, BlockType.Dirt);
+        gardenBoard.SetType(v, BlockType.Dirt);
 
       break;
 
     case "Pour Sand":
       if (gotType == BlockType.Dirt || gotType == BlockType.Grass)
-        chunk.SetType(v, BlockType.Sand);
+        gardenBoard.SetType(v, BlockType.Sand);
 
       Instantiate(sandCloud, transform.position, Quaternion.identity, effectContainer);
       break;
@@ -316,7 +316,7 @@ public class Wand : MonoBehaviour {
     case "Shovel":
       tool1 = "Dig";
       tool2 = "Fill";
-      t = chunk.GetType(transform.position);
+      t = gardenBoard.GetType(transform.position);
 
       if (t == BlockType.Rough) { tool1 = "Flatten"; tool2 = ""; }
 
@@ -325,7 +325,7 @@ public class Wand : MonoBehaviour {
     case "Grass Seed":
       tool1 = "Plant Grass";
       tool2 = "Remove";
-      t = chunk.GetType(transform.position);
+      t = gardenBoard.GetType(transform.position);
 
       if (t == BlockType.Rough || t == BlockType.Water) { tool1 = ""; tool2 = ""; }
 
@@ -334,7 +334,7 @@ public class Wand : MonoBehaviour {
     case "Sand Bag":
       tool1 = "Pour Sand";
       tool2 = "Remove";
-      t = chunk.GetType(transform.position);
+      t = gardenBoard.GetType(transform.position);
 
       if (t == BlockType.Rough || t == BlockType.Water) { tool1 = ""; tool2 = ""; }
 
