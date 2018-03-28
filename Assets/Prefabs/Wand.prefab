@@ -1249,7 +1249,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   garden: {fileID: 0}
-  chunk: {fileID: 0}
+  gardenBoard: {fileID: 0}
   toolText: {fileID: 0}
   swapLText: {fileID: 0}
   swapRText: {fileID: 0}

@@ -915,7 +915,7 @@ Prefab:
       objectReference: {fileID: 1771626594}
     - target: {fileID: 114330434569095648, guid: 2d9406c1543516e47b17f5c6a188c7f9,
         type: 2}
-      propertyPath: chunk
+      propertyPath: gardenBoard
       value: 
       objectReference: {fileID: 511140589}
     - target: {fileID: 114330434569095648, guid: 2d9406c1543516e47b17f5c6a188c7f9,
