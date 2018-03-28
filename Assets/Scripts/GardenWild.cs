@@ -4,10 +4,10 @@ using UnityEngine;
 
 using System.Reflection;
 
-public class Wild : MonoBehaviour {
-  // Wild:
-  //		Controller that handles wilderness data.
-  //		Contains wild monsters and visit times.
+public class GardenWild : MonoBehaviour {
+  // GardenWild:
+  //    Controller that handles wilderness data.
+  //    Contains wild monsters and visit times.
 
 
   // Assigned in Editor:
