@@ -3,21 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Cam : MonoBehaviour {
-  // Controller handles camera behavior, and player camera controls
+  // Controller that handles camera inputs and behaviors
 
   private Transform wand;
 
-  private float x = 0.0f;   // Current angles
+  private float x = 0.0f;   // Current camera angles
   private float y = 30.0f;
 
   private float distance = 3.0f;  // Current distance from wand
 
-  private float xSpeed = 3.0f;  // Angular change
+  private float xSpeed = 3.0f;  // Angular change rate
   private float ySpeed = 12.0f;
   private float yMinLimit = 5f; // Angle bounds
   private float yMaxLimit = 80f;
 
-  private float distanceSpeed = 0.5f; // Distance change
+  private float distanceSpeed = 0.5f; // Distance change rate
   private float distanceMin = 1f;     // Distance bounds
   private float distanceMax = 5f;
 

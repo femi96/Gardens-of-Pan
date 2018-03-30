@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class ClassFormat {
-  // Class purpose described here. Classes are:
+  // Class type that does (purpose described here)
+  //
+  //  Class types are:
   //
   //  Controller - Class that takes inputs
   //  Game controller - Class that changes game state
