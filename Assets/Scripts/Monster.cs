@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Monster : Unit {
+public abstract class Monster : Unit {
   // Monster:
   //    Controller that handles a monster in the garden
 
