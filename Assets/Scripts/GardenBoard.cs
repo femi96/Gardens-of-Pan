@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GardenBoard : MonoBehaviour {
   // GardenBoard:
-  //    Controller hold and changes blocks for garden
+  //    Controller that holds and changes blocks in the garden
   //    Chunks are the gameObject representations of block data
 
 
@@ -82,8 +82,30 @@ public class GardenBoard : MonoBehaviour {
     UpdateChunk(x, z);
   }
 
+  //
+  public List<SpawnPoint> GetSpawnPoints() {
+    List<SpawnPoint> spawnPoints = new List<SpawnPoint>();
 
-  // Returns block chunk prefab of BlockType t
+    int iMax = spawnPointMap.GetLength(0) - 1;
+    int jMax = spawnPointMap.GetLength(1) - 1;
+
+    for (int i = 0; i <= iMax; i++) {
+      if (spawnPointMap[i, 0] != null) spawnPoints.Add(spawnPointMap[i, 0]);
+
+      if (spawnPointMap[i, jMax] != null) spawnPoints.Add(spawnPointMap[i, jMax]);
+    }
+
+    for (int j = 1; j <= jMax - 1; j++) {
+      if (spawnPointMap[0, j] != null) spawnPoints.Add(spawnPointMap[0, j]);
+
+      if (spawnPointMap[iMax, j] != null) spawnPoints.Add(spawnPointMap[iMax, j]);
+    }
+
+    return spawnPoints;
+  }
+
+
+// Returns block chunk prefab of BlockType t
   private GameObject GetBlockPrefab(BlockType t) {
     GameObject newChunk = blockPrefabs[0];
 

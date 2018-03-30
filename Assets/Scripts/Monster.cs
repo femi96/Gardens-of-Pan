@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Monster : Unit {
   // Monster:
-  //		Controller that handles a monster in the garden
+  //    Controller that handles a monster in the garden
 
 
   // Monster variables:
@@ -78,6 +78,16 @@ public class Monster : Unit {
   // Returns if garden meets visit conditions
   public virtual bool CanVisit(Garden garden) {
     return false;
+  }
+
+  // Returns if garden board has a valid spawn
+  public virtual bool CanSpawn(GardenBoard board) {
+    return false;
+  }
+
+  // Returns a valid spawn from garden board, given it exists
+  public virtual SpawnPoint GetSpawn(GardenBoard board) {
+    return null;
   }
 
   // Returns if garden has enough room to enter

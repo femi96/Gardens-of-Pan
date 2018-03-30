@@ -18,6 +18,8 @@ public class SpawnPoint {
   public SpawnPoint(Block b, Vector3 pos) {
     spawnPosition = pos;
     block = b;
+
+    spawnRotation = Quaternion.identity;
   }
 
   // Returns block of spawn point
@@ -28,5 +30,9 @@ public class SpawnPoint {
   // Returns spawn position of spawn point
   public Vector3 GetPosition() {
     return spawnPosition;
+  }
+
+  public Quaternion GetRotation() {
+    return spawnRotation;
   }
 }

@@ -5,12 +5,31 @@ using UnityEngine;
 public class Worm : Monster {
   // Worm: Class of Worm
 
-  // Returns if garden meets visit conditions
   public override bool CanVisit(Garden garden) {
     return true;
   }
 
-  // Updates unit size
+  public override bool CanSpawn(GardenBoard board) {
+    List<SpawnPoint> spawnPoints =  board.GetSpawnPoints();
+
+    foreach (SpawnPoint spawn in spawnPoints) {
+      if (spawn.GetBlock().GetBlockType() == BlockType.Dirt) return true;
+    }
+
+    return false;
+  }
+
+  public override SpawnPoint GetSpawn(GardenBoard board) {
+    List<SpawnPoint> spawnPoints =  board.GetSpawnPoints();
+    List<SpawnPoint> validSpawnPoints  =  new List<SpawnPoint>();
+
+    foreach (SpawnPoint spawn in spawnPoints) {
+      if (spawn.GetBlock().GetBlockType() == BlockType.Dirt) validSpawnPoints.Add(spawn);
+    }
+
+    return validSpawnPoints[0];
+  }
+
   public override void UpdateSize() {
     size = 1;
   }

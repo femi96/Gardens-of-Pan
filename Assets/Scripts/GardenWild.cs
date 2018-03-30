@@ -7,15 +7,17 @@ using System.Reflection;
 public class GardenWild : MonoBehaviour {
   // GardenWild:
   //    Controller that handles wilderness data.
-  //    Contains wild monsters and visit times.
+  //    Manages visiting monsters, occasionally
+  //      pushing a monster and its spawn point to the garden
 
 
   // Assigned in Editor:
   public GameObject[] wildMonsterPrefabs;
 
-  // Wild monster variables
+  // Monster variables
   private int monsterInd = 0;
   private Garden garden;
+  private GardenBoard gardenBoard;
 
   // Visit variables:
   private int visitTime = 0;
@@ -25,6 +27,7 @@ public class GardenWild : MonoBehaviour {
 
     // Awake with components
     garden = GetComponent<Garden>();
+    gardenBoard = GetComponent<GardenBoard>();
   }
 
   void Start() {}
@@ -36,7 +39,7 @@ public class GardenWild : MonoBehaviour {
     // Visit
     if (visitTime == 50) {
       visitTime -= 10;
-      GetWildMonster();
+      TryAddWildMonster();
     } else {
       visitTime += 1;
     }
@@ -44,7 +47,7 @@ public class GardenWild : MonoBehaviour {
 
 
   // Tries to add a wild monster to the garden
-  public void GetWildMonster() {
+  private void TryAddWildMonster() {
 
     // Wrap wild monster index
     if (monsterInd >= wildMonsterPrefabs.Length) {
@@ -53,10 +56,16 @@ public class GardenWild : MonoBehaviour {
     }
 
     // Add monster if there is space and requirement is met
-    GameObject monster = wildMonsterPrefabs[monsterInd];
+    GameObject monsterGo = wildMonsterPrefabs[monsterInd];
+    Monster monster = monsterGo.GetComponent<Monster>();
 
-    if (monster.GetComponent<Monster>().RoomInGarden(garden) && monster.GetComponent<Monster>().CanVisit(garden)) {
-      garden.AddMonster(monster);
+    bool roomInGarden = monster.RoomInGarden(garden);
+    bool canVisit = monster.CanVisit(garden);
+    bool canSpawn = monster.CanSpawn(gardenBoard);
+
+    if (roomInGarden && canVisit && canSpawn) {
+      SpawnPoint spawn = monster.GetSpawn(gardenBoard);
+      garden.AddMonster(monsterGo, spawn);
       visitTime = 0;
     }
 

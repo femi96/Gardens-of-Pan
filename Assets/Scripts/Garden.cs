@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class Garden : MonoBehaviour {
   // Garden:
-  //		Controller that handles the garden data.
-  //		Meta garden data: size, name
-  //		Time: time, day, night, lighting
-  //		Units: units in garden
+  //    Controller that handles the garden data.
+  //    Meta garden data: size, name
+  //    Time: time, day, night, lighting
+  //    Units: units in garden
 
 
   // Garden variables:
@@ -36,9 +36,9 @@ public class Garden : MonoBehaviour {
   void Awake() {
 
     // Awake with components
-    // wild = GetComponent<Wild>();			// Awake w wild component
-    // chunk = GetComponent<Chunk>();		// Awake w chunk component
-    unitsCont = transform.Find("Units");	// Awake w units container child
+    // wild = GetComponent<Wild>();     // Awake w wild component
+    // chunk = GetComponent<Chunk>();   // Awake w chunk component
+    unitsCont = transform.Find("Units");  // Awake w units container child
 
     dayLight = transform.Find("DayLight").GetComponent<Light>();
   }
@@ -91,10 +91,9 @@ public class Garden : MonoBehaviour {
   }
 
   // Instantiate Monster from prefab and add to collection
-  public void AddMonster(GameObject newMonster) {
-    GameObject go = Instantiate(newMonster);
+  public void AddMonster(GameObject newMonster, SpawnPoint spawn) {
+    GameObject go = Instantiate(newMonster, spawn.GetPosition(), spawn.GetRotation(), unitsCont);
     Unit unit = go.GetComponent<Unit>();
     units.Add(unit);
-    go.transform.parent = unitsCont;
   }
 }
