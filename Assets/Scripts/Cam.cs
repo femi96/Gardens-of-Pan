@@ -3,31 +3,28 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Cam : MonoBehaviour {
-  // Cam:
-  //		Controller for camera behavior/controls
+  // Controller handles camera behavior, and player camera controls
 
+  private Transform wand;
 
-  // Assigned in Editor:
-  public Transform wand;
-
-  // Camera position variables:
-  private float x = 0.0f;		// Angles
+  private float x = 0.0f;   // Current angles
   private float y = 30.0f;
 
-  private float distance = 3.0f;	// Distance from wand
+  private float distance = 3.0f;  // Current distance from wand
 
-  private float xSpeed = 3.0f;	// Angular change
+  private float xSpeed = 3.0f;  // Angular change
   private float ySpeed = 12.0f;
-  private float yMinLimit = 5f;	// Angle bounds
+  private float yMinLimit = 5f; // Angle bounds
   private float yMaxLimit = 80f;
 
-  private float distanceSpeed = 0.5f;	// Distance change
-  private float distanceMin = 1f;		// Distance bounds
+  private float distanceSpeed = 0.5f; // Distance change
+  private float distanceMin = 1f;     // Distance bounds
   private float distanceMax = 5f;
 
-
-  // Unity MonoBehavior Functions:
   void Start() {
+
+    // Initialize fields
+    wand = transform.parent;
 
     // Camera depth mode for water shader
     GetComponent<Camera>().depthTextureMode = DepthTextureMode.Depth;
@@ -44,7 +41,7 @@ public class Cam : MonoBehaviour {
 
   void Update() {
 
-    // Lock cursor to screen on ToolToggle Input
+    // Lock cursor to screen on ToolToggle input
     if (Input.GetAxis("ToolToggle") > 0) {
       Cursor.lockState = CursorLockMode.Locked;
     }
@@ -69,8 +66,9 @@ public class Cam : MonoBehaviour {
     transform.position = position;
   }
 
-  // Limits an angle to +360 degrees > angle >= 0 degrees, then clamps:
-  public static float ClampAngleDeg(float angle, float min, float max) {
+  // Converts an angle to 360 degrees > angle >= 0 degrees, then clamps:
+  private static float ClampAngleDeg(float angle, float min, float max) {
+
     if (angle < 0f)
       angle += 360f;
 
