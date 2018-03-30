@@ -52,6 +52,7 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Scripts\Cam.cs" />
+     <Compile Include="Assets\Scripts\ClassFormat.cs" />
      <Compile Include="Assets\Scripts\DestroyTimeout.cs" />
      <Compile Include="Assets\Scripts\Enums\BlockType.cs" />
      <Compile Include="Assets\Scripts\Garden.cs" />
