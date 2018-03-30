@@ -134,7 +134,7 @@ public class Monster : Unit {
   // Moves based on velocity and limits to garden area
   private void ApplyVelocity() {
     Move(velocity * Time.deltaTime);
-    LimitMovement();
+    // LimitMovement();
   }
 
   // Applies move vector to transform position
