@@ -9,7 +9,6 @@ public class ClassFormat {
   //
   //  Controller - Class that takes inputs
   //  Game controller - Class that changes game state
-  //  View controller - Class that updates game display
   //  Abstract data type - Class that holds data
   //
   //  Higher labels have priority

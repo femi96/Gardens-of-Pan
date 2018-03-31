@@ -5,8 +5,7 @@ using UnityEngine.UI;
 using System.Linq;
 
 public class Wand : MonoBehaviour {
-  // Wand:
-  //    Controller that handles the player wand and player's inputs
+  //  Controller that handles the player wand's inputs and behaviors
 
 
   // Assigned in Editor:

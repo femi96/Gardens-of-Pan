@@ -3,9 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class Monster : Unit {
-  // Monster:
-  //    Controller that handles a monster in the garden
-
+  // Game controller that handles a monster's state and behavior
 
   // Monster variables:
   [Header("Monster")]
@@ -37,8 +35,6 @@ public abstract class Monster : Unit {
   public Vector3 moveDirection;
   public bool moving = false;
 
-
-  // Unity MonoBehavior Functions:
   void Awake() {
 
     // Awake with components
@@ -72,8 +68,6 @@ public abstract class Monster : Unit {
 
     ApplyVelocity();
   }
-
-  void FixedUpdate() {}
 
   // Returns if garden meets visit conditions
   public virtual bool CanVisit(Garden garden) {

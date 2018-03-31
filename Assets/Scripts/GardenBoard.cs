@@ -3,31 +3,34 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class GardenBoard : MonoBehaviour {
-  // GardenBoard:
-  //    Controller that holds and changes blocks in the garden
-  //    Chunks are the gameObject representations of block data
-
+  // Game controller that handles garden's board data, board includes:
+  //    blocks - board tile data
+  //    chunks - gameObject representations of blocks
+  //    spawnPoints (blocks and chunks for spawns)
 
   // Assigned in Editor:
-  public BlockType[] blockPrefabsIndex;
-  public GameObject[] blockPrefabs;
-  public GameObject[] spawnPrefabs;
+  public BlockType[] blockPrefabsIndex; // Maps BlockType to index
+  public GameObject[] blockPrefabs;     // Maps index to block chunk
+  public GameObject[] spawnPrefabs;     // Maps index to spawn chunk
 
-  // Block variables:
-  private Block[,] blockMap;      // Grid location to block data @ location
-  private GameObject[,] chunkMap; // Grid location to chunk gameobjects
-
-  private Transform blockContainer; // Parent transform of chunks
-  private Transform spawnContainer; // Parent transform of spawn chunks
   private Garden garden;
   private int gardenSize;
 
-  // Spawn variables:
-  private SpawnPoint[,] spawnPointMap;
-  private GameObject[,] spawnChunkMap;
+  // Blocks:
+  private Block[,] blockMap;      // Grid location to block @ location
+  private GameObject[,] chunkMap; // Grid location to chunk
 
+  private Transform blockContainer; // Parent transform of block chunks
 
-  // Unity MonoBehavior Functions:
+  // Spawns:
+  private SpawnPoint[,] spawnPointMap; // Grid location to spawns
+  private GameObject[,] spawnChunkMap; // Grid location to spawn chunks
+
+  private Transform spawnContainer; // Parent transform of spawn chunks
+
+  // BlockMap & ChunkMap are full
+  // SpawnMaps only have edges
+
   void Awake() {
 
     // Awake with components
@@ -39,22 +42,20 @@ public class GardenBoard : MonoBehaviour {
 
   void Start() {
 
-    // Create blockMap as Rough Blocks
+    // Create collections
     blockMap = new Block[gardenSize, gardenSize];
+    chunkMap = new GameObject[gardenSize, gardenSize];
+    spawnPointMap = new SpawnPoint[gardenSize + 2, gardenSize + 2];
+    spawnChunkMap = new GameObject[gardenSize + 2, gardenSize + 2];
 
+    // Start all blocks and Rough
     for (int z = 0; z < gardenSize; z++) {
       for (int x = 0; x < gardenSize; x++) {
         blockMap[x, z] = new Block(BlockType.Rough);
       }
     }
 
-    // Create edgeMaps
-    spawnPointMap = new SpawnPoint[gardenSize + 2, gardenSize + 2];
-    spawnChunkMap = new GameObject[gardenSize + 2, gardenSize + 2];
-
-    // Update chunkMap from blockMap
-    chunkMap = new GameObject[gardenSize, gardenSize];
-
+    // Update chunks from blocks
     for (int z = 0; z < gardenSize; z++) {
       for (int x = 0; x < gardenSize; x++) {
         UpdateChunk(x, z);
@@ -82,19 +83,21 @@ public class GardenBoard : MonoBehaviour {
     UpdateChunk(x, z);
   }
 
-  //
+  // Returns list of spawn points on board
   public List<SpawnPoint> GetSpawnPoints() {
     List<SpawnPoint> spawnPoints = new List<SpawnPoint>();
 
     int iMax = spawnPointMap.GetLength(0) - 1;
     int jMax = spawnPointMap.GetLength(1) - 1;
 
+    // Add all from x edges
     for (int i = 0; i <= iMax; i++) {
       if (spawnPointMap[i, 0] != null) spawnPoints.Add(spawnPointMap[i, 0]);
 
       if (spawnPointMap[i, jMax] != null) spawnPoints.Add(spawnPointMap[i, jMax]);
     }
 
+    // Add all from z edges
     for (int j = 1; j <= jMax - 1; j++) {
       if (spawnPointMap[0, j] != null) spawnPoints.Add(spawnPointMap[0, j]);
 
@@ -105,7 +108,7 @@ public class GardenBoard : MonoBehaviour {
   }
 
 
-// Returns block chunk prefab of BlockType t
+  // Returns block chunk prefab of BlockType t
   private GameObject GetBlockPrefab(BlockType t) {
     GameObject newChunk = blockPrefabs[0];
 
@@ -116,7 +119,7 @@ public class GardenBoard : MonoBehaviour {
     return newChunk;
   }
 
-  // Returns spawn point chunk prefab of BlockType t
+  // Returns spawn chunk prefab of BlockType t
   private GameObject GetSpawnPrefab(BlockType t) {
     GameObject newChunk = spawnPrefabs[0];
 
@@ -128,7 +131,7 @@ public class GardenBoard : MonoBehaviour {
   }
 
 
-  // Update chunk at x, z from block data
+  // Update chunk at x, z based on block data
   private void UpdateChunk(int x, int z) {
 
     // Clear the old chunk gameObject
@@ -185,7 +188,7 @@ public class GardenBoard : MonoBehaviour {
       UpdateSpawnPoint(px, z + 2, b);
   }
 
-  // Update spawn point around Block b at x, y
+  // Update spawn point at x, y near Block b
   private void UpdateSpawnPoint(int x, int z, Block b) {
 
     // Clear the old chunk gameObject

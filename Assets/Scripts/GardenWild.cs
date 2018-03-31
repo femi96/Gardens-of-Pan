@@ -5,24 +5,20 @@ using UnityEngine;
 using System.Reflection;
 
 public class GardenWild : MonoBehaviour {
-  // GardenWild:
-  //    Controller that handles wilderness data.
-  //    Manages visiting monsters, occasionally
-  //      pushing a monster and its spawn point to the garden
-
+  // Game controller that handles garden's wilderness data
+  //    stores wild monsters, all possible visiting monsters
+  //    stores visit timer, for when monsters visit
+  //    pushes new monsters and their spawn point to the garden
 
   // Assigned in Editor:
-  public GameObject[] wildMonsterPrefabs;
+  public GameObject[] wildMonsterPrefabs; // Monsters that can visit garden
 
-  // Monster variables
-  private int monsterInd = 0;
   private Garden garden;
   private GardenBoard gardenBoard;
 
-  // Visit variables:
-  private int visitTime = 0;
+  private float visitTime = 0f;
+  private int monsterInd = 0;
 
-  // Unity MonoBehavior Functions:
   void Awake() {
 
     // Awake with components
@@ -32,17 +28,18 @@ public class GardenWild : MonoBehaviour {
 
   void Start() {}
 
-  void Update() {}
-
-  void FixedUpdate() {
+  void Update() {
 
     // Visit
-    if (visitTime == 50) {
-      visitTime -= 10;
+    visitTime += Time.deltaTime;
+
+    if (visitTime >= 1f) {
+      visitTime -= 1f;
       TryAddWildMonster();
-    } else {
-      visitTime += 1;
     }
+  }
+
+  void FixedUpdate() {
   }
 
 
@@ -66,7 +63,6 @@ public class GardenWild : MonoBehaviour {
     if (roomInGarden && canVisit && canSpawn) {
       SpawnPoint spawn = monster.GetSpawn(gardenBoard);
       garden.AddMonster(monsterGo, spawn);
-      visitTime = 0;
     }
 
     monsterInd += 1;
