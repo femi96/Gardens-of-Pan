@@ -2,9 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Unit : MonoBehaviour {
+public abstract class Unit : MonoBehaviour {
   // Game controller that handles a unit's state and behavior
 
-  public float size;
-  public float wandRadius = 1f;
+  // Returns size of unit
+  public abstract float GetSize();
+
+  // Returns radius of wand when selecting unit
+  public abstract float GetWandRadius();
+
+  // Returns if garden has enough room to add
+  public bool RoomInGarden(Garden garden) {
+    return garden.FreeRoom() >= GetSize();
+  }
 }

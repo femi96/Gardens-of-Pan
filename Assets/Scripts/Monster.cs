@@ -7,204 +7,32 @@ public abstract class Monster : Unit {
 
   // Monster variables:
   [Header("Monster")]
-  public Garden garden;
+  private Garden garden;
+  private MonsterMover mover;
   private bool owned = false;
-
-  // Movement variables (prefab):
-  [Header("Movement")]
-  public float radius = 0.25f;
-  public float height = 0.25f;
-  public float moveSpeed = 0.5f;
-
-  private bool isGrounded;
-  private Vector3 velocity = new Vector3(0, 0, 0);
-  private static float gravity = 0.1f;
-  private int gLayer = 1 << 8;
-  // private int wLayer = 1 << 9;
-
-  // MonsterAI variables:
-  [Header("MonsterAI")]
-  public MonsterState currentState;
-  public MonsterState[] states;
-  public float stateTime;
-
-  public bool stateDone = false;
-  public Dictionary<MonsterState, int> statesSinceState;
-  public MonsterState possibleState;
-  public Vector3 moveDestination;
-  public Vector3 moveDirection;
-  public bool moving = false;
 
   void Awake() {
 
     // Awake with components
     garden = GameObject.Find("Garden").GetComponent<Garden>();
+    mover = gameObject.GetComponent<MonsterMover>();
   }
 
-  void Start() {
+  void Start() {}
 
-    // MonsterAI factor repeat
-    statesSinceState = new Dictionary<MonsterState, int>();
-
-    foreach (MonsterState state in states) {
-      statesSinceState[state] = 0;
-    }
-  }
-
-  void Update() {
-
-    // MonsterAI state updates
-    stateTime += Time.deltaTime;
-
-    if (currentState == null || stateDone) { ChangeState(); }
-
-    currentState.UpdateState(this);
-
-    // Movement updates
-    ApplyGravity();
-
-    if (moving) { ApplyMoveDirection(moveDirection); }
-    else { velocity.x = 0; velocity.z = 0; }
-
-    ApplyVelocity();
-  }
+  void Update() {}
 
   // Returns if garden meets visit conditions
-  public virtual bool CanVisit(Garden garden) {
-    return false;
-  }
+  public abstract bool CanVisit(Garden garden);
 
   // Returns if garden board has a valid spawn
-  public virtual bool CanSpawn(GardenBoard board) {
-    return false;
-  }
+  public abstract bool CanSpawn(GardenBoard board);
 
   // Returns a valid spawn from garden board, given it exists
-  public virtual SpawnPoint GetSpawn(GardenBoard board) {
-    return null;
-  }
-
-  // Returns if garden has enough room to enter
-  public virtual bool RoomInGarden(Garden garden) {
-    UpdateSize();
-
-    if (garden.FreeRoom() >= size) {
-      return true;
-    }
-
-    return false;
-  }
-
-  // Updates unit size
-  public virtual void UpdateSize() {
-    size = 0;
-  }
+  public abstract SpawnPoint GetSpawn(GardenBoard board);
 
   // Returns if monster is owned
   public bool Owned() {
     return owned;
-  }
-
-  // Applies gravity and normal forces to velocity
-  private void ApplyGravity() {
-    velocity.y -= gravity;
-
-    if (isGrounded) {
-      velocity.y = 0;
-    }
-  }
-
-  // Applies a move direction to velocity
-  private void ApplyMoveDirection(Vector3 move) {
-    move.y = 0;
-    move = Vector3.Normalize(move);
-    move *= moveSpeed;
-    transform.forward = move;
-
-    velocity.x = move.x;
-    velocity.z = move.z;
-  }
-
-  // Moves based on velocity and limits to garden area
-  private void ApplyVelocity() {
-    Move(velocity * Time.deltaTime);
-    // LimitMovement();
-  }
-
-  // Applies move vector to transform position
-  private void Move(Vector3 v) {
-
-    // Update transform position
-    transform.position += v;
-
-    // Check if on ground
-    Vector3 collide = new Vector3(0, 0, 0);
-    RaycastHit hit;
-
-    if (Physics.Raycast(transform.position, -Vector3.up, out hit, height, gLayer)) {
-      collide.y = height - hit.distance;
-      transform.position += collide;
-      isGrounded = true;
-    } else {
-      isGrounded = false;
-    }
-
-    // Check if falling off world
-    if (transform.position.y < -2) {
-      transform.position += 4 * Vector3.up;
-      isGrounded = true;
-    }
-  }
-
-  // Corrects position to in garden area
-  private void LimitMovement() {
-
-    // Get garden limits assuming square garden
-    float limit = (garden.gardenSize / 2f) - radius;
-
-    float y = transform.position.y;
-    float x = transform.position.x;
-    float z = transform.position.z;
-
-    // Correct x
-    if (x < -limit) { transform.position = new Vector3(-limit, y, z); }
-
-    if (x > limit) { transform.position = new Vector3(limit, y, z); }
-
-    x = transform.position.x;
-
-    // Correct z
-    if (z < -limit) { transform.position = new Vector3(x, y, -limit); }
-
-    if (z > limit) { transform.position = new Vector3(x, y, limit); }
-
-    z = transform.position.z;
-  }
-
-  // Weight MonsterAI states and set the best one
-  public void ChangeState() {
-
-    // Initial state is null with score -1
-    float score = -1f;
-    MonsterState nextState = currentState;
-
-    // Get state with highest factor score
-    foreach (MonsterState state in states) {
-      possibleState = state;
-
-      float newScore = 0;
-      newScore += state.GetScore(this);
-
-      if (newScore > score) { score = newScore; nextState = state; }
-
-      statesSinceState[state] += 1;
-    }
-
-    currentState = nextState;
-
-    // Update current state and setup to run
-    stateDone = false;
-    stateTime = 0f;
-    statesSinceState[currentState] = 0;
   }
 }

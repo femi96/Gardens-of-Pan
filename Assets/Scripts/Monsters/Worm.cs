@@ -5,6 +5,14 @@ using UnityEngine;
 public class Worm : Monster {
   // Worm: Class of Worm
 
+  public override float GetSize() {
+    return 1f;
+  }
+
+  public override float GetWandRadius() {
+    return 0.4f;
+  }
+
   public override bool CanVisit(Garden garden) {
     return true;
   }
@@ -28,9 +36,5 @@ public class Worm : Monster {
     }
 
     return validSpawnPoints[0];
-  }
-
-  public override void UpdateSize() {
-    size = 1;
   }
 }

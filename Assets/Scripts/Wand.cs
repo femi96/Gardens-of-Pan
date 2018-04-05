@@ -95,7 +95,7 @@ public class Wand : MonoBehaviour {
     Vector3 newScale;
 
     if (targetUnit != null) {
-      float r = targetUnit.GetComponent<Unit>().wandRadius;
+      float r = targetUnit.GetComponent<Unit>().GetWandRadius();
       newScale = new Vector3(r * 2, 1, r * 2);
     } else {
       newScale = Vector3.one;

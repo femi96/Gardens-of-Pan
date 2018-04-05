@@ -65,6 +65,7 @@
      <Compile Include="Assets\Scripts\MonsterAI\MonsterAction.cs" />
      <Compile Include="Assets\Scripts\MonsterAI\MonsterFactor.cs" />
      <Compile Include="Assets\Scripts\MonsterAI\MonsterState.cs" />
+     <Compile Include="Assets\Scripts\MonsterMover.cs" />
      <Compile Include="Assets\Scripts\Monsters\Worm.cs" />
      <Compile Include="Assets\Scripts\Obsolete\Surface.cs" />
      <Compile Include="Assets\Scripts\Structures\Block.cs" />

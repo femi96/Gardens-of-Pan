@@ -36,7 +36,7 @@ public class Garden : MonoBehaviour {
     float sizeTotal = 0;
 
     foreach (Unit unit in units) {
-      sizeTotal += unit.size;
+      sizeTotal += unit.GetSize();
     }
 
     return sizeTotal;
