@@ -58,6 +58,8 @@ public class Wand : MonoBehaviour {
 
   private float timeAction = 0.1f;
 
+  public GameObject hoverUI;
+
 
   // Unity MonoBehavior Functions:
   void Start() {
@@ -86,6 +88,8 @@ public class Wand : MonoBehaviour {
     ToolAction();
 
     if (timeSinceAction > timeAction) { UpdateToolStrings(); }
+
+    UpdateTagUI();
   }
 
   // Updates wand shape based on units
@@ -349,5 +353,16 @@ public class Wand : MonoBehaviour {
     if (tool1 == "") { act1Text.text = "None"; act1UI.SetActive(false); }
 
     if (tool2 == "") { act2Text.text = "None"; act2UI.SetActive(false); }
+  }
+
+  // Update UI for hovered unit's tag
+  private void UpdateTagUI() {
+    if (targetUnit != null) {
+      hoverUI.GetComponent<Text>().text = targetUnit.GetComponent<Unit>().GetName();
+      Vector3 screenPos = Camera.main.WorldToScreenPoint(targetUnit.transform.position + (Vector3.up * 0.5f));
+      hoverUI.transform.position = screenPos;
+    } else {
+      hoverUI.GetComponent<Text>().text = "";
+    }
   }
 }

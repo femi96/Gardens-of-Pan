@@ -5,6 +5,9 @@ using UnityEngine;
 public abstract class Unit : MonoBehaviour {
   // Game controller that handles a unit's state and behavior
 
+  // Returns name of unit
+  public abstract string GetName();
+
   // Returns size of unit
   public abstract float GetSize();
 

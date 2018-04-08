@@ -5,6 +5,10 @@ using UnityEngine;
 public class Worm : Monster {
   // Worm: Class of Worm
 
+  public override string GetName() {
+    return "Worm";
+  }
+
   public override float GetSize() {
     return 1f;
   }
