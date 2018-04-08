@@ -14,7 +14,15 @@ public class Worm : Monster {
   }
 
   public override bool CanVisit(Garden garden) {
-    return true;
+    GardenBoard board = garden.GetBoard();
+
+    return board.GetBlockTypeCount(BlockType.Dirt) >= 4;
+  }
+
+  public override bool CanOwn(Garden garden) {
+    GardenBoard board = garden.GetBoard();
+
+    return board.GetBlockTypeCount(BlockType.Dirt) >= 8;
   }
 
   public override bool CanSpawn(GardenBoard board) {

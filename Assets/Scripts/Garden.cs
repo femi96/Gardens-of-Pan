@@ -11,22 +11,37 @@ public class Garden : MonoBehaviour {
   public string gardenName;
   public int gardenSize = 4;  // Garden dimensions 4x4
 
+  private GardenBoard gardenBoard;
+
   // Garden contents:
   private float unitSizeLimit = 4;
   private List<Unit> units = new List<Unit>();  // List of units in garden
   private Transform unitsCont; // GameObject container for unit gameObjects
+
+  private float ownTime = 0f;
+  private int ownInd = 0;
 
   // Garden time: (TODO : Re design and implement, might separate)
 
   void Awake() {
 
     // Awake with components
+    gardenBoard = GetComponent<GardenBoard>();
+
     unitsCont = transform.Find("Units");
   }
 
   void Start() {}
 
-  void Update() {}
+  void Update() {
+
+    // Own
+    ownTime += Time.deltaTime;
+
+    if (ownTime >= 1f) {
+      TryOwnMonster();
+    }
+  }
 
   void FixedUpdate() {}
 
@@ -54,5 +69,30 @@ public class Garden : MonoBehaviour {
     GameObject go = Instantiate(newMonster, spawn.GetPosition(), spawn.GetRotation(), unitsCont);
     Unit unit = go.GetComponent<Unit>();
     units.Add(unit);
+  }
+
+  // Get garden's board
+  public GardenBoard GetBoard() {
+    return gardenBoard;
+  }
+
+  // Try to own a monster that exists in the garden
+  private void TryOwnMonster() {
+    if (ownInd >= units.Count) {
+      ownInd = 0;
+      return;
+    }
+
+    if (units[ownInd] is Monster) {
+
+      Monster mon = (Monster)units[ownInd];
+
+      if (!mon.IsOwned()) {
+        mon.SetOwned(mon.CanOwn(this));
+        ownTime = 0f;
+      }
+
+      ownInd += 1;
+    }
   }
 }

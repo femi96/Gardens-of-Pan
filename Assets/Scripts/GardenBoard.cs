@@ -83,6 +83,19 @@ public class GardenBoard : MonoBehaviour {
     UpdateChunk(x, z);
   }
 
+  // Returns BlockType of block at Vector3 v
+  public int GetBlockTypeCount(BlockType t) {
+    int count = 0;
+
+    for (int z = 0; z < gardenSize; z++) {
+      for (int x = 0; x < gardenSize; x++) {
+        if (blockMap[x, z].GetBlockType() == t) count += 1;
+      }
+    }
+
+    return count;
+  }
+
   // Returns list of spawn points on board
   public List<SpawnPoint> GetSpawnPoints() {
     List<SpawnPoint> spawnPoints = new List<SpawnPoint>();

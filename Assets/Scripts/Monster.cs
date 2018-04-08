@@ -25,6 +25,9 @@ public abstract class Monster : Unit {
   // Returns if garden meets visit conditions
   public abstract bool CanVisit(Garden garden);
 
+  // Returns if monster can be owned
+  public abstract bool CanOwn(Garden garden);
+
   // Returns if garden board has a valid spawn
   public abstract bool CanSpawn(GardenBoard board);
 
@@ -32,7 +35,12 @@ public abstract class Monster : Unit {
   public abstract SpawnPoint GetSpawn(GardenBoard board);
 
   // Returns if monster is owned
-  public bool Owned() {
+  public bool IsOwned() {
     return owned;
+  }
+
+  // Set if monster is owned
+  public void SetOwned(bool own) {
+    owned = own;
   }
 }
