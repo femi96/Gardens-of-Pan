@@ -31,6 +31,7 @@ public class Wand : MonoBehaviour {
   // UI:
   public GameObject unitHoverUI;
   private Text unitHoverName;
+  private Image unitHoverBackground;
 
   // All public variables are assigned in editor
 
@@ -41,6 +42,7 @@ public class Wand : MonoBehaviour {
     wandShapePieces = wandShapePieces.Skip(1).ToArray();
 
     unitHoverName = unitHoverUI.transform.Find("Name").GetComponent<Text>();
+    unitHoverBackground = unitHoverUI.transform.Find("Background").GetComponent<Image>();
   }
 
   void Update() {
@@ -135,6 +137,16 @@ public class Wand : MonoBehaviour {
     if (targetUnit != null) {
       unitHoverUI.SetActive(true);
       unitHoverName.text = targetUnit.GetName();
+
+      unitHoverBackground.color = Color.black;
+
+      if (targetUnit is Monster) {
+        Monster targetMon = (Monster)targetUnit;
+
+        if (!targetMon.IsOwned())
+          unitHoverBackground.color = Color.red;
+      }
+
       Vector3 screenPos = Camera.main.WorldToScreenPoint(targetUnit.transform.position + (Vector3.up * 0.5f));
       unitHoverUI.transform.position = screenPos;
     } else {
