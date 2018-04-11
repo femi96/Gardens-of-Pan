@@ -33,6 +33,9 @@ public class Wand : MonoBehaviour {
   private Text unitHoverName;
   private Image unitHoverBackground;
 
+  private readonly Color colorHoverDefault = new Color(0f, 0f, 0f, 0.7f);
+  private readonly Color colorHoverWild = new Color(1f, 0f, 0f, 0.7f);
+
   // All public variables are assigned in editor
 
   void Awake() {
@@ -138,13 +141,13 @@ public class Wand : MonoBehaviour {
       unitHoverUI.SetActive(true);
       unitHoverName.text = targetUnit.GetName();
 
-      unitHoverBackground.color = Color.black;
+      unitHoverBackground.color = colorHoverDefault;
 
       if (targetUnit is Monster) {
         Monster targetMon = (Monster)targetUnit;
 
         if (!targetMon.IsOwned())
-          unitHoverBackground.color = Color.red;
+          unitHoverBackground.color = colorHoverWild;
       }
 
       Vector3 screenPos = Camera.main.WorldToScreenPoint(targetUnit.transform.position + (Vector3.up * 0.5f));
