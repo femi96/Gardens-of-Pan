@@ -74,6 +74,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4001163384444400}
   - component: {fileID: 114330434569095648}
+  - component: {fileID: 114663792471936102}
   m_Layer: 0
   m_Name: Wand
   m_TagString: Untagged
@@ -1250,17 +1251,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   garden: {fileID: 0}
   gardenBoard: {fileID: 0}
-  toolText: {fileID: 0}
-  swapLText: {fileID: 0}
-  swapRText: {fileID: 0}
-  act1UI: {fileID: 0}
-  act1Text: {fileID: 0}
-  act2UI: {fileID: 0}
-  act2Text: {fileID: 0}
-  effectContainer: {fileID: 0}
-  dirtCloud: {fileID: 1508824101407052, guid: ceff9250b71a0854c875cb18cb9f30cc, type: 2}
-  grassCloud: {fileID: 1086913131271382, guid: bb114bdbd20eaac4c9e2ed8cc9f1ab0b, type: 2}
-  sandCloud: {fileID: 1765793412613460, guid: dc584a32b6660ec45abf97f8b830320a, type: 2}
+  hoverUI: {fileID: 0}
 --- !u!114 &114641301033665606
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1272,7 +1263,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a83ec6e572511d47946f1431d692fd0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wand: {fileID: 4001163384444400}
+--- !u!114 &114663792471936102
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1471288934874296}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6885af3be431a44386581a4a71167a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gardenBoard: {fileID: 0}
+  actionMainUI: {fileID: 0}
+  actionMainText: {fileID: 0}
+  actionOffUI: {fileID: 0}
+  actionOffText: {fileID: 0}
+  toolText: {fileID: 0}
+  swapLeftText: {fileID: 0}
+  swapRightText: {fileID: 0}
+  effectContainer: {fileID: 0}
+  dirtCloud: {fileID: 1508824101407052, guid: ceff9250b71a0854c875cb18cb9f30cc, type: 2}
+  grassCloud: {fileID: 1086913131271382, guid: bb114bdbd20eaac4c9e2ed8cc9f1ab0b, type: 2}
+  sandCloud: {fileID: 1765793412613460, guid: dc584a32b6660ec45abf97f8b830320a, type: 2}
 --- !u!124 &124240752444113476
 Behaviour:
   m_ObjectHideFlags: 1

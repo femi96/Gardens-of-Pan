@@ -7,11 +7,11 @@ public class Garden : MonoBehaviour {
   //    garden meta data (size, name)
   //    garden contents (units in garden)
 
+  private GardenBoard gardenBoard;
+
   // Garden meta:
   public string gardenName;
   public int gardenSize = 4;  // Garden dimensions 4x4
-
-  private GardenBoard gardenBoard;
 
   // Garden contents:
   private float unitSizeLimit = 4;

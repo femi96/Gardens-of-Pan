@@ -55,6 +55,8 @@
      <Compile Include="Assets\Scripts\ClassFormat.cs" />
      <Compile Include="Assets\Scripts\DestroyTimeout.cs" />
      <Compile Include="Assets\Scripts\Enums\BlockType.cs" />
+     <Compile Include="Assets\Scripts\Enums\ToolAction.cs" />
+     <Compile Include="Assets\Scripts\Enums\ToolType.cs" />
      <Compile Include="Assets\Scripts\Garden.cs" />
      <Compile Include="Assets\Scripts\GardenBoard.cs" />
      <Compile Include="Assets\Scripts\GardenWild.cs" />
@@ -72,6 +74,7 @@
      <Compile Include="Assets\Scripts\Structures\SpawnPoint.cs" />
      <Compile Include="Assets\Scripts\Unit.cs" />
      <Compile Include="Assets\Scripts\Wand.cs" />
+     <Compile Include="Assets\Scripts\WandTools.cs" />
      <None Include="Assets\Shaders\Water.shader" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>

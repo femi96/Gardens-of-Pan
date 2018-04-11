@@ -7,13 +7,11 @@ using System.Linq;
 public class Wand : MonoBehaviour {
   //  Controller that handles the player wand's inputs and behaviors
 
-
   // Assigned in Editor:
   public Garden garden;
   public GardenBoard gardenBoard;
 
   // Wand shape variables:
-  [Header("Wand Shape")]
   private GameObject wandShape;
   private Transform[] wandShapePieces;
 
@@ -26,37 +24,8 @@ public class Wand : MonoBehaviour {
   private const int gLayer = 1 << 8;
   private const int wLayer = 1 << 9;
 
-  // Tools variables:
-  [Header("Tools")]
-  public Text toolText;
-  public Text swapLText;
-  public Text swapRText;
-
-  public GameObject act1UI;
-  public Text act1Text;
-  public GameObject act2UI;
-  public Text act2Text;
-
-  private string[] tools;
-  private int toolIndex;
-
-  private string tool1;
-  private string tool2;
-
-  // Effect variables:
-  [Header("Effects")]
-  public Transform effectContainer;
-
-  public GameObject dirtCloud;
-  public GameObject grassCloud;
-  public GameObject sandCloud;
-
   // Timer variables:
   private float timeSinceMove;
-  private float timeSinceSwap;
-  private float timeSinceAction;
-
-  private float timeAction = 0.1f;
 
   public GameObject hoverUI;
 
@@ -68,10 +37,6 @@ public class Wand : MonoBehaviour {
     wandShape = transform.Find("WandShape").gameObject;
     wandShapePieces = wandShape.GetComponentsInChildren<Transform>();
     wandShapePieces = wandShapePieces.Skip(1).ToArray();
-
-    // Setup tools
-    toolIndex = 0;
-    tools = new string[] {"Shovel", "Grass Seed", "Sand Bag"};
   }
 
   void Update() {
@@ -84,10 +49,6 @@ public class Wand : MonoBehaviour {
     FollowUnit();
 
     // Tool
-    ToolSwap();
-    ToolAction();
-
-    if (timeSinceAction > timeAction) { UpdateToolStrings(); }
 
     UpdateTagUI();
   }
@@ -201,158 +162,6 @@ public class Wand : MonoBehaviour {
     } else {
       targetUnit = null;
     }
-  }
-
-  // Change tool index on input
-  private void ToolSwap() {
-    timeSinceSwap += Time.deltaTime;
-
-    if (timeSinceSwap > 0.25f && timeSinceAction > timeAction) {
-      if (Input.GetAxis("SwapLeft") > 0) { toolIndex -= 1; timeSinceSwap = 0; }
-
-      if (Input.GetAxis("SwapRight") > 0) { toolIndex += 1; timeSinceSwap = 0; }
-
-      if (toolIndex >= tools.Length) { toolIndex = 0; }
-
-      if (toolIndex < 0) { toolIndex = tools.Length - 1; }
-    }
-  }
-
-  // Act if tool input
-  private void ToolAction() {
-    timeSinceAction += Time.deltaTime;
-
-    if (timeSinceAction > timeAction) {
-      int i = 0;
-
-      if (Input.GetAxis("Click2") > 0) { i = 2; timeSinceAction = 0; }
-
-      if (Input.GetAxis("Click1") > 0) { i = 1; timeSinceAction = 0; }
-
-      HandleAction(i);
-    }
-  }
-
-  // Apply inpute to effect garden
-  private void HandleAction(int input) {
-
-    // Get tool action from input
-    string t = "";
-
-    if (input == 1) { t = tool1; }
-
-    if (input == 2) { t = tool2; }
-
-    if (t == "") { return; }
-
-    // Apply tool action to appropriate effect
-    Vector3 v = transform.position;
-    BlockType gotType = gardenBoard.GetType(v);
-
-    switch (t) {
-    case "Dig":
-      if (gotType == BlockType.Dirt || gotType == BlockType.Grass || gotType == BlockType.Sand)
-        gardenBoard.SetType(v, BlockType.Water);
-
-      Instantiate(dirtCloud, transform.position, Quaternion.identity, effectContainer);
-      break;
-
-    case "Flatten":
-      if (gotType == BlockType.Rough)
-        gardenBoard.SetType(v, BlockType.Dirt);
-
-      Instantiate(dirtCloud, transform.position, Quaternion.identity, effectContainer);
-      break;
-
-    case "Fill":
-      if (gotType == BlockType.Water)
-        gardenBoard.SetType(v, BlockType.Dirt);
-
-      break;
-
-    case "Plant Grass":
-      if (gotType == BlockType.Dirt || gotType == BlockType.Sand)
-        gardenBoard.SetType(v, BlockType.Grass);
-
-      Instantiate(grassCloud, transform.position, Quaternion.identity, effectContainer);
-      break;
-
-    case "Remove":
-      if (gotType == BlockType.Grass || gotType == BlockType.Sand)
-        gardenBoard.SetType(v, BlockType.Dirt);
-
-      break;
-
-    case "Pour Sand":
-      if (gotType == BlockType.Dirt || gotType == BlockType.Grass)
-        gardenBoard.SetType(v, BlockType.Sand);
-
-      Instantiate(sandCloud, transform.position, Quaternion.identity, effectContainer);
-      break;
-    }
-  }
-
-  // Update UI and strings based on index
-  private void UpdateToolStrings() {
-
-    // Update index, left, and right
-    int i;
-    i = toolIndex - 1;
-
-    if (i < 0) { i = tools.Length - 1; }
-
-    swapLText.text = tools[i];
-
-    i = toolIndex + 1;
-
-    if (i == tools.Length) { i = 0; }
-
-    swapRText.text = tools[i];
-
-    i = toolIndex;
-    toolText.text = tools[i];
-
-    // Update tool based on block differences
-    BlockType t;
-
-    switch (tools[i]) {
-    case "Shovel":
-      tool1 = "Dig";
-      tool2 = "Fill";
-      t = gardenBoard.GetType(transform.position);
-
-      if (t == BlockType.Rough) { tool1 = "Flatten"; tool2 = ""; }
-
-      break;
-
-    case "Grass Seed":
-      tool1 = "Plant Grass";
-      tool2 = "Remove";
-      t = gardenBoard.GetType(transform.position);
-
-      if (t == BlockType.Rough || t == BlockType.Water) { tool1 = ""; tool2 = ""; }
-
-      break;
-
-    case "Sand Bag":
-      tool1 = "Pour Sand";
-      tool2 = "Remove";
-      t = gardenBoard.GetType(transform.position);
-
-      if (t == BlockType.Rough || t == BlockType.Water) { tool1 = ""; tool2 = ""; }
-
-      break;
-    }
-
-    // Enable UI if needs to display a tool action
-    act1UI.SetActive(true);
-    act1Text.text = tool1;
-    act2UI.SetActive(true);
-    act2Text.text = tool2;
-
-    if (tool1 == "") { act1Text.text = "None"; act1UI.SetActive(false); }
-
-    if (tool2 == "") { act2Text.text = "None"; act2UI.SetActive(false); }
   }
 
   // Update UI for hovered unit's tag
