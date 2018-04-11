@@ -11,24 +11,25 @@ public class Wand : MonoBehaviour {
   public Garden garden;
   public GardenBoard gardenBoard;
 
-  // Wand shape variables:
-  private GameObject wandShape;
-  private Transform[] wandShapePieces;
-
-  // Movement variables:
+  // Movement:
   private float radius = 0.2f;
   private float speed = 4f;
-
-  private GameObject targetUnit;
 
   private const int gLayer = 1 << 8;
   private const int wLayer = 1 << 9;
 
-  // Timer variables:
-  private float timeSinceMove;
+  private GameObject targetUnit;
 
+  // Timing:
+  private float moveTime;
+  private const float followCooldown = 0.25f;
+
+  // Wand shape:
+  private GameObject wandShape;
+  private Transform[] wandShapePieces;
+
+  // UI:
   public GameObject hoverUI;
-
 
   // Unity MonoBehavior Functions:
   void Start() {
@@ -40,17 +41,102 @@ public class Wand : MonoBehaviour {
   }
 
   void Update() {
+    // TODO // move timing to update, like with wand tools
 
-    // Shape
-    UpdateWandShape();
-
-    // Move
     MoveWand();
-    FollowUnit();
 
-    // Tool
+    // Only follow if not moving
+    if (moveTime > followCooldown) {
+      FollowUnit();
+    } else {
+      targetUnit = null;
+    }
 
     UpdateTagUI();
+    UpdateWandShape();
+  }
+
+  // Move wand each frame
+  private void MoveWand() {
+
+    // Transform input direction based on camera forward
+    float limit = (garden.gardenSize / 2f) - radius;
+    float spd = speed * Time.deltaTime;
+
+    Vector3 moveDirection = Camera.main.transform.forward;
+    moveDirection.y = 0;
+
+    float y;
+    float x = Input.GetAxis("Horizontal");
+    float z = Input.GetAxis("Vertical");
+
+    moveDirection = Vector3.Normalize(moveDirection);   // Don't normalize your inputs
+    Vector3 moveDirectionF = moveDirection * z;         // Project z onto forward direction vector
+    Vector3 moveDirectionR = new Vector3(moveDirection.z, 0, -moveDirection.x); // Create right vector
+    moveDirectionR *= x;                                // Project x onto right direction vector
+
+    moveDirection = moveDirectionF + moveDirectionR;
+    moveDirection *= spd;
+
+    // Update move timer
+    moveTime += Time.deltaTime;
+
+    if (x != 0 || z != 0) {
+      moveTime = 0;
+    }
+
+    // Apply move direction to transform
+    transform.Translate(moveDirection.x, 0, moveDirection.z);
+
+    // Limit movement based on garden size
+    y = transform.position.y;
+    x = transform.position.x;
+    z = transform.position.z;
+
+    if (x < -limit) { transform.position = new Vector3(-limit, y, z); }
+
+    if (x > limit) { transform.position = new Vector3(limit, y, z); }
+
+    x = transform.position.x;
+
+    if (z < -limit) { transform.position = new Vector3(x, y, -limit); }
+
+    if (z > limit) { transform.position = new Vector3(x, y, limit); }
+
+    z = transform.position.z;
+  }
+
+  // If not moving, follow a unit
+  private void FollowUnit() {
+
+    // Find new unit to follow
+    if (targetUnit == null) {
+      RaycastHit hit;
+
+      if (Physics.Raycast(transform.position + Vector3.up * 2, -Vector3.up, out hit, 4)) {
+        if (hit.transform.gameObject.GetComponent<Unit>() != null) {
+          targetUnit = hit.transform.gameObject;
+        }
+      }
+
+      // Or follow unit
+    } else {
+      float deltaX = targetUnit.transform.position.x - transform.position.x;
+      float deltaZ = targetUnit.transform.position.z - transform.position.z;
+      Vector3 deltaV = new Vector3(deltaX, 0, deltaZ);
+      transform.position += deltaV;
+    }
+  }
+
+  // Update UI for hovered unit's tag
+  private void UpdateTagUI() {
+    if (targetUnit != null) {
+      hoverUI.GetComponent<Text>().text = targetUnit.GetComponent<Unit>().GetName();
+      Vector3 screenPos = Camera.main.WorldToScreenPoint(targetUnit.transform.position + (Vector3.up * 0.5f));
+      hoverUI.transform.position = screenPos;
+    } else {
+      hoverUI.GetComponent<Text>().text = "";
+    }
   }
 
   // Updates wand shape based on units
@@ -84,94 +170,5 @@ public class Wand : MonoBehaviour {
 
     // Rotate wand shape
     wandShape.transform.Rotate(10 * Vector3.up * Time.deltaTime);
-  }
-
-  // Move wand each frame
-  private void MoveWand() {
-
-    // Transform input direction based on camera forward
-    float limit = (garden.gardenSize / 2f) - radius;
-    float spd = speed * Time.deltaTime;
-
-    Vector3 moveDirection = Camera.main.transform.forward;
-    moveDirection.y = 0;
-
-    float y;
-    float x = Input.GetAxis("Horizontal");
-    float z = Input.GetAxis("Vertical");
-
-    moveDirection = Vector3.Normalize(moveDirection);             // Don't normalize your inputs
-    Vector3 moveDirectionF = moveDirection * z;                 // Project z onto forward direction vector
-    Vector3 moveDirectionR = new Vector3(moveDirection.z, 0, -moveDirection.x); // Create right vector
-    moveDirectionR *= x;                            // Project x onto right direction vector
-
-    moveDirection = moveDirectionF + moveDirectionR;
-    moveDirection *= spd;
-
-    // Update movme timer
-    timeSinceMove += Time.deltaTime;
-
-    if (x != 0 || z != 0) {
-      timeSinceMove = 0;
-    }
-
-    // Apply move direction to transform
-    transform.Translate(moveDirection.x, 0, moveDirection.z);
-
-    // Limit movement based on garden size
-    y = transform.position.y;
-    x = transform.position.x;
-    z = transform.position.z;
-
-    if (x < -limit) { transform.position = new Vector3(-limit, y, z); }
-
-    if (x > limit) { transform.position = new Vector3(limit, y, z); }
-
-    x = transform.position.x;
-
-    if (z < -limit) { transform.position = new Vector3(x, y, -limit); }
-
-    if (z > limit) { transform.position = new Vector3(x, y, limit); }
-
-    z = transform.position.z;
-  }
-
-  // If not moving, follow a unit
-  private void FollowUnit() {
-
-    // Only follow if not moving
-    if (timeSinceMove > 0.25f) {
-
-      // Find new unit to follow
-      if (targetUnit == null) {
-        RaycastHit hit;
-
-        if (Physics.Raycast(transform.position + Vector3.up * 2, -Vector3.up, out hit, 4)) {
-          if (hit.transform.gameObject.GetComponent<Unit>() != null) {
-            targetUnit = hit.transform.gameObject;
-          }
-        }
-
-        // Or follow unit
-      } else {
-        float newX = targetUnit.transform.position.x - transform.position.x;
-        float newZ = targetUnit.transform.position.z - transform.position.z;
-        Vector3 newV = new Vector3(newX, 0, newZ);
-        transform.position += newV;
-      }
-    } else {
-      targetUnit = null;
-    }
-  }
-
-  // Update UI for hovered unit's tag
-  private void UpdateTagUI() {
-    if (targetUnit != null) {
-      hoverUI.GetComponent<Text>().text = targetUnit.GetComponent<Unit>().GetName();
-      Vector3 screenPos = Camera.main.WorldToScreenPoint(targetUnit.transform.position + (Vector3.up * 0.5f));
-      hoverUI.transform.position = screenPos;
-    } else {
-      hoverUI.GetComponent<Text>().text = "";
-    }
   }
 }

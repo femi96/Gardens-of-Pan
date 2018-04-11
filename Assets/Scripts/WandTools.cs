@@ -15,14 +15,14 @@ public class WandTools : MonoBehaviour {
   private ToolAction toolActionMain;
   private ToolAction toolActionOff;
 
+  // Timing:
   private float swapTime;
   private const float swapCooldown = 0.25f;
 
   private float actionTime;
   private const float actionCooldown = 0.1f;
 
-  // UI variables:
-
+  // UI:
   public GameObject actionMainUI;
   public Text actionMainText;
 
@@ -33,7 +33,7 @@ public class WandTools : MonoBehaviour {
   public Text swapLeftText;
   public Text swapRightText;
 
-  // Effect variables:
+  // Effect:
   public Transform effectContainer;
 
   public GameObject dirtCloud;
