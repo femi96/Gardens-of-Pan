@@ -78,7 +78,7 @@ public class WandTools : MonoBehaviour {
       toolIndex += 1;
     }
 
-    toolIndex = toolIndex % tools.Length;
+    toolIndex = (toolIndex + tools.Length) % tools.Length;
   }
 
   // Act if tool input

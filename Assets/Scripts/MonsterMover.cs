@@ -18,7 +18,7 @@ public class MonsterMover : MonoBehaviour {
 
   private static float gravity = 0.1f;
   private static int gLayer = 1 << 8;
-  private static int wLayer = 1 << 9;
+  // private static int wLayer = 1 << 9;
 
   void Start() {
     velocity = new Vector3(0, 0, 0);

@@ -6,7 +6,6 @@ public abstract class Monster : Unit {
   // Game controller that handles a monster's state and behavior
 
   // Monster variables:
-  [Header("Monster")]
   private Garden garden;
   private MonsterMover mover;
   private bool owned = false;
@@ -14,8 +13,8 @@ public abstract class Monster : Unit {
   void Awake() {
 
     // Awake with components
-    garden = GameObject.Find("Garden").GetComponent<Garden>();
-    mover = gameObject.GetComponent<MonsterMover>();
+    // garden = GameObject.Find("Garden").GetComponent<Garden>();
+    // mover = gameObject.GetComponent<MonsterMover>();
   }
 
   void Start() {}
