@@ -24,10 +24,10 @@ public class WandTools : MonoBehaviour {
 
   // UI:
   public GameObject actionMainUI;
-  public Text actionMainText;
+  private Text actionMainText;
 
   public GameObject actionOffUI;
-  public Text actionOffText;
+  private Text actionOffText;
 
   public Text toolText;
   public Text swapLeftText;
@@ -42,7 +42,14 @@ public class WandTools : MonoBehaviour {
 
   // All public variables are assigned in editor
 
+  void Awake() {
+
+    actionMainText = actionMainUI.transform.Find("Text").GetComponent<Text>();
+    actionOffText = actionOffUI.transform.Find("Text").GetComponent<Text>();
+  }
+
   void Start() {
+
     toolIndex = 0;
     tools = new ToolType[] {ToolType.None, ToolType.Shovel, ToolType.Grass, ToolType.Sand};
   }

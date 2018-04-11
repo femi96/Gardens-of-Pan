@@ -34,9 +34,8 @@ public class Wand : MonoBehaviour {
 
   // All public variables are assigned in editor
 
-  void Start() {
+  void Awake() {
 
-    // Setup wand shape
     wandShape = transform.Find("WandShape").gameObject;
     wandShapePieces = wandShape.GetComponentsInChildren<Transform>();
     wandShapePieces = wandShapePieces.Skip(1).ToArray();

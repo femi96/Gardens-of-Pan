@@ -189,7 +189,7 @@ Prefab:
         type: 2}
       propertyPath: actionMainUI
       value: 
-      objectReference: {fileID: 1502983728}
+      objectReference: {fileID: 401276649}
     - target: {fileID: 114663792471936102, guid: 2d9406c1543516e47b17f5c6a188c7f9,
         type: 2}
       propertyPath: actionMainText
@@ -199,7 +199,7 @@ Prefab:
         type: 2}
       propertyPath: actionOffUI
       value: 
-      objectReference: {fileID: 401276649}
+      objectReference: {fileID: 1502983728}
     - target: {fileID: 114663792471936102, guid: 2d9406c1543516e47b17f5c6a188c7f9,
         type: 2}
       propertyPath: actionOffText
