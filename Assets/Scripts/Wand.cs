@@ -18,7 +18,7 @@ public class Wand : MonoBehaviour {
   private const int gLayer = 1 << 8;
   private const int wLayer = 1 << 9;
 
-  private GameObject targetUnit;
+  private Unit targetUnit;
 
   // Timing:
   private float moveTime;
@@ -29,19 +29,22 @@ public class Wand : MonoBehaviour {
   private Transform[] wandShapePieces;
 
   // UI:
-  public GameObject hoverUI;
+  public GameObject unitHoverUI;
+  private Text unitHoverName;
 
-  // Unity MonoBehavior Functions:
+  // All public variables are assigned in editor
+
   void Start() {
 
     // Setup wand shape
     wandShape = transform.Find("WandShape").gameObject;
     wandShapePieces = wandShape.GetComponentsInChildren<Transform>();
     wandShapePieces = wandShapePieces.Skip(1).ToArray();
+
+    unitHoverName = unitHoverUI.transform.Find("Name").GetComponent<Text>();
   }
 
   void Update() {
-    // TODO // move timing to update, like with wand tools
 
     MoveWand();
 
@@ -115,7 +118,7 @@ public class Wand : MonoBehaviour {
 
       if (Physics.Raycast(transform.position + Vector3.up * 2, -Vector3.up, out hit, 4)) {
         if (hit.transform.gameObject.GetComponent<Unit>() != null) {
-          targetUnit = hit.transform.gameObject;
+          targetUnit = hit.transform.gameObject.GetComponent<Unit>();
         }
       }
 
@@ -131,11 +134,12 @@ public class Wand : MonoBehaviour {
   // Update UI for hovered unit's tag
   private void UpdateTagUI() {
     if (targetUnit != null) {
-      hoverUI.GetComponent<Text>().text = targetUnit.GetComponent<Unit>().GetName();
+      unitHoverUI.SetActive(true);
+      unitHoverName.text = targetUnit.GetName();
       Vector3 screenPos = Camera.main.WorldToScreenPoint(targetUnit.transform.position + (Vector3.up * 0.5f));
-      hoverUI.transform.position = screenPos;
+      unitHoverUI.transform.position = screenPos;
     } else {
-      hoverUI.GetComponent<Text>().text = "";
+      unitHoverUI.SetActive(false);
     }
   }
 
@@ -146,7 +150,7 @@ public class Wand : MonoBehaviour {
     Vector3 newScale;
 
     if (targetUnit != null) {
-      float r = targetUnit.GetComponent<Unit>().GetWandRadius();
+      float r = targetUnit.GetWandRadius();
       newScale = new Vector3(r * 2, 1, r * 2);
     } else {
       newScale = Vector3.one;

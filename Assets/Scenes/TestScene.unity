@@ -240,6 +240,11 @@ Prefab:
       propertyPath: hoverUI
       value: 
       objectReference: {fileID: 1085926089}
+    - target: {fileID: 114330434569095648, guid: 2d9406c1543516e47b17f5c6a188c7f9,
+        type: 2}
+      propertyPath: unitHoverUI
+      value: 
+      objectReference: {fileID: 1085926089}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2d9406c1543516e47b17f5c6a188c7f9, type: 2}
   m_IsPrefabParent: 0
