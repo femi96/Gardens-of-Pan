@@ -15,6 +15,7 @@ public class GardenWild : MonoBehaviour {
 
   private Garden garden;
 
+  private const float visitPeriod = 5f;
   private float visitTime = 0f;
   private int monsterInd = 0;
 
@@ -31,7 +32,7 @@ public class GardenWild : MonoBehaviour {
     // Visit
     visitTime += Time.deltaTime;
 
-    if (visitTime >= 1f) {
+    if (visitTime >= visitPeriod) {
       visitTime -= 1f;
       TryAddWildMonster();
     }
@@ -61,6 +62,7 @@ public class GardenWild : MonoBehaviour {
     if (roomInGarden && canVisit && canSpawn) {
       SpawnPoint spawn = monster.GetSpawn(garden.GetBoard());
       garden.AddMonster(monsterGo, spawn);
+      visitTime = 0;
     }
 
     monsterInd += 1;
