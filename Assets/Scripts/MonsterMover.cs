@@ -103,8 +103,8 @@ public class MonsterMover : MonoBehaviour {
     }
 
     // Check if falling off world
-    if (transform.position.y < -2) {
-      transform.position += 4 * Vector3.up;
+    if (transform.position.y < -1) {
+      transform.position += 2 * Vector3.up;
       isGrounded = true;
     }
   }
