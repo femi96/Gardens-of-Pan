@@ -59,11 +59,11 @@ public class WandTools : MonoBehaviour {
     swapTime += Time.deltaTime;
     actionTime += Time.deltaTime;
 
-    if (swapTime >= swapCooldown && actionTime >= actionCooldown)
-      InputSwap();
-
     if (actionTime >= actionCooldown)
       InputAction();
+
+    if (swapTime >= swapCooldown && actionTime >= actionCooldown)
+      InputSwap();
 
     // if (swapTime >= swapCooldown && actionTime >= actionCooldown)
     if (actionTime >= actionCooldown)
