@@ -47,7 +47,8 @@ public class Worm : Monster {
       if (spawn.GetBlock().GetBlockType() == BlockType.Dirt) validSpawnPoints.Add(spawn);
     }
 
-    return validSpawnPoints[0];
+    int r = Random.Range(0, validSpawnPoints.Count);
+    return validSpawnPoints[r];
   }
 
   public override void Behaviors() {
