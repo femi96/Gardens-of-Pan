@@ -67,7 +67,7 @@ public class Worm : Monster {
 
       new MonsterBehavior("Wait", g, this,
       new MonsterAction[] {
-        new ActionTimeout(3f)
+        new ActionTimeout(3f, 6f)
       },
       new MonsterFactor[] {
         new FactorRepeat(1f)

@@ -14,6 +14,10 @@ public class ActionTimeout : MonsterAction {
     timeoutTime = timeout;
   }
 
+  public ActionTimeout(float timeoutMin, float timeoutMax) {
+    timeoutTime = Random.Range(timeoutMin, timeoutMax);
+  }
+
   public void StartAction(MonsterBehavior behavior) {
 
     state = behavior;
