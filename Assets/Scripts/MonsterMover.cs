@@ -41,6 +41,16 @@ public class MonsterMover : MonoBehaviour {
     moving = true;
   }
 
+  // Stops monster movement
+  public void Stop() {
+    moving = false;
+  }
+
+  // Returns if monster is moving
+  public bool IsMoving() {
+    return moving;
+  }
+
   // Applies gravity and normal forces to velocity
   private void ApplyGravity() {
     velocity.y -= gravity;

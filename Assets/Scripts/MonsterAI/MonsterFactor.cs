@@ -2,10 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class MonsterFactor : ScriptableObject {
-  // MonsterFactor: MonsterAI component deciding state priority.
+public interface MonsterFactor {
+  // AI controller evaluating state priority
 
-
-  // Returns factor value for state priority
-  public abstract float Score(Monster mon);
+  // Returns factor value for the behavior state priority
+  float GetScore(MonsterBehavior behavior);
 }

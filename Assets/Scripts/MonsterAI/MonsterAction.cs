@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class MonsterAction : ScriptableObject {
-  // MonsterAction: MonsterAI component scripting monster actions.
+public interface MonsterAction {
+  // AI controller scripting monster action
 
+  // Initializes action variables, called at the start of the behavior state
+  void StartAction(MonsterBehavior behavior);
 
-  // Executes action, effecting garden.
-  public abstract void Act(Monster mon);
+  // Executes action, effecting garden
+  void Act();
 }

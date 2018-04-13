@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Worm : Monster {
-  // Worm: Class of Worm
+  // Worm
 
   public override string GetName() {
     return "Worm";
@@ -48,5 +48,30 @@ public class Worm : Monster {
     }
 
     return validSpawnPoints[0];
+  }
+
+  public override void Behaviors() {
+
+    Garden g = GameObject.Find("Garden").GetComponent<Garden>();
+
+    MonsterBehavior[] behaviors = new MonsterBehavior[] {
+
+      new MonsterBehavior("Wander", g, this,
+      new MonsterAction[] {
+        new ActionWander()
+      },
+      new MonsterFactor[] {
+        new FactorRepeat(1f)
+      }),
+
+      new MonsterBehavior("Wait", g, this,
+      new MonsterAction[] {
+        new ActionTimeout(3f)
+      },
+      new MonsterFactor[] {
+        new FactorRepeat(1f)
+      })
+    };
+    SetBehaviors(behaviors);
   }
 }

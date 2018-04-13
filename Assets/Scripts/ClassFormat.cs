@@ -9,6 +9,7 @@ public class ClassFormat {
   //
   //  Controller - Class that takes inputs
   //  Game controller - Class that changes game state
+  //    AI controller - Game controller but for Monster AI
   //  Abstract data type - Class that holds data
   //
   //  Higher labels have priority

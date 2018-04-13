@@ -37,6 +37,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4870451785020136}
   - component: {fileID: 114860319795269586}
+  - component: {fileID: 114761189296152378}
   - component: {fileID: 65936153720833896}
   m_Layer: 0
   m_Name: Worm
@@ -197,6 +198,20 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.5, y: 1, z: 0.5}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &114761189296152378
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1541386915088780}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71821b05883a198478d8af2ed016e917, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  radius: 0.25
+  height: 0.25
+  moveSpeed: 0.5
 --- !u!114 &114860319795269586
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -208,20 +223,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2980a6a6200879844b65adf31c723a2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  size: 1
-  wandRadius: 0.4
-  owned: 0
-  garden: {fileID: 0}
-  isGrounded: 0
-  radius: 0.25
-  height: 0.25
-  moveSpeed: 0.5
-  currentState: {fileID: 0}
-  states:
-  - {fileID: 11400000, guid: aeb0ecf1fc6597f4197811b39bcdea19, type: 2}
-  - {fileID: 11400000, guid: 2786724207ef22a4b966cfa982631bd1, type: 2}
-  stateTime: 0
-  possibleState: {fileID: 0}
-  moveDestination: {x: 0, y: 0, z: 0}
-  moveDirection: {x: 0, y: 0, z: 0}
-  moving: 0
+  states: []

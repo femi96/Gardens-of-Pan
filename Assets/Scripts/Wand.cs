@@ -50,6 +50,7 @@ public class Wand : MonoBehaviour {
 
   void Update() {
 
+    moveTime += Time.deltaTime;
     MoveWand();
 
     // Only follow if not moving
@@ -86,8 +87,6 @@ public class Wand : MonoBehaviour {
     moveDirection *= spd;
 
     // Update move timer
-    moveTime += Time.deltaTime;
-
     if (x != 0 || z != 0) {
       moveTime = 0;
     }
