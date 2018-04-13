@@ -31,6 +31,7 @@ public class Wand : MonoBehaviour {
   // UI:
   public GameObject unitHoverUI;
   private Text unitHoverName;
+  private Text unitHoverBehavior;
   private Image unitHoverBackground;
 
   private readonly Color colorHoverDefault = new Color(0f, 0f, 0f, 0.7f);
@@ -45,6 +46,7 @@ public class Wand : MonoBehaviour {
     wandShapePieces = wandShapePieces.Skip(1).ToArray();
 
     unitHoverName = unitHoverUI.transform.Find("Name").GetComponent<Text>();
+    unitHoverBehavior = unitHoverUI.transform.Find("Behavior").GetComponent<Text>();
     unitHoverBackground = unitHoverUI.transform.Find("Background").GetComponent<Image>();
   }
 
@@ -139,11 +141,13 @@ public class Wand : MonoBehaviour {
     if (targetUnit != null) {
       unitHoverUI.SetActive(true);
       unitHoverName.text = targetUnit.GetName();
+      unitHoverBehavior.text = "";
 
       unitHoverBackground.color = colorHoverDefault;
 
       if (targetUnit is Monster) {
         Monster targetMon = (Monster)targetUnit;
+        unitHoverBehavior.text = targetMon.currentBehavior.ToString();
 
         if (!targetMon.IsOwned())
           unitHoverBackground.color = colorHoverWild;

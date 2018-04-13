@@ -102,4 +102,8 @@ public class MonsterBehavior {
   public float GetBehaviorTime() {
     return behaviorTime;
   }
+
+  public override string ToString() {
+    return behaviorName + "ing...";
+  }
 }
