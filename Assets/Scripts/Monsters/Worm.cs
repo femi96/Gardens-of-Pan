@@ -14,7 +14,7 @@ public class Worm : Monster {
   }
 
   public override float GetWandRadius() {
-    return 0.4f;
+    return 0.3f;
   }
 
   public override bool CanVisit(Garden garden) {
