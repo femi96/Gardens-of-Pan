@@ -12,7 +12,7 @@ public class Cam : MonoBehaviour {
 
   private float distance = 3.0f;  // Current distance from wand
 
-  private float xSpeed = 3.0f;  // Angular change rate
+  private float xSpeed = 9.0f;  // Angular change rate
   private float ySpeed = 12.0f;
   private float yMinLimit = 5f; // Angle bounds
   private float yMaxLimit = 80f;
@@ -50,10 +50,10 @@ public class Cam : MonoBehaviour {
   void LateUpdate() {
 
     // Update camera position based on mouse movement
-    x += Input.GetAxis("MouseX") * xSpeed * distance * 0.02f;
+    x += Input.GetAxis("MouseX") * xSpeed * 0.02f;
     y -= Input.GetAxis("MouseY") * ySpeed * 0.02f;
-    x = ClampAngleDeg(x, 0f, 360f);
-    y = ClampAngleDeg(y, yMinLimit, yMaxLimit);
+    x = (x + 360f) % 360f;
+    y = Mathf.Clamp(y, yMinLimit, yMaxLimit);
 
     Quaternion rotation = Quaternion.Euler(y, x, 0);
 
@@ -64,17 +64,5 @@ public class Cam : MonoBehaviour {
 
     transform.rotation = rotation;
     transform.position = position;
-  }
-
-  // Converts an angle to 360 degrees > angle >= 0 degrees, then clamps:
-  private static float ClampAngleDeg(float angle, float min, float max) {
-
-    if (angle < 0f)
-      angle += 360f;
-
-    if (angle >= 360f)
-      angle -= 360f;
-
-    return Mathf.Clamp(angle, min, max);
   }
 }

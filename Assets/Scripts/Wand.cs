@@ -35,7 +35,7 @@ public class Wand : MonoBehaviour {
   private Image unitHoverBackground;
 
   private readonly Color colorHoverDefault = new Color(0f, 0f, 0f, 0.7f);
-  private readonly Color colorHoverWild = new Color(1f, 0f, 0f, 0.7f);
+  private readonly Color colorHoverWild = new Color(0.5f, 0f, 0f, 0.7f);
 
   // All public variables are assigned in editor
 
