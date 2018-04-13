@@ -227,7 +227,11 @@ MonoBehaviour:
   - {fileID: 1750714205706756, guid: 826e5be4d6db9574a90c1b15f2498893, type: 2}
   - {fileID: 1920911878503668, guid: 171c63859869e0a4eb63accc0dda4003, type: 2}
   spawnPrefabs:
-  - {fileID: 1204523385019874, guid: c1c56e3adfdc10442a0f95547205ffc2, type: 2}
+  - {fileID: 1533515035940110, guid: 33ca341d724551146a0612e2752ba0b5, type: 2}
+  - {fileID: 1533515035940110, guid: 33ca341d724551146a0612e2752ba0b5, type: 2}
+  - {fileID: 1533515035940110, guid: 33ca341d724551146a0612e2752ba0b5, type: 2}
+  - {fileID: 1533515035940110, guid: 33ca341d724551146a0612e2752ba0b5, type: 2}
+  - {fileID: 1533515035940110, guid: 33ca341d724551146a0612e2752ba0b5, type: 2}
 --- !u!114 &114890702010952304
 MonoBehaviour:
   m_ObjectHideFlags: 1
