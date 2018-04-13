@@ -6,7 +6,7 @@ public class Worm : Monster {
   // Worm
 
   public override string GetName() {
-    return "Worm";
+    return "Earthworm";
   }
 
   public override float GetSize() {
