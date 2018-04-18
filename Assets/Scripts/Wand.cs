@@ -70,13 +70,11 @@ public class Wand : MonoBehaviour {
   private void MoveWand() {
 
     // Transform input direction based on camera forward
-    float limit = (garden.gardenSize / 2f) - radius;
     float spd = speed * Time.deltaTime;
 
     Vector3 moveDirection = Camera.main.transform.forward;
     moveDirection.y = 0;
 
-    float y;
     float x = Input.GetAxis("Horizontal");
     float z = Input.GetAxis("Vertical");
 
@@ -96,10 +94,18 @@ public class Wand : MonoBehaviour {
     // Apply move direction to transform
     transform.Translate(moveDirection.x, 0, moveDirection.z);
 
-    // Limit movement based on garden size
-    y = transform.position.y;
-    x = transform.position.x;
-    z = transform.position.z;
+    // Limit movement
+    LimitWandPosition();
+  }
+
+  // Limit movement based on garden size
+  private void LimitWandPosition() {
+
+    float limit = (garden.gardenSize / 2f) - radius;
+
+    float x = transform.position.x;
+    float y = transform.position.y;
+    float z = transform.position.z;
 
     if (x < -limit) { transform.position = new Vector3(-limit, y, z); }
 
@@ -112,6 +118,7 @@ public class Wand : MonoBehaviour {
     if (z > limit) { transform.position = new Vector3(x, y, limit); }
 
     z = transform.position.z;
+
   }
 
   // If not moving, follow a unit
@@ -119,6 +126,7 @@ public class Wand : MonoBehaviour {
 
     // Find new unit to follow
     if (targetUnit == null) {
+
       RaycastHit hit;
 
       if (Physics.Raycast(transform.position + Vector3.up * 2, -Vector3.up, out hit, 4)) {
@@ -129,10 +137,13 @@ public class Wand : MonoBehaviour {
 
       // Or follow unit
     } else {
+
       float deltaX = targetUnit.transform.position.x - transform.position.x;
       float deltaZ = targetUnit.transform.position.z - transform.position.z;
       Vector3 deltaV = new Vector3(deltaX, 0, deltaZ);
       transform.position += deltaV;
+
+      LimitWandPosition();
     }
   }
 
