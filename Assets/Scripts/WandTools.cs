@@ -75,12 +75,12 @@ public class WandTools : MonoBehaviour {
   // Change tool index on input
   private void InputSwap() {
 
-    if (Input.GetAxis("SwapLeft") > 0) {
+    if (Input.GetAxis(InputConstants.ToolSwapLeft) > 0) {
       swapTime = 0;
       toolIndex -= 1;
     }
 
-    if (Input.GetAxis("SwapRight") > 0) {
+    if (Input.GetAxis(InputConstants.ToolSwapRight) > 0) {
       swapTime = 0;
       toolIndex += 1;
     }
@@ -95,10 +95,10 @@ public class WandTools : MonoBehaviour {
     ToolAction t;
     t = ToolAction.None;
 
-    if (Input.GetAxis("Click2") > 0)
+    if (Input.GetAxis(InputConstants.ToolUseOff) > 0)
       t = toolActionOff;
 
-    if (Input.GetAxis("Click1") > 0)
+    if (Input.GetAxis(InputConstants.ToolUseMain) > 0)
       t = toolActionMain;
 
     // Apply action if exists

@@ -41,8 +41,8 @@ public class Cam : MonoBehaviour {
 
   void Update() {
 
-    // Lock cursor to screen on ToolToggle input
-    if (Input.GetAxis("ToolToggle") > 0) {
+    // Lock cursor to screen on input
+    if (Input.GetAxis(InputConstants.CameraLock) > 0) {
       Cursor.lockState = CursorLockMode.Locked;
     }
   }
@@ -50,14 +50,14 @@ public class Cam : MonoBehaviour {
   void LateUpdate() {
 
     // Update camera position based on mouse movement
-    x += Input.GetAxis("MouseX") * xSpeed * 0.02f;
-    y -= Input.GetAxis("MouseY") * ySpeed * 0.02f;
+    x += Input.GetAxis(InputConstants.CameraX) * xSpeed * 0.02f;
+    y -= Input.GetAxis(InputConstants.CameraY) * ySpeed * 0.02f;
     x = (x + 360f) % 360f;
     y = Mathf.Clamp(y, yMinLimit, yMaxLimit);
 
     Quaternion rotation = Quaternion.Euler(y, x, 0);
 
-    distance = Mathf.Clamp(distance - Input.GetAxis("MouseScrollWheel") * distanceSpeed, distanceMin, distanceMax);
+    distance = Mathf.Clamp(distance - Input.GetAxis(InputConstants.CameraZoom) * distanceSpeed, distanceMin, distanceMax);
 
     Vector3 negDistance = new Vector3(0.0f, 0.0f, -distance);
     Vector3 position = rotation * negDistance + wand.position;

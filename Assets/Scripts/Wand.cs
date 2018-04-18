@@ -75,8 +75,8 @@ public class Wand : MonoBehaviour {
     Vector3 moveDirection = Camera.main.transform.forward;
     moveDirection.y = 0;
 
-    float x = Input.GetAxis("Horizontal");
-    float z = Input.GetAxis("Vertical");
+    float x = Input.GetAxis(InputConstants.WandX);
+    float z = Input.GetAxis(InputConstants.WandZ);
 
     moveDirection = Vector3.Normalize(moveDirection);   // Don't normalize your inputs
     Vector3 moveDirectionF = moveDirection * z;         // Project z onto forward direction vector
