@@ -73,6 +73,15 @@ public class Garden : MonoBehaviour {
     units.Add(unit);
   }
 
+  // Remove a monster from the garden, and destroy it's gameObject
+  public void RemoveMonster(Monster monster) {
+
+    Unit unit = (Unit)monster;
+    units.Remove(unit);
+
+    Destroy(unit.gameObject);
+  }
+
   // Get garden's board
   public GardenBoard GetBoard() {
     return gardenBoard;

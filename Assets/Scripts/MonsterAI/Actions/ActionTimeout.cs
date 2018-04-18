@@ -8,14 +8,14 @@ public class ActionTimeout : MonsterAction {
 
   private MonsterBehavior state;
 
-  private float timeoutTime;
+  private float timeout;
 
   public ActionTimeout(float timeout) {
-    timeoutTime = timeout;
+    this.timeout = timeout;
   }
 
   public ActionTimeout(float timeoutMin, float timeoutMax) {
-    timeoutTime = Random.Range(timeoutMin, timeoutMax);
+    timeout = Random.Range(timeoutMin, timeoutMax);
   }
 
   public void StartAction(MonsterBehavior behavior) {
@@ -25,7 +25,7 @@ public class ActionTimeout : MonsterAction {
 
   public void Act() {
 
-    if (state.GetBehaviorTime() >= timeoutTime) {
+    if (state.GetBehaviorTime() >= timeout) {
       state.EndBehavior();
     }
   }

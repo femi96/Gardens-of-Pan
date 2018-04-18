@@ -71,7 +71,15 @@ public class Worm : Monster {
       },
       new MonsterFactor[] {
         new FactorRepeat(1f)
-      })
+      }),
+
+      new MonsterBehavior("Leave", g, this,
+      new MonsterAction[] {
+        new ActionLeave()
+      },
+      new MonsterFactor[] {
+        new FactorTimeoutWild(1f, 3f)
+      }),
     };
     SetBehaviors(behaviors);
   }

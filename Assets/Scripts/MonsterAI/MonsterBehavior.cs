@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -14,28 +15,31 @@ public class MonsterBehavior {
   private List<MonsterAction> actions;
   private List<MonsterFactor> factors;
 
-  public float behaviorTime;
-  public int behaviorsSince;
+  private float behaviorTime;
+  private int behaviorsSince;
+  private DateTime lastEndedTime;
 
   // Creates MonsterBehavior with TODO
-  public MonsterBehavior(string name, Garden g, Monster m, MonsterAction[] iActions, MonsterFactor[] iFactors) {
+  public MonsterBehavior(string name, Garden g, Monster m, MonsterAction[] actions, MonsterFactor[] factors) {
 
     behaviorName = name;
 
     garden = g;
     monster = m;
 
-    actions = new List<MonsterAction>();
+    this.actions = new List<MonsterAction>();
 
-    foreach (MonsterAction a in iActions) {
-      actions.Add(a);
+    foreach (MonsterAction a in actions) {
+      this.actions.Add(a);
     }
 
-    factors = new List<MonsterFactor>();
+    this.factors = new List<MonsterFactor>();
 
-    foreach (MonsterFactor f in iFactors) {
-      factors.Add(f);
+    foreach (MonsterFactor f in factors) {
+      this.factors.Add(f);
     }
+
+    lastEndedTime = DateTime.Now;
   }
 
   // Starts state with initial fields and starts behaviors
@@ -52,6 +56,7 @@ public class MonsterBehavior {
   // Ends state
   public void EndBehavior() {
 
+    lastEndedTime = DateTime.Now;
     monster.BehaviorDone();
   }
 
@@ -101,6 +106,11 @@ public class MonsterBehavior {
   // Returns time since this state started
   public float GetBehaviorTime() {
     return behaviorTime;
+  }
+
+  // Returns DateTime of when this behavior ended
+  public DateTime GetLastEndedTime() {
+    return lastEndedTime;
   }
 
   public override string ToString() {
