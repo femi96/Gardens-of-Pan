@@ -118,7 +118,7 @@ public class WandTools : MonoBehaviour {
     switch (t) {
 
     case ToolAction.Dig:
-      if (b == BlockType.Dirt || b == BlockType.Grass || b == BlockType.Sand)
+      if (b == BlockType.Dirt || b == BlockType.Grassland || b == BlockType.Sand)
         gardenBoard.SetType(v, BlockType.Water);
 
       Instantiate(dirtCloud, transform.position, Quaternion.identity, effectContainer);
@@ -139,19 +139,19 @@ public class WandTools : MonoBehaviour {
 
     case ToolAction.Grass:
       if (b == BlockType.Dirt || b == BlockType.Sand)
-        gardenBoard.SetType(v, BlockType.Grass);
+        gardenBoard.SetType(v, BlockType.Grassland);
 
       Instantiate(grassCloud, transform.position, Quaternion.identity, effectContainer);
       break;
 
     case ToolAction.Remove:
-      if (b == BlockType.Grass || b == BlockType.Sand)
+      if (b == BlockType.Grassland || b == BlockType.Sand)
         gardenBoard.SetType(v, BlockType.Dirt);
 
       break;
 
     case ToolAction.Sand:
-      if (b == BlockType.Dirt || b == BlockType.Grass)
+      if (b == BlockType.Dirt || b == BlockType.Grassland)
         gardenBoard.SetType(v, BlockType.Sand);
 
       Instantiate(sandCloud, transform.position, Quaternion.identity, effectContainer);

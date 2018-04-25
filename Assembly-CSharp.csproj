@@ -55,6 +55,7 @@
      <Compile Include="Assets\Scripts\ClassFormat.cs" />
      <Compile Include="Assets\Scripts\Constants\InputConstants.cs" />
      <Compile Include="Assets\Scripts\DestroyTimeout.cs" />
+     <Compile Include="Assets\Scripts\DisableOnPlay.cs" />
      <Compile Include="Assets\Scripts\Enums\BlockType.cs" />
      <Compile Include="Assets\Scripts\Enums\ToolAction.cs" />
      <Compile Include="Assets\Scripts\Enums\ToolType.cs" />
