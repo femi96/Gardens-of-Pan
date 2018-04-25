@@ -15,9 +15,6 @@ public class Wand : MonoBehaviour {
   private float radius = 0.2f;
   private float speed = 4f;
 
-  private const int gLayer = 1 << 8;
-  private const int wLayer = 1 << 9;
-
   private Unit targetUnit;
 
   // Timing:
@@ -191,10 +188,10 @@ public class Wand : MonoBehaviour {
       Vector3 collide = new Vector3(0, 0, 0);
       RaycastHit wandHit;
 
-      if (Physics.Raycast(piece.transform.position + Vector3.up * 0.5f, -Vector3.up, out wandHit, 2f, wLayer)) {
+      if (Physics.Raycast(piece.transform.position + Vector3.up * 0.5f, -Vector3.up, out wandHit, 2f, LayerConstants.WaterLayer)) {
         collide.y = 0.05f - wandHit.distance + 0.55f;
         piece.transform.position += collide;
-      } else if (Physics.Raycast(piece.transform.position + Vector3.up * 0.5f, -Vector3.up, out wandHit, 2f, gLayer)) {
+      } else if (Physics.Raycast(piece.transform.position + Vector3.up * 0.5f, -Vector3.up, out wandHit, 2f, LayerConstants.GroundLayer)) {
         collide.y = 0.05f - wandHit.distance + 0.55f;
         piece.transform.position += collide;
       }

@@ -17,8 +17,6 @@ public class MonsterMover : MonoBehaviour {
   private Vector3 moveDirection;
 
   private static float gravity = 0.1f;
-  private static int gLayer = 1 << 8;
-  // private static int wLayer = 1 << 9;
 
   void Start() {
     velocity = new Vector3(0, 0, 0);
@@ -94,7 +92,7 @@ public class MonsterMover : MonoBehaviour {
     Vector3 collide = new Vector3(0, 0, 0);
     RaycastHit hit;
 
-    if (Physics.Raycast(transform.position, -Vector3.up, out hit, height, gLayer)) {
+    if (Physics.Raycast(transform.position, -Vector3.up, out hit, height, LayerConstants.GroundLayer)) {
       collide.y = height - hit.distance;
       transform.position += collide;
       isGrounded = true;

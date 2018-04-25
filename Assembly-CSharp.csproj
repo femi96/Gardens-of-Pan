@@ -54,6 +54,7 @@
      <Compile Include="Assets\Scripts\Cam.cs" />
      <Compile Include="Assets\Scripts\ClassFormat.cs" />
      <Compile Include="Assets\Scripts\Constants\InputConstants.cs" />
+     <Compile Include="Assets\Scripts\Constants\LayerConstants.cs" />
      <Compile Include="Assets\Scripts\DestroyTimeout.cs" />
      <Compile Include="Assets\Scripts\DisableOnPlay.cs" />
      <Compile Include="Assets\Scripts\Enums\BlockType.cs" />
