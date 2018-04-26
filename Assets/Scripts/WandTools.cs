@@ -51,7 +51,9 @@ public class WandTools : MonoBehaviour {
   void Start() {
 
     toolIndex = 0;
-    tools = new ToolType[] {ToolType.None, ToolType.Shovel, ToolType.Grass, ToolType.Sand};
+    tools = new ToolType[] {
+      ToolType.None, ToolType.Shovel, ToolType.LifeOrb, ToolType.WetDryOrb, ToolType.HotColdOrb,
+    };
   }
 
   void Update() {
@@ -66,8 +68,8 @@ public class WandTools : MonoBehaviour {
       InputSwap();
 
     // if (swapTime >= swapCooldown && actionTime >= actionCooldown)
-    if (actionTime >= actionCooldown)
-      UpdateToolActions();
+    // if (actionTime >= actionCooldown)
+    UpdateToolActions();
 
     UpdateToolUI();
   }
@@ -95,10 +97,10 @@ public class WandTools : MonoBehaviour {
     ToolAction t;
     t = ToolAction.None;
 
-    if (Input.GetAxis(InputConstants.ToolUseOff) > 0)
+    if (Input.GetButtonDown(InputConstants.ToolUseOff))
       t = toolActionOff;
 
-    if (Input.GetAxis(InputConstants.ToolUseMain) > 0)
+    if (Input.GetButtonDown(InputConstants.ToolUseMain))
       t = toolActionMain;
 
     // Apply action if exists
@@ -115,98 +117,128 @@ public class WandTools : MonoBehaviour {
     Vector3 v = transform.position;
     BlockType b = gardenBoard.GetType(transform.position);
 
+    int[] features = BlockTypeFeatures.GetFeatures(b);
+
     switch (t) {
 
     case ToolAction.Dig:
-      if (b == BlockType.Dirt || b == BlockType.Grassland || b == BlockType.Sand)
-        gardenBoard.SetType(v, BlockType.Water);
-
-      Instantiate(dirtCloud, transform.position, Quaternion.identity, effectContainer);
-      break;
-
-    case ToolAction.Flatten:
-      if (b == BlockType.Rough)
-        gardenBoard.SetType(v, BlockType.Dirt);
-
+      features[0] -= 1;
       Instantiate(dirtCloud, transform.position, Quaternion.identity, effectContainer);
       break;
 
     case ToolAction.Fill:
-      if (b == BlockType.Water)
-        gardenBoard.SetType(v, BlockType.Dirt);
+      features[0] += 1;
+      break;
 
+    case ToolAction.Flatten:
+      features[0] -= 1;
+      Instantiate(dirtCloud, transform.position, Quaternion.identity, effectContainer);
       break;
 
     case ToolAction.Grass:
-      if (b == BlockType.Dirt || b == BlockType.Sand)
-        gardenBoard.SetType(v, BlockType.Grassland);
-
+      features[1] += 1;
       Instantiate(grassCloud, transform.position, Quaternion.identity, effectContainer);
       break;
 
     case ToolAction.Remove:
-      if (b == BlockType.Grassland || b == BlockType.Sand)
-        gardenBoard.SetType(v, BlockType.Dirt);
-
+      features[1] -= 1;
       break;
 
-    case ToolAction.Sand:
-      if (b == BlockType.Dirt || b == BlockType.Grassland)
-        gardenBoard.SetType(v, BlockType.Sand);
+    case ToolAction.Wet:
+      features[2] += 1;
+      // Instantiate(dirtCloud, transform.position, Quaternion.identity, effectContainer);
+      break;
 
-      Instantiate(sandCloud, transform.position, Quaternion.identity, effectContainer);
+    case ToolAction.Dry:
+      features[2] -= 1;
+      // Instantiate(dirtCloud, transform.position, Quaternion.identity, effectContainer);
+      break;
+
+    case ToolAction.Heat:
+      features[3] += 1;
+      // Instantiate(dirtCloud, transform.position, Quaternion.identity, effectContainer);
+      break;
+
+    case ToolAction.Chill:
+      features[3] -= 1;
+      // Instantiate(dirtCloud, transform.position, Quaternion.identity, effectContainer);
       break;
 
     default:
       break;
     }
+
+    gardenBoard.SetType(v, BlockTypeFeatures.GetType(features));
   }
 
-  // Update UI and strings based on index
+// Update UI and strings based on index
   private void UpdateToolActions() {
 
     ToolType t = tools[toolIndex];
     BlockType b = gardenBoard.GetType(transform.position);
 
+    toolActionMain = ToolAction.None;
+    toolActionOff = ToolAction.None;
+
     switch (t) {
 
     case ToolType.Shovel:
-      toolActionMain = ToolAction.Dig;
-      toolActionOff = ToolAction.Fill;
 
-      if (b == BlockType.Rough) {
+      if (b == BlockType.Rough)
         toolActionMain = ToolAction.Flatten;
-        toolActionOff = ToolAction.None;
-      }
+
+      if (BlockTypeGroups.InGroup(b, BlockTypeGroups.Ground)
+          || BlockTypeGroups.InGroup(b, BlockTypeGroups.Shallow))
+        toolActionMain = ToolAction.Dig;
+
+      if (BlockTypeGroups.InGroup(b, BlockTypeGroups.Shallow)
+          || BlockTypeGroups.InGroup(b, BlockTypeGroups.Deep))
+        toolActionOff = ToolAction.Fill;
 
       break;
 
-    case ToolType.Grass:
-      toolActionMain = ToolAction.Grass;
-      toolActionOff = ToolAction.Remove;
+    case ToolType.LifeOrb:
 
-      if (b == BlockType.Rough || b == BlockType.Water) {
-        toolActionMain = ToolAction.None;
-        toolActionOff = ToolAction.None;
-      }
+      if (BlockTypeGroups.InGroup(b, BlockTypeGroups.GroundBasic)
+          || BlockTypeGroups.InGroup(b, BlockTypeGroups.Life)
+          || b == BlockType.Scorch || b == BlockType.Tundra)
+        toolActionMain = ToolAction.Grass;
 
-      break;
-
-    case ToolType.Sand:
-      toolActionMain = ToolAction.Sand;
-      toolActionOff = ToolAction.Remove;
-
-      if (b == BlockType.Rough || b == BlockType.Water) {
-        toolActionMain = ToolAction.None;
-        toolActionOff = ToolAction.None;
-      }
+      if (BlockTypeGroups.InGroup(b, BlockTypeGroups.Life)
+          || b == BlockType.Overgrowth
+          || b == BlockType.Ashland || b == BlockType.Snow)
+        toolActionOff = ToolAction.Remove;
 
       break;
 
-    case ToolType.None:
-      toolActionMain = ToolAction.None;
-      toolActionOff = ToolAction.None;
+    case ToolType.WetDryOrb:
 
+      if (b == BlockType.Sand || b == BlockType.DirtDry || b == BlockType.Dirt
+          || b == BlockType.Grassland || b == BlockType.Aridland || b == BlockType.Overgrowth)
+        toolActionMain = ToolAction.Wet;
+
+      if (BlockTypeGroups.InGroup(b, BlockTypeGroups.GroundBasic)
+          || b == BlockType.Grassland || b == BlockType.Wetland || b == BlockType.Overgrowth)
+        toolActionOff = ToolAction.Dry;
+
+      break;
+
+    case ToolType.HotColdOrb:
+
+      if (BlockTypeGroups.InGroup(b, BlockTypeGroups.Temperate)) {
+        toolActionMain = ToolAction.Heat;
+        toolActionOff = ToolAction.Chill;
+      }
+
+      if (BlockTypeGroups.InGroup(b, BlockTypeGroups.Cold))
+        toolActionMain = ToolAction.Heat;
+
+      if (BlockTypeGroups.InGroup(b, BlockTypeGroups.Hot))
+        toolActionOff = ToolAction.Chill;
+
+      break;
+
+    default:
       break;
     }
   }
