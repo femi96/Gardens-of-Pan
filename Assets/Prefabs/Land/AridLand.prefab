@@ -54,7 +54,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4925143970767354}
   m_Layer: 0
-  m_Name: AridLand
+  m_Name: Aridland
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -311,7 +311,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 142f22c8fe0de1443bde33dbcc89a2f1, type: 2}
+  - {fileID: 2100000, guid: 6290d0c1c69ba564a87db5f74903a5bc, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
