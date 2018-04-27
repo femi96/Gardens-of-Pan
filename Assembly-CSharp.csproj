@@ -64,11 +64,12 @@
      <Compile Include="Assets\Scripts\GardenBoard.cs" />
      <Compile Include="Assets\Scripts\GardenWild.cs" />
      <Compile Include="Assets\Scripts\Monster.cs" />
+     <Compile Include="Assets\Scripts\MonsterAI\Actions\ActionJoin.cs" />
      <Compile Include="Assets\Scripts\MonsterAI\Actions\ActionLeave.cs" />
      <Compile Include="Assets\Scripts\MonsterAI\Actions\ActionTimeout.cs" />
      <Compile Include="Assets\Scripts\MonsterAI\Actions\ActionWander.cs" />
      <Compile Include="Assets\Scripts\MonsterAI\Factors\FactorRepeat.cs" />
-     <Compile Include="Assets\Scripts\MonsterAI\Factors\FactorTimeoutWild.cs" />
+     <Compile Include="Assets\Scripts\MonsterAI\Factors\FactorTimeout.cs" />
      <Compile Include="Assets\Scripts\MonsterAI\MonsterAction.cs" />
      <Compile Include="Assets\Scripts\MonsterAI\MonsterBehavior.cs" />
      <Compile Include="Assets\Scripts\MonsterAI\MonsterFactor.cs" />

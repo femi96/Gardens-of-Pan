@@ -10,7 +10,7 @@ public abstract class Monster : Unit {
 
   // Monster AI
   public MonsterBehavior currentBehavior;
-  private MonsterBehavior[] behaviors;
+  public MonsterBehavior[] behaviors;
   private bool currentBehaviorDone = true;
 
   // Monster models
@@ -27,7 +27,7 @@ public abstract class Monster : Unit {
 
   void Start() {
 
-    Behaviors();
+    UpdateBehaviors();
   }
 
   void Update() {
@@ -57,6 +57,10 @@ public abstract class Monster : Unit {
 
   // Set if monster is owned
   public void SetOwned(bool own) {
+
+    if (owned != own)
+      UpdateBehaviors();
+
     owned = own;
     UpdateModel();
   }
@@ -95,7 +99,7 @@ public abstract class Monster : Unit {
   }
 
   // Create and set monster's behavior states
-  public abstract void Behaviors();
+  public abstract void UpdateBehaviors();
 
   // Set monster's behavior states to input b
   public void SetBehaviors(MonsterBehavior[] b) {
@@ -106,5 +110,31 @@ public abstract class Monster : Unit {
   public void UpdateModel() {
     modelOwned.SetActive(owned);
     modelWild.SetActive(!owned);
+  }
+
+  // Get set of wild only monster behaviors
+  public static MonsterBehavior[] WildBehaviors(Monster m) {
+
+    Garden g = GameObject.Find("Garden").GetComponent<Garden>();
+    MonsterBehavior[] wildBehaviors = new MonsterBehavior[] {
+
+      new MonsterBehavior("Leave", g, m,
+      new MonsterAction[] {
+        new ActionLeave()
+      },
+      new MonsterFactor[] {
+        new FactorTimeout(10f, 30f)
+      }),
+
+      new MonsterBehavior("Join", g, m,
+      new MonsterAction[] {
+        new ActionJoin()
+      },
+      new MonsterFactor[] {
+        new FactorRepeat(10f)
+      }),
+    };
+
+    return wildBehaviors;
   }
 }
