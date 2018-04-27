@@ -92,7 +92,7 @@ public class Worm : Monster {
 
       new MonsterBehavior("Join", g, this,
       new MonsterAction[] {
-        new ActionJoin()
+        new ActionJoin(2f)
       },
       new MonsterFactor[] {
         new FactorRepeat(10f)
