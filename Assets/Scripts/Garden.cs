@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -74,5 +75,19 @@ public class Garden : MonoBehaviour {
   // Get garden's board
   public GardenBoard GetBoard() {
     return gardenBoard;
+  }
+
+  // Get number of units of type in garden
+  public int GetUnitTypeCount(Type t) {
+
+    int count = 0;
+
+    foreach (Unit unit in units) {
+
+      if (unit.GetType() == t)
+        count += 1;
+    }
+
+    return count;
   }
 }

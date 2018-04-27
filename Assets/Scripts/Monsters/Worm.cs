@@ -20,7 +20,7 @@ public class Worm : Monster {
   public override bool CanVisit(Garden garden) {
     GardenBoard board = garden.GetBoard();
 
-    return board.GetBlockTypeCount(BlockType.Dirt) >= 4;
+    return board.GetBlockTypeCount(BlockType.Dirt) >= 4 && garden.GetUnitTypeCount(typeof(Worm)) < 2;
   }
 
   public override bool CanOwn(Garden garden) {
