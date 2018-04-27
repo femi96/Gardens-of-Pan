@@ -51,10 +51,9 @@ public class Worm : Monster {
     return validSpawnPoints[r];
   }
 
-  public override void UpdateBehaviors() {
+  public override MonsterBehavior[] UniqueBehaviors() {
 
     Garden g = GameObject.Find("Garden").GetComponent<Garden>();
-    List<MonsterBehavior> behaviors = new List<MonsterBehavior>();
 
     MonsterBehavior[] uniqueBehaviors = new MonsterBehavior[] {
 
@@ -75,14 +74,6 @@ public class Worm : Monster {
       }),
     };
 
-    behaviors.AddRange(uniqueBehaviors);
-
-    if (!IsOwned()) {
-
-      MonsterBehavior[] wildBehaviors = WildBehaviors(this);
-      behaviors.AddRange(wildBehaviors);
-    }
-
-    SetBehaviors(behaviors.ToArray());
+    return uniqueBehaviors;
   }
 }

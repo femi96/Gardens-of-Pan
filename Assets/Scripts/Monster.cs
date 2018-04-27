@@ -58,10 +58,8 @@ public abstract class Monster : Unit {
   // Set if monster is owned
   public void SetOwned(bool own) {
 
-    if (owned != own)
-      UpdateBehaviors();
-
     owned = own;
+    UpdateBehaviors();
     UpdateModel();
   }
 
@@ -98,9 +96,6 @@ public abstract class Monster : Unit {
     }
   }
 
-  // Create and set monster's behavior states
-  public abstract void UpdateBehaviors();
-
   // Set monster's behavior states to input b
   public void SetBehaviors(MonsterBehavior[] b) {
     behaviors = b;
@@ -112,13 +107,33 @@ public abstract class Monster : Unit {
     modelWild.SetActive(!owned);
   }
 
+  // Set monster's behavior states to input b
+  public void UpdateBehaviors() {
+
+    List<MonsterBehavior> b = new List<MonsterBehavior>();
+
+    MonsterBehavior[] uniqueBehaviors = UniqueBehaviors();
+    b.AddRange(uniqueBehaviors);
+
+    if (!IsOwned()) {
+
+      MonsterBehavior[] wildBehaviors = WildBehaviors();
+      b.AddRange(wildBehaviors);
+    }
+
+    behaviors = b.ToArray();
+  }
+
+  // Get monster's unique behavior states based on monster type
+  public abstract MonsterBehavior[] UniqueBehaviors();
+
   // Get set of wild only monster behaviors
-  public static MonsterBehavior[] WildBehaviors(Monster m) {
+  public MonsterBehavior[] WildBehaviors() {
 
     Garden g = GameObject.Find("Garden").GetComponent<Garden>();
     MonsterBehavior[] wildBehaviors = new MonsterBehavior[] {
 
-      new MonsterBehavior("Leave", g, m,
+      new MonsterBehavior("Leave", g, this,
       new MonsterAction[] {
         new ActionLeave()
       },
@@ -126,7 +141,7 @@ public abstract class Monster : Unit {
         new FactorTimeout(10f, 30f)
       }),
 
-      new MonsterBehavior("Join", g, m,
+      new MonsterBehavior("Join", g, this,
       new MonsterAction[] {
         new ActionJoin()
       },
