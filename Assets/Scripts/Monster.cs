@@ -107,13 +107,15 @@ public abstract class Monster : Unit {
     modelWild.SetActive(!owned);
   }
 
+  // Changing behaviors
+
   // Set monster's behavior states to input b
   public void UpdateBehaviors() {
 
     List<MonsterBehavior> b = new List<MonsterBehavior>();
 
-    MonsterBehavior[] uniqueBehaviors = UniqueBehaviors();
-    b.AddRange(uniqueBehaviors);
+    MonsterBehavior[] normalBehaviors = NormalBehaviors();
+    b.AddRange(normalBehaviors);
 
     if (!IsOwned()) {
 
@@ -124,32 +126,9 @@ public abstract class Monster : Unit {
     behaviors = b.ToArray();
   }
 
-  // Get monster's unique behavior states based on monster type
-  public abstract MonsterBehavior[] UniqueBehaviors();
+  // Get set of monster behavior states based on monster type
+  public abstract MonsterBehavior[] NormalBehaviors();
 
-  // Get set of wild only monster behaviors
-  public MonsterBehavior[] WildBehaviors() {
-
-    Garden g = GameObject.Find("Garden").GetComponent<Garden>();
-    MonsterBehavior[] wildBehaviors = new MonsterBehavior[] {
-
-      new MonsterBehavior("Leave", g, this,
-      new MonsterAction[] {
-        new ActionLeave()
-      },
-      new MonsterFactor[] {
-        new FactorTimeout(10f, 30f)
-      }),
-
-      new MonsterBehavior("Join", g, this,
-      new MonsterAction[] {
-        new ActionJoin()
-      },
-      new MonsterFactor[] {
-        new FactorRepeat(10f)
-      }),
-    };
-
-    return wildBehaviors;
-  }
+  // Get set of wild only monster behaviors states based on monster type
+  public abstract MonsterBehavior[] WildBehaviors();
 }

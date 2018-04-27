@@ -51,7 +51,7 @@ public class Worm : Monster {
     return validSpawnPoints[r];
   }
 
-  public override MonsterBehavior[] UniqueBehaviors() {
+  public override MonsterBehavior[] NormalBehaviors() {
 
     Garden g = GameObject.Find("Garden").GetComponent<Garden>();
 
@@ -75,5 +75,30 @@ public class Worm : Monster {
     };
 
     return uniqueBehaviors;
+  }
+
+  public override MonsterBehavior[] WildBehaviors() {
+
+    Garden g = GameObject.Find("Garden").GetComponent<Garden>();
+    MonsterBehavior[] wildBehaviors = new MonsterBehavior[] {
+
+      new MonsterBehavior("Leave", g, this,
+      new MonsterAction[] {
+        new ActionLeave()
+      },
+      new MonsterFactor[] {
+        new FactorTimeout(10f, 30f)
+      }),
+
+      new MonsterBehavior("Join", g, this,
+      new MonsterAction[] {
+        new ActionJoin()
+      },
+      new MonsterFactor[] {
+        new FactorRepeat(10f)
+      }),
+    };
+
+    return wildBehaviors;
   }
 }
