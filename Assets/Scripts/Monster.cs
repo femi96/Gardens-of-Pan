@@ -10,13 +10,19 @@ public abstract class Monster : Unit {
 
   // Monster AI
   public MonsterBehavior currentBehavior;
-  public MonsterBehavior[] behaviors;
+  private MonsterBehavior[] behaviors;
   private bool currentBehaviorDone = true;
+
+  // Monster models
+  private GameObject modelOwned;
+  private GameObject modelWild;
 
   void Awake() {
 
     // Awake with components
     mover = gameObject.GetComponent<MonsterMover>();
+    modelOwned = transform.Find("ModelOwned").gameObject;
+    modelWild = transform.Find("ModelWild").gameObject;
   }
 
   void Start() {
@@ -52,6 +58,7 @@ public abstract class Monster : Unit {
   // Set if monster is owned
   public void SetOwned(bool own) {
     owned = own;
+    UpdateModel();
   }
 
   // Returns monster rmover
@@ -93,5 +100,11 @@ public abstract class Monster : Unit {
   // Set monster's behavior states to input b
   public void SetBehaviors(MonsterBehavior[] b) {
     behaviors = b;
+  }
+
+  // Update monster's model based on monster's owned
+  public void UpdateModel() {
+    modelOwned.SetActive(owned);
+    modelWild.SetActive(!owned);
   }
 }
