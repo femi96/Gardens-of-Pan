@@ -38,7 +38,6 @@ public class WandTools : MonoBehaviour {
 
   public GameObject dirtCloud;
   public GameObject grassCloud;
-  public GameObject sandCloud;
 
   // All public variables are assigned in editor
 
