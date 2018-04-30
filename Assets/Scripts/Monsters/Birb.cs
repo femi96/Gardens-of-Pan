@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Worm : Monster {
-  // Worm
+public class Birb : Monster {
+  // Birb
 
   public override string GetName() {
-    return "Worm";
+    return "Birb";
   }
 
   public override float GetSize() {
@@ -20,20 +20,20 @@ public class Worm : Monster {
   public override bool CanVisit(Garden garden) {
     GardenBoard board = garden.GetBoard();
 
-    return board.GetBlockTypeCount(BlockType.Dirt) >= 4 && garden.GetUnitTypeCount(typeof(Worm)) < 2;
+    return board.GetBlockTypeCount(BlockType.Grassland) >= 4 && garden.GetUnitTypeCount(typeof(Birb)) < 2;
   }
 
   public override bool CanOwn(Garden garden) {
     GardenBoard board = garden.GetBoard();
 
-    return board.GetBlockTypeCount(BlockType.Dirt) >= 8;
+    return board.GetBlockTypeCount(BlockType.Grassland) >= 8;
   }
 
   public override bool CanSpawn(GardenBoard board) {
     List<SpawnPoint> spawnPoints =  board.GetSpawnPoints();
 
     foreach (SpawnPoint spawn in spawnPoints) {
-      if (spawn.GetBlock().GetBlockType() == BlockType.Dirt)
+      if (spawn.GetBlock().GetBlockType() == BlockType.Grassland)
         return true;
     }
 
@@ -45,7 +45,7 @@ public class Worm : Monster {
     List<SpawnPoint> validSpawnPoints  =  new List<SpawnPoint>();
 
     foreach (SpawnPoint spawn in spawnPoints) {
-      if (spawn.GetBlock().GetBlockType() == BlockType.Dirt)
+      if (spawn.GetBlock().GetBlockType() == BlockType.Grassland)
         validSpawnPoints.Add(spawn);
     }
 
