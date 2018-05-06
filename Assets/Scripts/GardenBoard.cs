@@ -63,24 +63,23 @@ public class GardenBoard : MonoBehaviour {
     }
   }
 
-  // Returns BlockType of block at Vector3 v
-  public BlockType GetType(Vector3 v) {
+  // Get block at Vector3 v
+  public Block GetBlock(Vector3 v) {
     float g = gardenSize / 2f;
     int x = Mathf.RoundToInt(Mathf.Floor(v.x + g)); // Get x from v
     int z = Mathf.RoundToInt(Mathf.Floor(v.z + g)); // Get z from v
-
-    return blockMap[x, z].GetBlockType();
+    return blockMap[x, z];
   }
 
-  // Sets BlockType of block at Vector3 v to BlockType t
-  public void SetType(Vector3 v, BlockType t) {
-    float g = gardenSize / 2f;
-    int x = Mathf.RoundToInt(Mathf.Floor(v.x + g)); // Get x from v
-    int z = Mathf.RoundToInt(Mathf.Floor(v.z + g)); // Get z from v
+  // Returns BlockType of block at Vector3 v
+  public BlockType GetType(Vector3 v) {
+    return GetBlock(v).GetBlockType();
+  }
 
-    blockMap[x, z] = new Block(t);
-
-    UpdateChunk(x, z);
+  // Apply action to block at Vector3 v
+  public void ApplyAction(Vector3 v, ToolAction a) {
+    GetBlock(v).ApplyAction(a);
+    UpdateChunk(v);
   }
 
   // Returns BlockType of block at Vector3 v
@@ -165,6 +164,13 @@ public class GardenBoard : MonoBehaviour {
     chunkMap[x, z] = go;
 
     UpdateAdjacentSpawnPoint(x, z);
+  }
+
+  private void UpdateChunk(Vector3 v) {
+    float g = gardenSize / 2f;
+    int x = Mathf.RoundToInt(Mathf.Floor(v.x + g)); // Get x from v
+    int z = Mathf.RoundToInt(Mathf.Floor(v.z + g)); // Get z from v
+    UpdateChunk(x, z);
   }
 
   // Update spawn points around a block

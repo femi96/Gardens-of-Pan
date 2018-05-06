@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class WandTools : MonoBehaviour {
-  //  Controller that handles the player's tool inputs behaviors
+  // Controller that handles the player's tool inputs behaviors
 
   // Assigned in Editor:
   public GardenBoard gardenBoard;
@@ -17,10 +17,10 @@ public class WandTools : MonoBehaviour {
 
   // Timing:
   private float swapTime;
-  private const float swapCooldown = 0.25f;
+  private const float SwapCooldown = 0.25f;
 
   private float actionTime;
-  private const float actionCooldown = 0.1f;
+  private const float ActionCooldown = 0.1f;
 
   // UI:
   public GameObject actionMainUI;
@@ -60,15 +60,15 @@ public class WandTools : MonoBehaviour {
     swapTime += Time.deltaTime;
     actionTime += Time.deltaTime;
 
-    if (actionTime >= actionCooldown)
+    if (actionTime >= ActionCooldown)
       InputAction();
 
-    if (swapTime >= swapCooldown && actionTime >= actionCooldown)
+    if (swapTime >= SwapCooldown && actionTime >= ActionCooldown)
       InputSwap();
 
-    // if (swapTime >= swapCooldown && actionTime >= actionCooldown)
-    // if (actionTime >= actionCooldown)
-    UpdateToolActions();
+    // if (swapTime >= SwapCooldown && actionTime >= ActionCooldown)
+    if (actionTime >= ActionCooldown)
+      UpdateToolActions();
 
     UpdateToolUI();
   }
@@ -96,143 +96,117 @@ public class WandTools : MonoBehaviour {
     ToolAction t;
     t = ToolAction.None;
 
-    if (Input.GetButtonDown(InputConstants.ToolUseOff))
+    if (Input.GetAxis(InputConstants.ToolUseOff) > 0)
       t = toolActionOff;
 
-    if (Input.GetButtonDown(InputConstants.ToolUseMain))
+    if (Input.GetAxis(InputConstants.ToolUseMain) > 0)
       t = toolActionMain;
 
     // Apply action if exists
     if (t != ToolAction.None) {
       actionTime = 0;
       ApplyAction(t);
+    } else {
+      // reset previous action, so can hold
     }
   }
 
   // Apply input to effect garden
-  private void ApplyAction(ToolAction t) {
+  private void ApplyAction(ToolAction a) {
 
     // Apply tool action to appropriate effect
     Vector3 v = transform.position;
-    BlockType b = gardenBoard.GetType(transform.position);
 
-    int[] features = BlockTypeFeatures.GetFeatures(b);
-
-    switch (t) {
+    switch (a) {
 
     case ToolAction.Dig:
-      features[0] -= 1;
       Instantiate(dirtCloud, transform.position, Quaternion.identity, effectContainer);
       break;
 
     case ToolAction.Fill:
-      features[0] += 1;
       break;
 
     case ToolAction.Flatten:
-      features[0] -= 1;
       Instantiate(dirtCloud, transform.position, Quaternion.identity, effectContainer);
       break;
 
     case ToolAction.Grass:
-      features[1] += 1;
       Instantiate(grassCloud, transform.position, Quaternion.identity, effectContainer);
       break;
 
     case ToolAction.Remove:
-      features[1] -= 1;
       break;
 
     case ToolAction.Wet:
-      features[2] += 1;
-      // Instantiate(dirtCloud, transform.position, Quaternion.identity, effectContainer);
       break;
 
     case ToolAction.Dry:
-      features[2] -= 1;
-      // Instantiate(dirtCloud, transform.position, Quaternion.identity, effectContainer);
       break;
 
     case ToolAction.Heat:
-      features[3] += 1;
-      // Instantiate(dirtCloud, transform.position, Quaternion.identity, effectContainer);
       break;
 
     case ToolAction.Chill:
-      features[3] -= 1;
-      // Instantiate(dirtCloud, transform.position, Quaternion.identity, effectContainer);
       break;
 
     default:
       break;
     }
 
-    gardenBoard.SetType(v, BlockTypeFeatures.GetType(features));
+    gardenBoard.ApplyAction(v, a);
   }
 
 // Update UI and strings based on index
   private void UpdateToolActions() {
 
-    ToolType t = tools[toolIndex];
+    ToolType tool = tools[toolIndex];
     BlockType b = gardenBoard.GetType(transform.position);
 
     toolActionMain = ToolAction.None;
     toolActionOff = ToolAction.None;
 
-    switch (t) {
+    switch (tool) {
 
     case ToolType.Shovel:
-
-      if (b == BlockType.Rough)
+      if (b == BlockType.Rough) {
         toolActionMain = ToolAction.Flatten;
+        break;
+      }
 
-      if (BlockTypeGroups.InGroup(b, BlockTypeGroups.Ground)
-          || BlockTypeGroups.InGroup(b, BlockTypeGroups.Shallow))
+      if (!BlockTypes.InGroup(b, BlockTypes.DepthDeep))
         toolActionMain = ToolAction.Dig;
 
-      if (BlockTypeGroups.InGroup(b, BlockTypeGroups.Shallow)
-          || BlockTypeGroups.InGroup(b, BlockTypeGroups.Deep))
+      if (!BlockTypes.InGroup(b, BlockTypes.DepthGround))
         toolActionOff = ToolAction.Fill;
 
       break;
 
     case ToolType.LifeOrb:
 
-      if (BlockTypeGroups.InGroup(b, BlockTypeGroups.GroundBasic)
-          || BlockTypeGroups.InGroup(b, BlockTypeGroups.Life)
-          || b == BlockType.Scorch || b == BlockType.Tundra)
+      if (b == BlockType.Dirt || b == BlockType.Scorch || b == BlockType.Tundra)
         toolActionMain = ToolAction.Grass;
 
-      if (BlockTypeGroups.InGroup(b, BlockTypeGroups.Life)
-          || b == BlockType.Overgrowth
-          || b == BlockType.Ashland || b == BlockType.Snow)
+      if (b == BlockType.Grassland || b == BlockType.Ashland || b == BlockType.Snow)
         toolActionOff = ToolAction.Remove;
 
       break;
 
     case ToolType.WetDryOrb:
 
-      if (b == BlockType.Sand || b == BlockType.DirtDry || b == BlockType.Dirt
-          || b == BlockType.Grassland || b == BlockType.Aridland || b == BlockType.Overgrowth)
+      if (b == BlockType.Sand || b == BlockType.Grassland)
         toolActionMain = ToolAction.Wet;
 
-      if (BlockTypeGroups.InGroup(b, BlockTypeGroups.GroundBasic)
-          || b == BlockType.Grassland || b == BlockType.Wetland || b == BlockType.Overgrowth)
+      if (b == BlockType.Dirt || b == BlockType.Wetland)
         toolActionOff = ToolAction.Dry;
 
       break;
 
     case ToolType.HotColdOrb:
 
-      if (BlockTypeGroups.InGroup(b, BlockTypeGroups.Temperate)) {
-        toolActionMain = ToolAction.Heat;
-        toolActionOff = ToolAction.Chill;
-      }
-
-      if (BlockTypeGroups.InGroup(b, BlockTypeGroups.Cold))
+      if (!BlockTypes.InGroup(b, BlockTypes.TempHot))
         toolActionMain = ToolAction.Heat;
 
-      if (BlockTypeGroups.InGroup(b, BlockTypeGroups.Hot))
+      if (!BlockTypes.InGroup(b, BlockTypes.TempCold))
         toolActionOff = ToolAction.Chill;
 
       break;
@@ -242,7 +216,7 @@ public class WandTools : MonoBehaviour {
     }
   }
 
-  // Update UI based on tool index and actions
+// Update UI based on tool index and actions
   private void UpdateToolUI() {
 
     // Update index, left, and right
