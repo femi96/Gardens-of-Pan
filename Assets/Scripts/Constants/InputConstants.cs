@@ -4,6 +4,8 @@ using UnityEngine;
 
 public static class InputConstants {
 
+  public const string ScreenCapture = "ScreenCapture";
+
   public const string CameraLock = "ToolToggle";
 
   public const string CameraX = "MouseX";

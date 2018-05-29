@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Linq;
+using System.IO;
 
 public class Wand : MonoBehaviour {
   //  Controller that handles the player wand's inputs and behaviors
@@ -49,6 +50,8 @@ public class Wand : MonoBehaviour {
 
   void Update() {
 
+    ScreenCapture();
+
     moveTime += Time.deltaTime;
     MoveWand();
 
@@ -61,6 +64,20 @@ public class Wand : MonoBehaviour {
 
     UpdateTagUI();
     UpdateWandShape();
+  }
+
+  // Take a screenshot and save it
+  private void ScreenCapture() {
+
+    if (Input.GetButtonDown(InputConstants.ScreenCapture)) {
+      string filePath = Application.dataPath + "/Screenshots/";
+      string fileName = "Screenshot_" + garden.gardenName + System.DateTime.Now.ToString("_yyyy-MM-dd-HH-mm-ss") + ".png";
+
+      if (!Directory.Exists(filePath))
+        Directory.CreateDirectory(filePath);
+
+      UnityEngine.ScreenCapture.CaptureScreenshot(filePath + fileName);
+    }
   }
 
   // Move wand each frame
