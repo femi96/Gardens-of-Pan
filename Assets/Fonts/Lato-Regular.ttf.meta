@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 60d1b579478c5ae478f42a7bb99ccbac
-timeCreated: 1525111246
+guid: 5f94d6cbf27ad7742a11bce1be6b79c3
+timeCreated: 1527676716
 licenseType: Free
 TrueTypeFontImporter:
   externalObjects: {}
@@ -10,9 +10,9 @@ TrueTypeFontImporter:
   characterSpacing: 0
   characterPadding: 1
   includeFontData: 1
-  fontName: Raleway
+  fontName: Lato
   fontNames:
-  - Raleway
+  - Lato
   fallbackFontReferences: []
   customCharacters: 
   fontRenderingMode: 0
