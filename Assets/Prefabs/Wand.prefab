@@ -569,7 +569,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 6547bef02b447794b8990d4f5c1d62ef, type: 2}
+  - {fileID: 2100000, guid: 5e8dea2bdfe1af142b84e24c2da1989c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -603,7 +603,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 6547bef02b447794b8990d4f5c1d62ef, type: 2}
+  - {fileID: 2100000, guid: 5e8dea2bdfe1af142b84e24c2da1989c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -637,7 +637,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 6547bef02b447794b8990d4f5c1d62ef, type: 2}
+  - {fileID: 2100000, guid: 5e8dea2bdfe1af142b84e24c2da1989c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -671,7 +671,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 6547bef02b447794b8990d4f5c1d62ef, type: 2}
+  - {fileID: 2100000, guid: 5e8dea2bdfe1af142b84e24c2da1989c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -705,7 +705,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 6547bef02b447794b8990d4f5c1d62ef, type: 2}
+  - {fileID: 2100000, guid: 5e8dea2bdfe1af142b84e24c2da1989c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -739,7 +739,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 6547bef02b447794b8990d4f5c1d62ef, type: 2}
+  - {fileID: 2100000, guid: 5e8dea2bdfe1af142b84e24c2da1989c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -773,7 +773,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 6547bef02b447794b8990d4f5c1d62ef, type: 2}
+  - {fileID: 2100000, guid: 5e8dea2bdfe1af142b84e24c2da1989c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -807,7 +807,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 6547bef02b447794b8990d4f5c1d62ef, type: 2}
+  - {fileID: 2100000, guid: 5e8dea2bdfe1af142b84e24c2da1989c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -841,7 +841,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 6547bef02b447794b8990d4f5c1d62ef, type: 2}
+  - {fileID: 2100000, guid: 5e8dea2bdfe1af142b84e24c2da1989c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -875,7 +875,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 6547bef02b447794b8990d4f5c1d62ef, type: 2}
+  - {fileID: 2100000, guid: 5e8dea2bdfe1af142b84e24c2da1989c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -909,7 +909,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 6547bef02b447794b8990d4f5c1d62ef, type: 2}
+  - {fileID: 2100000, guid: 5e8dea2bdfe1af142b84e24c2da1989c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -943,7 +943,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 6547bef02b447794b8990d4f5c1d62ef, type: 2}
+  - {fileID: 2100000, guid: 5e8dea2bdfe1af142b84e24c2da1989c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -977,7 +977,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 6547bef02b447794b8990d4f5c1d62ef, type: 2}
+  - {fileID: 2100000, guid: 5e8dea2bdfe1af142b84e24c2da1989c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1253,6 +1253,7 @@ MonoBehaviour:
   garden: {fileID: 0}
   gardenBoard: {fileID: 0}
   unitHoverUI: {fileID: 0}
+  screenshotUI: {fileID: 0}
 --- !u!114 &114641301033665606
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1284,7 +1285,6 @@ MonoBehaviour:
   effectContainer: {fileID: 0}
   dirtCloud: {fileID: 1508824101407052, guid: ceff9250b71a0854c875cb18cb9f30cc, type: 2}
   grassCloud: {fileID: 1086913131271382, guid: bb114bdbd20eaac4c9e2ed8cc9f1ab0b, type: 2}
-  sandCloud: {fileID: 1765793412613460, guid: dc584a32b6660ec45abf97f8b830320a, type: 2}
 --- !u!124 &124240752444113476
 Behaviour:
   m_ObjectHideFlags: 1

@@ -19,7 +19,7 @@ public class Wand : MonoBehaviour {
   private Unit targetUnit;
 
   // Timing:
-  private float moveTime;
+  private float moveTime = 0f;
   private const float followCooldown = 0.25f;
 
   // Wand shape:
@@ -35,6 +35,11 @@ public class Wand : MonoBehaviour {
   private readonly Color colorHoverDefault = new Color(0f, 0f, 0f, 0.7f);
   private readonly Color colorHoverWild = new Color(0.5f, 0f, 0f, 0.7f);
 
+  // Screenshot:
+  public GameObject screenshotUI;
+  private Text screenshotText;
+  private float screenshotTime = 10f;
+  private const float screenshotCooldown = 3f;
   // All public variables are assigned in editor
 
   void Awake() {
@@ -46,10 +51,13 @@ public class Wand : MonoBehaviour {
     unitHoverName = unitHoverUI.transform.Find("Name").GetComponent<Text>();
     unitHoverBehavior = unitHoverUI.transform.Find("Behavior").GetComponent<Text>();
     unitHoverBackground = unitHoverUI.transform.Find("Background").GetComponent<Image>();
+
+    screenshotText = screenshotUI.transform.Find("Text").GetComponent<Text>();
   }
 
   void Update() {
 
+    screenshotTime += Time.deltaTime;
     ScreenCapture();
 
     moveTime += Time.deltaTime;
@@ -76,8 +84,12 @@ public class Wand : MonoBehaviour {
       if (!Directory.Exists(filePath))
         Directory.CreateDirectory(filePath);
 
+      screenshotText.text = "Screenshot saved as " + fileName;
+      screenshotTime = 0f;
       UnityEngine.ScreenCapture.CaptureScreenshot(filePath + fileName);
     }
+
+    screenshotUI.SetActive(screenshotTime <= screenshotCooldown);
   }
 
   // Move wand each frame
