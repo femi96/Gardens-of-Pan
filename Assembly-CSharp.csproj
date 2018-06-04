@@ -58,11 +58,13 @@
      <Compile Include="Assets\Scripts\DestroyTimeout.cs" />
      <Compile Include="Assets\Scripts\DisableOnPlay.cs" />
      <Compile Include="Assets\Scripts\Enums\BlockType.cs" />
+     <Compile Include="Assets\Scripts\Enums\GardenMode.cs" />
      <Compile Include="Assets\Scripts\Enums\ToolAction.cs" />
      <Compile Include="Assets\Scripts\Enums\ToolType.cs" />
      <Compile Include="Assets\Scripts\Garden.cs" />
      <Compile Include="Assets\Scripts\GardenBoard.cs" />
      <Compile Include="Assets\Scripts\GardenWild.cs" />
+     <Compile Include="Assets\Scripts\MainMenuHandler.cs" />
      <Compile Include="Assets\Scripts\Monster.cs" />
      <Compile Include="Assets\Scripts\MonsterAI\Actions\ActionJoin.cs" />
      <Compile Include="Assets\Scripts\MonsterAI\Actions\ActionLeave.cs" />

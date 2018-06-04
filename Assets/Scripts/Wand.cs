@@ -40,6 +40,7 @@ public class Wand : MonoBehaviour {
   private Text screenshotText;
   private float screenshotTime = 10f;
   private const float screenshotCooldown = 3f;
+
   // All public variables are assigned in editor
 
   void Awake() {

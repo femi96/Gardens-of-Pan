@@ -49,6 +49,8 @@ public class Cam : MonoBehaviour {
 
   void LateUpdate() {
 
+    // TODO: Frame independent
+
     // Update camera position based on mouse movement
     x += Input.GetAxis(InputConstants.CameraX) * xSpeed * 0.02f;
     y -= Input.GetAxis(InputConstants.CameraY) * ySpeed * 0.02f;

@@ -9,6 +9,7 @@ public class Garden : MonoBehaviour {
   //    garden contents (units in garden)
 
   private GardenBoard gardenBoard;
+  private GardenMode gardenMode;
 
   // Garden meta:
   public string gardenName;
@@ -19,7 +20,13 @@ public class Garden : MonoBehaviour {
   private List<Unit> units = new List<Unit>();  // List of units in garden
   private Transform unitsCont; // GameObject container for unit gameObjects
 
-  // Garden time: (TODO : Re design and implement, might separate)
+  // Garden mode gameobjects
+  public GameObject mainMenuUI;
+  public GameObject mainMenuCamera;
+  public GameObject playUI;
+  public GameObject playWand;
+
+  // All public variables are assigned in editor
 
   void Awake() {
 
@@ -29,11 +36,23 @@ public class Garden : MonoBehaviour {
     unitsCont = transform.Find("Units");
   }
 
-  void Start() {}
+  void Start() {
+    SetGardenMode(GardenMode.MainMenu);
+  }
 
-  void Update() {}
+  // Set garden mode and update related
+  public void SetGardenMode(GardenMode m) {
+    gardenMode = m;
+    mainMenuUI.SetActive(gardenMode == GardenMode.MainMenu);
+    mainMenuCamera.SetActive(gardenMode == GardenMode.MainMenu);
+    playUI.SetActive(gardenMode == GardenMode.Play);
+    playWand.SetActive(gardenMode == GardenMode.Play);
 
-  void FixedUpdate() {}
+    if (gardenMode == GardenMode.Play)
+      Time.timeScale = 1f;
+    else
+      Time.timeScale = 0f;
+  }
 
   // Get total size of all units
   public float UnitSizeCount() {
