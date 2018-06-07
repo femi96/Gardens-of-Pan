@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class MainMenuHandler : MonoBehaviour {
+public class TitleMenu : MonoBehaviour {
   // Game controller that handles main menu
 
   public Garden garden;

@@ -1040,6 +1040,10 @@ Prefab:
       propertyPath: garden
       value: 
       objectReference: {fileID: 1771626594}
+    - target: {fileID: 1076899354482786, guid: fc2f18f8e8c9f484b8de7703ed49759e, type: 2}
+      propertyPath: m_Name
+      value: TitleMenu
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: fc2f18f8e8c9f484b8de7703ed49759e, type: 2}
   m_IsPrefabParent: 0

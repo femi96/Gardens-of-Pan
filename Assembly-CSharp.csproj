@@ -64,7 +64,8 @@
      <Compile Include="Assets\Scripts\Garden.cs" />
      <Compile Include="Assets\Scripts\GardenBoard.cs" />
      <Compile Include="Assets\Scripts\GardenWild.cs" />
-     <Compile Include="Assets\Scripts\MainMenuHandler.cs" />
+     <Compile Include="Assets\Scripts\Menu\TitleMenu.cs" />
+     <Compile Include="Assets\Scripts\Menu\WheelMenu.cs" />
      <Compile Include="Assets\Scripts\Monster.cs" />
      <Compile Include="Assets\Scripts\MonsterAI\Actions\ActionJoin.cs" />
      <Compile Include="Assets\Scripts\MonsterAI\Actions\ActionLeave.cs" />
