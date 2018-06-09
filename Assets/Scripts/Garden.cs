@@ -37,14 +37,14 @@ public class Garden : MonoBehaviour {
   }
 
   void Start() {
-    SetGardenMode(GardenMode.MainMenu);
+    SetGardenMode(GardenMode.Title);
   }
 
   // Set garden mode and update related
   public void SetGardenMode(GardenMode m) {
     gardenMode = m;
-    mainMenuUI.SetActive(gardenMode == GardenMode.MainMenu);
-    mainMenuCamera.SetActive(gardenMode == GardenMode.MainMenu);
+    mainMenuUI.SetActive(gardenMode == GardenMode.Title);
+    mainMenuCamera.SetActive(gardenMode == GardenMode.Title);
     playUI.SetActive(gardenMode == GardenMode.Play);
     playWand.SetActive(gardenMode == GardenMode.Play);
 

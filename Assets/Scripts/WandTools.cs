@@ -4,34 +4,22 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class WandTools : MonoBehaviour {
-  // Controller that handles the player's tool inputs behaviors
+  // Controller that handles the player's tool inputsm, behaviors, and UI
 
   // Assigned in Editor:
   public GardenBoard gardenBoard;
 
-  private ToolType[] tools;
-  private int toolIndex;
-
+  private ToolType tool;
   private ToolAction toolActionMain;
   private ToolAction toolActionOff;
 
   // Timing:
-  private float swapTime;
-  private const float SwapCooldown = 0.25f;
-
   private float actionTime;
   private const float ActionCooldown = 0.1f;
 
   // UI:
-  public GameObject actionMainUI;
-  private Text actionMainText;
-
-  public GameObject actionOffUI;
-  private Text actionOffText;
-
-  public Text toolText;
-  public Text swapLeftText;
-  public Text swapRightText;
+  public GameObject toolGuide;
+  public GameObject toolWheel;
 
   // Effect:
   public Transform effectContainer;
@@ -41,52 +29,24 @@ public class WandTools : MonoBehaviour {
 
   // All public variables are assigned in editor
 
-  void Awake() {
-
-    actionMainText = actionMainUI.transform.Find("Text").GetComponent<Text>();
-    actionOffText = actionOffUI.transform.Find("Text").GetComponent<Text>();
-  }
+  void Awake() {}
 
   void Start() {
-
-    toolIndex = 0;
-    tools = new ToolType[] {
-      ToolType.None, ToolType.Shovel, ToolType.LifeOrb, ToolType.WetDryOrb, ToolType.HotColdOrb,
-    };
+    SetTool(ToolType.None);
   }
 
   void Update() {
 
-    swapTime += Time.deltaTime;
     actionTime += Time.deltaTime;
 
     if (actionTime >= ActionCooldown)
       InputAction();
-
-    if (swapTime >= SwapCooldown && actionTime >= ActionCooldown)
-      InputSwap();
-
-    // if (swapTime >= SwapCooldown && actionTime >= ActionCooldown)
-    if (actionTime >= ActionCooldown)
-      UpdateToolActions();
-
-    UpdateToolUI();
   }
 
-  // Change tool index on input
-  private void InputSwap() {
-
-    if (Input.GetAxis(InputConstants.ToolSwapLeft) > 0) {
-      swapTime = 0;
-      toolIndex -= 1;
-    }
-
-    if (Input.GetAxis(InputConstants.ToolSwapRight) > 0) {
-      swapTime = 0;
-      toolIndex += 1;
-    }
-
-    toolIndex = (toolIndex + tools.Length) % tools.Length;
+  // Set wand tool
+  public void SetTool(ToolType t) {
+    tool = t;
+    UpdateToolActions();
   }
 
   // Act if tool input
@@ -106,6 +66,7 @@ public class WandTools : MonoBehaviour {
     if (t != ToolAction.None) {
       actionTime = 0;
       ApplyAction(t);
+
     } else {
       // reset previous action, so can hold
     }
@@ -154,12 +115,12 @@ public class WandTools : MonoBehaviour {
     }
 
     gardenBoard.ApplyAction(v, a);
+    UpdateToolActions();
   }
 
-// Update UI and strings based on index
+  // Update UI and strings based on index
   private void UpdateToolActions() {
 
-    ToolType tool = tools[toolIndex];
     BlockType b = gardenBoard.GetType(transform.position);
 
     toolActionMain = ToolAction.None;
@@ -214,28 +175,27 @@ public class WandTools : MonoBehaviour {
     default:
       break;
     }
+
+    UpdateUIToolGuide();
   }
 
-// Update UI based on tool index and actions
-  private void UpdateToolUI() {
+  // Update tool guide based on current tool
+  private void UpdateUIToolGuide() {
 
-    // Update index, left, and right
-    toolText.text = tools[toolIndex].ToString();
+    // Update tool
+    Text toolText = toolGuide.transform.Find("Tool/Text").gameObject.GetComponent<Text>();
+    toolText.text = tool.ToString();
 
-    int indexLeft = (toolIndex - 1 + tools.Length) % tools.Length;
-    swapLeftText.text = tools[indexLeft].ToString();
+    // Enable UI main action
+    GameObject mainUI = toolGuide.transform.Find("Main/Active").gameObject;
+    Text mainText = toolGuide.transform.Find("Main/Active/Text").gameObject.GetComponent<Text>();
+    mainUI.SetActive(toolActionMain != ToolAction.None);
+    mainText.text = toolActionMain.ToString();
 
-    int indexRight = (toolIndex + 1) % tools.Length;
-    swapRightText.text = tools[indexRight].ToString();
-
-    // Enable UI if needs to display a tool action
-    actionMainUI.SetActive(true);
-    actionMainText.text = toolActionMain.ToString();
-    actionOffUI.SetActive(true);
-    actionOffText.text = toolActionOff.ToString();
-
-    if (toolActionMain == ToolAction.None) { actionMainUI.SetActive(false); }
-
-    if (toolActionOff == ToolAction.None) { actionOffUI.SetActive(false); }
+    // Enable UI off action
+    GameObject offUI = toolGuide.transform.Find("Off/Active").gameObject;
+    Text offText = toolGuide.transform.Find("Off/Active/Text").gameObject.GetComponent<Text>();
+    offUI.SetActive(toolActionOff != ToolAction.None);
+    offText.text = toolActionOff.ToString();
   }
 }

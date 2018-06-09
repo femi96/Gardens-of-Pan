@@ -9,4 +9,8 @@ public class WheelMenu : MonoBehaviour {
   public Garden garden;
 
   // All public variables are assigned in editor
+
+  public void Shovel() {
+    garden.SetGardenMode(GardenMode.Play);
+  }
 }

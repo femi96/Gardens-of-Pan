@@ -6,7 +6,7 @@ using System.Linq;
 using System.IO;
 
 public class Wand : MonoBehaviour {
-  //  Controller that handles the player wand's inputs and behaviors
+  //  Controller that handles the player wand's behaviors and movement inputs
 
   // Assigned in Editor:
   public Garden garden;
@@ -26,7 +26,7 @@ public class Wand : MonoBehaviour {
   private GameObject wandShape;
   private Transform[] wandShapePieces;
 
-  // UI:
+  // UI hover:
   public GameObject unitHoverUI;
   private Text unitHoverName;
   private Text unitHoverBehavior;
@@ -35,7 +35,7 @@ public class Wand : MonoBehaviour {
   private readonly Color colorHoverDefault = new Color(0f, 0f, 0f, 0.7f);
   private readonly Color colorHoverWild = new Color(0.5f, 0f, 0f, 0.7f);
 
-  // Screenshot:
+  // UI screenshot:
   public GameObject screenshotUI;
   private Text screenshotText;
   private float screenshotTime = 10f;

@@ -15,11 +15,6 @@ public static class InputConstants {
   public const string WandX = "Horizontal";
   public const string WandZ = "Vertical";
 
-  public const string ToolToggle = "ToolToggle";
-
-  public const string ToolSwapLeft = "SwapLeft";
-  public const string ToolSwapRight = "SwapRight";
-
   public const string ToolUseMain = "Click1";
   public const string ToolUseOff = "Click2";
 }
