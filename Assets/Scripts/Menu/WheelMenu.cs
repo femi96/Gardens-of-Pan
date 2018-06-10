@@ -29,4 +29,8 @@ public class WheelMenu : MonoBehaviour {
     tools.SetTool(ToolType.HotColdOrb);
     tools.ToolWheelToggle();
   }
+
+  public void CloseWheel() {
+    tools.ToolWheelToggle();
+  }
 }
