@@ -30,6 +30,11 @@ public class WheelMenu : MonoBehaviour {
     tools.ToolWheelToggle();
   }
 
+  public void SetToolNone() {
+    tools.SetTool(ToolType.None);
+    tools.ToolWheelToggle();
+  }
+
   public void CloseWheel() {
     tools.ToolWheelToggle();
   }
