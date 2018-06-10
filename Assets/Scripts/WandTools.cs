@@ -217,7 +217,9 @@ public class WandTools : MonoBehaviour {
     // Tool guide
 
     // Update tool
-    Text toolText = toolGuide.transform.Find("Tool/Text").gameObject.GetComponent<Text>();
+    GameObject toolUI = toolGuide.transform.Find("Tool/Active").gameObject;
+    Text toolText = toolGuide.transform.Find("Tool/Active/Text").gameObject.GetComponent<Text>();
+    toolUI.SetActive(tool != ToolType.None);
     toolText.text = tool.ToString();
 
     // Enable UI main action
