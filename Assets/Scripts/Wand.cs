@@ -6,7 +6,9 @@ using System.Linq;
 using System.IO;
 
 public class Wand : MonoBehaviour {
-  //  Controller that handles the player wand's behaviors and movement inputs
+  //  Controller that handles the player wand's behaviors:
+  //    MOVEMENT
+  //    SCREENSHOT
 
   // Assigned in Editor:
   public Garden garden;

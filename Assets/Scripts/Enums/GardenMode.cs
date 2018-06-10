@@ -4,5 +4,5 @@ using UnityEngine;
 
 // Global GardenMode Enum
 public enum GardenMode {
-  Play, Title, Menu
+  Play, Title
 }

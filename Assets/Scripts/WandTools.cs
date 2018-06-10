@@ -4,10 +4,15 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class WandTools : MonoBehaviour {
-  // Controller that handles the player's tool inputsm, behaviors, and UI
+  //  Controller that handles the player wand's behaviors:
+  //    TOOL ACTIONS
+  //    TOOL MENUS
 
   // Assigned in Editor:
   public GardenBoard gardenBoard;
+  public Cam wandCamera;
+
+  public bool wandMenuOpen = false;
 
   private ToolType tool;
   private ToolAction toolActionMain;
@@ -39,14 +44,31 @@ public class WandTools : MonoBehaviour {
 
     actionTime += Time.deltaTime;
 
-    if (actionTime >= ActionCooldown)
-      InputAction();
+    if (!wandMenuOpen) {
+
+      if (actionTime >= ActionCooldown)
+        InputAction();
+
+      InputWheelToggle();
+    } else {
+      InputWheelToggle();
+    }
   }
 
   // Set wand tool
   public void SetTool(ToolType t) {
     tool = t;
     UpdateToolActions();
+  }
+
+  // Open/close tool wheel
+  private void InputWheelToggle() {
+
+    if (Input.GetButtonDown(InputConstants.ToolSpace)) {
+      wandMenuOpen = !wandMenuOpen;
+      wandCamera.SetCameraMode(!wandMenuOpen);
+      UpdateUI();
+    }
   }
 
   // Act if tool input
@@ -176,11 +198,16 @@ public class WandTools : MonoBehaviour {
       break;
     }
 
-    UpdateUIToolGuide();
+    UpdateUI();
   }
 
-  // Update tool guide based on current tool
-  private void UpdateUIToolGuide() {
+  // Update tool wheel and guide based on current fields
+  private void UpdateUI() {
+
+    // Tool wheel
+    toolWheel.SetActive(wandMenuOpen);
+
+    // Tool guide
 
     // Update tool
     Text toolText = toolGuide.transform.Find("Tool/Text").gameObject.GetComponent<Text>();
@@ -197,5 +224,13 @@ public class WandTools : MonoBehaviour {
     Text offText = toolGuide.transform.Find("Off/Active/Text").gameObject.GetComponent<Text>();
     offUI.SetActive(toolActionOff != ToolAction.None);
     offText.text = toolActionOff.ToString();
+
+    // Enable UI off action
+    Text spaceText = toolGuide.transform.Find("Space/Active/Text").gameObject.GetComponent<Text>();
+
+    if (!wandMenuOpen)
+      spaceText.text = "Tool Wheel";
+    else
+      spaceText.text = "Garden";
   }
 }

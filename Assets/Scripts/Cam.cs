@@ -7,6 +7,8 @@ public class Cam : MonoBehaviour {
 
   private Transform wand;
 
+  private bool cameraInWandMode; // Camera in wand mode vs menu mode
+
   private float x = 0.0f;   // Current camera angles
   private float y = 30.0f;
 
@@ -30,8 +32,7 @@ public class Cam : MonoBehaviour {
     GetComponent<Camera>().depthTextureMode = DepthTextureMode.Depth;
 
     // Lock cursor to screen
-    Cursor.lockState = CursorLockMode.Locked;
-    Cursor.visible = false;
+    SetCameraMode(true);
 
     // Camera positioning
     Vector3 angles = transform.eulerAngles;
@@ -42,14 +43,19 @@ public class Cam : MonoBehaviour {
   void Update() {
 
     // Lock cursor to screen on input
-    if (Input.GetAxis(InputConstants.CameraLock) > 0) {
+    if (cameraInWandMode) {
       Cursor.lockState = CursorLockMode.Locked;
     }
   }
 
   void LateUpdate() {
 
-    // TODO: Frame independent
+    // TODO: Make this frame independent (currently runs on main menu kinda)
+    //    may not be necessary with camera modes
+
+    // Don't move camera if in menu
+    if (!cameraInWandMode)
+      return;
 
     // Update camera position based on mouse movement
     x += Input.GetAxis(InputConstants.CameraX) * xSpeed * 0.02f;
@@ -66,5 +72,17 @@ public class Cam : MonoBehaviour {
 
     transform.rotation = rotation;
     transform.position = position;
+  }
+
+  public void SetCameraMode(bool mode) {
+    cameraInWandMode = mode;
+
+    if (cameraInWandMode) {
+      Cursor.lockState = CursorLockMode.Locked;
+      Cursor.visible = false;
+    } else {
+      Cursor.lockState = CursorLockMode.None;
+      Cursor.visible = true;
+    }
   }
 }

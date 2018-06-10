@@ -957,6 +957,26 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114663792471936102, guid: 2d9406c1543516e47b17f5c6a188c7f9,
+        type: 2}
+      propertyPath: gardenBoard
+      value: 
+      objectReference: {fileID: 511140589}
+    - target: {fileID: 114663792471936102, guid: 2d9406c1543516e47b17f5c6a188c7f9,
+        type: 2}
+      propertyPath: toolGuide
+      value: 
+      objectReference: {fileID: 1438647997}
+    - target: {fileID: 114663792471936102, guid: 2d9406c1543516e47b17f5c6a188c7f9,
+        type: 2}
+      propertyPath: toolWheel
+      value: 
+      objectReference: {fileID: 2030412878}
+    - target: {fileID: 114663792471936102, guid: 2d9406c1543516e47b17f5c6a188c7f9,
+        type: 2}
+      propertyPath: effectContainer
+      value: 
+      objectReference: {fileID: 1750400032}
     - target: {fileID: 114330434569095648, guid: 2d9406c1543516e47b17f5c6a188c7f9,
         type: 2}
       propertyPath: garden
@@ -977,51 +997,6 @@ Prefab:
       propertyPath: screenshotUI
       value: 
       objectReference: {fileID: 67892097}
-    - target: {fileID: 114663792471936102, guid: 2d9406c1543516e47b17f5c6a188c7f9,
-        type: 2}
-      propertyPath: gardenBoard
-      value: 
-      objectReference: {fileID: 511140589}
-    - target: {fileID: 114663792471936102, guid: 2d9406c1543516e47b17f5c6a188c7f9,
-        type: 2}
-      propertyPath: actionMainUI
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 114663792471936102, guid: 2d9406c1543516e47b17f5c6a188c7f9,
-        type: 2}
-      propertyPath: actionOffUI
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 114663792471936102, guid: 2d9406c1543516e47b17f5c6a188c7f9,
-        type: 2}
-      propertyPath: toolText
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 114663792471936102, guid: 2d9406c1543516e47b17f5c6a188c7f9,
-        type: 2}
-      propertyPath: swapLeftText
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 114663792471936102, guid: 2d9406c1543516e47b17f5c6a188c7f9,
-        type: 2}
-      propertyPath: swapRightText
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 114663792471936102, guid: 2d9406c1543516e47b17f5c6a188c7f9,
-        type: 2}
-      propertyPath: effectContainer
-      value: 
-      objectReference: {fileID: 1750400032}
-    - target: {fileID: 114663792471936102, guid: 2d9406c1543516e47b17f5c6a188c7f9,
-        type: 2}
-      propertyPath: toolGuide
-      value: 
-      objectReference: {fileID: 1438647997}
-    - target: {fileID: 114663792471936102, guid: 2d9406c1543516e47b17f5c6a188c7f9,
-        type: 2}
-      propertyPath: toolWheel
-      value: 
-      objectReference: {fileID: 2030412878}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2d9406c1543516e47b17f5c6a188c7f9, type: 2}
   m_IsPrefabParent: 0
