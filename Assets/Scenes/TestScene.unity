@@ -233,6 +233,12 @@ GameObject:
   m_PrefabParentObject: {fileID: 1471288934874296, guid: 2d9406c1543516e47b17f5c6a188c7f9,
     type: 2}
   m_PrefabInternal: {fileID: 1437391602}
+--- !u!114 &256640435 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114663792471936102, guid: 2d9406c1543516e47b17f5c6a188c7f9,
+    type: 2}
+  m_PrefabInternal: {fileID: 1437391602}
+  m_Script: {fileID: 11500000, guid: b6885af3be431a44386581a4a71167a3, type: 3}
 --- !u!1001 &383692533
 Prefab:
   m_ObjectHideFlags: 0
@@ -372,11 +378,36 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114351813961597982, guid: fc2f18f8e8c9f484b8de7703ed49759e,
+        type: 2}
+      propertyPath: tools
+      value: 
+      objectReference: {fileID: 256640435}
     - target: {fileID: 114177734912009714, guid: fc2f18f8e8c9f484b8de7703ed49759e,
         type: 2}
       propertyPath: garden
       value: 
       objectReference: {fileID: 1771626594}
+    - target: {fileID: 114752587587527284, guid: fc2f18f8e8c9f484b8de7703ed49759e,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SetToolShovel
+      objectReference: {fileID: 0}
+    - target: {fileID: 114545456742822736, guid: fc2f18f8e8c9f484b8de7703ed49759e,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SetToolLifeOrb
+      objectReference: {fileID: 0}
+    - target: {fileID: 114442872970422258, guid: fc2f18f8e8c9f484b8de7703ed49759e,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SetToolWetDryOrb
+      objectReference: {fileID: 0}
+    - target: {fileID: 114245077770574790, guid: fc2f18f8e8c9f484b8de7703ed49759e,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SetToolHotColdOrb
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: fc2f18f8e8c9f484b8de7703ed49759e, type: 2}
   m_IsPrefabParent: 0

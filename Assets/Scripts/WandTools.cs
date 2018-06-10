@@ -49,9 +49,11 @@ public class WandTools : MonoBehaviour {
       if (actionTime >= ActionCooldown)
         InputAction();
 
-      InputWheelToggle();
+      if (Input.GetButtonDown(InputConstants.ToolSpace))
+        ToolWheelToggle();
     } else {
-      InputWheelToggle();
+      if (Input.GetButtonDown(InputConstants.ToolSpace))
+        ToolWheelToggle();
     }
   }
 
@@ -62,13 +64,11 @@ public class WandTools : MonoBehaviour {
   }
 
   // Open/close tool wheel
-  private void InputWheelToggle() {
+  public void ToolWheelToggle() {
 
-    if (Input.GetButtonDown(InputConstants.ToolSpace)) {
-      wandMenuOpen = !wandMenuOpen;
-      wandCamera.SetCameraMode(!wandMenuOpen);
-      UpdateUI();
-    }
+    wandMenuOpen = !wandMenuOpen;
+    wandCamera.SetCameraMode(!wandMenuOpen);
+    UpdateUI();
   }
 
   // Act if tool input
