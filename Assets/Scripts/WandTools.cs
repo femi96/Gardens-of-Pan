@@ -45,13 +45,17 @@ public class WandTools : MonoBehaviour {
     actionTime += Time.deltaTime;
 
     if (!wandMenuOpen) {
+      // Wand mode
 
       if (actionTime >= ActionCooldown)
         InputAction();
 
       if (Input.GetButtonDown(InputConstants.ToolSpace))
         ToolWheelToggle();
+
     } else {
+      // Menu mode
+
       if (Input.GetButtonDown(InputConstants.ToolSpace))
         ToolWheelToggle();
     }
@@ -91,6 +95,8 @@ public class WandTools : MonoBehaviour {
 
     } else {
       // reset previous action, so can hold
+
+      UpdateToolActions();
     }
   }
 
@@ -137,7 +143,6 @@ public class WandTools : MonoBehaviour {
     }
 
     gardenBoard.ApplyAction(v, a);
-    UpdateToolActions();
   }
 
   // Update UI and strings based on index
@@ -203,6 +208,8 @@ public class WandTools : MonoBehaviour {
 
   // Update tool wheel and guide based on current fields
   private void UpdateUI() {
+
+    // TODO OPTIMIZE: Move finds to start so they arent called every frame
 
     // Tool wheel
     toolWheel.SetActive(wandMenuOpen);
