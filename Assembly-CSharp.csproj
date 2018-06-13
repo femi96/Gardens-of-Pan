@@ -63,6 +63,7 @@
      <Compile Include="Assets\Scripts\Enums\ToolType.cs" />
      <Compile Include="Assets\Scripts\Garden.cs" />
      <Compile Include="Assets\Scripts\GardenBoard.cs" />
+     <Compile Include="Assets\Scripts\GardenSave.cs" />
      <Compile Include="Assets\Scripts\GardenWild.cs" />
      <Compile Include="Assets\Scripts\Menu\TitleMenu.cs" />
      <Compile Include="Assets\Scripts\Menu\WheelMenu.cs" />

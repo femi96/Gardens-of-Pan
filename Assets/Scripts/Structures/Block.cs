@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 public class Block {
   // Mutable data type for tile blocks
   //    Contains a block's type, visual variant, and features

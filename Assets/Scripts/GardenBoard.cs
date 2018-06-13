@@ -48,7 +48,7 @@ public class GardenBoard : MonoBehaviour {
     spawnPointMap = new SpawnPoint[gardenSize + 2, gardenSize + 2];
     spawnChunkMap = new GameObject[gardenSize + 2, gardenSize + 2];
 
-    // Start all blocks and Rough
+    // Start all blocks as Rough
     for (int z = 0; z < gardenSize; z++) {
       for (int x = 0; x < gardenSize; x++) {
         blockMap[x, z] = new Block(BlockType.Rough);
@@ -61,6 +61,24 @@ public class GardenBoard : MonoBehaviour {
         UpdateChunk(x, z);
       }
     }
+  }
+
+  // Set blockMap to a blockMap
+  public void SetBlockMap(Block[,] blocks) {
+
+    blockMap = blocks;
+
+    for (int z = 0; z < gardenSize; z++) {
+      for (int x = 0; x < gardenSize; x++) {
+        // blockMap[x, z] = blocks[x, z];
+        UpdateChunk(x, z);
+      }
+    }
+  }
+
+  // Get blockMap of board
+  public Block[,] GetBlockMap() {
+    return blockMap;
   }
 
   // Get block at Vector3 v
@@ -88,7 +106,8 @@ public class GardenBoard : MonoBehaviour {
 
     for (int z = 0; z < gardenSize; z++) {
       for (int x = 0; x < gardenSize; x++) {
-        if (blockMap[x, z].GetBlockType() == t) count += 1;
+        if (blockMap[x, z].GetBlockType() == t)
+          count += 1;
       }
     }
 
