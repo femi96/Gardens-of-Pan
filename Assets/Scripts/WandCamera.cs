@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Cam : MonoBehaviour {
+public class WandCamera : MonoBehaviour {
   // Controller that handles camera inputs and behaviors
 
   private Transform wand;

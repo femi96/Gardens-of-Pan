@@ -10,7 +10,7 @@ public class WandTools : MonoBehaviour {
 
   // Assigned in Editor:
   public GardenBoard gardenBoard;
-  public Cam wandCamera;
+  public WandCamera wandCamera;
 
   public bool wandMenuOpen = false;
 

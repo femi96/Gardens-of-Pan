@@ -51,7 +51,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Scripts\Cam.cs" />
      <Compile Include="Assets\Scripts\ClassFormat.cs" />
      <Compile Include="Assets\Scripts\Constants\InputConstants.cs" />
      <Compile Include="Assets\Scripts\Constants\LayerConstants.cs" />
@@ -86,6 +85,7 @@
      <Compile Include="Assets\Scripts\Structures\SpawnPoint.cs" />
      <Compile Include="Assets\Scripts\Unit.cs" />
      <Compile Include="Assets\Scripts\Wand.cs" />
+     <Compile Include="Assets\Scripts\WandCamera.cs" />
      <Compile Include="Assets\Scripts\WandTools.cs" />
      <None Include="Assets\Shaders\Water.shader" />
  <Reference Include="UnityEngine.UI">
