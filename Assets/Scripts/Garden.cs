@@ -17,6 +17,7 @@ public class Garden : MonoBehaviour {
 
   // Garden meta:
   public string gardenName;
+  public int gardenID;
   public int gardenSize = 4;  // Garden dimensions 4x4
   public bool saveGarden = false;
   public bool loadGarden = true;
@@ -33,7 +34,10 @@ public class Garden : MonoBehaviour {
   public GameObject playWand;
 
   // Garden saving
+  private float saveTime = 2f;
+  private const float saveInterval = 60; // Saves every 60s
   private string saveFilePath;
+  public GameObject saveUI;
 
   // All public variables are assigned in editor
 
@@ -42,7 +46,7 @@ public class Garden : MonoBehaviour {
     // Awake with components
     gardenBoard = GetComponent<GardenBoard>();
 
-    saveFilePath = Application.persistentDataPath + "/garden_" + gardenName + ".garden";
+    saveFilePath = Application.persistentDataPath + "/garden_" + gardenName + "_" + gardenID + ".garden";
     unitsCont = transform.Find("Units");
   }
 
@@ -54,10 +58,16 @@ public class Garden : MonoBehaviour {
   }
 
   void Update() {
-    if (saveGarden) {
+    saveTime += Time.deltaTime;
+
+    if (saveGarden || saveTime >= saveInterval) {
       SaveGarden();
       saveGarden = false;
+      saveTime -= saveInterval;
+      saveTime = Mathf.Max(saveTime, 0);
     }
+
+    saveUI.SetActive(saveTime <= 2f);
   }
 
   // Creates a garden save representation of this garden
@@ -65,6 +75,7 @@ public class Garden : MonoBehaviour {
 
     GardenSave save = new GardenSave();
     save.gardenName = gardenName;
+    save.gardenID = gardenID;
     save.blockMap = gardenBoard.GetBlockMap();
     return save;
   }
@@ -73,6 +84,7 @@ public class Garden : MonoBehaviour {
   private void SetGardenFromSave(GardenSave save) {
 
     gardenName = save.gardenName;
+    gardenID = save.gardenID;
     gardenBoard.SetBlockMap(save.blockMap);
   }
 

@@ -9,5 +9,6 @@ public class GardenSave {
   //    This is not data safe so instances of garden save should not be passed around.
 
   public string gardenName = "Null Garden";
+  public int gardenID = 0;
   public Block[,] blockMap = new Block[0, 0];
 }

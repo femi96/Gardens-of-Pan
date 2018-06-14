@@ -115,7 +115,7 @@ NavMeshSettings:
   m_NavMeshData: {fileID: 0}
 --- !u!1 &67892097 stripped
 GameObject:
-  m_PrefabParentObject: {fileID: 1098730161227720, guid: fc2f18f8e8c9f484b8de7703ed49759e,
+  m_PrefabParentObject: {fileID: 1567976761482552, guid: fc2f18f8e8c9f484b8de7703ed49759e,
     type: 2}
   m_PrefabInternal: {fileID: 319316155}
 --- !u!1001 &220001120
@@ -336,16 +336,16 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 114177734912009714, guid: fc2f18f8e8c9f484b8de7703ed49759e,
-        type: 2}
-      propertyPath: garden
-      value: 
-      objectReference: {fileID: 1771626594}
     - target: {fileID: 114351813961597982, guid: fc2f18f8e8c9f484b8de7703ed49759e,
         type: 2}
       propertyPath: tools
       value: 
       objectReference: {fileID: 256640435}
+    - target: {fileID: 114177734912009714, guid: fc2f18f8e8c9f484b8de7703ed49759e,
+        type: 2}
+      propertyPath: garden
+      value: 
+      objectReference: {fileID: 1771626594}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: fc2f18f8e8c9f484b8de7703ed49759e, type: 2}
   m_IsPrefabParent: 0
@@ -583,6 +583,11 @@ Transform:
 --- !u!1 &787418111 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1944841004848830, guid: fc2f18f8e8c9f484b8de7703ed49759e,
+    type: 2}
+  m_PrefabInternal: {fileID: 319316155}
+--- !u!1 &802327675 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1098730161227720, guid: fc2f18f8e8c9f484b8de7703ed49759e,
     type: 2}
   m_PrefabInternal: {fileID: 319316155}
 --- !u!1001 &825059215
@@ -1349,6 +1354,11 @@ Prefab:
       propertyPath: playWand
       value: 
       objectReference: {fileID: 256640434}
+    - target: {fileID: 114890702010952304, guid: 2842cd2331049b64da842e685550763d,
+        type: 2}
+      propertyPath: saveUI
+      value: 
+      objectReference: {fileID: 802327675}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2842cd2331049b64da842e685550763d, type: 2}
   m_IsPrefabParent: 0
