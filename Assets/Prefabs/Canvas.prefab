@@ -3195,7 +3195,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Dev Note: Thanks for playing <3'
+  m_Text: 'Dev Note: Screenshot on "z"
+
+    Thanks for playing <3'
 --- !u!114 &114941623316339134
 MonoBehaviour:
   m_ObjectHideFlags: 1
