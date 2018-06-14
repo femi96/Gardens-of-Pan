@@ -37,6 +37,7 @@ public class Garden : MonoBehaviour {
   private float saveTime = 2f;
   private const float saveInterval = 60; // Saves every 60s
   private string saveFilePath;
+  private string recentSaveFilePath;
   public GameObject saveUI;
 
   // All public variables are assigned in editor
@@ -46,7 +47,7 @@ public class Garden : MonoBehaviour {
     // Awake with components
     gardenBoard = GetComponent<GardenBoard>();
 
-    saveFilePath = Application.persistentDataPath + "/garden_" + gardenName + "_" + gardenID + ".garden";
+    recentSaveFilePath = Application.persistentDataPath + "/recent_garden.garden";
     unitsCont = transform.Find("Units");
   }
 
@@ -54,7 +55,7 @@ public class Garden : MonoBehaviour {
     SetGardenMode(GardenMode.Title);
 
     if (loadGarden)
-      LoadGarden(saveFilePath);
+      LoadGarden(recentSaveFilePath);
   }
 
   void Update() {
@@ -91,6 +92,9 @@ public class Garden : MonoBehaviour {
   // Save the garden
   private void SaveGarden() {
 
+    // 0: Update file path
+    saveFilePath = Application.persistentDataPath + "/garden_" + gardenName + "_" + gardenID + ".garden";
+
     // 1: Create save instance
     GardenSave save = CreateGardenSave();
 
@@ -99,6 +103,10 @@ public class Garden : MonoBehaviour {
     FileStream file = File.Create(saveFilePath);
     bf.Serialize(file, save);
     Debug.Log("Garden " + gardenName + " saved to " + saveFilePath);
+    file.Close();
+
+    FileStream rFile = File.Create(recentSaveFilePath);
+    bf.Serialize(rFile, save);
     file.Close();
 
     // 3: Ending save
