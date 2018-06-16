@@ -130,7 +130,7 @@ public class Garden : MonoBehaviour {
   }
 
   // Save the garden
-  private void SaveGarden() {
+  public void SaveGarden() {
 
     // 0: Update file path
     saveFilePath = Application.persistentDataPath + "/garden_" + gardenName + "_" + gardenID + ".garden";

@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class WheelMenu : MonoBehaviour {
   // Game controller that handles wheel menu
 
+  public Garden garden;
   public WandTools tools;
 
   // All public variables are assigned in editor
@@ -35,7 +36,12 @@ public class WheelMenu : MonoBehaviour {
     tools.ToolWheelToggle();
   }
 
-  public void CloseWheel() {
+  public void WheelToGarden() {
     tools.ToolWheelToggle();
+  }
+
+  public void WheelToTitle() {
+    garden.SaveGarden();
+    garden.SetGardenMode(GardenMode.Title);
   }
 }

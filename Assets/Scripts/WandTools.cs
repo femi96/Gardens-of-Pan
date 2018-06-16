@@ -36,9 +36,7 @@ public class WandTools : MonoBehaviour {
 
   void Awake() {}
 
-  void Start() {
-    SetTool(ToolType.None);
-  }
+  void Start() {}
 
   void Update() {
 
@@ -59,6 +57,14 @@ public class WandTools : MonoBehaviour {
       if (Input.GetButtonDown(InputConstants.ToolSpace))
         ToolWheelToggle();
     }
+  }
+
+  // Setup tools
+  public void Setup() {
+    SetTool(ToolType.None);
+    wandMenuOpen = false;
+    wandCamera.SetCameraMode(!wandMenuOpen);
+    UpdateUI();
   }
 
   // Set wand tool

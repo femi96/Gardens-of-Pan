@@ -7,6 +7,8 @@ public class TitleMenu : MonoBehaviour {
   // Game controller that handles main menu
 
   public Garden garden;
+  public WandTools tools;
+
   public GameObject mainUI;
   public GameObject swapUI;
   public GameObject swapFilePrefab;
@@ -22,6 +24,7 @@ public class TitleMenu : MonoBehaviour {
   }
 
   public void MainPlay() {
+    tools.Setup();
     garden.SetGardenMode(GardenMode.Play);
   }
 
