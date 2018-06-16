@@ -14,7 +14,7 @@ public class TitleMenu : MonoBehaviour {
   public GameObject swapFilePrefab;
   public Transform swapFilesContainer;
 
-  private string newGardenName = "Eden";
+  private string newGardenName = "Scadrial";
 
   // All public variables are assigned in editor
 
