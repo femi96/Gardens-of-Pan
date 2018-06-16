@@ -7,14 +7,63 @@ public class TitleMenu : MonoBehaviour {
   // Game controller that handles main menu
 
   public Garden garden;
+  public GameObject mainUI;
+  public GameObject swapUI;
+  public GameObject swapFilePrefab;
+  public Transform swapFilesContainer;
+
+  private string newGardenName = "Eden";
 
   // All public variables are assigned in editor
 
-  public void Play() {
+  void Start() {
+    mainUI.SetActive(true);
+    swapUI.SetActive(false);
+  }
+
+  public void MainPlay() {
     garden.SetGardenMode(GardenMode.Play);
   }
 
-  public void Quit() {
+  public void MainToSwap() {
+
+    // Fill swap
+    List<GardenSave> saves = garden.GetAllGardenSaves();
+
+    // Clear files
+    foreach (Transform child in swapFilesContainer)
+      Destroy(child.gameObject);
+
+    // Fill files
+    foreach (GardenSave save in saves) {
+      GameObject go = Instantiate(swapFilePrefab, swapFilePrefab.transform.position, Quaternion.identity, swapFilesContainer);
+
+      go.name = "File: " + save.gardenName;
+
+      Button btn = go.transform.Find("Button").gameObject.GetComponent<Button>();
+      btn.onClick.AddListener(() => { SwapGarden(save); });
+
+      Text txt = go.transform.Find("Button/Text").gameObject.GetComponent<Text>();
+      txt.text = save.gardenName;
+
+
+      if (save.gardenID > 0)
+        txt.text += " ";
+
+      for (int i = 0; i < save.gardenID; i++) {
+        txt.text += "I";
+      }
+
+      if (save.gardenID == 0)
+        txt.text = save.gardenName;
+    }
+
+    // Set active
+    mainUI.SetActive(false);
+    swapUI.SetActive(true);
+  }
+
+  public void MainQuit() {
 
 #if UNITY_EDITOR
     UnityEditor.EditorApplication.isPlaying = false;
@@ -23,5 +72,24 @@ public class TitleMenu : MonoBehaviour {
 #else
     Application.Quit();
 #endif
+  }
+
+  public void SwapNewGarden() {
+    garden.NewGarden(newGardenName);
+    SwapToMain();
+  }
+
+  public void SwapChangeName(string newName) {
+    newGardenName = newName;
+  }
+
+  public void SwapGarden(GardenSave save) {
+    garden.LoadGarden(save);
+    SwapToMain();
+  }
+
+  public void SwapToMain() {
+    mainUI.SetActive(true);
+    swapUI.SetActive(false);
   }
 }

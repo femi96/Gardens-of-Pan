@@ -36,6 +36,7 @@ public class Garden : MonoBehaviour {
   // Garden saving
   private float saveTime = 2f;
   private const float saveInterval = 60; // Saves every 60s
+
   private string saveFilePath;
   private string recentSaveFilePath;
   public GameObject saveUI;
@@ -54,8 +55,9 @@ public class Garden : MonoBehaviour {
   void Start() {
     SetGardenMode(GardenMode.Title);
 
-    if (loadGarden)
-      LoadGarden(recentSaveFilePath);
+    if (!LoadGarden(recentSaveFilePath)) {
+      NewGarden("Pan");
+    }
   }
 
   void Update() {
@@ -69,6 +71,44 @@ public class Garden : MonoBehaviour {
     }
 
     saveUI.SetActive(saveTime <= 2f);
+  }
+
+  // Setup the garden as new
+  public void NewGarden(string name) {
+    gardenName = name;
+    gardenID = 0;
+    // check if id is unique
+    string filePath = Application.persistentDataPath + "/garden_" + gardenName + "_" + gardenID + ".garden";
+
+    while (File.Exists(filePath)) {
+      gardenID += 1;
+      filePath = Application.persistentDataPath + "/garden_" + gardenName + "_" + gardenID + ".garden";
+    }
+
+    gardenBoard.NewBoard();
+
+    SaveGarden();
+  }
+
+  public List<GardenSave> GetAllGardenSaves() {
+
+    DirectoryInfo info = new DirectoryInfo(Application.persistentDataPath);
+    FileInfo[] files = info.GetFiles("garden_*.garden");
+    List<GardenSave> saves = new List<GardenSave>();
+
+    foreach (FileInfo fileInfo in files) {
+
+      if (File.Exists(fileInfo.FullName)) {
+        BinaryFormatter bf = new BinaryFormatter();
+        FileStream file = File.Open(fileInfo.FullName, FileMode.Open);
+        GardenSave save = (GardenSave)bf.Deserialize(file);
+        file.Close();
+
+        saves.Add(save);
+      }
+    }
+
+    return saves;
   }
 
   // Creates a garden save representation of this garden
@@ -114,7 +154,7 @@ public class Garden : MonoBehaviour {
   }
 
   // Load the garden
-  private bool LoadGarden(string filePath) {
+  public bool LoadGarden(string filePath) {
 
     if (File.Exists(filePath)) {
 
@@ -135,6 +175,11 @@ public class Garden : MonoBehaviour {
       Debug.Log("No game saved!");
       return false;
     }
+  }
+
+  public bool LoadGarden(GardenSave save) {
+    SetGardenFromSave(save);
+    return true;
   }
 
   // Set garden mode and update related

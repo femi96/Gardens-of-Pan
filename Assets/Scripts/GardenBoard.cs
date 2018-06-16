@@ -37,16 +37,30 @@ public class GardenBoard : MonoBehaviour {
     blockContainer = transform.Find("BlockContainer");
     spawnContainer = transform.Find("SpawnContainer");
     garden = GetComponent<Garden>();
-    gardenSize = garden.gardenSize;
   }
 
-  void Start() {
+  // Create empty board collections
+  private void SetupCollections() {
+
+    // Clear containers
+    foreach (Transform child in blockContainer)
+      Destroy(child.gameObject);
+
+    foreach (Transform child in spawnContainer)
+      Destroy(child.gameObject);
 
     // Create collections
+    gardenSize = garden.gardenSize;
     blockMap = new Block[gardenSize, gardenSize];
     chunkMap = new GameObject[gardenSize, gardenSize];
     spawnPointMap = new SpawnPoint[gardenSize + 2, gardenSize + 2];
     spawnChunkMap = new GameObject[gardenSize + 2, gardenSize + 2];
+  }
+
+  // Setup a new garden board
+  public void NewBoard() {
+
+    SetupCollections();
 
     // Start all blocks as Rough
     for (int z = 0; z < gardenSize; z++) {
@@ -65,6 +79,8 @@ public class GardenBoard : MonoBehaviour {
 
   // Set blockMap to a blockMap
   public void SetBlockMap(Block[,] blocks) {
+
+    SetupCollections();
 
     blockMap = blocks;
 
