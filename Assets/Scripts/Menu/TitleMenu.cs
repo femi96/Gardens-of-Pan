@@ -78,6 +78,9 @@ public class TitleMenu : MonoBehaviour {
   }
 
   public void SwapNewGarden() {
+    if (newGardenName.Length == 0)
+      return;
+
     garden.NewGarden(newGardenName);
     SwapToMain();
   }
