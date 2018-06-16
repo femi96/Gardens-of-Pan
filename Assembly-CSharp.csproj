@@ -83,6 +83,7 @@
      <Compile Include="Assets\Scripts\Obsolete\Surface.cs" />
      <Compile Include="Assets\Scripts\Structures\Block.cs" />
      <Compile Include="Assets\Scripts\Structures\SpawnPoint.cs" />
+     <Compile Include="Assets\Scripts\TitleCamera.cs" />
      <Compile Include="Assets\Scripts\Unit.cs" />
      <Compile Include="Assets\Scripts\Wand.cs" />
      <Compile Include="Assets\Scripts\WandCamera.cs" />
