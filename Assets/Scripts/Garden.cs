@@ -75,9 +75,11 @@ public class Garden : MonoBehaviour {
 
   // Setup the garden as new
   public void NewGarden(string name) {
+
+    // Setup garden class
     gardenName = name;
     gardenID = 0;
-    // check if id is unique
+
     string filePath = Application.persistentDataPath + "/garden_" + gardenName + "_" + gardenID + ".garden";
 
     while (File.Exists(filePath)) {
@@ -87,6 +89,7 @@ public class Garden : MonoBehaviour {
 
     gardenBoard.NewBoard();
 
+    // Create files
     SaveGarden();
   }
 
@@ -147,7 +150,8 @@ public class Garden : MonoBehaviour {
 
     FileStream rFile = File.Create(recentSaveFilePath);
     bf.Serialize(rFile, save);
-    file.Close();
+    Debug.Log("Recent garden " + gardenName + " saved to " + recentSaveFilePath);
+    rFile.Close();
 
     // 3: Ending save
     // Close game or whatever, based on whatever
@@ -180,6 +184,12 @@ public class Garden : MonoBehaviour {
   public bool LoadGarden(GardenSave save) {
     SetGardenFromSave(save);
     return true;
+  }
+
+  // Delete garden from save file
+  public void DeleteGarden(GardenSave save) {
+    string filePath = Application.persistentDataPath + "/garden_" + save.gardenName + "_" + save.gardenID + ".garden";
+    File.Delete(filePath);
   }
 
   // Set garden mode and update related
