@@ -37,7 +37,6 @@ public class Garden : MonoBehaviour {
   private float saveTime = 2f;
   private const float saveInterval = 60; // Saves every 60s
 
-  private string saveFilePath;
   private string recentSaveFilePath;
   public GameObject saveUI;
 
@@ -73,6 +72,11 @@ public class Garden : MonoBehaviour {
     saveUI.SetActive(saveTime <= 2f);
   }
 
+  // Create file path for garden
+  private string GetFilePath(string name, int iD) {
+    return Application.persistentDataPath + "/garden_" + gardenName + "_" + gardenID + ".garden";
+  }
+
   // Setup the garden as new
   public void NewGarden(string name) {
 
@@ -80,11 +84,11 @@ public class Garden : MonoBehaviour {
     gardenName = name;
     gardenID = 0;
 
-    string filePath = Application.persistentDataPath + "/garden_" + gardenName + "_" + gardenID + ".garden";
+    string filePath = GetFilePath(gardenName, gardenID);
 
     while (File.Exists(filePath)) {
       gardenID += 1;
-      filePath = Application.persistentDataPath + "/garden_" + gardenName + "_" + gardenID + ".garden";
+      filePath = GetFilePath(gardenName, gardenID);
     }
 
     gardenBoard.NewBoard();
@@ -136,7 +140,7 @@ public class Garden : MonoBehaviour {
   public void SaveGarden() {
 
     // 0: Update file path
-    saveFilePath = Application.persistentDataPath + "/garden_" + gardenName + "_" + gardenID + ".garden";
+    string saveFilePath = GetFilePath(gardenName, gardenID);
 
     // 1: Create save instance
     GardenSave save = CreateGardenSave();
@@ -188,7 +192,7 @@ public class Garden : MonoBehaviour {
 
   // Delete garden from save file
   public void DeleteGarden(GardenSave save) {
-    string filePath = Application.persistentDataPath + "/garden_" + save.gardenName + "_" + save.gardenID + ".garden";
+    string filePath = GetFilePath(gardenName, gardenID);
     File.Delete(filePath);
   }
 
