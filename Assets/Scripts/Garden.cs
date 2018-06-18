@@ -9,8 +9,9 @@ using UnityEngine;
 public class Garden : MonoBehaviour {
   // Game controller that handles garden data, includes:
   //    SIZE/NAME of garden
+  //    FILE MANAGEMENT or SAVING/LOADING garden
+  //    GARDEN MODE of game/garden
   //    UNITS in garden
-  //    SAVING/LOADING garden
 
   private GardenBoard gardenBoard;
   private GardenMode gardenMode;
@@ -47,19 +48,18 @@ public class Garden : MonoBehaviour {
     // Awake with components
     gardenBoard = GetComponent<GardenBoard>();
 
-    recentSaveFilePath = Application.persistentDataPath + "/recent_garden.garden";
+    recentSaveFilePath = Application.persistentDataPath + "/recent_garden.path";
     unitsCont = transform.Find("Units");
   }
 
   void Start() {
     SetGardenMode(GardenMode.Title);
-
-    if (!LoadGarden(recentSaveFilePath)) {
-      NewGarden("Pan");
-    }
+    LoadGarden();
   }
 
   void Update() {
+
+    // Autosave on interval
     saveTime += Time.deltaTime;
 
     if (saveGarden || saveTime >= saveInterval) {
@@ -72,31 +72,16 @@ public class Garden : MonoBehaviour {
     saveUI.SetActive(saveTime <= 2f);
   }
 
-  // Create file path for garden
+  // ========================================
+  // FILE MANAGEMENT or SAVING/LOADING garden
+  // ========================================
+
+  // Get file path for garden from its name and ID
   private string GetFilePath(string name, int iD) {
     return Application.persistentDataPath + "/garden_" + gardenName + "_" + gardenID + ".garden";
   }
 
-  // Setup the garden as new
-  public void NewGarden(string name) {
-
-    // Setup garden class
-    gardenName = name;
-    gardenID = 0;
-
-    string filePath = GetFilePath(gardenName, gardenID);
-
-    while (File.Exists(filePath)) {
-      gardenID += 1;
-      filePath = GetFilePath(gardenName, gardenID);
-    }
-
-    gardenBoard.NewBoard();
-
-    // Create files
-    SaveGarden();
-  }
-
+  // Get a list of all garden save files
   public List<GardenSave> GetAllGardenSaves() {
 
     DirectoryInfo info = new DirectoryInfo(Application.persistentDataPath);
@@ -129,17 +114,37 @@ public class Garden : MonoBehaviour {
   }
 
   // Sets this garden from a garden save representation
-  private void SetGardenFromSave(GardenSave save) {
+  public void SetGardenFromSave(GardenSave save) {
 
     gardenName = save.gardenName;
     gardenID = save.gardenID;
     gardenBoard.SetBlockMap(save.blockMap);
   }
 
-  // Save the garden
+  // Setup garden as a new garden with given name
+  public void NewGarden(string name) {
+
+    // Setup garden class
+    gardenName = name;
+    gardenID = 0;
+
+    string filePath = GetFilePath(gardenName, gardenID);
+
+    while (File.Exists(filePath)) {
+      gardenID += 1;
+      filePath = GetFilePath(gardenName, gardenID);
+    }
+
+    gardenBoard.NewBoard();
+
+    // Create save file
+    SaveGarden();
+  }
+
+  // Save this garden to a garden save file
   public void SaveGarden() {
 
-    // 0: Update file path
+    // 0: Get file path
     string saveFilePath = GetFilePath(gardenName, gardenID);
 
     // 1: Create save instance
@@ -152,49 +157,59 @@ public class Garden : MonoBehaviour {
     Debug.Log("Garden " + gardenName + " saved to " + saveFilePath);
     file.Close();
 
+    // 2b: Save file as most recent file path
     FileStream rFile = File.Create(recentSaveFilePath);
-    bf.Serialize(rFile, save);
-    Debug.Log("Recent garden " + gardenName + " saved to " + recentSaveFilePath);
+    bf.Serialize(rFile, saveFilePath);
+    Debug.Log("Recent garden's path saved to " + gardenName + " saved to " + recentSaveFilePath);
     rFile.Close();
 
     // 3: Ending save
-    // Close game or whatever, based on whatever
+    // Post save operations if necessary
   }
 
-  // Load the garden
-  public bool LoadGarden(string filePath) {
+  // Load the garden from the most recent file, or create an empty garden
+  public void LoadGarden() {
 
-    if (File.Exists(filePath)) {
-
-      // 1: Prepare garden
-
-      // 2: Load save file
+    // Try to find recent save file path
+    if (File.Exists(recentSaveFilePath)) {
       BinaryFormatter bf = new BinaryFormatter();
-      FileStream file = File.Open(filePath, FileMode.Open);
-      GardenSave save = (GardenSave)bf.Deserialize(file);
-      file.Close();
 
-      // 3: Apply saved garden to garden
-      SetGardenFromSave(save);
-      return true;
+      FileStream rFile = File.Open(recentSaveFilePath, FileMode.Open);
+      string saveFilePath = (string)bf.Deserialize(rFile);
+      rFile.Close();
 
-    } else {
+      // Try to load recent save file
+      if (File.Exists(saveFilePath)) {
+        FileStream file = File.Open(saveFilePath, FileMode.Open);
+        GardenSave save = (GardenSave)bf.Deserialize(file);
+        file.Close();
 
-      Debug.Log("No game saved!");
-      return false;
+        SetGardenFromSave(save);
+        return;
+      }
     }
+
+    // If no recent file, try to find another file, and load the first
+    List<GardenSave> saves = GetAllGardenSaves();
+
+    foreach (GardenSave save in saves) {
+      SetGardenFromSave(save);
+      return;
+    }
+
+    // If no garden files at all
+    NewGarden("Pan");
   }
 
-  public bool LoadGarden(GardenSave save) {
-    SetGardenFromSave(save);
-    return true;
-  }
-
-  // Delete garden from save file
+  // Delete garden save file given garden save
   public void DeleteGarden(GardenSave save) {
     string filePath = GetFilePath(gardenName, gardenID);
     File.Delete(filePath);
   }
+
+  // ==========================
+  // GARDEN MODE of game/garden
+  // ==========================
 
   // Set garden mode and update related
   public void SetGardenMode(GardenMode m) {

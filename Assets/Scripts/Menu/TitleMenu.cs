@@ -62,7 +62,7 @@ public class TitleMenu : MonoBehaviour {
   }
 
   public void SwapGarden(GardenSave save) {
-    garden.LoadGarden(save);
+    garden.SetGardenFromSave(save);
     SwapToMain();
   }
 
