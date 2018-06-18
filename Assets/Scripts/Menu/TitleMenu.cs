@@ -13,6 +13,7 @@ public class TitleMenu : MonoBehaviour {
   public GameObject swapUI;
   public GameObject swapFilePrefab;
   public Transform swapFilesContainer;
+  public Text currentGardenText;
 
   private string newGardenName = "Scadrial";
 
@@ -77,6 +78,8 @@ public class TitleMenu : MonoBehaviour {
   }
 
   public void UpdateSwapFiles() {
+
+    currentGardenText.text = "Current Garden: \n  " + garden.gardenName;
 
     // Fill swap
     List<GardenSave> saves = garden.GetAllGardenSaves();
