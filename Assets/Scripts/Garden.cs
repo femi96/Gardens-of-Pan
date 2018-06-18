@@ -78,7 +78,7 @@ public class Garden : MonoBehaviour {
 
   // Get file path for garden from its name and ID
   private string GetFilePath(string name, int iD) {
-    return Application.persistentDataPath + "/garden_" + gardenName + "_" + gardenID + ".garden";
+    return Application.persistentDataPath + "/garden_" + name + "_" + iD + ".garden";
   }
 
   // Get a list of all garden save files
@@ -203,7 +203,8 @@ public class Garden : MonoBehaviour {
 
   // Delete garden save file given garden save
   public void DeleteGarden(GardenSave save) {
-    string filePath = GetFilePath(gardenName, gardenID);
+    string filePath = GetFilePath(save.gardenName, save.gardenID);
+    Debug.Log("Garden " + save.gardenName + " deleted from " + filePath);
     File.Delete(filePath);
   }
 
