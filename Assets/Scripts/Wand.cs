@@ -92,7 +92,7 @@ public class Wand : MonoBehaviour {
       UnityEngine.ScreenCapture.CaptureScreenshot(filePath + fileName);
     }
 
-    screenshotUI.SetActive(screenshotTime <= screenshotCooldown);
+    screenshotUI.SetActive(screenshotTime <= screenshotCooldown && screenshotTime > 0.05f);
   }
 
   // Move wand each frame
