@@ -104,8 +104,16 @@ public class TitleMenu : MonoBehaviour {
 
     if (garden.noGarden)
       currentGardenText.text = "";
-    else
+    else {
       currentGardenText.text = "Current Garden: " + garden.gardenName;
+
+      if (garden.gardenID > 0)
+        currentGardenText.text += " ";
+
+      for (int i = 0; i < garden.gardenID; i++) {
+        currentGardenText.text += "I";
+      }
+    }
 
     // Fill swap
     List<GardenSave> saves = garden.GetAllGardenSaves();

@@ -214,6 +214,12 @@ public class Garden : MonoBehaviour {
     if (save.gardenName == gardenName && save.gardenID == gardenID) {
 
       // Try to load next
+      List<GardenSave> saves = GetAllGardenSaves();
+
+      foreach (GardenSave fileSave in saves) {
+        SetGardenFromSave(fileSave);
+        return;
+      }
 
       // Cant load next, no garden
       noGarden = true;
