@@ -10,9 +10,13 @@ public class TitleMenu : MonoBehaviour {
   public WandTools tools;
 
   public GameObject mainUI;
+
   public GameObject swapUI;
   public GameObject swapFilePrefab;
   public Transform swapFilesContainer;
+
+  public GameObject newUI;
+
   public Text currentGardenText;
 
   private string newGardenName = "Scadrial";
@@ -20,8 +24,19 @@ public class TitleMenu : MonoBehaviour {
   // All public variables are assigned in editor
 
   void Start() {
-    mainUI.SetActive(true);
-    swapUI.SetActive(false);
+    bool firstTime = garden.GetAllGardenSaves().Count == 0;
+
+    if (firstTime) {
+      mainUI.SetActive(false);
+      swapUI.SetActive(false);
+      newUI.SetActive(true);
+    } else {
+      mainUI.SetActive(true);
+      swapUI.SetActive(false);
+      newUI.SetActive(false);
+    }
+
+    UpdateSwapFiles();
   }
 
   public void MainPlay() {
@@ -39,6 +54,13 @@ public class TitleMenu : MonoBehaviour {
     swapUI.SetActive(true);
   }
 
+  public void MainToNew() {
+
+    // Set active
+    mainUI.SetActive(false);
+    newUI.SetActive(true);
+  }
+
   public void MainQuit() {
 
 #if UNITY_EDITOR
@@ -50,26 +72,22 @@ public class TitleMenu : MonoBehaviour {
 #endif
   }
 
-  public void SwapNewGarden() {
-    if (newGardenName.Length == 0)
-      return;
-
-    garden.NewGarden(newGardenName);
-    SwapToMain();
-  }
-
   public void SwapChangeName(string newName) {
     newGardenName = newName;
   }
 
   public void SwapGarden(GardenSave save) {
     garden.SetGardenFromSave(save);
+    UpdateSwapFiles();
     SwapToMain();
   }
 
   public void DeleteGarden(GardenSave save) {
     garden.DeleteGarden(save);
     UpdateSwapFiles();
+
+    if (garden.noGarden)
+      SwapToNew();
   }
 
   public void SwapToMain() {
@@ -77,9 +95,17 @@ public class TitleMenu : MonoBehaviour {
     swapUI.SetActive(false);
   }
 
+  public void SwapToNew() {
+    newUI.SetActive(true);
+    swapUI.SetActive(false);
+  }
+
   public void UpdateSwapFiles() {
 
-    currentGardenText.text = "Current Garden: \n  " + garden.gardenName;
+    if (garden.noGarden)
+      currentGardenText.text = "";
+    else
+      currentGardenText.text = "Current Garden: " + garden.gardenName;
 
     // Fill swap
     List<GardenSave> saves = garden.GetAllGardenSaves();
@@ -113,5 +139,19 @@ public class TitleMenu : MonoBehaviour {
       if (save.gardenID == 0)
         txt.text = save.gardenName;
     }
+  }
+
+  public void NewCreateNewGarden() {
+    if (newGardenName.Length == 0)
+      return;
+
+    garden.NewGarden(newGardenName);
+    UpdateSwapFiles();
+    NewToMain();
+  }
+
+  public void NewToMain() {
+    newUI.SetActive(false);
+    mainUI.SetActive(true);
   }
 }

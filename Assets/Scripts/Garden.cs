@@ -21,7 +21,7 @@ public class Garden : MonoBehaviour {
   public int gardenID;
   public int gardenSize = 4;  // Garden dimensions 4x4
   public bool saveGarden = false;
-  public bool loadGarden = true;
+  public bool noGarden = true;
 
   // Garden contents:
   private float unitSizeLimit = 6;
@@ -50,9 +50,8 @@ public class Garden : MonoBehaviour {
 
     recentSaveFilePath = Application.persistentDataPath + "/recent_garden.path";
     unitsCont = transform.Find("Units");
-  }
 
-  void Start() {
+    // Try load garden so title can start
     SetGardenMode(GardenMode.Title);
     LoadGarden();
   }
@@ -119,6 +118,8 @@ public class Garden : MonoBehaviour {
     gardenName = save.gardenName;
     gardenID = save.gardenID;
     gardenBoard.SetBlockMap(save.blockMap);
+
+    noGarden = false;
   }
 
   // Setup garden as a new garden with given name
@@ -136,6 +137,8 @@ public class Garden : MonoBehaviour {
     }
 
     gardenBoard.NewBoard();
+
+    noGarden = false;
 
     // Create save file
     SaveGarden();
@@ -198,7 +201,7 @@ public class Garden : MonoBehaviour {
     }
 
     // If no garden files at all
-    NewGarden("Pan");
+    noGarden = true;
   }
 
   // Delete garden save file given garden save
@@ -206,6 +209,16 @@ public class Garden : MonoBehaviour {
     string filePath = GetFilePath(save.gardenName, save.gardenID);
     Debug.Log("Garden " + save.gardenName + " deleted from " + filePath);
     File.Delete(filePath);
+
+    // Deleted current garden
+    if (save.gardenName == gardenName && save.gardenID == gardenID) {
+
+      // Try to load next
+
+      // Cant load next, no garden
+      noGarden = true;
+      // also clear garden
+    }
   }
 
   // ==========================
