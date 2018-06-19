@@ -24,7 +24,7 @@ public class FactorTimeout : MonsterFactor {
 
   public float GetScore(MonsterBehavior behavior) {
 
-    int totalSeconds = (int)DateTime.Now.Subtract(behavior.GetLastEndedTime()).TotalSeconds;
+    float totalSeconds = behavior.GetTimeSinceLastEnd();
     return Mathf.Max(0, totalSeconds - timeout) * m;
   }
 }

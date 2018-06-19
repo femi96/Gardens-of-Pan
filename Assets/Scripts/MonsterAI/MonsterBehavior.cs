@@ -17,7 +17,7 @@ public class MonsterBehavior {
 
   private float behaviorTime;
   private int behaviorsSince;
-  private DateTime lastEndedTime;
+  public float timeSinceLastEnd;
 
   // Creates MonsterBehavior with TODO
   public MonsterBehavior(string name, Garden g, Monster m, MonsterAction[] actions, MonsterFactor[] factors) {
@@ -39,7 +39,7 @@ public class MonsterBehavior {
       this.factors.Add(f);
     }
 
-    lastEndedTime = DateTime.Now;
+    timeSinceLastEnd = 0;
   }
 
   // Starts state with initial fields and starts behaviors
@@ -56,7 +56,7 @@ public class MonsterBehavior {
   // Ends state
   public void EndBehavior() {
 
-    lastEndedTime = DateTime.Now;
+    timeSinceLastEnd = 0;
     monster.BehaviorDone();
   }
 
@@ -109,8 +109,8 @@ public class MonsterBehavior {
   }
 
   // Returns DateTime of when this behavior ended
-  public DateTime GetLastEndedTime() {
-    return lastEndedTime;
+  public float GetTimeSinceLastEnd() {
+    return timeSinceLastEnd;
   }
 
   public override string ToString() {

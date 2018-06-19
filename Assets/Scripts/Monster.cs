@@ -34,8 +34,12 @@ public abstract class Monster : Unit {
 
     if (currentBehaviorDone)
       StartNewBehavior();
-    else
+    else {
+      foreach (MonsterBehavior b in behaviors)
+        b.timeSinceLastEnd += Time.deltaTime;
+
       currentBehavior.BehaviorUpdate();
+    }
   }
 
   // Returns if garden meets visit conditions
