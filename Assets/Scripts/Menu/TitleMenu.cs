@@ -13,6 +13,7 @@ public class TitleMenu : MonoBehaviour {
 
   public GameObject swapUI;
   public GameObject swapFilePrefab;
+  public GameObject swapFilePrefabCurrent;
   public Transform swapFilesContainer;
 
   public GameObject newUI;
@@ -124,7 +125,12 @@ public class TitleMenu : MonoBehaviour {
 
     // Fill files
     foreach (GardenSave save in saves) {
-      GameObject go = Instantiate(swapFilePrefab, swapFilePrefab.transform.position, Quaternion.identity, swapFilesContainer);
+      GameObject go;
+
+      if (garden.gardenID == save.gardenID && garden.gardenName == save.gardenName)
+        go = Instantiate(swapFilePrefabCurrent, swapFilePrefab.transform.position, Quaternion.identity, swapFilesContainer);
+      else
+        go = Instantiate(swapFilePrefab, swapFilePrefab.transform.position, Quaternion.identity, swapFilesContainer);
 
       go.name = "File: " + save.gardenName;
 

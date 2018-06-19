@@ -192,7 +192,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1098730161227720
 GameObject:
   m_ObjectHideFlags: 1
@@ -1624,7 +1624,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1931866149016716
 GameObject:
   m_ObjectHideFlags: 1
@@ -2382,6 +2382,8 @@ MonoBehaviour:
   mainUI: {fileID: 1308993511189692}
   swapUI: {fileID: 1079338211300124}
   swapFilePrefab: {fileID: 1585276384090448, guid: 0760520d54cd8c1419150cdf73b739de,
+    type: 2}
+  swapFilePrefabCurrent: {fileID: 1460568834402854, guid: 5a7f238bc7dcec546aa88b0e8b7be6b2,
     type: 2}
   swapFilesContainer: {fileID: 224589695355387856}
   newUI: {fileID: 1929875073778476}
