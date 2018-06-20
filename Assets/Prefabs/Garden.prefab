@@ -373,7 +373,8 @@ MonoBehaviour:
   gardenID: 0
   gardenSize: 4
   saveGarden: 0
-  loadGarden: 1
+  noGarden: 1
+  currentGardenText: {fileID: 0}
   mainMenuUI: {fileID: 0}
   mainMenuCamera: {fileID: 1193225085158376}
   playUI: {fileID: 0}

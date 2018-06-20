@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
+using UnityEngine.UI;
 
 [System.Serializable]
 public class Garden : MonoBehaviour {
@@ -22,6 +23,7 @@ public class Garden : MonoBehaviour {
   public int gardenSize = 4;  // Garden dimensions 4x4
   public bool saveGarden = false;
   public bool noGarden = true;
+  public Text currentGardenText;
 
   // Garden contents:
   private float unitSizeLimit = 6;
@@ -80,6 +82,24 @@ public class Garden : MonoBehaviour {
     return Application.persistentDataPath + "/garden_" + name + "_" + iD + ".garden";
   }
 
+  // Get title for garden from its name and ID
+  public string GetGardenTitle(string name, int iD) {
+    string title = name;
+
+    if (iD > 0)
+      title += " ";
+
+    for (int i = 0; i < iD; i++) {
+      title += "I";
+    }
+
+    return title;
+  }
+
+  public string GetGardenTitle() {
+    return GetGardenTitle(gardenName, gardenID);
+  }
+
   // Get a list of all garden save files
   public List<GardenSave> GetAllGardenSaves() {
 
@@ -120,6 +140,7 @@ public class Garden : MonoBehaviour {
     gardenBoard.SetBlockMap(save.blockMap);
 
     noGarden = false;
+    currentGardenText.text = "Current Garden: " + GetGardenTitle();
   }
 
   // Setup garden as a new garden with given name

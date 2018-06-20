@@ -105,16 +105,8 @@ public class TitleMenu : MonoBehaviour {
 
     if (garden.noGarden)
       currentGardenText.text = "";
-    else {
-      currentGardenText.text = "Current Garden: " + garden.gardenName;
-
-      if (garden.gardenID > 0)
-        currentGardenText.text += " ";
-
-      for (int i = 0; i < garden.gardenID; i++) {
-        currentGardenText.text += "I";
-      }
-    }
+    else
+      currentGardenText.text = "Current Garden: " + garden.GetGardenTitle();
 
     // Fill swap
     List<GardenSave> saves = garden.GetAllGardenSaves();
@@ -138,20 +130,10 @@ public class TitleMenu : MonoBehaviour {
       btn.onClick.AddListener(() => { SwapGarden(save); });
 
       Text txt = go.transform.Find("Button/Text").gameObject.GetComponent<Text>();
-      txt.text = save.gardenName;
+      txt.text = garden.GetGardenTitle(save.gardenName, save.gardenID);
 
       Button del = go.transform.Find("Delete").gameObject.GetComponent<Button>();
       del.onClick.AddListener(() => { DeleteGarden(save); });
-
-      if (save.gardenID > 0)
-        txt.text += " ";
-
-      for (int i = 0; i < save.gardenID; i++) {
-        txt.text += "I";
-      }
-
-      if (save.gardenID == 0)
-        txt.text = save.gardenName;
     }
   }
 

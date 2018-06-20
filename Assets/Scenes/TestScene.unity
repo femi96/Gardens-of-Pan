@@ -647,6 +647,12 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: fc2f18f8e8c9f484b8de7703ed49759e, type: 2}
   m_IsPrefabParent: 0
+--- !u!114 &899348009 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114274041879855752, guid: fc2f18f8e8c9f484b8de7703ed49759e,
+    type: 2}
+  m_PrefabInternal: {fileID: 899348008}
+  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
 --- !u!1001 &971967809
 Prefab:
   m_ObjectHideFlags: 0
@@ -1070,6 +1076,11 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114890702010952304, guid: 2842cd2331049b64da842e685550763d,
+        type: 2}
+      propertyPath: currentGardenText
+      value: 
+      objectReference: {fileID: 899348009}
     - target: {fileID: 114890702010952304, guid: 2842cd2331049b64da842e685550763d,
         type: 2}
       propertyPath: mainMenuUI
