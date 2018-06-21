@@ -6,7 +6,6 @@ using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 using UnityEngine.UI;
 
-[System.Serializable]
 public class Garden : MonoBehaviour {
   // Game controller that handles garden data, includes:
   //    SIZE/NAME of garden

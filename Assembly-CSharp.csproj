@@ -81,6 +81,7 @@
      <Compile Include="Assets\Scripts\Monsters\Bomb.cs" />
      <Compile Include="Assets\Scripts\Monsters\Worm.cs" />
      <Compile Include="Assets\Scripts\Obsolete\Surface.cs" />
+     <Compile Include="Assets\Scripts\Seed.cs" />
      <Compile Include="Assets\Scripts\Structures\Block.cs" />
      <Compile Include="Assets\Scripts\Structures\SpawnPoint.cs" />
      <Compile Include="Assets\Scripts\TitleCamera.cs" />
