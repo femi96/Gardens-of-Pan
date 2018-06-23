@@ -7,8 +7,8 @@ public abstract class Unit : MonoBehaviour {
 
   public Garden garden;
 
-  void Awake() {
-    garden = GameObject.Find("Garden").gameObject.GetComponent<Garden>();
+  public virtual void Awake() {
+    garden = GameObject.FindWithTag("Garden").GetComponent<Garden>();
   }
 
   // Returns name of unit
@@ -21,7 +21,7 @@ public abstract class Unit : MonoBehaviour {
   public abstract float GetWandRadius();
 
   // Returns if garden has enough room to add
-  public bool RoomInGarden() {
+  public bool RoomInGarden(Garden garden) {
     return garden.FreeRoom() >= GetSize();
   }
 }

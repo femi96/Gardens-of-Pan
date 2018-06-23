@@ -7,8 +7,7 @@ public class ActionJoin : MonsterAction {
   //  Monster tries to join garden
 
   private Monster monster;
-  private MonsterBehavior state;
-  private Garden garden;
+  private MonsterBehavior behavior;
 
   private float timeout;
 
@@ -16,25 +15,24 @@ public class ActionJoin : MonsterAction {
     timeout = joinTime;
   }
 
-  public void StartAction(MonsterBehavior behavior) {
+  public void SetupAction(MonsterBehavior behavior) {
 
-    state = behavior;
-    monster = state.GetMonster();
-    garden = state.GetGarden();
+    this.behavior = behavior;
+    monster = behavior.monster;
   }
 
   public void Act() {
 
-    if (!monster.IsOwned() && monster.CanOwn(garden)) {
+    if (!monster.owned && monster.CanOwn()) {
 
-      if (state.GetBehaviorTime() >= timeout) {
+      if (behavior.behaviorTime >= timeout) {
         monster.SetOwned(true);
-        state.EndBehavior();
+        behavior.EndBehavior();
       }
 
     } else {
 
-      state.EndBehavior();
+      behavior.EndBehavior();
     }
   }
 }

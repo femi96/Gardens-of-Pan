@@ -5,6 +5,7 @@ using UnityEngine;
 public class Bomb : Monster {
   // Bomb
 
+  // Unit functions
   public override string GetName() {
     return "Bomb";
   }
@@ -17,20 +18,22 @@ public class Bomb : Monster {
     return 0.3f;
   }
 
-  public override bool CanVisit(Garden garden) {
+  // Monster functions
+  public override bool CanVisit() {
     GardenBoard board = garden.GetBoard();
-
-    return board.GetBlockTypeCount(BlockType.Scorch) >= 4 && garden.GetUnitTypeCount(typeof(Bomb)) < 2;
+    int blocks = board.GetBlockTypeCount(BlockType.Scorch)
+                 + board.GetBlockTypeCount(BlockType.Ashland)
+                 + board.GetBlockTypeCount(BlockType.Lava);
+    return blocks >= 4 && garden.GetUnitTypeCount(typeof(Bomb)) < 2;
   }
 
-  public override bool CanOwn(Garden garden) {
+  public override bool CanOwn() {
     GardenBoard board = garden.GetBoard();
-
     return board.GetBlockTypeCount(BlockType.Scorch) >= 8;
   }
 
-  public override bool CanSpawn(GardenBoard board) {
-    List<SpawnPoint> spawnPoints =  board.GetSpawnPoints();
+  public override bool CanSpawn() {
+    List<SpawnPoint> spawnPoints = board.GetSpawnPoints();
 
     foreach (SpawnPoint spawn in spawnPoints) {
       if (spawn.GetBlock().GetBlockType() == BlockType.Scorch)
@@ -40,8 +43,8 @@ public class Bomb : Monster {
     return false;
   }
 
-  public override SpawnPoint GetSpawn(GardenBoard board) {
-    List<SpawnPoint> spawnPoints =  board.GetSpawnPoints();
+  public override SpawnPoint GetSpawn() {
+    List<SpawnPoint> spawnPoints = garden.GetBoard().GetSpawnPoints();
     List<SpawnPoint> validSpawnPoints  =  new List<SpawnPoint>();
 
     foreach (SpawnPoint spawn in spawnPoints) {
@@ -53,54 +56,32 @@ public class Bomb : Monster {
     return validSpawnPoints[r];
   }
 
-  public override MonsterBehavior[] NormalBehaviors() {
+  public override MonsterBehavior[] Behaviors() {
 
-    Garden g = GameObject.Find("Garden").GetComponent<Garden>();
+    List<MonsterBehavior> behaviors = new List<MonsterBehavior>();
 
-    MonsterBehavior[] uniqueBehaviors = new MonsterBehavior[] {
+    MonsterBehavior wander = new MonsterBehavior("Wander", this);
+    wander.actions.Add(new ActionWander());
+    wander.factors.Add(new FactorRepeat(1f));
+    behaviors.Add(wander);
 
-      new MonsterBehavior("Wander", g, this,
-      new MonsterAction[] {
-        new ActionWander()
-      },
-      new MonsterFactor[] {
-        new FactorRepeat(1f)
-      }),
+    MonsterBehavior wait = new MonsterBehavior("Wait", this);
+    wait.actions.Add(new ActionTimeout(3f, 6f));
+    wait.factors.Add(new FactorRepeat(1f));
+    behaviors.Add(wait);
 
-      new MonsterBehavior("Wait", g, this,
-      new MonsterAction[] {
-        new ActionTimeout(3f, 6f)
-      },
-      new MonsterFactor[] {
-        new FactorRepeat(1f)
-      }),
-    };
+    MonsterBehavior leave = new MonsterBehavior("Leave", this);
+    leave.actions.Add(new ActionLeave());
+    leave.factors.Add(new FactorTimeout(10f, 30f));
+    leave.restrictors.Add(new RestrictorWildOnly());
+    behaviors.Add(leave);
 
-    return uniqueBehaviors;
-  }
+    MonsterBehavior join = new MonsterBehavior("Leave", this);
+    join.actions.Add(new ActionJoin(2f));
+    join.factors.Add(new FactorRepeat(10f));
+    join.restrictors.Add(new RestrictorWildOnly());
+    behaviors.Add(join);
 
-  public override MonsterBehavior[] WildBehaviors() {
-
-    Garden g = GameObject.Find("Garden").GetComponent<Garden>();
-    MonsterBehavior[] wildBehaviors = new MonsterBehavior[] {
-
-      new MonsterBehavior("Leave", g, this,
-      new MonsterAction[] {
-        new ActionLeave()
-      },
-      new MonsterFactor[] {
-        new FactorTimeout(10f, 30f)
-      }),
-
-      new MonsterBehavior("Join", g, this,
-      new MonsterAction[] {
-        new ActionJoin(2f)
-      },
-      new MonsterFactor[] {
-        new FactorRepeat(10f)
-      }),
-    };
-
-    return wildBehaviors;
+    return behaviors.ToArray();
   }
 }

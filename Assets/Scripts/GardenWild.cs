@@ -55,12 +55,14 @@ public class GardenWild : MonoBehaviour {
     GameObject monsterGo = wildMonsterPrefabs[monsterInd];
     Monster monster = monsterGo.GetComponent<Monster>();
 
+    monster.Awake();
+
     bool roomInGarden = monster.RoomInGarden(garden);
-    bool canVisit = monster.CanVisit(garden);
-    bool canSpawn = monster.CanSpawn(garden.GetBoard());
+    bool canVisit = monster.CanVisit();
+    bool canSpawn = monster.CanSpawn();
 
     if (roomInGarden && canVisit && canSpawn) {
-      SpawnPoint spawn = monster.GetSpawn(garden.GetBoard());
+      SpawnPoint spawn = monster.GetSpawn();
       garden.AddMonster(monsterGo, spawn);
       visitTime = 0;
     }

@@ -189,7 +189,7 @@ public class Wand : MonoBehaviour {
         Monster targetMon = (Monster)targetUnit;
         unitHoverBehavior.text = targetMon.currentBehavior.ToString();
 
-        if (!targetMon.IsOwned())
+        if (!targetMon.owned)
           unitHoverBackground.color = colorHoverWild;
       }
 

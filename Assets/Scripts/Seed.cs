@@ -9,7 +9,7 @@ public abstract class Seed : Unit {
 
   public float timeActive = 0f;
 
-  void Awake() {
+  public override void Awake() {
     base.Awake();
     model = transform.Find("Model").gameObject;
   }

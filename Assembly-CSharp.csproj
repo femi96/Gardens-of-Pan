@@ -76,6 +76,8 @@
      <Compile Include="Assets\Scripts\MonsterAI\MonsterAction.cs" />
      <Compile Include="Assets\Scripts\MonsterAI\MonsterBehavior.cs" />
      <Compile Include="Assets\Scripts\MonsterAI\MonsterFactor.cs" />
+     <Compile Include="Assets\Scripts\MonsterAI\MonsterRestrictor.cs" />
+     <Compile Include="Assets\Scripts\MonsterAI\Restrictors\RestrictorWildOnly.cs" />
      <Compile Include="Assets\Scripts\MonsterMover.cs" />
      <Compile Include="Assets\Scripts\Monsters\Birb.cs" />
      <Compile Include="Assets\Scripts\Monsters\Bomb.cs" />

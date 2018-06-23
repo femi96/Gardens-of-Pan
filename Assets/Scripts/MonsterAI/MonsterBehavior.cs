@@ -10,34 +10,27 @@ public class MonsterBehavior {
   public string behaviorName;
 
   // Collection variables:
-  private Garden garden;
-  private Monster monster;
-  private List<MonsterAction> actions;
-  private List<MonsterFactor> factors;
+  public Garden garden;
+  public Monster monster;
+  public List<MonsterAction> actions;
+  public List<MonsterFactor> factors;
+  public List<MonsterRestrictor> restrictors;
 
-  private float behaviorTime;
-  private int behaviorsSince;
+  public int behaviorsSince;
+  public float behaviorTime;
   public float timeSinceLastEnd;
 
-  // Creates MonsterBehavior with TODO
-  public MonsterBehavior(string name, Garden g, Monster m, MonsterAction[] actions, MonsterFactor[] factors) {
+  // Creates MonsterBehavior with name name for monster rMonster
+  public MonsterBehavior(string name, Monster rMonster) {
 
     behaviorName = name;
 
-    garden = g;
-    monster = m;
+    garden = rMonster.garden;
+    monster = rMonster;
 
-    this.actions = new List<MonsterAction>();
-
-    foreach (MonsterAction a in actions) {
-      this.actions.Add(a);
-    }
-
-    this.factors = new List<MonsterFactor>();
-
-    foreach (MonsterFactor f in factors) {
-      this.factors.Add(f);
-    }
+    actions = new List<MonsterAction>();
+    factors = new List<MonsterFactor>();
+    restrictors = new List<MonsterRestrictor>();
 
     timeSinceLastEnd = 0;
   }
@@ -49,7 +42,7 @@ public class MonsterBehavior {
     behaviorsSince = -1;
 
     foreach (MonsterAction action in actions) {
-      action.StartAction(this);
+      action.SetupAction(this);
     }
   }
 
@@ -57,60 +50,40 @@ public class MonsterBehavior {
   public void EndBehavior() {
 
     timeSinceLastEnd = 0;
-    monster.BehaviorDone();
+    monster.currentBehaviorDone = true;
   }
 
-  // Execute per frame state operations
+  // Called per frame, execute every action each frame
   public void BehaviorUpdate() {
 
     behaviorTime += Time.deltaTime;
-    Act();
-  }
-
-  // Execute all actions in this state
-  private void Act() {
 
     foreach (MonsterAction action in actions) {
       action.Act();
     }
   }
 
-  // Sum all factors, returning state priority
-  public float GetFactorTotal() {
+  // Get behavior priority, based on sum of all factors
+  public float GetPriority() {
 
-    float total = 0;
+    float priority = 0;
 
     foreach (MonsterFactor factor in factors) {
-      total += factor.GetScore(this);
+      priority += factor.GetPriority(this);
     }
 
-    behaviorsSince += 1;
-    return total;
+    return priority;
   }
 
-  // Returns state's monster's garden
-  public Garden GetGarden() {
-    return garden;
-  }
+  // Is behavior allowed to start
+  public bool IsResticted() {
+    bool restricted = false;
 
-  // Returns state's monster
-  public Monster GetMonster() {
-    return monster;
-  }
+    foreach (MonsterRestrictor restrictor in restrictors) {
+      restricted = restricted || restrictor.Restrict(this);
+    }
 
-  // Returns states since this was the current state
-  public int GetBehaviorsSince() {
-    return behaviorsSince;
-  }
-
-  // Returns time since this state started
-  public float GetBehaviorTime() {
-    return behaviorTime;
-  }
-
-  // Returns DateTime of when this behavior ended
-  public float GetTimeSinceLastEnd() {
-    return timeSinceLastEnd;
+    return restricted;
   }
 
   public override string ToString() {

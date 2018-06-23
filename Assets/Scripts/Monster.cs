@@ -5,91 +5,81 @@ using UnityEngine;
 public abstract class Monster : Unit {
   // Game controller that handles a monster's state and behavior
 
-  private MonsterMover mover;
-  private bool owned = false;
+  public GardenBoard board;
+  public MonsterMover mover;
+  public bool owned = false;
 
   // Monster AI
   public MonsterBehavior currentBehavior;
   public MonsterBehavior[] behaviors;
-  private bool currentBehaviorDone = true;
+  public bool currentBehaviorDone = true;
 
   // Monster models
   private GameObject modelOwned;
   private GameObject modelWild;
 
-  void Awake() {
-
-    // Awake with components
+  public override void Awake() {
+    base.Awake();
+    board = garden.GetBoard();
     mover = gameObject.GetComponent<MonsterMover>();
     modelOwned = transform.Find("ModelOwned").gameObject;
     modelWild = transform.Find("ModelWild").gameObject;
   }
 
   void Start() {
-
-    UpdateBehaviors();
+    SetBehaviors();
   }
 
   void Update() {
-
     if (currentBehaviorDone)
       StartNewBehavior();
-    else {
-      foreach (MonsterBehavior b in behaviors)
-        b.timeSinceLastEnd += Time.deltaTime;
 
-      currentBehavior.BehaviorUpdate();
-    }
+    foreach (MonsterBehavior behavior in behaviors)
+      behavior.timeSinceLastEnd += Time.deltaTime;
+
+    currentBehavior.BehaviorUpdate();
   }
 
   // Returns if garden meets visit conditions
-  public abstract bool CanVisit(Garden garden);
+  public abstract bool CanVisit();
 
   // Returns if monster can be owned
-  public abstract bool CanOwn(Garden garden);
+  public abstract bool CanOwn();
 
   // Returns if garden board has a valid spawn
-  public abstract bool CanSpawn(GardenBoard board);
+  public abstract bool CanSpawn();
 
   // Returns a valid spawn from garden board, given it exists
-  public abstract SpawnPoint GetSpawn(GardenBoard board);
-
-  // Returns if monster is owned
-  public bool IsOwned() {
-    return owned;
-  }
+  public abstract SpawnPoint GetSpawn();
 
   // Set if monster is owned
   public void SetOwned(bool own) {
 
     owned = own;
-    UpdateBehaviors();
-    UpdateModel();
-  }
-
-  // Returns monster rmover
-  public MonsterMover GetMover() {
-    return mover;
-  }
-
-  // Sets current state to done
-  public void BehaviorDone() {
-    currentBehaviorDone = true;
+    modelOwned.SetActive(owned);
+    modelWild.SetActive(!owned);
   }
 
   // Chooses a new state, and starts it
   private void StartNewBehavior() {
 
     bool newState = false;
-    float max = float.MinValue;
+    float maxPriority = float.MinValue;
 
-    foreach (MonsterBehavior b in behaviors) {
+    foreach (MonsterBehavior behavior in behaviors) {
 
-      float f = b.GetFactorTotal();
+      behavior.behaviorsSince += 1;
 
-      if (f > max) {
-        max = f;
-        currentBehavior = b;
+      // Is behavior valid
+      if (behavior.IsResticted())
+        continue;
+
+      // Find highest factor behavior
+      float priority = behavior.GetPriority();
+
+      if (priority > maxPriority) {
+        maxPriority = priority;
+        currentBehavior = behavior;
         newState = true;
       }
     }
@@ -100,39 +90,11 @@ public abstract class Monster : Unit {
     }
   }
 
-  // Set monster's behavior states to input b
-  public void SetBehaviors(MonsterBehavior[] b) {
-    behaviors = b;
-  }
-
-  // Update monster's model based on monster's owned
-  public void UpdateModel() {
-    modelOwned.SetActive(owned);
-    modelWild.SetActive(!owned);
-  }
-
-  // Changing behaviors
-
-  // Set monster's behavior states to input b
-  public void UpdateBehaviors() {
-
-    List<MonsterBehavior> b = new List<MonsterBehavior>();
-
-    MonsterBehavior[] normalBehaviors = NormalBehaviors();
-    b.AddRange(normalBehaviors);
-
-    if (!IsOwned()) {
-
-      MonsterBehavior[] wildBehaviors = WildBehaviors();
-      b.AddRange(wildBehaviors);
-    }
-
-    behaviors = b.ToArray();
+  // Set monster's behavior states
+  public void SetBehaviors() {
+    behaviors = Behaviors();
   }
 
   // Get set of monster behavior states based on monster type
-  public abstract MonsterBehavior[] NormalBehaviors();
-
-  // Get set of wild only monster behaviors states based on monster type
-  public abstract MonsterBehavior[] WildBehaviors();
+  public abstract MonsterBehavior[] Behaviors();
 }

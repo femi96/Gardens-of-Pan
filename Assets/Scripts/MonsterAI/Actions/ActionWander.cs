@@ -12,7 +12,7 @@ public class ActionWander : MonsterAction {
 
   private Monster monster;
   private MonsterMover mover;
-  private MonsterBehavior state;
+  private MonsterBehavior behavior;
   private Garden garden;
 
   private float endDistance;
@@ -21,12 +21,12 @@ public class ActionWander : MonsterAction {
 
   public ActionWander() {}
 
-  public void StartAction(MonsterBehavior behavior) {
+  public void SetupAction(MonsterBehavior behavior) {
 
-    state = behavior;
-    monster = state.GetMonster();
-    mover = monster.GetMover();
-    garden = state.GetGarden();
+    this.behavior = behavior;
+    monster = behavior.monster;
+    mover = monster.mover;
+    garden = behavior.garden;
     endDistance = mover.radius;
 
     // Pick a random destination
@@ -60,13 +60,13 @@ public class ActionWander : MonsterAction {
       mover.Stop();
     }
 
-    // If reached destination, stop state
+    // If reached destination, stop behavior
     destination.y = monster.transform.position.y;
     float destDistance = (destination - monster.transform.position).magnitude;
 
     if (destDistance < endDistance) {
       mover.Stop();
-      state.EndBehavior();
+      behavior.EndBehavior();
     }
   }
 }

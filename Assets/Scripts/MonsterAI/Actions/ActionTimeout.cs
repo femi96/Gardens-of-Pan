@@ -6,7 +6,7 @@ public class ActionTimeout : MonsterAction {
   // AI controller scripting monster behavior
   //  Waits a duration and ends state
 
-  private MonsterBehavior state;
+  private MonsterBehavior behavior;
 
   private float timeout;
 
@@ -18,15 +18,15 @@ public class ActionTimeout : MonsterAction {
     timeout = Random.Range(timeoutMin, timeoutMax);
   }
 
-  public void StartAction(MonsterBehavior behavior) {
+  public void SetupAction(MonsterBehavior behavior) {
 
-    state = behavior;
+    this.behavior = behavior;
   }
 
   public void Act() {
 
-    if (state.GetBehaviorTime() >= timeout) {
-      state.EndBehavior();
+    if (behavior.behaviorTime >= timeout) {
+      behavior.EndBehavior();
     }
   }
 }

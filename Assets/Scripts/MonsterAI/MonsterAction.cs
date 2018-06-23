@@ -6,7 +6,7 @@ public interface MonsterAction {
   // AI controller scripting monster action
 
   // Initializes action variables, called at the start of the behavior state
-  void StartAction(MonsterBehavior behavior);
+  void SetupAction(MonsterBehavior behavior);
 
   // Executes action, effecting garden
   void Act();
