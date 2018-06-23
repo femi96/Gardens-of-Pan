@@ -5,6 +5,12 @@ using UnityEngine;
 public abstract class Unit : MonoBehaviour {
   // Game controller that handles a unit's state and behavior
 
+  public Garden garden;
+
+  void Awake() {
+    garden = GameObject.Find("Garden").gameObject.GetComponent<Garden>();
+  }
+
   // Returns name of unit
   public abstract string GetName();
 
@@ -15,7 +21,7 @@ public abstract class Unit : MonoBehaviour {
   public abstract float GetWandRadius();
 
   // Returns if garden has enough room to add
-  public bool RoomInGarden(Garden garden) {
+  public bool RoomInGarden() {
     return garden.FreeRoom() >= GetSize();
   }
 }
