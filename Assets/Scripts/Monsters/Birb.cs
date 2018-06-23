@@ -41,7 +41,7 @@ public class Birb : Monster {
   }
 
   public override SpawnPoint GetSpawn() {
-    List<SpawnPoint> spawnPoints =  board.GetSpawnPoints();
+    List<SpawnPoint> spawnPoints = board.GetSpawnPoints();
     List<SpawnPoint> validSpawnPoints = new List<SpawnPoint>();
 
     foreach (SpawnPoint spawn in spawnPoints) {

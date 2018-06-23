@@ -16,7 +16,7 @@ public class MonsterMover : MonoBehaviour {
   private Vector3 velocity;
   private Vector3 moveDirection;
 
-  private static float gravity = 0.1f;
+  private static float gravity = 10f;
 
   void Start() {
     velocity = new Vector3(0, 0, 0);
@@ -51,7 +51,7 @@ public class MonsterMover : MonoBehaviour {
 
   // Applies gravity and normal forces to velocity
   private void ApplyGravity() {
-    velocity.y -= gravity;
+    velocity.y -= gravity * Time.deltaTime;
 
     if (isGrounded) {
       velocity.y = 0;

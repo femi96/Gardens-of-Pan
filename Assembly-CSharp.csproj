@@ -56,6 +56,7 @@
      <Compile Include="Assets\Scripts\Constants\LayerConstants.cs" />
      <Compile Include="Assets\Scripts\DestroyTimeout.cs" />
      <Compile Include="Assets\Scripts\DisableOnPlay.cs" />
+     <Compile Include="Assets\Scripts\EntityDrop.cs" />
      <Compile Include="Assets\Scripts\Enums\BlockType.cs" />
      <Compile Include="Assets\Scripts\Enums\GardenMode.cs" />
      <Compile Include="Assets\Scripts\Enums\ToolAction.cs" />
@@ -84,6 +85,7 @@
      <Compile Include="Assets\Scripts\Monsters\Worm.cs" />
      <Compile Include="Assets\Scripts\Obsolete\Surface.cs" />
      <Compile Include="Assets\Scripts\Seed.cs" />
+     <Compile Include="Assets\Scripts\Seeds\BlockberrySeed.cs" />
      <Compile Include="Assets\Scripts\Structures\Block.cs" />
      <Compile Include="Assets\Scripts\Structures\SpawnPoint.cs" />
      <Compile Include="Assets\Scripts\TitleCamera.cs" />
