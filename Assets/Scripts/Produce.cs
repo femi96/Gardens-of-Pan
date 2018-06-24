@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Plant : Unit {
-  // Game controller that handles a plant's state and behavior
+public abstract class Produce : Unit {
+  // Game controller that handles a produce's state and behavior
 
   public GardenBoard board;
   public GameObject model;
@@ -19,12 +19,12 @@ public abstract class Plant : Unit {
   void Update() {
     timeActive += Time.deltaTime;
 
-    PlantBehavior();
+    ProduceBehavior();
   }
 
-  public abstract void PlantBehavior();
+  public abstract void ProduceBehavior();
 
-  public void Die() {
+  public void Break() {
     Destroy(gameObject);
   }
 }
