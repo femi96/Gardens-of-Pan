@@ -279,8 +279,12 @@ public class Garden : MonoBehaviour {
 
   // Get remaining room for new units
   public float FreeRoom() {
-
     return unitSizeLimit - UnitSizeCount();
+  }
+
+  // Returns if garden has enough room to add unity
+  public bool RoomForUnit(Unit unit) {
+    return FreeRoom() >= unit.GetSize();
   }
 
   // Create monster from prefab newMonster and add it to garden at spawn

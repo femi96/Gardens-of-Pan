@@ -57,7 +57,7 @@ public class GardenWild : MonoBehaviour {
 
     monster.Awake();
 
-    bool roomInGarden = monster.RoomInGarden(garden);
+    bool roomInGarden = garden.RoomForUnit(monster);
     bool canVisit = monster.CanVisit();
     bool canSpawn = monster.CanSpawn();
 

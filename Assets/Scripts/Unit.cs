@@ -19,9 +19,4 @@ public abstract class Unit : MonoBehaviour {
 
   // Returns radius of wand when selecting unit
   public abstract float GetWandRadius();
-
-  // Returns if garden has enough room to add
-  public bool RoomInGarden(Garden garden) {
-    return garden.FreeRoom() >= GetSize();
-  }
 }
