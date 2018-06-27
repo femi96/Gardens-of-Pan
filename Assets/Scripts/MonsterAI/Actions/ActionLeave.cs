@@ -66,7 +66,7 @@ public class ActionLeave : MonsterAction {
 
     if (destDistance < endDistance) {
       mover.Stop();
-      garden.RemoveMonster(monster);
+      garden.RemoveUnit(monster);
       behavior.EndBehavior();
     }
   }

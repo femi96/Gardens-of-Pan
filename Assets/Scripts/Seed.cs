@@ -29,6 +29,6 @@ public abstract class Seed : Unit {
   public abstract void Plant();
 
   public void Break() {
-    Destroy(gameObject);
+    garden.RemoveUnit(this);
   }
 }

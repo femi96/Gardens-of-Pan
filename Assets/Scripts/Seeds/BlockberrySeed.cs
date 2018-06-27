@@ -40,5 +40,10 @@ public class BlockberrySeed : Seed {
       Break();
   }
 
-  public override void Plant() {}
+  public override void Plant() {
+    bool planted = garden.TryToPlant(plant, transform.position, Quaternion.identity);
+
+    if (planted)
+      Break();
+  }
 }

@@ -102,7 +102,6 @@ public class GardenBoard : MonoBehaviour {
     float g = gardenSize / 2f;
     int x = Mathf.RoundToInt(Mathf.Floor(v.x + g)); // Get x from v
     int z = Mathf.RoundToInt(Mathf.Floor(v.z + g)); // Get z from v
-    Debug.Log(v);
     return blockMap[x, z];
   }
 

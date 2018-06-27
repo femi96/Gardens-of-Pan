@@ -265,6 +265,10 @@ public class Garden : MonoBehaviour {
       Time.timeScale = 0f;
   }
 
+  // ===============
+  // UNITS in garden
+  // ===============
+
   // Get total size of all units
   public float UnitSizeCount() {
 
@@ -297,13 +301,25 @@ public class Garden : MonoBehaviour {
     units.Add(unit);
   }
 
-  // Remove a monster from the garden, and destroy it's gameObject
-  public void RemoveMonster(Monster monster) {
-
-    Unit unit = (Unit)monster;
+  // Remove a unit from the garden, and destroy it's gameObject
+  public void RemoveUnit(Unit unit) {
     units.Remove(unit);
-
     Destroy(unit.gameObject);
+  }
+
+  // Try to plant a plant at a position
+  public bool TryToPlant(GameObject plant, Vector3 pos, Quaternion rot) {
+    if (RoomForUnit(plant.GetComponent<Unit>())) {
+      Instantiate(plant, pos, rot, unitsCont);
+      return true;
+    }
+
+    return false;
+  }
+
+  // Try to add produce at a position
+  public bool TryAddProduce(GameObject produce) {
+    return false;
   }
 
   // Get garden's board

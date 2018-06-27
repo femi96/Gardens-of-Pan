@@ -8,6 +8,8 @@ public abstract class Plant : Unit {
   public GardenBoard board;
   public GameObject model;
 
+  public bool grown;
+
   public float timeActive = 0f;
 
   public override void Awake() {
