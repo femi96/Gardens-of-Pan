@@ -272,7 +272,7 @@ MonoBehaviour:
   model: {fileID: 1055223805784900}
   modelRot: {fileID: 1346310224058036}
   timeActive: 0
-  plant: {fileID: 1365525670269232}
+  plant: {fileID: 1144113896645262, guid: 471bd435b8df31a48b88f4f0b766606f, type: 2}
 --- !u!114 &114507575315885994
 MonoBehaviour:
   m_ObjectHideFlags: 1

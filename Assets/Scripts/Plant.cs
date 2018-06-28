@@ -16,6 +16,9 @@ public abstract class Plant : Unit {
     base.Awake();
     board = garden.GetBoard();
     model = transform.Find("Model").gameObject;
+
+    foreach (Transform child in model.transform)
+      child.gameObject.SetActive(false);
   }
 
   void Update() {
