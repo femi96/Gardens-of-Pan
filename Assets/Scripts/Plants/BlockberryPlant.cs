@@ -61,7 +61,9 @@ public class BlockberryPlant : Plant {
     produceTime += Time.deltaTime;
 
     if (produceTime > 1f) {
-      if (garden.TryAddProduce(produce, producePoints[Random.Range(0, producePoints.Length)]))
+      Transform point = producePoints[Random.Range(0, producePoints.Length)];
+
+      if (garden.TryAddUnit(produce, point.position, point.rotation))
         produceTime -= 1f;
       else {
         produceTime -= 10f;

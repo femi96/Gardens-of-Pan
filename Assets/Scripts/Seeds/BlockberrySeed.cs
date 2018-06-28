@@ -41,7 +41,7 @@ public class BlockberrySeed : Seed {
   }
 
   public override void Plant() {
-    bool planted = garden.TryToPlant(plant, transform.position, Quaternion.identity);
+    bool planted = garden.TryAddUnit(plant, transform.position, Quaternion.identity);
 
     if (planted)
       Break();

@@ -307,20 +307,14 @@ public class Garden : MonoBehaviour {
     Destroy(unit.gameObject);
   }
 
-  // Try to plant a plant at a position
-  public bool TryToPlant(GameObject plant, Vector3 pos, Quaternion rot) {
-    if (RoomForUnit(plant.GetComponent<Unit>())) {
-      Instantiate(plant, pos, rot, unitsCont);
-      return true;
-    }
+  // Try to add a unit at a position
+  public bool TryAddUnit(GameObject unitPrefab, Vector3 pos, Quaternion rot) {
+    Unit unit = unitPrefab.GetComponent<Unit>();
 
-    return false;
-  }
-
-  // Try to add produce at a position
-  public bool TryAddProduce(GameObject produce, Transform producePoint) {
-    if (RoomForUnit(produce.GetComponent<Unit>())) {
-      Instantiate(produce, producePoint.position, producePoint.rotation, unitsCont);
+    if (RoomForUnit(unit)) {
+      GameObject go = Instantiate(unitPrefab, pos, rot, unitsCont);
+      unit = go.GetComponent<Unit>();
+      units.Add(unit);
       return true;
     }
 
