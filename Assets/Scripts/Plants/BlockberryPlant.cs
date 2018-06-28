@@ -6,12 +6,13 @@ public class BlockberryPlant : Plant {
   // Blockberry plant
 
   public GameObject produce;
-  // public Transform producePoint;
 
   [Header("Plant Parts")]
   public GameObject trunk;
   public GameObject[] branch;
   public GameObject[] bush;
+
+  public Transform[] producePoints;
 
   private int growthStage = 0;
 
@@ -36,20 +37,12 @@ public class BlockberryPlant : Plant {
   public override void PlantBehavior() {
 
     // If not grown, grow
-    if (!grown) {
+    if (!grown)
       NotGrown();
-    }
 
     // If grown, create produce
-    if (grown) {
-      // Create produce
-      produceTime += Time.deltaTime;
-
-      if (produceTime > 20f) {
-        produceTime -= 20f;
-        garden.TryAddProduce(produce);
-      }
-    }
+    if (grown)
+      Grown();
 
     // If to old, break
     if (timeActive > 600f) {
@@ -59,6 +52,22 @@ public class BlockberryPlant : Plant {
 
     if (dieTime > 30f)
       Die();
+  }
+
+  // Plant Behavior when fully grown
+  private void Grown() {
+
+    // Create produce
+    produceTime += Time.deltaTime;
+
+    if (produceTime > 1f) {
+      if (garden.TryAddProduce(produce, producePoints[Random.Range(0, producePoints.Length)]))
+        produceTime -= 1f;
+      else {
+        produceTime -= 10f;
+        Debug.Log("Garden to full for fruit");
+      }
+    }
   }
 
   // Plant Behavior when not grown

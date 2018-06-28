@@ -318,7 +318,12 @@ public class Garden : MonoBehaviour {
   }
 
   // Try to add produce at a position
-  public bool TryAddProduce(GameObject produce) {
+  public bool TryAddProduce(GameObject produce, Transform producePoint) {
+    if (RoomForUnit(produce.GetComponent<Unit>())) {
+      Instantiate(produce, producePoint.position, producePoint.rotation, unitsCont);
+      return true;
+    }
+
     return false;
   }
 
