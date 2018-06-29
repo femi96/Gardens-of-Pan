@@ -51,9 +51,9 @@ public class Wand : MonoBehaviour {
     wandShapePieces = wandShape.GetComponentsInChildren<Transform>();
     wandShapePieces = wandShapePieces.Skip(1).ToArray();
 
-    unitHoverName = unitHoverUI.transform.Find("Name").GetComponent<Text>();
-    unitHoverBehavior = unitHoverUI.transform.Find("Behavior").GetComponent<Text>();
-    unitHoverBackground = unitHoverUI.transform.Find("Background").GetComponent<Image>();
+    unitHoverName = unitHoverUI.transform.Find("NameBG/Name").GetComponent<Text>();
+    unitHoverBehavior = unitHoverUI.transform.Find("BehaviorBG/Behavior").GetComponent<Text>();
+    unitHoverBackground = unitHoverUI.transform.Find("NameBG").GetComponent<Image>();
 
     screenshotText = screenshotUI.transform.Find("Text").GetComponent<Text>();
   }
