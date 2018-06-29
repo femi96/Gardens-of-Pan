@@ -5,6 +5,8 @@ using UnityEngine;
 public class EntityDrop : MonoBehaviour {
   // Game controller that handles an entity's movement
 
+  public bool locked = false;
+
   private bool isGrounded;
   public float height = 0.25f;
   private Vector3 velocity;
@@ -15,8 +17,10 @@ public class EntityDrop : MonoBehaviour {
   }
 
   void Update() {
-    ApplyGravity();
-    ApplyVelocity();
+    if (!locked) {
+      ApplyGravity();
+      ApplyVelocity();
+    }
   }
 
   // Applies gravity and normal forces to velocity

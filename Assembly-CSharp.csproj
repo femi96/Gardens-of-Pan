@@ -87,6 +87,7 @@
      <Compile Include="Assets\Scripts\Plant.cs" />
      <Compile Include="Assets\Scripts\Plants\BlockberryPlant.cs" />
      <Compile Include="Assets\Scripts\Produce.cs" />
+     <Compile Include="Assets\Scripts\Produce\BlockberryProduce.cs" />
      <Compile Include="Assets\Scripts\Seed.cs" />
      <Compile Include="Assets\Scripts\Seeds\BlockberrySeed.cs" />
      <Compile Include="Assets\Scripts\Structures\Block.cs" />

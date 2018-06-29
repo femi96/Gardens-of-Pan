@@ -6,18 +6,21 @@ public abstract class Produce : Unit {
   // Game controller that handles a produce's state and behavior
 
   public GardenBoard board;
-  public GameObject model;
+  public EntityDrop entityDrop;
+
+  public bool held = false;
 
   public float timeActive = 0f;
 
   public override void Awake() {
     base.Awake();
     board = garden.GetBoard();
-    model = transform.Find("Model").gameObject;
+    entityDrop = GetComponent<EntityDrop>();
   }
 
   void Update() {
     timeActive += Time.deltaTime;
+    entityDrop.locked = held;
 
     ProduceBehavior();
   }
@@ -25,6 +28,6 @@ public abstract class Produce : Unit {
   public abstract void ProduceBehavior();
 
   public void Break() {
-    Destroy(gameObject);
+    garden.RemoveUnit(this);
   }
 }

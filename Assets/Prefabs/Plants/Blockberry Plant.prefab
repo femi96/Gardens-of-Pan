@@ -777,7 +777,7 @@ MonoBehaviour:
   model: {fileID: 1673721353344678}
   grown: 0
   timeActive: 0
-  produce: {fileID: 1365525670269232, guid: d96d594c118107c4d8211182c82b4759, type: 2}
+  produce: {fileID: 1185455563754820, guid: 27bd88849bd32f942a34c7b92d718956, type: 2}
   trunk: {fileID: 1238376214445912}
   branch:
   - {fileID: 1072532535582962}

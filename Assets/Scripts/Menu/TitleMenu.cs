@@ -40,6 +40,10 @@ public class TitleMenu : MonoBehaviour {
     UpdateSwapFiles();
   }
 
+  public void TitleOpenTwitter() {
+    Application.OpenURL("https://twitter.com/imef96");
+  }
+
   public void MainPlay() {
     tools.Setup();
     garden.SetGardenMode(GardenMode.Play);
