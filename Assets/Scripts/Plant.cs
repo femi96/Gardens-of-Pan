@@ -17,8 +17,7 @@ public abstract class Plant : Unit {
     board = garden.GetBoard();
     model = transform.Find("Model").gameObject;
 
-    foreach (Transform child in model.transform)
-      child.gameObject.SetActive(false);
+    PlantAwake();
   }
 
   void Update() {
@@ -27,8 +26,13 @@ public abstract class Plant : Unit {
     PlantBehavior();
   }
 
+  // Plants behavior on load (disabling objects etc)
+  public abstract void PlantAwake();
+
+  // Plant behavior per frame
   public abstract void PlantBehavior();
 
+  // Returns a plants width for suffocation
   public abstract float PlantRadius();
 
   public void Die() {

@@ -34,6 +34,14 @@ public class BlockberryPlant : Plant {
   }
 
   // Plant functions
+  public override void PlantAwake() {
+    trunk.SetActive(false);
+    branch[0].SetActive(false);
+    branch[1].SetActive(false);
+    bush[0].SetActive(false);
+    bush[1].SetActive(false);
+  }
+
   public override void PlantBehavior() {
 
     // If not grown, grow
