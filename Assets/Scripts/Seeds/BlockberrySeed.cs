@@ -17,13 +17,13 @@ public class BlockberrySeed : Seed {
   }
 
   public override float GetWandRadius() {
-    return 0.3f;
+    return 0.1f;
   }
 
   // Seed functions
   public override void SeedBehavior() {
     BlockType surfaceType = board.GetBlock(transform.position).GetBlockType();
-    bool validSurface = surfaceType == BlockType.Dirt;
+    bool validSurface = BlockTypes.InGroup(surfaceType, BlockTypes.DepthGround);
 
     // If can plant, plant
     if (timeActive > 5f && validSurface)

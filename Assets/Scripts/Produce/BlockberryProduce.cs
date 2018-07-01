@@ -17,7 +17,7 @@ public class BlockberryProduce : Produce {
   }
 
   public override float GetWandRadius() {
-    return 0.3f;
+    return 0.1f;
   }
 
   // Produce functions

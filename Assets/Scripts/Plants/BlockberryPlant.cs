@@ -30,7 +30,7 @@ public class BlockberryPlant : Plant {
   }
 
   public override float GetWandRadius() {
-    return 0.3f;
+    return 0.15f;
   }
 
   // Plant functions
@@ -89,7 +89,7 @@ public class BlockberryPlant : Plant {
   // Plant Behavior when not grown
   private void NotGrown() {
     BlockType surfaceType = board.GetBlock(transform.position).GetBlockType();
-    bool validSurface = surfaceType == BlockType.Dirt;
+    bool validSurface = BlockTypes.InGroup(surfaceType, BlockTypes.DepthGround);
 
     bool toClose = false;
     List<Unit> plants = garden.GetUnitListOfType(typeof(Plant));
