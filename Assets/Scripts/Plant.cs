@@ -29,7 +29,9 @@ public abstract class Plant : Unit {
 
   public abstract void PlantBehavior();
 
+  public abstract float PlantRadius();
+
   public void Die() {
-    Destroy(gameObject);
+    garden.RemoveUnit(this);
   }
 }

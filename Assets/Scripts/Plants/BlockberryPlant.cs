@@ -50,8 +50,15 @@ public class BlockberryPlant : Plant {
       // Should look old now
     }
 
-    if (dieTime > 30f)
+    if (dieTime > 5f + growTime * 0.1f)
       Die();
+  }
+
+  public override float PlantRadius() {
+    if (grown)
+      return 0.5f;
+
+    return growTime * 0.5f / 30f;
   }
 
   // Plant Behavior when fully grown
@@ -60,14 +67,13 @@ public class BlockberryPlant : Plant {
     // Create produce
     produceTime += Time.deltaTime;
 
-    if (produceTime > 1f) {
+    if (produceTime > 10f) {
       Transform point = producePoints[Random.Range(0, producePoints.Length)];
 
       if (garden.TryAddUnit(produce, point.position, point.rotation))
-        produceTime -= 1f;
+        produceTime -= 10f;
       else {
         produceTime -= 10f;
-        Debug.Log("Garden to full for fruit");
       }
     }
   }
@@ -77,7 +83,24 @@ public class BlockberryPlant : Plant {
     BlockType surfaceType = board.GetBlock(transform.position).GetBlockType();
     bool validSurface = surfaceType == BlockType.Dirt;
 
-    if (validSurface) {
+    bool toClose = false;
+    List<Unit> plants = garden.GetUnitListOfType(typeof(Plant));
+
+    foreach (Unit u in plants) {
+      Plant p = (Plant)u;
+
+      if (p == this)
+        continue;
+
+      float pDist = (p.transform.position - transform.position).magnitude;
+
+      if (pDist < PlantRadius() || pDist < p.PlantRadius()) {
+        toClose = true;
+        break;
+      }
+    }
+
+    if (validSurface && !toClose) {
       growTime += Time.deltaTime;
       dieTime = 0;
     } else {
@@ -87,7 +110,7 @@ public class BlockberryPlant : Plant {
 
     // Grow based on growTime
     if (growthStage == 0) {
-      if (growTime >= 1f) {
+      if (growTime >= 0f) {
         // trunk.transform.rotation = Quaternion.Euler(new Vector3(0, Random.Range(0, 360), 0));
         trunk.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
         trunk.SetActive(true);
@@ -96,7 +119,7 @@ public class BlockberryPlant : Plant {
     }
 
     if (growthStage == 1) {
-      float trunkSize = Mathf.Lerp(0.1f, 1f, (growTime - 1f) / 9f);
+      float trunkSize = Mathf.Lerp(0.1f, 1f, (growTime - 0f) / 10f);
       trunk.transform.localScale = new Vector3(trunkSize, trunkSize, trunkSize);
 
       if (growTime >= 10f) {

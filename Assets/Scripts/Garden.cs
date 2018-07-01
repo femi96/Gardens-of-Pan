@@ -333,10 +333,23 @@ public class Garden : MonoBehaviour {
 
     foreach (Unit unit in units) {
 
-      if (unit.GetType() == t)
+      if (t.IsAssignableFrom(unit.GetType()))
         count += 1;
     }
 
     return count;
+  }
+
+  // Get list of units of type in garden
+  public List<Unit> GetUnitListOfType(Type t) {
+    List<Unit> unitsOfType = new List<Unit>();
+
+    foreach (Unit unit in units) {
+
+      if (t.IsAssignableFrom(unit.GetType()))
+        unitsOfType.Add(unit);
+    }
+
+    return unitsOfType;
   }
 }

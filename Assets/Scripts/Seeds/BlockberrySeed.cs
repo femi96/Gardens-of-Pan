@@ -26,7 +26,7 @@ public class BlockberrySeed : Seed {
     bool validSurface = surfaceType == BlockType.Dirt;
 
     // If can plant, plant
-    if (timeActive > 10f && validSurface)
+    if (timeActive > 5f && validSurface)
       Plant();
 
     // If to old, rot
