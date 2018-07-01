@@ -68,6 +68,7 @@ GameObject:
   - component: {fileID: 4359149665749974}
   - component: {fileID: 65895700855889436}
   - component: {fileID: 114587611841668624}
+  - component: {fileID: 114352387695688318}
   m_Layer: 0
   m_Name: Blockberry Plant
   m_TagString: Untagged
@@ -399,7 +400,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1144113896645262}
-  m_LocalRotation: {x: 0, y: 0, z: 1.2453093e-12, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: 1.2453093e-12, w: 1}
   m_LocalPosition: {x: 0, y: 0.45, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -761,6 +762,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.4, y: 0.2, z: 0.4}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &114352387695688318
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1144113896645262}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c84be022415d8e4798b30f0b2724fc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  locked: 0
+  height: 0
 --- !u!114 &114587611841668624
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -11,6 +11,7 @@ public class EntityDrop : MonoBehaviour {
   public float height = 0.25f;
   private Vector3 velocity;
   private static float gravity = 10f;
+  private static float rayRange = 0.2f;
 
   void Start() {
     velocity = new Vector3(0, 0, 0);
@@ -40,11 +41,10 @@ public class EntityDrop : MonoBehaviour {
     transform.position += frameVelocity;
 
     // Check if on ground
-    Vector3 collide = new Vector3(0, 0, 0);
     RaycastHit hit;
 
-    if (Physics.Raycast(transform.position, -Vector3.up, out hit, height, LayerConstants.GroundLayer)) {
-      collide.y = height - hit.distance;
+    if (Physics.Raycast(transform.position + (Vector3.up * rayRange), -Vector3.up, out hit, height + rayRange, LayerConstants.GroundLayer)) {
+      Vector3 collide = new Vector3(0, height + rayRange - hit.distance, 0);
       transform.position += collide;
       isGrounded = true;
     } else {
