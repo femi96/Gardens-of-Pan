@@ -9,6 +9,7 @@ public class WandTools : MonoBehaviour {
   //    TOOL MENUS
 
   // Assigned in Editor:
+  public Garden garden;
   public GardenBoard gardenBoard;
   public WandCamera wandCamera;
 
@@ -31,6 +32,10 @@ public class WandTools : MonoBehaviour {
 
   public GameObject dirtCloud;
   public GameObject grassCloud;
+
+  // Seeds:
+  public GameObject[] seedPrefabs;
+  public int seedIndex;
 
   // All public variables are assigned in editor
 
@@ -116,39 +121,54 @@ public class WandTools : MonoBehaviour {
 
     case ToolAction.Dig:
       Instantiate(dirtCloud, transform.position, Quaternion.identity, effectContainer);
+      gardenBoard.ApplyAction(v, a);
       break;
 
     case ToolAction.Fill:
+      gardenBoard.ApplyAction(v, a);
       break;
 
     case ToolAction.Flatten:
       Instantiate(dirtCloud, transform.position, Quaternion.identity, effectContainer);
+      gardenBoard.ApplyAction(v, a);
       break;
 
     case ToolAction.Grass:
       Instantiate(grassCloud, transform.position, Quaternion.identity, effectContainer);
+      gardenBoard.ApplyAction(v, a);
       break;
 
     case ToolAction.Remove:
+      gardenBoard.ApplyAction(v, a);
       break;
 
     case ToolAction.Wet:
+      gardenBoard.ApplyAction(v, a);
       break;
 
     case ToolAction.Dry:
+      gardenBoard.ApplyAction(v, a);
       break;
 
     case ToolAction.Heat:
+      gardenBoard.ApplyAction(v, a);
       break;
 
     case ToolAction.Chill:
+      gardenBoard.ApplyAction(v, a);
+      break;
+
+    case ToolAction.Plant_Seed:
+      garden.TryAddUnit(seedPrefabs[seedIndex], transform.position, Quaternion.identity);
+      break;
+
+    case ToolAction.Swap_Seed:
+      seedIndex = (seedIndex + 1) % seedPrefabs.Length;
       break;
 
     default:
       break;
     }
-
-    gardenBoard.ApplyAction(v, a);
   }
 
   // Update UI and strings based on index
@@ -205,6 +225,11 @@ public class WandTools : MonoBehaviour {
 
       break;
 
+    case ToolType.Seed:
+      toolActionMain = ToolAction.Plant_Seed;
+      toolActionOff = ToolAction.Swap_Seed;
+      break;
+
     default:
       break;
     }
@@ -226,19 +251,19 @@ public class WandTools : MonoBehaviour {
     GameObject toolUI = toolGuide.transform.Find("Tool/Active").gameObject;
     Text toolText = toolGuide.transform.Find("Tool/Active/Text").gameObject.GetComponent<Text>();
     toolUI.SetActive(tool != ToolType.None);
-    toolText.text = tool.ToString();
+    toolText.text = tool.ToString().Replace('_', ' ');
 
     // Enable UI main action
     GameObject mainUI = toolGuide.transform.Find("Main/Active").gameObject;
     Text mainText = toolGuide.transform.Find("Main/Active/Text").gameObject.GetComponent<Text>();
     mainUI.SetActive(toolActionMain != ToolAction.None);
-    mainText.text = toolActionMain.ToString();
+    mainText.text = toolActionMain.ToString().Replace('_', ' ');
 
     // Enable UI off action
     GameObject offUI = toolGuide.transform.Find("Off/Active").gameObject;
     Text offText = toolGuide.transform.Find("Off/Active/Text").gameObject.GetComponent<Text>();
     offUI.SetActive(toolActionOff != ToolAction.None);
-    offText.text = toolActionOff.ToString();
+    offText.text = toolActionOff.ToString().Replace('_', ' ');
 
     // Enable UI off action
     Text spaceText = toolGuide.transform.Find("Space/Active/Text").gameObject.GetComponent<Text>();

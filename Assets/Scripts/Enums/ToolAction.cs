@@ -9,4 +9,5 @@ public enum ToolAction {
   Grass, Remove,
   Wet, Dry,
   Heat, Chill,
+  Plant_Seed, Swap_Seed,
 }

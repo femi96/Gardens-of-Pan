@@ -9,4 +9,5 @@ public enum ToolType {
   LifeOrb,    // Grass Remove
   WetDryOrb,  // Wet Dry
   HotColdOrb, // Heat Chill
+  Seed,
 }

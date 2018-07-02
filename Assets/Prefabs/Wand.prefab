@@ -1276,6 +1276,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6885af3be431a44386581a4a71167a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  garden: {fileID: 0}
   gardenBoard: {fileID: 0}
   wandCamera: {fileID: 114641301033665606}
   wandMenuOpen: 0
@@ -1284,6 +1285,9 @@ MonoBehaviour:
   effectContainer: {fileID: 0}
   dirtCloud: {fileID: 1508824101407052, guid: ceff9250b71a0854c875cb18cb9f30cc, type: 2}
   grassCloud: {fileID: 1086913131271382, guid: bb114bdbd20eaac4c9e2ed8cc9f1ab0b, type: 2}
+  seedPrefabs:
+  - {fileID: 1365525670269232, guid: d96d594c118107c4d8211182c82b4759, type: 2}
+  seedIndex: 0
 --- !u!124 &124240752444113476
 Behaviour:
   m_ObjectHideFlags: 1

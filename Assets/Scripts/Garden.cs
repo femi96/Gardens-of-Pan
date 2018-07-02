@@ -25,7 +25,7 @@ public class Garden : MonoBehaviour {
   public Text currentGardenText;
 
   // Garden contents:
-  private float unitSizeLimit = 6;
+  private float unitSizeLimit = 20;
   private List<Unit> units = new List<Unit>();  // List of units in garden
   private Transform unitsCont; // GameObject container for unit gameObjects
 
