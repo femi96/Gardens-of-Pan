@@ -119,7 +119,7 @@ public class BlockberryPlant : Plant {
     // Grow based on growTime
     if (growthStage == 0) {
       if (growTime >= 0f) {
-        // trunk.transform.rotation = Quaternion.Euler(new Vector3(0, Random.Range(0, 360), 0));
+        trunk.transform.rotation = Quaternion.Euler(0, Random.Range(0f, 360f), 0);
         trunk.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
         trunk.SetActive(true);
         growthStage = 1;
@@ -131,6 +131,10 @@ public class BlockberryPlant : Plant {
       trunk.transform.localScale = new Vector3(trunkSize, trunkSize, trunkSize);
 
       if (growTime >= 10f) {
+        float rot0 = Random.Range(0f, 180f);
+        float rot1 = rot0 + Random.Range(120f, 240f);
+        branch[0].transform.rotation = Quaternion.Euler(0, rot0, 0);
+        branch[1].transform.rotation = Quaternion.Euler(0, rot1, 0);
         branch[0].transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
         branch[1].transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
         branch[0].SetActive(true);
