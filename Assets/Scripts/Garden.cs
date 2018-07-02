@@ -311,7 +311,7 @@ public class Garden : MonoBehaviour {
   public bool TryAddUnit(GameObject unitPrefab, Vector3 pos, Quaternion rot) {
     Unit unit = unitPrefab.GetComponent<Unit>();
 
-    if (RoomForUnit(unit)) {
+    if (RoomForUnit(unit) && gardenBoard.InGarden(pos)) {
       GameObject go = Instantiate(unitPrefab, pos, rot, unitsCont);
       unit = go.GetComponent<Unit>();
       units.Add(unit);

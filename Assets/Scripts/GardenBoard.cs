@@ -110,6 +110,14 @@ public class GardenBoard : MonoBehaviour {
     return GetBlock(v).GetBlockType();
   }
 
+  // Get block at Vector3 v
+  public bool InGarden(Vector3 v) {
+    float g = gardenSize / 2f;
+    int x = Mathf.RoundToInt(Mathf.Floor(v.x + g)); // Get x from v
+    int z = Mathf.RoundToInt(Mathf.Floor(v.z + g)); // Get z from v
+    return (x < blockMap.GetLength(0) && x >= 0) && (z < blockMap.GetLength(1) && z >= 0);
+  }
+
   // Apply action to block at Vector3 v
   public void ApplyAction(Vector3 v, ToolAction a) {
     GetBlock(v).ApplyAction(a);
