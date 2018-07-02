@@ -321,6 +321,11 @@ public class Garden : MonoBehaviour {
     return false;
   }
 
+  // Gets the last unit added to the garden
+  public Unit GetLastUnit() {
+    return units[units.Count - 1];
+  }
+
   // Get garden's board
   public GardenBoard GetBoard() {
     return gardenBoard;

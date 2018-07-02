@@ -13,6 +13,8 @@ public class BlockberryPlant : Plant {
   public GameObject[] bush;
 
   public Transform[] producePoints;
+  public Produce[] activeProduce;
+  public float[] activeProduceTime;
 
   private int growthStage = 0;
 
@@ -40,6 +42,13 @@ public class BlockberryPlant : Plant {
     branch[1].SetActive(false);
     bush[0].SetActive(false);
     bush[1].SetActive(false);
+
+    activeProduce = new Produce[producePoints.Length];
+    activeProduceTime = new float[producePoints.Length];
+
+    for (int i = 0; i < producePoints.Length; i++) {
+      activeProduceTime[i] = 0f;
+    }
   }
 
   public override void PlantBehavior() {
@@ -75,13 +84,37 @@ public class BlockberryPlant : Plant {
     // Create produce
     produceTime += Time.deltaTime;
 
-    if (produceTime > 10f) {
-      Transform point = producePoints[Random.Range(0, producePoints.Length)];
+    if (produceTime > 5f) {
+      // TODO: Improve by picking from empty instead of random
+      int produceIndex = Random.Range(0, producePoints.Length);
 
-      if (garden.TryAddUnit(produce, point.position, point.rotation))
-        produceTime -= 10f;
-      else {
-        produceTime -= 10f;
+      if (activeProduce[produceIndex] == null) {
+        Transform point = producePoints[produceIndex];
+
+        if (garden.TryAddUnit(produce, point.position, point.rotation)) {
+          activeProduce[produceIndex] = (Produce)garden.GetLastUnit();
+          activeProduce[produceIndex].held = true;
+          activeProduceTime[produceIndex] = 0f;
+          produceTime -= 10f;
+        } else {
+          produceTime -= 10f;
+        }
+      } else {
+        produceTime -= 0.5f;
+      }
+    }
+
+    // Drop produce
+    for (int i = 0; i < producePoints.Length; i++) {
+      activeProduceTime[i] += Time.deltaTime;
+
+      if (activeProduceTime[i] >= 30f) {
+        activeProduceTime[i] -= 30f;
+
+        if (activeProduce[i] != null) {
+          activeProduce[i].held = false;
+          activeProduce[i] = null;
+        }
       }
     }
   }

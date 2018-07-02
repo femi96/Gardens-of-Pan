@@ -5,8 +5,6 @@ using UnityEngine;
 public class BlockberryProduce : Produce {
   // Blockberry produce
 
-  public bool onVine = true;
-
   // Unit functions
   public override string GetName() {
     return "Blockberry Seed";
@@ -23,21 +21,7 @@ public class BlockberryProduce : Produce {
   // Produce functions
   public override void ProduceBehavior() {
 
-    if (onVine) {
-      held = true;
-
-      if (timeActive > 5f)
-        Drop();
-    }
-
-    if (!onVine) {
-      if (timeActive > 90f)
-        Break();
-    }
-  }
-
-  private void Drop() {
-    onVine = false;
-    held = false;
+    if (timeActive > 90f)
+      Break();
   }
 }
