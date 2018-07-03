@@ -38,4 +38,26 @@ public abstract class Plant : Unit {
   public void Die() {
     garden.RemoveUnit(this);
   }
+
+  public bool IsToClose() {
+
+    bool toClose = false;
+    List<Unit> plants = garden.GetUnitListOfType(typeof(Plant));
+
+    foreach (Unit u in plants) {
+      Plant p = (Plant)u;
+
+      if (p == this)
+        continue;
+
+      float pDist = (p.transform.position - transform.position).magnitude;
+
+      if (pDist < PlantRadius() || pDist < p.PlantRadius()) {
+        toClose = true;
+        break;
+      }
+    }
+
+    return toClose;
+  }
 }

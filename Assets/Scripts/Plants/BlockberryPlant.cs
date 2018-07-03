@@ -123,23 +123,7 @@ public class BlockberryPlant : Plant {
   private void NotGrown() {
     BlockType surfaceType = board.GetBlock(transform.position).GetBlockType();
     bool validSurface = BlockTypes.InGroup(surfaceType, BlockTypes.DepthGround);
-
-    bool toClose = false;
-    List<Unit> plants = garden.GetUnitListOfType(typeof(Plant));
-
-    foreach (Unit u in plants) {
-      Plant p = (Plant)u;
-
-      if (p == this)
-        continue;
-
-      float pDist = (p.transform.position - transform.position).magnitude;
-
-      if (pDist < PlantRadius() || pDist < p.PlantRadius()) {
-        toClose = true;
-        break;
-      }
-    }
+    bool toClose = IsToClose();
 
     if (validSurface && !toClose) {
       growTime += Time.deltaTime;

@@ -7,7 +7,6 @@ public abstract class Seed : Unit {
 
   public GardenBoard board;
   public GameObject model;
-  public GameObject modelRot;
 
   public float timeActive = 0f;
 
@@ -15,7 +14,6 @@ public abstract class Seed : Unit {
     base.Awake();
     board = garden.GetBoard();
     model = transform.Find("Model").gameObject;
-    modelRot = transform.Find("ModelRot").gameObject;
   }
 
   void Update() {

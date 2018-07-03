@@ -2,18 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BlockberrySeed : Seed {
-  // Blockberry seed
+public class SquarerootSeed : Seed {
+  // Squareroot seed
 
   public GameObject plant;
 
   // Unit functions
   public override string GetName() {
-    return "Blockberry Seed";
+    return "Squareroot Seed";
   }
 
   public override float GetSize() {
-    return 0.2f;
+    return 0.1f;
   }
 
   public override float GetWandRadius() {
@@ -30,7 +30,7 @@ public class BlockberrySeed : Seed {
       Plant();
 
     // If to old, break
-    if (timeActive > 90f)
+    if (timeActive > 120f)
       Break();
   }
 
