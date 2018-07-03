@@ -7,7 +7,7 @@ public class BlockberryProduce : Produce {
 
   // Unit functions
   public override string GetName() {
-    return "Blockberry Seed";
+    return "Blockberry";
   }
 
   public override float GetSize() {
