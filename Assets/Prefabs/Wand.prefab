@@ -1301,6 +1301,7 @@ MonoBehaviour:
   seedPrefabs:
   - {fileID: 1365525670269232, guid: d96d594c118107c4d8211182c82b4759, type: 2}
   - {fileID: 1306916378998048, guid: 2fb52d540d143a846bfe3ac654ffd3b2, type: 2}
+  - {fileID: 1523815099835068, guid: 36498ed47952c5649b8b99180681a12f, type: 2}
   seedIndex: 0
 --- !u!124 &124240752444113476
 Behaviour:

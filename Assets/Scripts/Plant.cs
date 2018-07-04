@@ -35,7 +35,7 @@ public abstract class Plant : Unit {
   // Returns a plants width for suffocation
   public abstract float PlantRadius();
 
-  public void Die() {
+  public virtual void Die() {
     garden.RemoveUnit(this);
   }
 
