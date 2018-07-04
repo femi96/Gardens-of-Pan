@@ -1152,6 +1152,7 @@ GameObject:
   m_Component:
   - component: {fileID: 224870623282901444}
   - component: {fileID: 222466152610256116}
+  - component: {fileID: 114531614064465822}
   - component: {fileID: 114573906018081620}
   m_Layer: 5
   m_Name: Version
@@ -1354,6 +1355,7 @@ GameObject:
   m_Component:
   - component: {fileID: 224298256632870502}
   - component: {fileID: 222125205905205648}
+  - component: {fileID: 114992942480776734}
   - component: {fileID: 114277339661472914}
   m_Layer: 5
   m_Name: Text
@@ -3041,7 +3043,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Version: 0.0.3 - 6/16/18'
+  m_Text: 'Version: X.Y.Z - mm/dd/yy'
 --- !u!114 &114295682214137942
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3946,6 +3948,18 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: R-Click
+--- !u!114 &114531614064465822
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1666356330592622}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aed0129432ad6c24c871be46eaad9b08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefix: v
 --- !u!114 &114535873807703424
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4183,7 +4197,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: v0.0.3 - 6/16/18
+  m_Text: vX.Y.Z - mm/dd/yy
 --- !u!114 &114596772273509164
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5432,6 +5446,18 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: Life Orb
+--- !u!114 &114992942480776734
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1770579582582084}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aed0129432ad6c24c871be46eaad9b08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefix: 'Version: '
 --- !u!222 &222003103992077558
 CanvasRenderer:
   m_ObjectHideFlags: 1
@@ -6896,7 +6922,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.000030517578, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224505243958781136
