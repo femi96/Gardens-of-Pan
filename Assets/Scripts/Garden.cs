@@ -70,6 +70,14 @@ public class Garden : MonoBehaviour {
     }
 
     saveUI.SetActive(saveTime <= 2f);
+
+    // Fastforward
+    if (gardenMode == GardenMode.Play) {
+      if (InputConstants.FastForward())
+        Time.timeScale = 2f;
+      else
+        Time.timeScale = 1f;
+    }
   }
 
   // ========================================

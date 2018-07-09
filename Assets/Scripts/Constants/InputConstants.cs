@@ -18,4 +18,8 @@ public static class InputConstants {
   public const string ToolUseMain = "Click1";
   public const string ToolUseOff = "Click2";
   public const string ToolSpace = "Space";
+
+  public static bool FastForward() {
+    return Input.GetKey(KeyCode.F);
+  }
 }
