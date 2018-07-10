@@ -84,10 +84,19 @@ public class BlockberryPlant : Plant {
     // Create produce
     produceTime += Time.deltaTime;
 
-    if (produceTime > 5f) {
-      // TODO: Improve by picking from empty instead of random
-      int produceIndex = Random.Range(0, producePoints.Length);
+    if (produceTime > 8f) {
+      // Get random empty produce point
+      int produceIndex = 0;
+      List<int> emptyIndices = new List<int>();
 
+      for (int i = 0; i < producePoints.Length; i++)
+        if (activeProduce[i] == null)
+          emptyIndices.Add(i);
+
+      if (emptyIndices.Count > 0)
+        produceIndex = emptyIndices[Random.Range(0, emptyIndices.Count)];
+
+      // If empty, add produce
       if (activeProduce[produceIndex] == null) {
         Transform point = producePoints[produceIndex];
 
@@ -95,12 +104,12 @@ public class BlockberryPlant : Plant {
           activeProduce[produceIndex] = (Produce)garden.GetLastUnit();
           activeProduce[produceIndex].held = true;
           activeProduceTime[produceIndex] = 0f;
-          produceTime -= 10f;
+          produceTime -= 8f;
         } else {
-          produceTime -= 10f;
+          produceTime -= 8f;
         }
       } else {
-        produceTime -= 0.5f;
+        produceTime -= 4f;
       }
     }
 
@@ -108,8 +117,8 @@ public class BlockberryPlant : Plant {
     for (int i = 0; i < producePoints.Length; i++) {
       activeProduceTime[i] += Time.deltaTime;
 
-      if (activeProduceTime[i] >= 30f) {
-        activeProduceTime[i] -= 30f;
+      if (activeProduceTime[i] >= 60f) {
+        activeProduceTime[i] -= 60f;
 
         if (activeProduce[i] != null) {
           activeProduce[i].held = false;
