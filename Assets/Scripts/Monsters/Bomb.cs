@@ -76,7 +76,7 @@ public class Bomb : Monster {
     leave.restrictors.Add(new RestrictorWildOnly());
     behaviors.Add(leave);
 
-    MonsterBehavior join = new MonsterBehavior("Leave", this);
+    MonsterBehavior join = new MonsterBehavior("Join", this);
     join.actions.Add(new ActionJoin(2f));
     join.factors.Add(new FactorRepeat(10f));
     join.restrictors.Add(new RestrictorWildOnly());
