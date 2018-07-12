@@ -6,6 +6,7 @@ public class SphFlowerPlant : Plant {
   // Sph flower plant
 
   public GameObject produce;
+  public GameObject seed;
 
   [Header("Plant Parts")]
   public GameObject stem;
@@ -120,8 +121,10 @@ public class SphFlowerPlant : Plant {
   }
 
   public override void Die() {
-    if (grown)
+    if (grown) {
       garden.TryAddUnit(produce, transform.position + 0.1f * Vector3.up, flower.transform.rotation);
+      garden.TryAddUnit(seed, transform.position + 0.1f * Vector3.up, flower.transform.rotation);
+    }
 
     base.Die();
   }

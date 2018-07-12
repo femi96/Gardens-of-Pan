@@ -959,6 +959,7 @@ MonoBehaviour:
   grown: 0
   timeActive: 0
   produce: {fileID: 1341090329181446, guid: 50ac4be4716f58b46b61e184b8e7f667, type: 2}
+  seed: {fileID: 1523815099835068, guid: 36498ed47952c5649b8b99180681a12f, type: 2}
   stem: {fileID: 1353136262068334}
   flower: {fileID: 1255786304346970}
   leaves: {fileID: 1083584719351396}
