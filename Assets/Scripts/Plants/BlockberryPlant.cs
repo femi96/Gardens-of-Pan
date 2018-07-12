@@ -193,4 +193,16 @@ public class BlockberryPlant : Plant {
       }
     }
   }
+
+  public override void Die() {
+    // Drop produce on death
+    for (int i = 0; i < activeProduce.Length; i++) {
+      if (activeProduce[i] != null) {
+        activeProduce[i].held = false;
+        activeProduce[i] = null;
+      }
+    }
+
+    base.Die();
+  }
 }
