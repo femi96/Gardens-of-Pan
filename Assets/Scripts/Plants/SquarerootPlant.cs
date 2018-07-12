@@ -41,7 +41,7 @@ public class SquarerootPlant : Plant {
 
     // If grown, create produce
     if (grown) {
-      if (garden.TryAddUnit(produce, transform.position + 0.1f * Vector3.up, root.transform.rotation))
+      if (garden.TryAddUnit(produce, transform.position + 0.1f * Vector3.up + 0.02f * Random.onUnitSphere, root.transform.rotation))
         Die();
     }
 

@@ -122,8 +122,8 @@ public class SphFlowerPlant : Plant {
 
   public override void Die() {
     if (grown) {
-      garden.TryAddUnit(produce, transform.position + 0.1f * Vector3.up, flower.transform.rotation);
-      garden.TryAddUnit(seed, transform.position + 0.1f * Vector3.up, flower.transform.rotation);
+      garden.TryAddUnit(produce, transform.position + 0.1f * Vector3.up + 0.1f * Random.onUnitSphere, flower.transform.rotation);
+      garden.TryAddUnit(seed, transform.position + 0.1f * Vector3.up + 0.1f * Random.onUnitSphere, flower.transform.rotation);
     }
 
     base.Die();
