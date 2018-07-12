@@ -22,7 +22,7 @@ public class Wand : MonoBehaviour {
 
   // Timing:
   private float moveTime = 0f;
-  private const float followCooldown = 0.25f;
+  private const float followCooldown = 0.5f;
 
   // Wand shape:
   private GameObject wandShape;
