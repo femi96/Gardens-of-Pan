@@ -232,4 +232,14 @@ public class Wand : MonoBehaviour {
     // Rotate wand shape
     wandShape.transform.Rotate(10 * Vector3.up * Time.deltaTime);
   }
+
+  // True if wand is following a unit
+  public bool IsOnUnit() {
+    return targetUnit != null;
+  }
+
+  // Unit wand is following
+  public Unit GetTarget() {
+    return targetUnit;
+  }
 }
