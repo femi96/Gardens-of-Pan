@@ -178,7 +178,7 @@ public class Wand : MonoBehaviour {
 
   // Update UI for hovered unit's tag
   private void UpdateTagUI() {
-    if (targetUnit != null) {
+    if (IsOnUnit()) {
       unitHoverUI.SetActive(true);
       unitHoverName.text = targetUnit.GetName();
       unitHoverBehavior.text = "";
@@ -186,11 +186,15 @@ public class Wand : MonoBehaviour {
       unitHoverBackground.color = colorHoverDefault;
 
       if (targetUnit is Monster) {
+        unitHoverBehavior.transform.parent.gameObject.SetActive(true);
+
         Monster targetMon = (Monster)targetUnit;
         unitHoverBehavior.text = targetMon.currentBehavior.ToString();
 
         if (!targetMon.owned)
           unitHoverBackground.color = colorHoverWild;
+      } else {
+        unitHoverBehavior.transform.parent.gameObject.SetActive(false);
       }
 
       Vector3 screenPos = Camera.main.WorldToScreenPoint(targetUnit.transform.position + (Vector3.up * 0.5f));
