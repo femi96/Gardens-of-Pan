@@ -80,7 +80,7 @@ public class Wand : MonoBehaviour {
   // Take a screenshot and save it
   private void ScreenCapture() {
 
-    if (Input.GetButtonDown(InputConstants.ScreenCapture)) {
+    if (PanInputs.ScreenCapture()) {
       string filePath = Application.dataPath + "/Screenshots/";
       string fileName = "Screenshot_" + garden.gardenName + System.DateTime.Now.ToString("_yyyy-MM-dd-HH-mm-ss") + ".png";
 
@@ -104,8 +104,8 @@ public class Wand : MonoBehaviour {
     Vector3 moveDirection = Camera.main.transform.forward;
     moveDirection.y = 0;
 
-    float x = Input.GetAxis(InputConstants.WandX);
-    float z = Input.GetAxis(InputConstants.WandZ);
+    float x = PanInputs.WandX();
+    float z = PanInputs.WandZ();
 
     moveDirection = Vector3.Normalize(moveDirection);   // Don't normalize your inputs
     Vector3 moveDirectionF = moveDirection * z;         // Project z onto forward direction vector

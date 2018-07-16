@@ -58,14 +58,14 @@ public class WandCamera : MonoBehaviour {
       return;
 
     // Update camera position based on mouse movement
-    x += Input.GetAxis(InputConstants.CameraX) * xSpeed * 0.02f;
-    y -= Input.GetAxis(InputConstants.CameraY) * ySpeed * 0.02f;
+    x += PanInputs.CameraX() * xSpeed * 0.02f;
+    y -= PanInputs.CameraY() * ySpeed * 0.02f;
     x = (x + 360f) % 360f;
     y = Mathf.Clamp(y, yMinLimit, yMaxLimit);
 
     Quaternion rotation = Quaternion.Euler(y, x, 0);
 
-    distance = Mathf.Clamp(distance - Input.GetAxis(InputConstants.CameraZoom) * distanceSpeed, distanceMin, distanceMax);
+    distance = Mathf.Clamp(distance - PanInputs.CameraZoom() * distanceSpeed, distanceMin, distanceMax);
 
     Vector3 negDistance = new Vector3(0.0f, 0.0f, -distance);
     Vector3 position = rotation * negDistance + wand.position;

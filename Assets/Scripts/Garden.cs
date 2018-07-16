@@ -73,7 +73,7 @@ public class Garden : MonoBehaviour {
 
     // Fastforward
     if (gardenMode == GardenMode.Play) {
-      if (InputConstants.FastForward())
+      if (PanInputs.FastForward())
         Time.timeScale = 2f;
       else
         Time.timeScale = 1f;

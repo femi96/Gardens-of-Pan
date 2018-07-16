@@ -53,13 +53,13 @@ public class WandTools : MonoBehaviour {
       if (actionTime >= ActionCooldown)
         InputAction();
 
-      if (Input.GetButtonDown(InputConstants.ToolSpace))
+      if (Input.GetButtonDown(PanInputs.ToolSpace))
         ToolWheelToggle();
 
     } else {
       // Menu mode
 
-      if (Input.GetButtonDown(InputConstants.ToolSpace))
+      if (Input.GetButtonDown(PanInputs.ToolSpace))
         ToolWheelToggle();
     }
   }
@@ -93,10 +93,10 @@ public class WandTools : MonoBehaviour {
     ToolAction t;
     t = ToolAction.None;
 
-    if (Input.GetAxis(InputConstants.ToolUseOff) > 0)
+    if (Input.GetAxis(PanInputs.ToolUseOff) > 0)
       t = toolActionOff;
 
-    if (Input.GetAxis(InputConstants.ToolUseMain) > 0)
+    if (Input.GetAxis(PanInputs.ToolUseMain) > 0)
       t = toolActionMain;
 
     // Apply action if exists
