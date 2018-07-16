@@ -101,7 +101,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4492905320036134}
   - component: {fileID: 65880862700158876}
-  - component: {fileID: 114465105006333474}
+  - component: {fileID: 114761977717411812}
   - component: {fileID: 114748239899400846}
   m_Layer: 0
   m_Name: Squareroot Produce
@@ -404,22 +404,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.3, y: 0.1, z: 0.3}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &114465105006333474
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1729659249465504}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9df9bdc5aaa041943999521809e23c0b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  garden: {fileID: 0}
-  board: {fileID: 0}
-  entityDrop: {fileID: 0}
-  held: 0
-  timeActive: 0
 --- !u!114 &114748239899400846
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -433,3 +417,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   locked: 0
   height: 0.05
+--- !u!114 &114761977717411812
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1729659249465504}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef004a4e5cc2e5d489fdad307efbba0b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  garden: {fileID: 0}
+  board: {fileID: 0}
+  entityDrop: {fileID: 0}
+  held: 0
+  timeActive: 0
