@@ -14,8 +14,10 @@ public class EntityMover : MonoBehaviour {
 
   private Vector3 velocity = new Vector3(0, 0, 0);
   private Vector3 moveDirection = new Vector3(0, 0, 0);
-  private static float gravity = 10f;
-  private static float rayRange = 1f;
+
+  private const float Gravity = 10f;
+  private const float HeightRayRange = 1f;
+  private const float HeightError = 0.02f;
 
   void Update() {
     if (locked)
@@ -33,7 +35,7 @@ public class EntityMover : MonoBehaviour {
 
   // Applies gravity and normal forces to velocity
   private void ApplyGravity() {
-    velocity.y -= gravity * Time.deltaTime;
+    velocity.y -= Gravity * Time.deltaTime;
 
     if (isGrounded) {
       velocity.y = 0;
@@ -63,24 +65,32 @@ public class EntityMover : MonoBehaviour {
   private void ApplyVelocity() {
     Vector3 frameVelocity = velocity * Time.deltaTime;
 
-    // Update transform position
-    transform.position += frameVelocity;
-
     // Check if on ground
     RaycastHit hit;
 
-    if (Physics.Raycast(transform.position + (Vector3.up * rayRange), -Vector3.up, out hit, height + rayRange, LayerConstants.GroundLayer)) {
-      Vector3 collide = new Vector3(0, height + rayRange - hit.distance, 0);
+    if (Physics.Raycast(transform.position + (Vector3.up * HeightRayRange), -Vector3.up, out hit, height + HeightRayRange, LayerConstants.GroundLayer)) {
+      float heightDelta = height + HeightRayRange - hit.distance;
 
-      if (collide.y > Time.deltaTime)
-        transform.position += Time.deltaTime * Vector3.up;
-      else
-        transform.position += collide;
+      if (heightDelta >= HeightError) {
+        velocity += 20f * heightDelta * Vector3.up;
+
+        if (moveSpeed == 0f)
+          velocity = velocity.normalized;
+        else
+          velocity = velocity.normalized * moveSpeed;
+
+        frameVelocity = velocity * Time.deltaTime;
+      } else if (heightDelta >= HeightError) {
+        frameVelocity += new Vector3(0, heightDelta, 0);
+      }
 
       isGrounded = true;
     } else {
       isGrounded = false;
     }
+
+    // Update transform position
+    transform.position += frameVelocity;
 
     // Check if falling off world
     if (transform.position.y < -1) {
