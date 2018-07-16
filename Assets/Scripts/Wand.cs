@@ -158,7 +158,7 @@ public class Wand : MonoBehaviour {
 
       RaycastHit hit;
 
-      if (Physics.Raycast(transform.position + Vector3.up * 2, -Vector3.up, out hit, 4)) {
+      if (Physics.Raycast(transform.position + Vector3.up * 2, -Vector3.up, out hit, 4, LayerConstants.UnitLayer)) {
         if (hit.transform.gameObject.GetComponent<Unit>() != null) {
           targetUnit = hit.transform.gameObject.GetComponent<Unit>();
         }

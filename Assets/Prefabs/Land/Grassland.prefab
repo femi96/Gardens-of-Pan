@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4487706268919056}
   - component: {fileID: 33275594153251226}
   - component: {fileID: 23634583845732242}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Grass
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -70,7 +70,7 @@ GameObject:
   - component: {fileID: 4332323193563202}
   - component: {fileID: 33729242421023906}
   - component: {fileID: 23367766928239808}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: LandHigh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -88,7 +88,7 @@ GameObject:
   - component: {fileID: 33297629053021644}
   - component: {fileID: 65695301775350156}
   - component: {fileID: 23155677806327138}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: Soil
   m_TagString: Untagged
   m_Icon: {fileID: 0}

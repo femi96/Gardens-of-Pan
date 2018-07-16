@@ -38,7 +38,7 @@ GameObject:
   - component: {fileID: 4108538244036526}
   - component: {fileID: 33529430756332262}
   - component: {fileID: 23245882358950238}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Ash
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -55,7 +55,7 @@ GameObject:
   - component: {fileID: 4326931500662318}
   - component: {fileID: 33442660313510588}
   - component: {fileID: 23520317469914146}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Grass
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -73,7 +73,7 @@ GameObject:
   - component: {fileID: 33608443183508446}
   - component: {fileID: 65383600427652658}
   - component: {fileID: 23603438130398016}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: Soil
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -105,7 +105,7 @@ GameObject:
   - component: {fileID: 4839577510778980}
   - component: {fileID: 33411093589192812}
   - component: {fileID: 23379315622233394}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: LandHigh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -239,6 +239,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 2100000, guid: 148205b5b17c9b044896efeb5d6dfabb, type: 2}
   m_StaticBatchInfo:
@@ -273,6 +274,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 2100000, guid: 622a162bdd81e78418b30f5c41dd66b6, type: 2}
   m_StaticBatchInfo:
@@ -307,6 +309,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 2100000, guid: 30066a011587aea48bd4d7da9133a9e9, type: 2}
   m_StaticBatchInfo:
@@ -341,6 +344,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 2100000, guid: a1911d49c12b04545bee8032121aed2c, type: 2}
   m_StaticBatchInfo:
@@ -375,6 +379,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 2100000, guid: 142f22c8fe0de1443bde33dbcc89a2f1, type: 2}
   m_StaticBatchInfo:
@@ -409,6 +414,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 2100000, guid: 110e7e597d5d0994a9ff196391fff128, type: 2}
   m_StaticBatchInfo:

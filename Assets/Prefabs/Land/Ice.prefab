@@ -39,7 +39,7 @@ GameObject:
   - component: {fileID: 33735585143124986}
   - component: {fileID: 65403323772095630}
   - component: {fileID: 23854455164656554}
-  m_Layer: 9
+  m_Layer: 10
   m_Name: Ice
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -72,7 +72,7 @@ GameObject:
   - component: {fileID: 33792921633377100}
   - component: {fileID: 65288381605836744}
   - component: {fileID: 23451932908893852}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: LandHigh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -178,6 +178,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 2100000, guid: a1911d49c12b04545bee8032121aed2c, type: 2}
   m_StaticBatchInfo:
@@ -212,6 +213,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 2100000, guid: 622a162bdd81e78418b30f5c41dd66b6, type: 2}
   m_StaticBatchInfo:
@@ -246,6 +248,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 2100000, guid: 30066a011587aea48bd4d7da9133a9e9, type: 2}
   m_StaticBatchInfo:
@@ -280,6 +283,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 2100000, guid: 2817f9628b898bc40bf3823a9b5020bb, type: 2}
   m_StaticBatchInfo:

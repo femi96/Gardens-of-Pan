@@ -56,7 +56,7 @@ GameObject:
   - component: {fileID: 33003999019245620}
   - component: {fileID: 65889992658295270}
   - component: {fileID: 23078706601739366}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: Soil
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -73,7 +73,7 @@ GameObject:
   - component: {fileID: 4982184409377182}
   - component: {fileID: 33583269348282224}
   - component: {fileID: 23532891313891674}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Grass
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -90,7 +90,7 @@ GameObject:
   - component: {fileID: 4785666405498752}
   - component: {fileID: 33064637567628954}
   - component: {fileID: 23909788180497154}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: LandHigh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -208,6 +208,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 2100000, guid: a1911d49c12b04545bee8032121aed2c, type: 2}
   m_StaticBatchInfo:
@@ -242,6 +243,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 2100000, guid: 110e7e597d5d0994a9ff196391fff128, type: 2}
   m_StaticBatchInfo:
@@ -276,6 +278,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 2100000, guid: 30066a011587aea48bd4d7da9133a9e9, type: 2}
   m_StaticBatchInfo:
@@ -310,6 +313,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 2100000, guid: 8fbdbe0680675e64f82054fcc6d95183, type: 2}
   m_StaticBatchInfo:
@@ -344,6 +348,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 2100000, guid: 622a162bdd81e78418b30f5c41dd66b6, type: 2}
   m_StaticBatchInfo:

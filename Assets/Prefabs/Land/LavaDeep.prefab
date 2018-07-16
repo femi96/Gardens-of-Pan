@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 33617334379971830}
   - component: {fileID: 65456447533046078}
   - component: {fileID: 23605824488248796}
-  m_Layer: 9
+  m_Layer: 10
   m_Name: Lava
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -72,7 +72,7 @@ GameObject:
   - component: {fileID: 33039548178966046}
   - component: {fileID: 65154580384000654}
   - component: {fileID: 23353920106523716}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: LandMid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -147,6 +147,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 2100000, guid: a1911d49c12b04545bee8032121aed2c, type: 2}
   m_StaticBatchInfo:
@@ -181,6 +182,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 2100000, guid: 928f144100d78f742831eee0141fb1e0, type: 2}
   m_StaticBatchInfo:
@@ -215,6 +217,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 2100000, guid: 30066a011587aea48bd4d7da9133a9e9, type: 2}
   m_StaticBatchInfo:
