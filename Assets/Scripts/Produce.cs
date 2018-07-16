@@ -6,7 +6,7 @@ public abstract class Produce : Unit {
   // Game controller that handles a produce's state and behavior
 
   public GardenBoard board;
-  public EntityDrop entityDrop;
+  public EntityMover entitymover;
 
   public bool held = false;
 
@@ -15,12 +15,12 @@ public abstract class Produce : Unit {
   public override void Awake() {
     base.Awake();
     board = garden.GetBoard();
-    entityDrop = GetComponent<EntityDrop>();
+    entitymover = GetComponent<EntityMover>();
   }
 
   void Update() {
     timeActive += Time.deltaTime;
-    entityDrop.locked = held;
+    entitymover.locked = held;
 
     ProduceBehavior();
   }

@@ -68,7 +68,7 @@ GameObject:
   - component: {fileID: 4359149665749974}
   - component: {fileID: 65895700855889436}
   - component: {fileID: 114587611841668624}
-  - component: {fileID: 114352387695688318}
+  - component: {fileID: 114021981757443320}
   m_Layer: 0
   m_Name: Blockberry Plant
   m_TagString: Untagged
@@ -767,7 +767,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.3, y: 0.2, z: 0.3}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &114352387695688318
+--- !u!114 &114021981757443320
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -775,11 +775,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1144113896645262}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0c84be022415d8e4798b30f0b2724fc5, type: 3}
+  m_Script: {fileID: 11500000, guid: c952fc9e02284d14f8c73dcd2e807612, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   locked: 0
   height: 0
+  moveSpeed: 0
 --- !u!114 &114587611841668624
 MonoBehaviour:
   m_ObjectHideFlags: 1

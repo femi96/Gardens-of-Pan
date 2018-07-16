@@ -6,7 +6,7 @@ public abstract class Monster : Unit {
   // Game controller that handles a monster's state and behavior
 
   public GardenBoard board;
-  public MonsterMover mover;
+  public EntityMover mover;
   public bool owned = false;
 
   // Monster AI
@@ -21,7 +21,7 @@ public abstract class Monster : Unit {
   public override void Awake() {
     base.Awake();
     board = garden.GetBoard();
-    mover = gameObject.GetComponent<MonsterMover>();
+    mover = gameObject.GetComponent<EntityMover>();
     modelOwned = transform.Find("ModelOwned").gameObject;
     modelWild = transform.Find("ModelWild").gameObject;
   }

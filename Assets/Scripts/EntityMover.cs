@@ -2,28 +2,24 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MonsterMover : MonoBehaviour {
-  // Game controller that handles a monster's movement
+public class EntityMover : MonoBehaviour {
+  // Game controller that handles an entity's movement
 
-  // Movement variables (prefab):
+  public bool locked = false;
   private bool moving;
   private bool isGrounded;
 
-  public float radius = 0.25f;
   public float height = 0.25f;
   public float moveSpeed = 0.5f;
 
-  private Vector3 velocity;
-  private Vector3 moveDirection;
-
+  private Vector3 velocity = new Vector3(0, 0, 0);
+  private Vector3 moveDirection = new Vector3(0, 0, 0);
   private static float gravity = 10f;
-
-  void Start() {
-    velocity = new Vector3(0, 0, 0);
-    moveDirection = new Vector3(0, 0, 0);
-  }
+  private static float rayRange = 1f;
 
   void Update() {
+    if (locked)
+      return;
 
     // Update velocity
     ApplyGravity();
@@ -33,21 +29,7 @@ public class MonsterMover : MonoBehaviour {
     ApplyVelocity();
   }
 
-  // Starts monster movement
-  public void Move(Vector3 destination) {
-    moveDirection = destination - transform.position;
-    moving = true;
-  }
-
-  // Stops monster movement
-  public void Stop() {
-    moving = false;
-  }
-
-  // Returns if monster is moving
-  public bool IsMoving() {
-    return moving;
-  }
+  // Basic velocity methods
 
   // Applies gravity and normal forces to velocity
   private void ApplyGravity() {
@@ -77,24 +59,24 @@ public class MonsterMover : MonoBehaviour {
     velocity.z = moveDirection.z;
   }
 
-  // Moves based on velocity and limits to garden area
+  // Moves based on velocity
   private void ApplyVelocity() {
-    ApplyMove(velocity * Time.deltaTime);
-  }
-
-  // Applies move vector to transform position
-  private void ApplyMove(Vector3 v) {
+    Vector3 frameVelocity = velocity * Time.deltaTime;
 
     // Update transform position
-    transform.position += v;
+    transform.position += frameVelocity;
 
     // Check if on ground
-    Vector3 collide = new Vector3(0, 0, 0);
     RaycastHit hit;
 
-    if (Physics.Raycast(transform.position, -Vector3.up, out hit, height, LayerConstants.GroundLayer)) {
-      collide.y = height - hit.distance;
-      transform.position += collide;
+    if (Physics.Raycast(transform.position + (Vector3.up * rayRange), -Vector3.up, out hit, height + rayRange, LayerConstants.GroundLayer)) {
+      Vector3 collide = new Vector3(0, height + rayRange - hit.distance, 0);
+
+      if (collide.y > Time.deltaTime)
+        transform.position += Time.deltaTime * Vector3.up;
+      else
+        transform.position += collide;
+
       isGrounded = true;
     } else {
       isGrounded = false;
@@ -105,5 +87,23 @@ public class MonsterMover : MonoBehaviour {
       transform.position += 2 * Vector3.up;
       isGrounded = true;
     }
+  }
+
+  // Monster movement
+
+  // Starts monster movement
+  public void MoveStart(Vector3 destination) {
+    moveDirection = destination - transform.position;
+    moving = true;
+  }
+
+  // Stops monster movement
+  public void MoveStop() {
+    moving = false;
+  }
+
+  // Returns if monster is moving
+  public bool IsMoving() {
+    return moving;
   }
 }

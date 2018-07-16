@@ -72,7 +72,7 @@ GameObject:
   - component: {fileID: 4763880951171420}
   - component: {fileID: 65152642408766720}
   - component: {fileID: 114878556252881590}
-  - component: {fileID: 114500491666316568}
+  - component: {fileID: 114199285591836064}
   m_Layer: 0
   m_Name: SphFlower Produce
   m_TagString: Untagged
@@ -623,7 +623,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.3, y: 0.1, z: 0.3}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &114500491666316568
+--- !u!114 &114199285591836064
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -631,11 +631,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1341090329181446}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0c84be022415d8e4798b30f0b2724fc5, type: 3}
+  m_Script: {fileID: 11500000, guid: c952fc9e02284d14f8c73dcd2e807612, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   locked: 0
   height: 0.05
+  moveSpeed: 0
 --- !u!114 &114878556252881590
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -649,6 +650,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   garden: {fileID: 0}
   board: {fileID: 0}
-  entityDrop: {fileID: 0}
+  entitymover: {fileID: 0}
   held: 0
   timeActive: 0

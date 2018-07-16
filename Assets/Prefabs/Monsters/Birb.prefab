@@ -220,7 +220,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4650143460408790}
   - component: {fileID: 114971086004728680}
-  - component: {fileID: 114226163189364118}
+  - component: {fileID: 114120124692826524}
   - component: {fileID: 65703330353025234}
   m_Layer: 0
   m_Name: Birb
@@ -547,6 +547,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 2100000, guid: 5f22740d7ad76f644b6c862bfc6e4bf3, type: 2}
   m_StaticBatchInfo:
@@ -581,6 +582,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 2100000, guid: 5f22740d7ad76f644b6c862bfc6e4bf3, type: 2}
   m_StaticBatchInfo:
@@ -615,6 +617,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 2100000, guid: 78996b28e86cf96498d459e4b8e64d5c, type: 2}
   m_StaticBatchInfo:
@@ -649,6 +652,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 2100000, guid: 78996b28e86cf96498d459e4b8e64d5c, type: 2}
   m_StaticBatchInfo:
@@ -683,6 +687,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 2100000, guid: af82f807f31c118489e7806a68c993b7, type: 2}
   m_StaticBatchInfo:
@@ -717,6 +722,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 2100000, guid: 904e1e2e691ba5e4483501adb51d32ce, type: 2}
   m_StaticBatchInfo:
@@ -751,6 +757,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 2100000, guid: af82f807f31c118489e7806a68c993b7, type: 2}
   m_StaticBatchInfo:
@@ -785,6 +792,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 2100000, guid: af82f807f31c118489e7806a68c993b7, type: 2}
   m_StaticBatchInfo:
@@ -819,6 +827,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 2100000, guid: 904e1e2e691ba5e4483501adb51d32ce, type: 2}
   m_StaticBatchInfo:
@@ -853,6 +862,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 2100000, guid: 904e1e2e691ba5e4483501adb51d32ce, type: 2}
   m_StaticBatchInfo:
@@ -887,6 +897,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 2100000, guid: 848439971d6a92347a72fd0f4389283e, type: 2}
   m_StaticBatchInfo:
@@ -921,6 +932,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 2100000, guid: 848439971d6a92347a72fd0f4389283e, type: 2}
   m_StaticBatchInfo:
@@ -955,6 +967,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 2100000, guid: 5f22740d7ad76f644b6c862bfc6e4bf3, type: 2}
   m_StaticBatchInfo:
@@ -989,6 +1002,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 2100000, guid: 904e1e2e691ba5e4483501adb51d32ce, type: 2}
   m_StaticBatchInfo:
@@ -1120,7 +1134,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.5, y: 0.6, z: 0.5}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &114226163189364118
+--- !u!114 &114120124692826524
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -1128,10 +1142,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1824845750037556}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 71821b05883a198478d8af2ed016e917, type: 3}
+  m_Script: {fileID: 11500000, guid: c952fc9e02284d14f8c73dcd2e807612, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 0.25
+  locked: 0
   height: 0.15
   moveSpeed: 0.5
 --- !u!114 &114971086004728680
@@ -1145,6 +1159,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09ae100e2745f654d964918425baa36a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  garden: {fileID: 0}
+  board: {fileID: 0}
+  mover: {fileID: 114120124692826524}
+  owned: 0
   currentBehavior:
     behaviorName: 
+    garden: {fileID: 0}
+    monster: {fileID: 0}
+    behaviorsSince: 0
+    behaviorTime: 0
+    timeSinceLastEnd: 0
   behaviors: []
+  currentBehaviorDone: 1

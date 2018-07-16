@@ -11,11 +11,11 @@ public class ActionWander : MonsterAction {
   private bool hasStep;
 
   private Monster monster;
-  private MonsterMover mover;
   private MonsterBehavior behavior;
+  private EntityMover mover;
   private Garden garden;
 
-  private float endDistance;
+  private static float destSize = 0.5f;
 
   // hasDestination is false if destination is unassigned
 
@@ -27,7 +27,6 @@ public class ActionWander : MonsterAction {
     monster = behavior.monster;
     mover = monster.mover;
     garden = behavior.garden;
-    endDistance = mover.radius;
 
     // Pick a random destination
     float limit = (garden.gardenSize / 2f);
@@ -48,24 +47,24 @@ public class ActionWander : MonsterAction {
     // Set next movement to next step
     if (!mover.IsMoving()) {
 
-      mover.Move(step);
+      mover.MoveStart(step);
     }
 
     // If reached step, new step
     step.y = monster.transform.position.y;
     float stepDistance = (step - monster.transform.position).magnitude;
 
-    if (stepDistance < endDistance) {
+    if (stepDistance < destSize) {
       hasStep = false;
-      mover.Stop();
+      mover.MoveStop();
     }
 
     // If reached destination, stop behavior
     destination.y = monster.transform.position.y;
     float destDistance = (destination - monster.transform.position).magnitude;
 
-    if (destDistance < endDistance) {
-      mover.Stop();
+    if (destDistance < destSize) {
+      mover.MoveStop();
       behavior.EndBehavior();
     }
   }

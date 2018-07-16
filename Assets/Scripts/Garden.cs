@@ -303,7 +303,7 @@ public class Garden : MonoBehaviour {
   public void AddMonster(GameObject newMonster, SpawnPoint spawn) {
 
     GameObject go = Instantiate(newMonster, spawn.GetPosition(), spawn.GetRotation(), unitsCont);
-    go.transform.position += new Vector3(0, go.GetComponent<MonsterMover>().height, 0);
+    go.transform.position += new Vector3(0, go.GetComponent<EntityMover>().height, 0);
 
     Unit unit = go.GetComponent<Unit>();
     units.Add(unit);

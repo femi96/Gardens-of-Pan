@@ -53,7 +53,7 @@ GameObject:
   - component: {fileID: 4938267823802820}
   - component: {fileID: 65926704488406874}
   - component: {fileID: 114622464935875768}
-  - component: {fileID: 114472364608324184}
+  - component: {fileID: 114290682990401080}
   m_Layer: 0
   m_Name: Squareroot Plant
   m_TagString: Untagged
@@ -404,7 +404,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.3, y: 0.2, z: 0.3}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &114472364608324184
+--- !u!114 &114290682990401080
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -412,11 +412,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1725271723150118}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0c84be022415d8e4798b30f0b2724fc5, type: 3}
+  m_Script: {fileID: 11500000, guid: c952fc9e02284d14f8c73dcd2e807612, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   locked: 0
   height: 0
+  moveSpeed: 0
 --- !u!114 &114622464935875768
 MonoBehaviour:
   m_ObjectHideFlags: 1

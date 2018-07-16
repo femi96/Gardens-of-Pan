@@ -53,7 +53,7 @@ GameObject:
   - component: {fileID: 4667715751536946}
   - component: {fileID: 65642528550370780}
   - component: {fileID: 114415860971397072}
-  - component: {fileID: 114507575315885994}
+  - component: {fileID: 114889409749590136}
   m_Layer: 0
   m_Name: Blockberry Seed
   m_TagString: Untagged
@@ -172,7 +172,7 @@ MonoBehaviour:
   model: {fileID: 1055223805784900}
   timeActive: 0
   plant: {fileID: 1144113896645262, guid: 471bd435b8df31a48b88f4f0b766606f, type: 2}
---- !u!114 &114507575315885994
+--- !u!114 &114889409749590136
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -180,8 +180,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1365525670269232}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0c84be022415d8e4798b30f0b2724fc5, type: 3}
+  m_Script: {fileID: 11500000, guid: c952fc9e02284d14f8c73dcd2e807612, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   locked: 0
   height: 0.05
+  moveSpeed: 0

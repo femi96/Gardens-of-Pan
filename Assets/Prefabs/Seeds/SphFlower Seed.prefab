@@ -53,7 +53,7 @@ GameObject:
   - component: {fileID: 4976099480488216}
   - component: {fileID: 65956995409931292}
   - component: {fileID: 114621861186959876}
-  - component: {fileID: 114482487097070096}
+  - component: {fileID: 114470583790314174}
   m_Layer: 0
   m_Name: SphFlower Seed
   m_TagString: Untagged
@@ -156,7 +156,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.3, y: 0.1, z: 0.3}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &114482487097070096
+--- !u!114 &114470583790314174
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -164,11 +164,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1523815099835068}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0c84be022415d8e4798b30f0b2724fc5, type: 3}
+  m_Script: {fileID: 11500000, guid: c952fc9e02284d14f8c73dcd2e807612, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   locked: 0
   height: 0.025
+  moveSpeed: 0
 --- !u!114 &114621861186959876
 MonoBehaviour:
   m_ObjectHideFlags: 1

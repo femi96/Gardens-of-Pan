@@ -249,7 +249,7 @@ GameObject:
   - component: {fileID: 4429549590892282}
   - component: {fileID: 65554412450721812}
   - component: {fileID: 114361065762812532}
-  - component: {fileID: 114242195669374552}
+  - component: {fileID: 114179724378001254}
   m_Layer: 0
   m_Name: SphFlower Plant
   m_TagString: Untagged
@@ -929,7 +929,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.3, y: 0.2, z: 0.3}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &114242195669374552
+--- !u!114 &114179724378001254
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -937,11 +937,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1814485077948014}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0c84be022415d8e4798b30f0b2724fc5, type: 3}
+  m_Script: {fileID: 11500000, guid: c952fc9e02284d14f8c73dcd2e807612, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   locked: 0
   height: 0
+  moveSpeed: 0
 --- !u!114 &114361065762812532
 MonoBehaviour:
   m_ObjectHideFlags: 1

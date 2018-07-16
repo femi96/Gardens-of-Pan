@@ -120,7 +120,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4419777531939028}
   - component: {fileID: 114593468962117382}
-  - component: {fileID: 114335000397506956}
+  - component: {fileID: 114987303637826334}
   - component: {fileID: 65019158120152878}
   m_Layer: 0
   m_Name: Bomb
@@ -547,6 +547,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 2100000, guid: ad5126712ca64ce4fb173f557405fd91, type: 2}
   m_StaticBatchInfo:
@@ -581,6 +582,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 2100000, guid: ad5126712ca64ce4fb173f557405fd91, type: 2}
   m_StaticBatchInfo:
@@ -615,6 +617,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 2100000, guid: ad5126712ca64ce4fb173f557405fd91, type: 2}
   m_StaticBatchInfo:
@@ -649,6 +652,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 2100000, guid: 3294fbb8c7fc53a40939b1e99f22cfbb, type: 2}
   m_StaticBatchInfo:
@@ -683,6 +687,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 2100000, guid: ad5126712ca64ce4fb173f557405fd91, type: 2}
   m_StaticBatchInfo:
@@ -717,6 +722,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 2100000, guid: ad5126712ca64ce4fb173f557405fd91, type: 2}
   m_StaticBatchInfo:
@@ -751,6 +757,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 2100000, guid: 244cf197d98bf594ea7c81da41469b4c, type: 2}
   m_StaticBatchInfo:
@@ -785,6 +792,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 2100000, guid: 244cf197d98bf594ea7c81da41469b4c, type: 2}
   m_StaticBatchInfo:
@@ -819,6 +827,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 2100000, guid: 244cf197d98bf594ea7c81da41469b4c, type: 2}
   m_StaticBatchInfo:
@@ -853,6 +862,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 2100000, guid: 5f22740d7ad76f644b6c862bfc6e4bf3, type: 2}
   m_StaticBatchInfo:
@@ -887,6 +897,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 2100000, guid: 3294fbb8c7fc53a40939b1e99f22cfbb, type: 2}
   m_StaticBatchInfo:
@@ -921,6 +932,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 2100000, guid: 5f22740d7ad76f644b6c862bfc6e4bf3, type: 2}
   m_StaticBatchInfo:
@@ -955,6 +967,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 2100000, guid: 244cf197d98bf594ea7c81da41469b4c, type: 2}
   m_StaticBatchInfo:
@@ -989,6 +1002,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 2100000, guid: 244cf197d98bf594ea7c81da41469b4c, type: 2}
   m_StaticBatchInfo:
@@ -1120,20 +1134,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.5, y: 0.6, z: 0.5}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &114335000397506956
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1501450894785796}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 71821b05883a198478d8af2ed016e917, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  radius: 0.25
-  height: 0.25
-  moveSpeed: 0.5
 --- !u!114 &114593468962117382
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1145,6 +1145,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f503f6c4f9af2945b91b871910143c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  garden: {fileID: 0}
+  board: {fileID: 0}
+  mover: {fileID: 114987303637826334}
+  owned: 0
   currentBehavior:
     behaviorName: 
+    garden: {fileID: 0}
+    monster: {fileID: 0}
+    behaviorsSince: 0
+    behaviorTime: 0
+    timeSinceLastEnd: 0
   behaviors: []
+  currentBehaviorDone: 1
+--- !u!114 &114987303637826334
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1501450894785796}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c952fc9e02284d14f8c73dcd2e807612, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  locked: 0
+  height: 0.25
+  moveSpeed: 0.5
