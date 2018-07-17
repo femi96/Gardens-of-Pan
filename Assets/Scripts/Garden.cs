@@ -117,12 +117,14 @@ public class Garden : MonoBehaviour {
     foreach (FileInfo fileInfo in files) {
 
       if (File.Exists(fileInfo.FullName)) {
-        BinaryFormatter bf = new BinaryFormatter();
-        FileStream file = File.Open(fileInfo.FullName, FileMode.Open);
-        GardenSave save = (GardenSave)bf.Deserialize(file);
-        file.Close();
+        try {
+          BinaryFormatter bf = new BinaryFormatter();
+          FileStream file = File.Open(fileInfo.FullName, FileMode.Open);
+          GardenSave save = (GardenSave)bf.Deserialize(file);
+          file.Close();
 
-        saves.Add(save);
+          saves.Add(save);
+        } catch (System.FormatException e) { Debug.Log(e); }
       }
     }
 
@@ -174,28 +176,31 @@ public class Garden : MonoBehaviour {
 
   // Save this garden to a garden save file
   public void SaveGarden() {
+    try {
 
-    // 0: Get file path
-    string saveFilePath = GetFilePath(gardenName, gardenID);
+      // 0: Get file path
+      string saveFilePath = GetFilePath(gardenName, gardenID);
 
-    // 1: Create save instance
-    GardenSave save = CreateGardenSave();
+      // 1: Create save instance
+      GardenSave save = CreateGardenSave();
 
-    // 2: Save file and close file stream
-    BinaryFormatter bf = new BinaryFormatter();
-    FileStream file = File.Create(saveFilePath);
-    bf.Serialize(file, save);
-    Debug.Log("Garden " + gardenName + " saved to " + saveFilePath);
-    file.Close();
+      // 2: Save file and close file stream
+      BinaryFormatter bf = new BinaryFormatter();
+      FileStream file = File.Create(saveFilePath);
+      bf.Serialize(file, save);
+      Debug.Log("Garden " + gardenName + " saved to " + saveFilePath);
+      file.Close();
 
-    // 2b: Save file as most recent file path
-    FileStream rFile = File.Create(recentSaveFilePath);
-    bf.Serialize(rFile, saveFilePath);
-    Debug.Log("Recent garden's path saved to " + gardenName + " saved to " + recentSaveFilePath);
-    rFile.Close();
+      // 2b: Save file as most recent file path
+      FileStream rFile = File.Create(recentSaveFilePath);
+      bf.Serialize(rFile, saveFilePath);
+      Debug.Log("Recent garden's path saved to " + gardenName + " saved to " + recentSaveFilePath);
+      rFile.Close();
 
-    // 3: Ending save
-    // Post save operations if necessary
+      // 3: Ending save
+      // Post save operations if necessary
+
+    } catch (System.FormatException e) { Debug.Log(e); }
   }
 
   // Load the garden from the most recent file, or create an empty garden
@@ -203,21 +208,23 @@ public class Garden : MonoBehaviour {
 
     // Try to find recent save file path
     if (File.Exists(recentSaveFilePath)) {
-      BinaryFormatter bf = new BinaryFormatter();
+      try {
+        BinaryFormatter bf = new BinaryFormatter();
 
-      FileStream rFile = File.Open(recentSaveFilePath, FileMode.Open);
-      string saveFilePath = (string)bf.Deserialize(rFile);
-      rFile.Close();
+        FileStream rFile = File.Open(recentSaveFilePath, FileMode.Open);
+        string saveFilePath = (string)bf.Deserialize(rFile);
+        rFile.Close();
 
-      // Try to load recent save file
-      if (File.Exists(saveFilePath)) {
-        FileStream file = File.Open(saveFilePath, FileMode.Open);
-        GardenSave save = (GardenSave)bf.Deserialize(file);
-        file.Close();
+        // Try to load recent save file
+        if (File.Exists(saveFilePath)) {
+          FileStream file = File.Open(saveFilePath, FileMode.Open);
+          GardenSave save = (GardenSave)bf.Deserialize(file);
+          file.Close();
 
-        SetGardenFromSave(save);
-        return;
-      }
+          SetGardenFromSave(save);
+          return;
+        }
+      } catch (System.FormatException e) { Debug.Log(e); }
     }
 
     // If no recent file, try to find another file, and load the first
