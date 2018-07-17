@@ -18,6 +18,10 @@ public class BlockberryProduce : Produce {
     return 0.1f;
   }
 
+  public override float GetHoverHeight() {
+    return 0.1f;
+  }
+
   // Produce functions
   public override void ProduceBehavior() {
 

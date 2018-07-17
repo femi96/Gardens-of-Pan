@@ -28,6 +28,10 @@ public class SquarerootPlant : Plant {
     return 0.15f;
   }
 
+  public override float GetHoverHeight() {
+    return 0.3f;
+  }
+
   // Plant functions
   public override void PlantAwake() {
     root.SetActive(false);

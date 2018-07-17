@@ -18,6 +18,10 @@ public class Worm : Monster {
     return 0.3f;
   }
 
+  public override float GetHoverHeight() {
+    return 0.25f;
+  }
+
   // Monster functions
   public override bool CanVisit() {
     GardenBoard board = garden.GetBoard();

@@ -19,4 +19,7 @@ public abstract class Unit : MonoBehaviour {
 
   // Returns radius of wand when selecting unit
   public abstract float GetWandRadius();
+
+  // Returns base height of hover UI
+  public abstract float GetHoverHeight();
 }

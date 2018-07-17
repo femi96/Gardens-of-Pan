@@ -18,6 +18,10 @@ public class Birb : Monster {
     return 0.3f;
   }
 
+  public override float GetHoverHeight() {
+    return 0.35f;
+  }
+
   // Monster functions
   public override bool CanVisit() {
     int blocks = board.GetBlockTypeCount(BlockType.Grassland)

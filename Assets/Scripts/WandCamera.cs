@@ -85,4 +85,9 @@ public class WandCamera : MonoBehaviour {
       Cursor.visible = true;
     }
   }
+
+  // Returns 0 to 1 for zoom level where 0 in low, 1 is high
+  public float GetZoom() {
+    return distance - distanceMin / distanceMax - distanceMin;
+  }
 }

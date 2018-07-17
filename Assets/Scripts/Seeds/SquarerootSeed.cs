@@ -20,6 +20,10 @@ public class SquarerootSeed : Seed {
     return 0.1f;
   }
 
+  public override float GetHoverHeight() {
+    return 0.1f;
+  }
+
   // Seed functions
   public override void SeedBehavior() {
     BlockType surfaceType = board.GetBlock(transform.position).GetBlockType();

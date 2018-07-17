@@ -13,6 +13,7 @@ public class Wand : MonoBehaviour {
   // Assigned in Editor:
   public Garden garden;
   public GardenBoard gardenBoard;
+  public WandCamera wandCamera;
 
   // Movement:
   private float radius = 0.2f;
@@ -197,7 +198,7 @@ public class Wand : MonoBehaviour {
         unitHoverBehavior.transform.parent.gameObject.SetActive(false);
       }
 
-      Vector3 screenPos = Camera.main.WorldToScreenPoint(targetUnit.transform.position + (Vector3.up * 0.5f));
+      Vector3 screenPos = Camera.main.WorldToScreenPoint(targetUnit.transform.position + (Vector3.up * (targetUnit.GetHoverHeight() + wandCamera.GetZoom() * 0.06f)));
       unitHoverUI.transform.position = screenPos;
     } else {
       unitHoverUI.SetActive(false);
