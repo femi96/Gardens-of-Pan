@@ -157,13 +157,45 @@ public class Wand : MonoBehaviour {
     // Find new unit to follow
     if (targetUnit == null) {
 
+      List<Unit> hitUnits = new List<Unit>();
+
       RaycastHit hit;
 
-      if (Physics.Raycast(transform.position + Vector3.up * 2, -Vector3.up, out hit, 4, LayerConstants.UnitLayer)) {
-        if (hit.transform.gameObject.GetComponent<Unit>() != null) {
-          targetUnit = hit.transform.gameObject.GetComponent<Unit>();
+      float rayLength = 4f;
+      Vector3 rayStart = transform.position + Vector3.up * 2;
+      int rayCount = 0;
+
+      while (rayLength > 0f && rayCount < 10) {
+        rayCount += 1;
+
+        if (Physics.Raycast(rayStart, -Vector3.up, out hit, rayLength, LayerConstants.UnitLayer)) {
+          rayLength -= hit.distance;
+          rayStart = hit.point;
+
+          if (hit.transform.gameObject.GetComponent<Unit>() != null) {
+            hitUnits.Add(hit.transform.gameObject.GetComponent<Unit>());
+          }
+        } else
+          rayLength = 0f;
+      }
+
+
+      // Follow closes unit
+      Unit closeUnit = null;
+      float closeDistance = float.MaxValue;
+
+      foreach (Unit unit in hitUnits) {
+        float deltaX = unit.transform.position.x - transform.position.x;
+        float deltaZ = unit.transform.position.z - transform.position.z;
+        float unitDistance = new Vector3(deltaX, 0, deltaZ).magnitude;
+
+        if (unitDistance < closeDistance) {
+          closeDistance = unitDistance;
+          closeUnit = unit;
         }
       }
+
+      targetUnit = closeUnit;
 
       // Or follow unit
     } else {
