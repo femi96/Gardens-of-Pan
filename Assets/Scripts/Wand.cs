@@ -211,6 +211,10 @@ public class Wand : MonoBehaviour {
       float deltaX = targetUnit.transform.position.x - transform.position.x;
       float deltaZ = targetUnit.transform.position.z - transform.position.z;
       Vector3 deltaV = new Vector3(deltaX, 0, deltaZ);
+
+      if (deltaV.magnitude > Time.deltaTime)
+        deltaV = deltaV.normalized * Time.deltaTime;
+
       transform.position += deltaV;
 
       LimitWandPosition();
