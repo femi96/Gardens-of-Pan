@@ -51,10 +51,10 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4938267823802820}
-  - component: {fileID: 65926704488406874}
+  - component: {fileID: 136838397716531554}
   - component: {fileID: 114622464935875768}
   - component: {fileID: 114290682990401080}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Squareroot Plant
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -392,18 +392,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1989548557467528}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!65 &65926704488406874
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1725271723150118}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.3, y: 0.2, z: 0.3}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &114290682990401080
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -436,3 +424,16 @@ MonoBehaviour:
   timeActive: 0
   produce: {fileID: 1729659249465504, guid: f4377b9e1ba5df74bbc91958ea484377, type: 2}
   root: {fileID: 1650787452807508}
+--- !u!136 &136838397716531554
+CapsuleCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1725271723150118}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.15
+  m_Height: 0.5
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}

@@ -138,8 +138,8 @@ GameObject:
   - component: {fileID: 4870451785020136}
   - component: {fileID: 114860319795269586}
   - component: {fileID: 114143118557331900}
-  - component: {fileID: 65936153720833896}
-  m_Layer: 0
+  - component: {fileID: 136359561604405690}
+  m_Layer: 8
   m_Name: Worm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1268,18 +1268,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1345756730954944}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!65 &65936153720833896
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1541386915088780}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.5, y: 0.6, z: 0.5}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &114143118557331900
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1318,3 +1306,16 @@ MonoBehaviour:
     timeSinceLastEnd: 0
   behaviors: []
   currentBehaviorDone: 1
+--- !u!136 &136359561604405690
+CapsuleCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1541386915088780}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.25
+  m_Height: 1
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}

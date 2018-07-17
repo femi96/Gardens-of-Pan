@@ -66,10 +66,10 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4359149665749974}
-  - component: {fileID: 65895700855889436}
+  - component: {fileID: 136554233032180398}
   - component: {fileID: 114587611841668624}
   - component: {fileID: 114021981757443320}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Blockberry Plant
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -755,18 +755,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1421353462012374}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!65 &65895700855889436
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1144113896645262}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.3, y: 0.2, z: 0.3}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &114021981757443320
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -814,3 +802,16 @@ MonoBehaviour:
   - {fileID: 4927252283126444}
   activeProduce: []
   activeProduceTime: []
+--- !u!136 &136554233032180398
+CapsuleCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1144113896645262}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.15
+  m_Height: 0.5
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}

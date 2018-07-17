@@ -221,8 +221,8 @@ GameObject:
   - component: {fileID: 4650143460408790}
   - component: {fileID: 114971086004728680}
   - component: {fileID: 114120124692826524}
-  - component: {fileID: 65703330353025234}
-  m_Layer: 0
+  - component: {fileID: 136971580815694596}
+  m_Layer: 8
   m_Name: Birb
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1122,18 +1122,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1830732071855736}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!65 &65703330353025234
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1824845750037556}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.5, y: 0.6, z: 0.5}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &114120124692826524
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1172,3 +1160,16 @@ MonoBehaviour:
     timeSinceLastEnd: 0
   behaviors: []
   currentBehaviorDone: 1
+--- !u!136 &136971580815694596
+CapsuleCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1824845750037556}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.25
+  m_Height: 1
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
