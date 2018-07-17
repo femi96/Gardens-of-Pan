@@ -20,6 +20,7 @@ public class Wand : MonoBehaviour {
   private float speed = 4f;
 
   private Unit targetUnit;
+  private bool hadTarget = false;
 
   // Timing:
   private float moveTime = 0f;
@@ -157,6 +158,12 @@ public class Wand : MonoBehaviour {
     // Find new unit to follow
     if (targetUnit == null) {
 
+      if (hadTarget) {
+        moveTime = -0.5f;
+        hadTarget = false;
+        return;
+      }
+
       List<Unit> hitUnits = new List<Unit>();
 
       RaycastHit hit;
@@ -179,7 +186,6 @@ public class Wand : MonoBehaviour {
           rayLength = 0f;
       }
 
-
       // Follow closes unit
       Unit closeUnit = null;
       float closeDistance = float.MaxValue;
@@ -199,6 +205,8 @@ public class Wand : MonoBehaviour {
 
       // Or follow unit
     } else {
+
+      hadTarget = true;
 
       float deltaX = targetUnit.transform.position.x - transform.position.x;
       float deltaZ = targetUnit.transform.position.z - transform.position.z;
