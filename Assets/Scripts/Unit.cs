@@ -22,4 +22,12 @@ public abstract class Unit : MonoBehaviour {
 
   // Returns base height of hover UI
   public abstract float GetHoverHeight();
+
+  // Returns unit save of unit
+  public virtual UnitSave GetUnitSave() {
+    UnitSave save = new UnitSave();
+    save.position = transform.position;
+    save.rotation = transform.rotation;
+    return save;
+  }
 }

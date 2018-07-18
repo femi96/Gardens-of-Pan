@@ -138,15 +138,34 @@ public class Garden : MonoBehaviour {
     save.gardenName = gardenName;
     save.gardenID = gardenID;
     save.blockMap = gardenBoard.GetBlockMap();
+
+    List<UnitSave> unitSaves = new List<UnitSave>();
+
+    foreach (Unit unit in units)
+      unitSaves.Add(unit.GetUnitSave());
+
+    save.unitSaves = unitSaves.ToArray();
+
     return save;
   }
-
+  public GameObject debugUnitPrefab;
   // Sets this garden from a garden save representation
   public void SetGardenFromSave(GardenSave save) {
 
     gardenName = save.gardenName;
     gardenID = save.gardenID;
     gardenBoard.SetBlockMap(save.blockMap);
+
+    foreach (Unit unit in units) {
+      Destroy(unit.gameObject);
+    }
+
+    units = new List<Unit>();
+
+    foreach (UnitSave unitSaves in save.unitSaves) {
+      GameObject go = Instantiate(debugUnitPrefab, unitSaves.position, unitSaves.rotation, unitsCont);
+      units.Add(go.GetComponent<Unit>());
+    }
 
     noGarden = false;
     currentGardenText.text = "Current Garden: " + GetGardenTitle();

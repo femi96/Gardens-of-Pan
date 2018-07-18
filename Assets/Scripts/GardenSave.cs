@@ -11,4 +11,5 @@ public class GardenSave {
   public string gardenName = "Null Garden";
   public int gardenID = 0;
   public Block[,] blockMap = new Block[0, 0];
+  public UnitSave[] unitSaves = new UnitSave[0];
 }

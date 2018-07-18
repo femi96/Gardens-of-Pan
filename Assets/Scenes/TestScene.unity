@@ -853,6 +853,12 @@ Prefab:
       propertyPath: gardenSize
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 114890702010952304, guid: 2842cd2331049b64da842e685550763d,
+        type: 2}
+      propertyPath: debugUnitPrefab
+      value: 
+      objectReference: {fileID: 1541386915088780, guid: 0f617659039928045aeaf484a9c8e552,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2842cd2331049b64da842e685550763d, type: 2}
   m_IsPrefabParent: 0
