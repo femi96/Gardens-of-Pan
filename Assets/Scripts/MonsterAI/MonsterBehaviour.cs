@@ -4,10 +4,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class MonsterBehavior {
-  // AI controller holding AI behavior state with actions and factors
+public class MonsterBehaviour {
+  // AI controller holding AI behaviour state with actions and factors
 
-  public string behaviorName;
+  public string behaviourName;
 
   // Collection variables:
   public Garden garden;
@@ -16,14 +16,14 @@ public class MonsterBehavior {
   public List<MonsterFactor> factors;
   public List<MonsterRestrictor> restrictors;
 
-  public int behaviorsSince;
-  public float behaviorTime;
+  public int behavioursSince;
+  public float behaviourTime;
   public float timeSinceLastEnd;
 
-  // Creates MonsterBehavior with name name for monster rMonster
-  public MonsterBehavior(string name, Monster rMonster) {
+  // Creates MonsterBehaviour with name name for monster rMonster
+  public MonsterBehaviour(string name, Monster rMonster) {
 
-    behaviorName = name;
+    behaviourName = name;
 
     garden = rMonster.garden;
     monster = rMonster;
@@ -35,11 +35,11 @@ public class MonsterBehavior {
     timeSinceLastEnd = 0;
   }
 
-  // Starts state with initial fields and starts behaviors
-  public void StartBehavior() {
+  // Starts state with initial fields and starts behaviours
+  public void StartBehaviour() {
 
-    behaviorTime = 0f;
-    behaviorsSince = -1;
+    behaviourTime = 0f;
+    behavioursSince = -1;
 
     foreach (MonsterAction action in actions) {
       action.SetupAction(this);
@@ -47,23 +47,23 @@ public class MonsterBehavior {
   }
 
   // Ends state
-  public void EndBehavior() {
+  public void EndBehaviour() {
 
     timeSinceLastEnd = 0;
-    monster.currentBehaviorDone = true;
+    monster.currentBehaviourDone = true;
   }
 
   // Called per frame, execute every action each frame
-  public void BehaviorUpdate() {
+  public void BehaviourUpdate() {
 
-    behaviorTime += Time.deltaTime;
+    behaviourTime += Time.deltaTime;
 
     foreach (MonsterAction action in actions) {
       action.Act();
     }
   }
 
-  // Get behavior priority, based on sum of all factors
+  // Get behaviour priority, based on sum of all factors
   public float GetPriority() {
 
     float priority = 0;
@@ -75,7 +75,7 @@ public class MonsterBehavior {
     return priority;
   }
 
-  // Is behavior allowed to start
+  // Is behaviour allowed to start
   public bool IsResticted() {
     bool restricted = false;
 
@@ -87,6 +87,6 @@ public class MonsterBehavior {
   }
 
   public override string ToString() {
-    return behaviorName + "ing...";
+    return behaviourName + "ing...";
   }
 }

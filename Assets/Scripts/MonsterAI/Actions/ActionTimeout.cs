@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class ActionTimeout : MonsterAction {
-  // AI controller scripting monster behavior
+  // AI controller scripting monster behaviour
   //  Waits a duration and ends state
 
-  private MonsterBehavior behavior;
+  private MonsterBehaviour behaviour;
 
   private float timeout;
 
@@ -18,15 +18,15 @@ public class ActionTimeout : MonsterAction {
     timeout = Random.Range(timeoutMin, timeoutMax);
   }
 
-  public void SetupAction(MonsterBehavior behavior) {
+  public void SetupAction(MonsterBehaviour behaviour) {
 
-    this.behavior = behavior;
+    this.behaviour = behaviour;
   }
 
   public void Act() {
 
-    if (behavior.behaviorTime >= timeout) {
-      behavior.EndBehavior();
+    if (behaviour.behaviourTime >= timeout) {
+      behaviour.EndBehaviour();
     }
   }
 }

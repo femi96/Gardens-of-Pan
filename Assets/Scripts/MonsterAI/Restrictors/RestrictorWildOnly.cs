@@ -8,7 +8,7 @@ public class RestrictorWildOnly : MonsterRestrictor {
 
   public RestrictorWildOnly() {}
 
-  public bool Restrict(MonsterBehavior behavior) {
-    return behavior.monster.owned;
+  public bool Restrict(MonsterBehaviour behaviour) {
+    return behaviour.monster.owned;
   }
 }

@@ -12,7 +12,7 @@ public class FactorRepeat : MonsterFactor {
     m = multiplier;
   }
 
-  public float GetPriority(MonsterBehavior behavior) {
-    return behavior.behaviorsSince * m;
+  public float GetPriority(MonsterBehaviour behaviour) {
+    return behaviour.behavioursSince * m;
   }
 }

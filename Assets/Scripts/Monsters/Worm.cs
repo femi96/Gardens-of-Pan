@@ -57,27 +57,27 @@ public class Worm : Monster {
     return validSpawnPoints[r];
   }
 
-  public override MonsterBehavior[] Behaviors() {
+  public override MonsterBehaviour[] Behaviours() {
 
-    List<MonsterBehavior> behaviors = new List<MonsterBehavior>();
+    List<MonsterBehaviour> behaviors = new List<MonsterBehaviour>();
 
-    MonsterBehavior wander = new MonsterBehavior("Wander", this);
+    MonsterBehaviour wander = new MonsterBehaviour("Wander", this);
     wander.actions.Add(new ActionWander());
     wander.factors.Add(new FactorRepeat(1f));
     behaviors.Add(wander);
 
-    MonsterBehavior wait = new MonsterBehavior("Wait", this);
+    MonsterBehaviour wait = new MonsterBehaviour("Wait", this);
     wait.actions.Add(new ActionTimeout(3f, 6f));
     wait.factors.Add(new FactorRepeat(1f));
     behaviors.Add(wait);
 
-    MonsterBehavior leave = new MonsterBehavior("Leave", this);
+    MonsterBehaviour leave = new MonsterBehaviour("Leave", this);
     leave.actions.Add(new ActionLeave());
     leave.factors.Add(new FactorTimeout(10f, 30f));
     leave.restrictors.Add(new RestrictorWildOnly());
     behaviors.Add(leave);
 
-    MonsterBehavior join = new MonsterBehavior("Join", this);
+    MonsterBehaviour join = new MonsterBehaviour("Join", this);
     join.actions.Add(new ActionJoin(2f));
     join.factors.Add(new FactorRepeat(10f));
     join.restrictors.Add(new RestrictorWildOnly());

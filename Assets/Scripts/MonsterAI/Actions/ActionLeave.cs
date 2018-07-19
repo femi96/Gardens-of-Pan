@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class ActionLeave : MonsterAction {
-  // AI controller scripting monster behavior
+  // AI controller scripting monster behaviour
   //  Sets a random destination outside the garden and enables movement towards it
 
   private Vector3 destination;
@@ -11,7 +11,7 @@ public class ActionLeave : MonsterAction {
   private bool hasStep;
 
   private Monster monster;
-  private MonsterBehavior behavior;
+  private MonsterBehaviour behaviour;
   private EntityMover mover;
   private Garden garden;
 
@@ -21,12 +21,12 @@ public class ActionLeave : MonsterAction {
 
   public ActionLeave() {}
 
-  public void SetupAction(MonsterBehavior behavior) {
+  public void SetupAction(MonsterBehaviour behaviour) {
 
-    this.behavior = behavior;
-    monster = behavior.monster;
+    this.behaviour = behaviour;
+    monster = behaviour.monster;
     mover = monster.mover;
-    garden = behavior.garden;
+    garden = behaviour.garden;
 
     // Pick a random destination
     List<SpawnPoint> spawnPoints = garden.GetBoard().GetSpawnPoints();
@@ -59,14 +59,14 @@ public class ActionLeave : MonsterAction {
       mover.MoveStop();
     }
 
-    // If reached destination, stop behavior
+    // If reached destination, stop behaviour
     destination.y = monster.transform.position.y;
     float destDistance = (destination - monster.transform.position).magnitude;
 
     if (destDistance < destSize) {
       mover.MoveStop();
       garden.RemoveUnit(monster);
-      behavior.EndBehavior();
+      behaviour.EndBehaviour();
     }
   }
 }

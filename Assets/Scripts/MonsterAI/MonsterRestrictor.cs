@@ -6,5 +6,5 @@ public interface MonsterRestrictor {
   // AI controller evaluating if state is available
 
   // Returns bool for if the behavior state is available
-  bool Restrict(MonsterBehavior behavior);
+  bool Restrict(MonsterBehaviour behaviour);
 }

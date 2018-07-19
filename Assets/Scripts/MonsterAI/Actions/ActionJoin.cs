@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class ActionJoin : MonsterAction {
-  // AI controller scripting monster behavior
+  // AI controller scripting monster behaviour
   //  Monster tries to join garden
 
   private Monster monster;
-  private MonsterBehavior behavior;
+  private MonsterBehaviour behaviour;
 
   private float timeout;
 
@@ -15,24 +15,24 @@ public class ActionJoin : MonsterAction {
     timeout = joinTime;
   }
 
-  public void SetupAction(MonsterBehavior behavior) {
+  public void SetupAction(MonsterBehaviour behaviour) {
 
-    this.behavior = behavior;
-    monster = behavior.monster;
+    this.behaviour = behaviour;
+    monster = behaviour.monster;
   }
 
   public void Act() {
 
     if (!monster.owned && monster.CanOwn()) {
 
-      if (behavior.behaviorTime >= timeout) {
+      if (behaviour.behaviourTime >= timeout) {
         monster.SetOwned(true);
-        behavior.EndBehavior();
+        behaviour.EndBehaviour();
       }
 
     } else {
 
-      behavior.EndBehavior();
+      behaviour.EndBehaviour();
     }
   }
 }

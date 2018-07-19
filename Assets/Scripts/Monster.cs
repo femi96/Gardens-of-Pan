@@ -3,16 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class Monster : Unit {
-  // Game controller that handles a monster's state and behavior
+  // Game controller that handles a monster's state and behaviour
 
   public GardenBoard board;
   public EntityMover mover;
   public bool owned = false;
 
   // Monster AI
-  public MonsterBehavior currentBehavior;
-  public MonsterBehavior[] behaviors;
-  public bool currentBehaviorDone = true;
+  public MonsterBehaviour currentBehaviour;
+  public MonsterBehaviour[] behaviours;
+  public bool currentBehaviourDone = true;
 
   // Monster models
   private GameObject modelOwned;
@@ -27,17 +27,17 @@ public abstract class Monster : Unit {
   }
 
   void Start() {
-    SetBehaviors();
+    SetBehaviours();
   }
 
   void Update() {
-    if (currentBehaviorDone)
-      StartNewBehavior();
+    if (currentBehaviourDone)
+      StartNewBehaviour();
 
-    foreach (MonsterBehavior behavior in behaviors)
-      behavior.timeSinceLastEnd += Time.deltaTime;
+    foreach (MonsterBehaviour behaviour in behaviours)
+      behaviour.timeSinceLastEnd += Time.deltaTime;
 
-    currentBehavior.BehaviorUpdate();
+    currentBehaviour.BehaviourUpdate();
   }
 
   // Returns if garden meets visit conditions
@@ -61,40 +61,40 @@ public abstract class Monster : Unit {
   }
 
   // Chooses a new state, and starts it
-  private void StartNewBehavior() {
+  private void StartNewBehaviour() {
 
     bool newState = false;
     float maxPriority = float.MinValue;
 
-    foreach (MonsterBehavior behavior in behaviors) {
+    foreach (MonsterBehaviour behaviour in behaviours) {
 
-      behavior.behaviorsSince += 1;
+      behaviour.behavioursSince += 1;
 
-      // Is behavior valid
-      if (behavior.IsResticted())
+      // Is behaviour valid
+      if (behaviour.IsResticted())
         continue;
 
-      // Find highest factor behavior
-      float priority = behavior.GetPriority();
+      // Find highest factor behaviour
+      float priority = behaviour.GetPriority();
 
       if (priority > maxPriority) {
         maxPriority = priority;
-        currentBehavior = behavior;
+        currentBehaviour = behaviour;
         newState = true;
       }
     }
 
     if (newState) {
-      currentBehavior.StartBehavior();
-      currentBehaviorDone = false;
+      currentBehaviour.StartBehaviour();
+      currentBehaviourDone = false;
     }
   }
 
-  // Set monster's behavior states
-  public void SetBehaviors() {
-    behaviors = Behaviors();
+  // Set monster's behaviour states
+  public void SetBehaviours() {
+    behaviours = Behaviours();
   }
 
-  // Get set of monster behavior states based on monster type
-  public abstract MonsterBehavior[] Behaviors();
+  // Get set of monster behaviour states based on monster type
+  public abstract MonsterBehaviour[] Behaviours();
 }

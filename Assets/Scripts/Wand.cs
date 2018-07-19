@@ -234,7 +234,7 @@ public class Wand : MonoBehaviour {
         unitHoverBehavior.transform.parent.gameObject.SetActive(true);
 
         Monster targetMon = (Monster)targetUnit;
-        unitHoverBehavior.text = targetMon.currentBehavior.ToString();
+        unitHoverBehavior.text = targetMon.currentBehaviour.ToString();
 
         if (!targetMon.owned)
           unitHoverBackground.color = colorHoverWild;
