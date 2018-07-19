@@ -75,6 +75,7 @@ public class Birb : Monster {
     leave.actions.Add(new ActionLeave());
     leave.factors.Add(new FactorTimeout(10f, 30f));
     leave.restrictors.Add(new RestrictorWildOnly());
+    leave.behaviourText = "Leaving...";
     behaviors.Add(leave);
 
     MonsterBehaviour join = new MonsterBehaviour("Join", this);

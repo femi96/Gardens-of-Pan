@@ -8,7 +8,7 @@ public class MonsterBehaviour {
   // AI controller holding AI behaviour state with actions and factors
 
   public string behaviourName;
-  public string behaviourString;
+  public string behaviourText;
 
   // Collection variables:
   public Garden garden;
@@ -25,7 +25,7 @@ public class MonsterBehaviour {
   public MonsterBehaviour(string name, Monster rMonster) {
 
     behaviourName = name;
-    behaviourString = name;
+    behaviourText = name + "ing...";
 
     garden = rMonster.garden;
     monster = rMonster;
@@ -89,6 +89,6 @@ public class MonsterBehaviour {
   }
 
   public override string ToString() {
-    return behaviourString;
+    return behaviourText;
   }
 }
