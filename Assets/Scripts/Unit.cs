@@ -32,10 +32,7 @@ public abstract class Unit : MonoBehaviour {
 
   // Returns unit save of unit
   public virtual UnitSave GetUnitSave() {
-    UnitSave save = new UnitSave();
-    save.position = transform.position;
-    save.rotation = transform.rotation;
-    save.prefabID = prefabID;
+    UnitSave save = new UnitSave(this);
     return save;
   }
 }

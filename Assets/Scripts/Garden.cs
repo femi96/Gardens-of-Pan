@@ -166,9 +166,13 @@ public class Garden : MonoBehaviour {
 
     units = new List<Unit>();
 
-    foreach (UnitSave unitSaves in save.unitSaves) {
-      GameObject go = Instantiate(UnitPrefabs.PrefabFromID(unitSaves.prefabID), unitSaves.position, unitSaves.rotation, unitsCont);
-      units.Add(go.GetComponent<Unit>());
+    foreach (UnitSave unitSave in save.unitSaves) {
+      GameObject go = Instantiate(UnitPrefabs.PrefabFromID(unitSave.prefabID), unitSave.position, unitSave.rotation, unitsCont);
+      Unit unit = go.GetComponent<Unit>();
+      units.Add(unit);
+
+      if (typeof(Monster).IsAssignableFrom(unit.GetType()))
+        ((Monster)unit).SetFromMonsterSave((MonsterSave)unitSave);
     }
 
     noGarden = false;

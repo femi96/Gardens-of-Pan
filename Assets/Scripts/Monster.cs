@@ -24,9 +24,6 @@ public abstract class Monster : Unit {
     mover = gameObject.GetComponent<EntityMover>();
     modelOwned = transform.Find("ModelOwned").gameObject;
     modelWild = transform.Find("ModelWild").gameObject;
-  }
-
-  void Start() {
     SetBehaviours();
   }
 
@@ -97,4 +94,18 @@ public abstract class Monster : Unit {
 
   // Get set of monster behaviour states based on monster type
   public abstract MonsterBehaviour[] Behaviours();
+
+  // Returns unit save of unit
+  public override UnitSave GetUnitSave() {
+    UnitSave save = new MonsterSave(this);
+    return save;
+  }
+
+  // Sets monster from MonsterSave
+  public void SetFromMonsterSave(MonsterSave m) {
+    SetOwned(m.owned);
+    // currentBehaviour = m.currentBehaviour;
+    // behaviours = m.behaviours;
+    // currentBehaviourDone = m.currentBehaviourDone;
+  }
 }

@@ -12,4 +12,10 @@ public class UnitSave {
 
   public SerializableVector3 position = Vector3.zero;
   public SerializableQuaternion rotation = Quaternion.identity;
+
+  public UnitSave(Unit u) {
+    prefabID = u.prefabID;
+    position = u.transform.position;
+    rotation = u.transform.rotation;
+  }
 }
