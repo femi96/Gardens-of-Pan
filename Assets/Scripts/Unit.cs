@@ -7,6 +7,8 @@ public abstract class Unit : MonoBehaviour {
 
   public Garden garden;
 
+  public int prefabID;
+
   public virtual void Awake() {
     garden = GameObject.FindWithTag("Garden").GetComponent<Garden>();
   }
@@ -23,11 +25,17 @@ public abstract class Unit : MonoBehaviour {
   // Returns base height of hover UI
   public abstract float GetHoverHeight();
 
+  // Sets unit's prefab id number
+  public void SetUnitPrefabID(int id) {
+    prefabID = id;
+  }
+
   // Returns unit save of unit
   public virtual UnitSave GetUnitSave() {
     UnitSave save = new UnitSave();
     save.position = transform.position;
     save.rotation = transform.rotation;
+    save.prefabID = prefabID;
     return save;
   }
 }

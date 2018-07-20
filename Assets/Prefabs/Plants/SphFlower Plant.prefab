@@ -247,9 +247,9 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4429549590892282}
-  - component: {fileID: 136710992862816008}
   - component: {fileID: 114361065762812532}
   - component: {fileID: 114179724378001254}
+  - component: {fileID: 136710992862816008}
   m_Layer: 8
   m_Name: SphFlower Plant
   m_TagString: Untagged
@@ -943,6 +943,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   garden: {fileID: 0}
+  prefabID: 2001
   board: {fileID: 0}
   model: {fileID: 0}
   grown: 0

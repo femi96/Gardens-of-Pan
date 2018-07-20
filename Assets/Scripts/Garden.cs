@@ -16,6 +16,8 @@ public class Garden : MonoBehaviour {
   private GardenBoard gardenBoard;
   private GardenMode gardenMode;
 
+  private UnitPrefabsFiller filler;
+
   // Garden meta:
   public string gardenName;
   public int gardenID;
@@ -51,6 +53,9 @@ public class Garden : MonoBehaviour {
 
     recentSaveFilePath = Application.persistentDataPath + "/recent_garden.path";
     unitsCont = transform.Find("Units");
+
+    filler = GameObject.Find("UnitPrefabs").GetComponent<UnitPrefabsFiller>();
+    filler.Fill();
 
     // Try load garden so title can start
     SetGardenMode(GardenMode.Title);
@@ -148,7 +153,7 @@ public class Garden : MonoBehaviour {
 
     return save;
   }
-  public GameObject debugUnitPrefab;
+
   // Sets this garden from a garden save representation
   public void SetGardenFromSave(GardenSave save) {
 
@@ -156,14 +161,13 @@ public class Garden : MonoBehaviour {
     gardenID = save.gardenID;
     gardenBoard.SetBlockMap(save.blockMap);
 
-    foreach (Unit unit in units) {
+    foreach (Unit unit in units)
       Destroy(unit.gameObject);
-    }
 
     units = new List<Unit>();
 
     foreach (UnitSave unitSaves in save.unitSaves) {
-      GameObject go = Instantiate(debugUnitPrefab, unitSaves.position, unitSaves.rotation, unitsCont);
+      GameObject go = Instantiate(UnitPrefabs.PrefabFromID(unitSaves.prefabID), unitSaves.position, unitSaves.rotation, unitsCont);
       units.Add(go.GetComponent<Unit>());
     }
 
@@ -186,6 +190,11 @@ public class Garden : MonoBehaviour {
     }
 
     gardenBoard.NewBoard();
+
+    foreach (Unit unit in units)
+      Destroy(unit.gameObject);
+
+    units = new List<Unit>();
 
     noGarden = false;
 

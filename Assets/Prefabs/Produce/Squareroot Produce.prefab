@@ -100,9 +100,9 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4492905320036134}
-  - component: {fileID: 136464219123499758}
   - component: {fileID: 114761977717411812}
   - component: {fileID: 114174809441676220}
+  - component: {fileID: 136464219123499758}
   m_Layer: 8
   m_Name: Squareroot Produce
   m_TagString: Untagged
@@ -418,8 +418,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   garden: {fileID: 0}
+  prefabID: 1002
   board: {fileID: 0}
-  entitymover: {fileID: 0}
+  entityMover: {fileID: 0}
   held: 0
   timeActive: 0
 --- !u!136 &136464219123499758

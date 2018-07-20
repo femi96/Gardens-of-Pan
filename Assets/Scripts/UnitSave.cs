@@ -8,6 +8,8 @@ public class UnitSave {
   //    Need to store all unit fields as public.
   //    This is not data safe so instances of unit save should not be passed around.
 
+  public int prefabID = 0;
+
   public SerializableVector3 position = Vector3.zero;
   public SerializableQuaternion rotation = Quaternion.identity;
 }

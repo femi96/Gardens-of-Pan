@@ -51,9 +51,9 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4200023465408978}
-  - component: {fileID: 136980844553495144}
   - component: {fileID: 114758918890264456}
   - component: {fileID: 114398241024901244}
+  - component: {fileID: 136980844553495144}
   m_Layer: 8
   m_Name: Blockberry Produce
   m_TagString: Untagged
@@ -243,8 +243,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   garden: {fileID: 0}
+  prefabID: 1000
   board: {fileID: 0}
-  entitymover: {fileID: 0}
+  entityMover: {fileID: 0}
   held: 0
   timeActive: 0
 --- !u!136 &136980844553495144

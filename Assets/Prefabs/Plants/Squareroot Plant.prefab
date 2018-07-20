@@ -51,9 +51,9 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4938267823802820}
-  - component: {fileID: 136838397716531554}
   - component: {fileID: 114622464935875768}
   - component: {fileID: 114290682990401080}
+  - component: {fileID: 136838397716531554}
   m_Layer: 8
   m_Name: Squareroot Plant
   m_TagString: Untagged
@@ -418,6 +418,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   garden: {fileID: 0}
+  prefabID: 2002
   board: {fileID: 0}
   model: {fileID: 1914875273326010}
   grown: 0
