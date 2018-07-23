@@ -35,4 +35,8 @@ public abstract class Unit : MonoBehaviour {
     UnitSave save = new UnitSave(this);
     return save;
   }
+
+  // Sets unit from UnitSave
+  public virtual void SetFromSave(UnitSave save) {
+  }
 }

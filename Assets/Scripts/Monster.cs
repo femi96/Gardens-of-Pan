@@ -95,14 +95,13 @@ public abstract class Monster : Unit {
   // Get set of monster behaviour states based on monster type
   public abstract MonsterBehaviour[] Behaviours();
 
-  // Returns unit save of unit
   public override UnitSave GetUnitSave() {
     UnitSave save = new MonsterSave(this);
     return save;
   }
 
-  // Sets monster from MonsterSave
-  public void SetFromMonsterSave(MonsterSave m) {
+  public override void SetFromSave(UnitSave save) {
+    MonsterSave m = (MonsterSave)save;
     SetOwned(m.owned);
     // currentBehaviour = m.currentBehaviour;
     // behaviours = m.behaviours;

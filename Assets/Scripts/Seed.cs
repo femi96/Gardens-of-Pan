@@ -29,4 +29,14 @@ public abstract class Seed : Unit {
   public void Break() {
     garden.RemoveUnit(this);
   }
+
+  public override UnitSave GetUnitSave() {
+    UnitSave save = new SeedSave(this);
+    return save;
+  }
+
+  public override void SetFromSave(UnitSave save) {
+    SeedSave s = (SeedSave)save;
+    timeActive = s.timeActive;
+  }
 }
