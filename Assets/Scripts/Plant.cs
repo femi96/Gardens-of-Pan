@@ -5,7 +5,7 @@ using UnityEngine;
 public abstract class Plant : Unit {
   // Game controller that handles a plant's state and behavior
 
-  public GardenBoard board;
+  [Header("Plant Fields")]
   public GameObject model;
 
   public bool grown;
@@ -14,7 +14,6 @@ public abstract class Plant : Unit {
 
   public override void Awake() {
     base.Awake();
-    board = garden.GetBoard();
     model = transform.Find("Model").gameObject;
 
     PlantAwake();

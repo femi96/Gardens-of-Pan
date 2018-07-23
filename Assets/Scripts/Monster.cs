@@ -5,7 +5,7 @@ using UnityEngine;
 public abstract class Monster : Unit {
   // Game controller that handles a monster's state and behaviour
 
-  public GardenBoard board;
+  [Header("Monster Fields")]
   public EntityMover mover;
   public bool owned = false;
 
@@ -20,7 +20,6 @@ public abstract class Monster : Unit {
 
   public override void Awake() {
     base.Awake();
-    board = garden.GetBoard();
     mover = gameObject.GetComponent<EntityMover>();
     modelOwned = transform.Find("ModelOwned").gameObject;
     modelWild = transform.Find("ModelWild").gameObject;

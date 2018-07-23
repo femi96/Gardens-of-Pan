@@ -5,7 +5,7 @@ using UnityEngine;
 public abstract class Produce : Unit {
   // Game controller that handles a produce's state and behavior
 
-  public GardenBoard board;
+  [Header("Produce Fields")]
   public EntityMover entityMover;
 
   public bool held = false;
@@ -14,7 +14,6 @@ public abstract class Produce : Unit {
 
   public override void Awake() {
     base.Awake();
-    board = garden.GetBoard();
     entityMover = GetComponent<EntityMover>();
   }
 
@@ -30,4 +29,14 @@ public abstract class Produce : Unit {
   public void Break() {
     garden.RemoveUnit(this);
   }
+
+  // public override UnitSave GetUnitSave() {
+  //   UnitSave save = new ProduceSave(this);
+  //   return save;
+  // }
+
+  // public override void SetFromSave(UnitSave save) {
+  //   ProduceSave p = (ProduceSave)save;
+  //   timeActive = p.timeActive;
+  // }
 }

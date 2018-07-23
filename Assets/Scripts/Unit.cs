@@ -5,12 +5,15 @@ using UnityEngine;
 public abstract class Unit : MonoBehaviour {
   // Game controller that handles a unit's state and behavior
 
+  [Header("Unit Fields")]
   public Garden garden;
+  public GardenBoard board;
 
   public int prefabID;
 
   public virtual void Awake() {
     garden = GameObject.FindWithTag("Garden").GetComponent<Garden>();
+    board = garden.GetBoard();
   }
 
   // Returns name of unit

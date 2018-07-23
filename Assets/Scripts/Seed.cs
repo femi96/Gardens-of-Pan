@@ -5,14 +5,13 @@ using UnityEngine;
 public abstract class Seed : Unit {
   // Game controller that handles a seed's state and behavior
 
-  public GardenBoard board;
+  [Header("Seed Fields")]
   public GameObject model;
 
   public float timeActive = 0f;
 
   public override void Awake() {
     base.Awake();
-    board = garden.GetBoard();
     model = transform.Find("Model").gameObject;
   }
 
