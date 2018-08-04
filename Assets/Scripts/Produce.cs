@@ -30,13 +30,14 @@ public abstract class Produce : Unit {
     garden.RemoveUnit(this);
   }
 
-  // public override UnitSave GetUnitSave() {
-  //   UnitSave save = new ProduceSave(this);
-  //   return save;
-  // }
+  public override UnitSave GetUnitSave() {
+    UnitSave save = new ProduceSave(this);
+    return save;
+  }
 
-  // public override void SetFromSave(UnitSave save) {
-  //   ProduceSave p = (ProduceSave)save;
-  //   timeActive = p.timeActive;
-  // }
+  public override void SetFromSave(UnitSave save) {
+    ProduceSave p = (ProduceSave)save;
+    held = p.held;
+    timeActive = p.timeActive;
+  }
 }
