@@ -5,15 +5,9 @@ using UnityEngine;
 public class SquarerootPlant : Plant {
   // Squareroot plant
 
-  public GameObject produce;
-
   [Header("Plant Parts")]
+  public GameObject produce;
   public GameObject root;
-
-  private int growthStage = 0;
-
-  private float dieTime = 0f;
-  private float growTime = 0f;
 
   // Unit functions
   public override string GetName() {

@@ -366,6 +366,15 @@ public class Garden : MonoBehaviour {
     return false;
   }
 
+  // Gets the first unit with unit id id
+  public Unit GetUnit(int id) {
+    foreach (Unit unit in units)
+      if (unit.GetID() == id)
+        return unit;
+
+    return null;
+  }
+
   // Gets the last unit added to the garden
   public Unit GetLastUnit() {
     return units[units.Count - 1];

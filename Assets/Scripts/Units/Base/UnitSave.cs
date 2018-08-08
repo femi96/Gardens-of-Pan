@@ -9,6 +9,7 @@ public class UnitSave {
   //    This is not data safe so instances of unit save should not be passed around.
 
   public int prefabID = 0;
+  public int unitID = -1;
 
   public SerializableVector3 position = Vector3.zero;
   public SerializableQuaternion rotation = Quaternion.identity;
@@ -17,5 +18,6 @@ public class UnitSave {
     prefabID = u.prefabID;
     position = u.transform.position;
     rotation = u.transform.rotation;
+    unitID = u.unitID;
   }
 }

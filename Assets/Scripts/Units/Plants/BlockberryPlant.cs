@@ -5,22 +5,19 @@ using UnityEngine;
 public class BlockberryPlant : Plant {
   // Blockberry plant
 
-  public GameObject produce;
-
   [Header("Plant Parts")]
+  public GameObject produce;
   public GameObject trunk;
   public GameObject[] branch;
   public GameObject[] bush;
-
   public Transform[] producePoints;
+
+  [Header("Blockberry Bush Fields")]
   public Produce[] activeProduce;
   public float[] activeProduceTime;
 
-  private int growthStage = 0;
-
-  private float dieTime = 0f;
-  private float growTime = 0f;
-  private float produceTime = 0f;
+  public bool plantLoadedFromFile = false;
+  public int[] produceToLoad;
 
   // Unit functions
   public override string GetName() {
@@ -57,9 +54,18 @@ public class BlockberryPlant : Plant {
 
   public override void PlantBehavior() {
 
+    if (plantLoadedFromFile) {
+      // Load produce
+      for (int i = 0; i < produceToLoad.Length; i++) {
+        activeProduce[i] = (Produce)garden.GetUnit(produceToLoad[i]);
+      }
+
+      plantLoadedFromFile = false;
+    }
+
     // If not grown, grow
     if (!grown)
-      NotGrown();
+      Grow();
 
     // If grown, create produce
     if (grown)
@@ -80,6 +86,18 @@ public class BlockberryPlant : Plant {
       return 0.5f;
 
     return growTime * 0.5f / 30f;
+  }
+
+  public override void Die() {
+    // Drop produce on death
+    for (int i = 0; i < activeProduce.Length; i++) {
+      if (activeProduce[i] != null) {
+        activeProduce[i].held = false;
+        activeProduce[i] = null;
+      }
+    }
+
+    base.Die();
   }
 
   // Plant Behavior when fully grown
@@ -133,7 +151,7 @@ public class BlockberryPlant : Plant {
   }
 
   // Plant Behavior when not grown
-  private void NotGrown() {
+  private void Grow() {
     BlockType surfaceType = board.GetBlock(transform.position).GetBlockType();
     bool validSurface = BlockTypes.InGroup(surfaceType, BlockTypes.DepthGround);
     bool toClose = IsToClose();
@@ -150,9 +168,7 @@ public class BlockberryPlant : Plant {
     if (growthStage == 0) {
       if (growTime >= 0f) {
         trunk.transform.rotation = Quaternion.Euler(0, Random.Range(0f, 360f), 0);
-        trunk.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
-        trunk.SetActive(true);
-        growthStage = 1;
+        SetGrowthStage(1);
       }
     }
 
@@ -165,11 +181,7 @@ public class BlockberryPlant : Plant {
         float rot1 = rot0 + Random.Range(120f, 240f);
         branch[0].transform.rotation = Quaternion.Euler(0, rot0, 0);
         branch[1].transform.rotation = Quaternion.Euler(0, rot1, 0);
-        branch[0].transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
-        branch[1].transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
-        branch[0].SetActive(true);
-        branch[1].SetActive(true);
-        growthStage = 2;
+        SetGrowthStage(2);
       }
     }
 
@@ -179,11 +191,7 @@ public class BlockberryPlant : Plant {
       branch[1].transform.localScale = new Vector3(branchSize, branchSize, branchSize);
 
       if (growTime >= 20f) {
-        bush[0].transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
-        bush[1].transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
-        bush[0].SetActive(true);
-        bush[1].SetActive(true);
-        growthStage = 3;
+        SetGrowthStage(3);
       }
     }
 
@@ -193,20 +201,74 @@ public class BlockberryPlant : Plant {
       bush[1].transform.localScale = new Vector3(bushSize, bushSize, bushSize);
 
       if (growTime >= 30f) {
-        grown = true;
+        SetGrowthStage(4);
       }
     }
   }
 
-  public override void Die() {
-    // Drop produce on death
-    for (int i = 0; i < activeProduce.Length; i++) {
-      if (activeProduce[i] != null) {
-        activeProduce[i].held = false;
-        activeProduce[i] = null;
-      }
+  private void SetGrowthStage(int newStage) {
+    growthStage = newStage;
+
+    trunk.SetActive(growthStage >= 1);
+    branch[0].SetActive(growthStage >= 2);
+    branch[1].SetActive(growthStage >= 2);
+    bush[0].SetActive(growthStage >= 3);
+    bush[1].SetActive(growthStage >= 3);
+
+    if (growthStage == 1) {
+      trunk.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
     }
 
-    base.Die();
+    if (growthStage == 2) {
+      branch[0].transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
+      branch[1].transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
+    }
+
+    if (growthStage == 3) {
+      bush[0].transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
+      bush[1].transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
+    }
+
+    grown = (growthStage >= 4);
+  }
+
+  // ====================
+  // SAVING/LOADING plant
+  // ====================
+
+  public override void SetFromSave(UnitSave save) {
+    PlantSave p = (PlantSave)save;
+    base.SetFromSave(p);
+    activeProduceTime = p.produceTimes;
+
+    plantLoadedFromFile = true;
+    produceToLoad = p.produceIds;
+
+    trunk.transform.rotation = p.rotations[0];
+    branch[0].transform.rotation = p.rotations[1];
+    branch[1].transform.rotation = p.rotations[2];
+    bush[0].transform.rotation = p.rotations[3];
+    bush[1].transform.rotation = p.rotations[4];
+    SetGrowthStage(p.growthStage);
+  }
+
+  public override void SetPlantSave(PlantSave save) {
+    save.produceTimes = activeProduceTime;
+
+    save.produceIds = new int[activeProduce.Length];
+
+    for (int i = 0; i < save.produceIds.Length; i++) {
+      if (activeProduce[i] != null)
+        save.produceIds[i] = activeProduce[i].GetID();
+      else
+        save.produceIds[i] = -1;
+    }
+
+    save.rotations = new SerializableQuaternion[5];
+    save.rotations[0] = trunk.transform.rotation;
+    save.rotations[1] = branch[0].transform.rotation;
+    save.rotations[2] = branch[1].transform.rotation;
+    save.rotations[3] = bush[0].transform.rotation;
+    save.rotations[4] = bush[1].transform.rotation;
   }
 }

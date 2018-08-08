@@ -6,16 +6,16 @@ public abstract class Plant : Unit {
   // Game controller that handles a plant's state and behavior
 
   [Header("Plant Fields")]
-  public GameObject model;
-
   public bool grown;
+  public int growthStage = 0;
 
   public float timeActive = 0f;
+  public float dieTime = 0f;
+  public float growTime = 0f;
+  public float produceTime = 0f;
 
   public override void Awake() {
     base.Awake();
-    model = transform.Find("Model").gameObject;
-
     PlantAwake();
   }
 
@@ -59,4 +59,25 @@ public abstract class Plant : Unit {
 
     return toClose;
   }
+
+  // ====================
+  // SAVING/LOADING plant
+  // ====================
+
+  public override UnitSave GetUnitSave() {
+    PlantSave save = new PlantSave(this);
+    SetPlantSave(save);
+    return save;
+  }
+
+  public override void SetFromSave(UnitSave save) {
+    PlantSave p = (PlantSave)save;
+    grown = p.grown;
+    growthStage = p.growthStage;
+    timeActive = p.timeActive;
+    dieTime = p.dieTime;
+    growTime = p.growTime;
+  }
+
+  public virtual void SetPlantSave(PlantSave save) {}
 }

@@ -5,18 +5,12 @@ using UnityEngine;
 public class SphFlowerPlant : Plant {
   // Sph flower plant
 
+  [Header("Plant Parts")]
   public GameObject produce;
   public GameObject seed;
-
-  [Header("Plant Parts")]
   public GameObject stem;
   public GameObject flower;
   public GameObject leaves;
-
-  private int growthStage = 0;
-
-  private float dieTime = 0f;
-  private float growTime = 0f;
 
   // Unit functions
   public override string GetName() {

@@ -10,10 +10,12 @@ public abstract class Unit : MonoBehaviour {
   public GardenBoard board;
 
   public int prefabID;
+  public int unitID;
 
   public virtual void Awake() {
     garden = GameObject.FindWithTag("Garden").GetComponent<Garden>();
     board = garden.GetBoard();
+    unitID = this.GetInstanceID();
   }
 
   // Returns name of unit
@@ -33,6 +35,11 @@ public abstract class Unit : MonoBehaviour {
     prefabID = id;
   }
 
+  // Returns id of unit
+  public int GetID() {
+    return unitID;
+  }
+
   // Returns unit save of unit
   public virtual UnitSave GetUnitSave() {
     UnitSave save = new UnitSave(this);
@@ -41,5 +48,6 @@ public abstract class Unit : MonoBehaviour {
 
   // Sets unit from UnitSave
   public virtual void SetFromSave(UnitSave save) {
+    unitID = save.unitID;
   }
 }
