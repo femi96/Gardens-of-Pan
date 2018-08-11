@@ -31,9 +31,7 @@ public class SphFlowerPlant : Plant {
 
   // Plant functions
   public override void PlantAwake() {
-    stem.SetActive(false);
-    flower.SetActive(false);
-    leaves.SetActive(false);
+    SetGrowthStage(0);
   }
 
   public override void PlantBehavior() {
@@ -76,9 +74,7 @@ public class SphFlowerPlant : Plant {
     if (growthStage == 0) {
       if (growTime >= 0f) {
         stem.transform.rotation = Quaternion.Euler(0, Random.Range(0f, 360f), 0);
-        stem.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
-        stem.SetActive(true);
-        growthStage = 1;
+        SetGrowthStage(1);
       }
     }
 
@@ -88,9 +84,7 @@ public class SphFlowerPlant : Plant {
 
       if (growTime >= 10f) {
         leaves.transform.rotation = Quaternion.Euler(0, Random.Range(0f, 360f), 0);
-        leaves.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
-        leaves.SetActive(true);
-        growthStage = 2;
+        SetGrowthStage(2);
       }
     }
 
@@ -102,9 +96,7 @@ public class SphFlowerPlant : Plant {
 
       if (growTime >= 20f) {
         flower.transform.rotation = Quaternion.Euler(0, Random.Range(0f, 360f), 0);
-        flower.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
-        flower.SetActive(true);
-        growthStage = 3;
+        SetGrowthStage(3);
       }
     }
 
@@ -113,7 +105,7 @@ public class SphFlowerPlant : Plant {
       flower.transform.localScale = new Vector3(flowerSize, flowerSize, flowerSize);
 
       if (growTime >= 30f) {
-        grown = true;
+        SetGrowthStage(4);
       }
     }
   }
@@ -125,5 +117,48 @@ public class SphFlowerPlant : Plant {
     }
 
     base.Die();
+  }
+
+  private void SetGrowthStage(int newStage) {
+    growthStage = newStage;
+
+    if (growthStage == 1) {
+      stem.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
+    }
+
+    if (growthStage == 2) {
+      leaves.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
+    }
+
+    if (growthStage == 3) {
+      flower.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
+    }
+
+    stem.SetActive(growthStage >= 1);
+    leaves.SetActive(growthStage >= 2);
+    flower.SetActive(growthStage >= 3);
+
+    grown = (growthStage >= 4);
+  }
+
+  // ====================
+  // SAVING/LOADING plant
+  // ====================
+
+  public override void SetFromSave(UnitSave save) {
+    PlantSave p = (PlantSave)save;
+    base.SetFromSave(p);
+
+    stem.transform.rotation = p.rotations[0];
+    flower.transform.rotation = p.rotations[1];
+    leaves.transform.rotation = p.rotations[2];
+    SetGrowthStage(p.growthStage);
+  }
+
+  public override void SetPlantSave(PlantSave save) {
+    save.rotations = new SerializableQuaternion[3];
+    save.rotations[0] = stem.transform.rotation;
+    save.rotations[1] = flower.transform.rotation;
+    save.rotations[2] = leaves.transform.rotation;
   }
 }
