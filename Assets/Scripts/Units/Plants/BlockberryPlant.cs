@@ -38,11 +38,7 @@ public class BlockberryPlant : Plant {
 
   // Plant functions
   public override void PlantAwake() {
-    trunk.SetActive(false);
-    branch[0].SetActive(false);
-    branch[1].SetActive(false);
-    bush[0].SetActive(false);
-    bush[1].SetActive(false);
+    SetGrowthStage(0);
 
     activeProduce = new Produce[producePoints.Length];
     activeProduceTime = new float[producePoints.Length];
@@ -63,11 +59,9 @@ public class BlockberryPlant : Plant {
       plantLoadedFromFile = false;
     }
 
-    // If not grown, grow
     if (!grown)
       Grow();
 
-    // If grown, create produce
     if (grown)
       Grown();
 
@@ -102,40 +96,45 @@ public class BlockberryPlant : Plant {
 
   // Plant Behavior when fully grown
   private void Grown() {
+    CreateProduce();
+    DropProduce();
+  }
 
-    // Create produce
+  private void CreateProduce() {
     produceTime += Time.deltaTime;
 
-    if (produceTime > 8f) {
-      // Get random empty produce point
-      int produceIndex = 0;
-      List<int> emptyIndices = new List<int>();
+    if (produceTime < 8f)
+      return;
 
-      for (int i = 0; i < producePoints.Length; i++)
-        if (activeProduce[i] == null)
-          emptyIndices.Add(i);
+    // Get random empty produce point
+    int produceIndex = 0;
+    List<int> emptyIndices = new List<int>();
 
-      if (emptyIndices.Count > 0)
-        produceIndex = emptyIndices[Random.Range(0, emptyIndices.Count)];
+    for (int i = 0; i < producePoints.Length; i++)
+      if (activeProduce[i] == null)
+        emptyIndices.Add(i);
 
-      // If empty, add produce
-      if (activeProduce[produceIndex] == null) {
-        Transform point = producePoints[produceIndex];
+    if (emptyIndices.Count > 0)
+      produceIndex = emptyIndices[Random.Range(0, emptyIndices.Count)];
 
-        if (garden.TryAddUnit(produce, point.position, point.rotation)) {
-          activeProduce[produceIndex] = (Produce)garden.GetLastUnit();
-          activeProduce[produceIndex].held = true;
-          activeProduceTime[produceIndex] = 0f;
-          produceTime -= 8f;
-        } else {
-          produceTime -= 8f;
-        }
+    // If empty, add produce
+    if (activeProduce[produceIndex] == null) {
+      Transform point = producePoints[produceIndex];
+
+      if (garden.TryAddUnit(produce, point.position, point.rotation)) {
+        activeProduce[produceIndex] = (Produce)garden.GetLastUnit();
+        activeProduce[produceIndex].held = true;
+        activeProduceTime[produceIndex] = 0f;
+        produceTime -= 8f;
       } else {
-        produceTime -= 4f;
+        produceTime -= 8f;
       }
+    } else {
+      produceTime -= 4f;
     }
+  }
 
-    // Drop produce
+  private void DropProduce() {
     for (int i = 0; i < producePoints.Length; i++) {
       activeProduceTime[i] += Time.deltaTime;
 
@@ -209,12 +208,6 @@ public class BlockberryPlant : Plant {
   private void SetGrowthStage(int newStage) {
     growthStage = newStage;
 
-    trunk.SetActive(growthStage >= 1);
-    branch[0].SetActive(growthStage >= 2);
-    branch[1].SetActive(growthStage >= 2);
-    bush[0].SetActive(growthStage >= 3);
-    bush[1].SetActive(growthStage >= 3);
-
     if (growthStage == 1) {
       trunk.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
     }
@@ -228,6 +221,12 @@ public class BlockberryPlant : Plant {
       bush[0].transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
       bush[1].transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
     }
+
+    trunk.SetActive(growthStage >= 1);
+    branch[0].SetActive(growthStage >= 2);
+    branch[1].SetActive(growthStage >= 2);
+    bush[0].SetActive(growthStage >= 3);
+    bush[1].SetActive(growthStage >= 3);
 
     grown = (growthStage >= 4);
   }
