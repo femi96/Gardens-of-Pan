@@ -35,7 +35,7 @@ public class SquarerootPlant : Plant {
 
     // If not grown, grow
     if (!grown)
-      NotGrown();
+      Grow();
 
     // If grown, create produce
     if (grown) {
@@ -52,7 +52,7 @@ public class SquarerootPlant : Plant {
   }
 
   // Plant Behavior when not grown
-  private void NotGrown() {
+  private void Grow() {
     BlockType surfaceType = board.GetBlock(transform.position).GetBlockType();
     bool validSurface = BlockTypes.InGroup(surfaceType, BlockTypes.DepthGround);
     bool toClose = IsToClose();
@@ -69,9 +69,7 @@ public class SquarerootPlant : Plant {
     if (growthStage == 0) {
       if (growTime >= 0f) {
         root.transform.rotation = Quaternion.Euler(0, Random.Range(0f, 360f), 0);
-        root.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
-        root.SetActive(true);
-        growthStage = 1;
+        SetGrowthStage(1);
       }
     }
 
@@ -80,8 +78,37 @@ public class SquarerootPlant : Plant {
       root.transform.localScale = new Vector3(rootSize, rootSize, rootSize);
 
       if (growTime >= 20f) {
-        grown = true;
+        SetGrowthStage(2);
       }
     }
+  }
+
+  private void SetGrowthStage(int newStage) {
+    growthStage = newStage;
+
+    if (growthStage == 1) {
+      root.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
+    }
+
+    root.SetActive(growthStage >= 1);
+
+    grown = (growthStage >= 2);
+  }
+
+  // ====================
+  // SAVING/LOADING plant
+  // ====================
+
+  public override void SetFromSave(UnitSave save) {
+    PlantSave p = (PlantSave)save;
+    base.SetFromSave(p);
+
+    root.transform.rotation = p.rotations[0];
+    SetGrowthStage(p.growthStage);
+  }
+
+  public override void SetPlantSave(PlantSave save) {
+    save.rotations = new SerializableQuaternion[1];
+    save.rotations[0] = root.transform.rotation;
   }
 }

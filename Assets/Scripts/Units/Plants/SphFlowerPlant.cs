@@ -38,7 +38,7 @@ public class SphFlowerPlant : Plant {
 
     // If not grown, grow
     if (!grown)
-      NotGrown();
+      Grow();
 
     // Add grown behavior of flower looking at sun (or drifting towards w delta)
 
@@ -57,7 +57,7 @@ public class SphFlowerPlant : Plant {
   }
 
   // Plant Behavior when not grown
-  private void NotGrown() {
+  private void Grow() {
     BlockType surfaceType = board.GetBlock(transform.position).GetBlockType();
     bool validSurface = BlockTypes.InGroup(surfaceType, BlockTypes.DepthGround);
     bool toClose = IsToClose();
