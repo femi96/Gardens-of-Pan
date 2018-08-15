@@ -22,7 +22,7 @@ public class FactorTimeout : MonsterFactor {
     timeout = UnityEngine.Random.Range(timeoutMin, timeoutMax);
   }
 
-  public float GetPriority(MonsterBehaviour behaviour) {
+  public override float GetPriority(MonsterBehaviour behaviour) {
 
     float totalSeconds = behaviour.timeSinceLastEnd;
     return Mathf.Max(0, totalSeconds - timeout) * m;

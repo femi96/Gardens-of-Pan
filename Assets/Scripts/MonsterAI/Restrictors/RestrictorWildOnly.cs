@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 public class RestrictorWildOnly : MonsterRestrictor {
   // AI controller evaluating if state is available
   //  Only available if monster is not owned
 
   public RestrictorWildOnly() {}
 
-  public bool Restrict(MonsterBehaviour behaviour) {
+  public override bool Restrict(MonsterBehaviour behaviour) {
     return behaviour.monster.owned;
   }
 }

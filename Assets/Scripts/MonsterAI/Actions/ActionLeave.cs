@@ -21,7 +21,7 @@ public class ActionLeave : MonsterAction {
 
   public ActionLeave() {}
 
-  public void SetupAction(MonsterBehaviour behaviour) {
+  public override void SetupAction(MonsterBehaviour behaviour) {
 
     this.behaviour = behaviour;
     monster = behaviour.monster;
@@ -33,7 +33,7 @@ public class ActionLeave : MonsterAction {
     destination = spawnPoints[Random.Range(0, spawnPoints.Count)].GetPosition();
   }
 
-  public void Act() {
+  public override void Act() {
 
     // If monster path isnt valid, update path
     // TODO

@@ -21,7 +21,7 @@ public class ActionWander : MonsterAction {
 
   public ActionWander() {}
 
-  public void SetupAction(MonsterBehaviour behaviour) {
+  public override void SetupAction(MonsterBehaviour behaviour) {
 
     this.behaviour = behaviour;
     monster = behaviour.monster;
@@ -33,7 +33,7 @@ public class ActionWander : MonsterAction {
     destination = new Vector3(Random.Range(-limit, limit), 0, Random.Range(-limit, limit));
   }
 
-  public void Act() {
+  public override void Act() {
 
     // If monster path isnt valid, update path
     // TODO

@@ -18,12 +18,12 @@ public class ActionTimeout : MonsterAction {
     timeout = Random.Range(timeoutMin, timeoutMax);
   }
 
-  public void SetupAction(MonsterBehaviour behaviour) {
+  public override void SetupAction(MonsterBehaviour behaviour) {
 
     this.behaviour = behaviour;
   }
 
-  public void Act() {
+  public override void Act() {
 
     if (behaviour.behaviourTime >= timeout) {
       behaviour.EndBehaviour();

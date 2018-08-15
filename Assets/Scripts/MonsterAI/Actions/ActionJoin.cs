@@ -15,13 +15,13 @@ public class ActionJoin : MonsterAction {
     timeout = joinTime;
   }
 
-  public void SetupAction(MonsterBehaviour behaviour) {
+  public override void SetupAction(MonsterBehaviour behaviour) {
 
     this.behaviour = behaviour;
     monster = behaviour.monster;
   }
 
-  public void Act() {
+  public override void Act() {
 
     if (!monster.owned && monster.CanOwn()) {
 

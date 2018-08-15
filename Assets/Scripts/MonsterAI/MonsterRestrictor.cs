@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface MonsterRestrictor {
+public abstract class MonsterRestrictor {
   // AI controller evaluating if state is available
 
   // Returns bool for if the behavior state is available
-  bool Restrict(MonsterBehaviour behaviour);
+  public abstract bool Restrict(MonsterBehaviour behaviour);
 }
