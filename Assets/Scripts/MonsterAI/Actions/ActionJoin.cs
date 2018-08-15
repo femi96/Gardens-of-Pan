@@ -2,12 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 public class ActionJoin : MonsterAction {
   // AI controller scripting monster behaviour
   //  Monster tries to join garden
-
-  private Monster monster;
-  private MonsterBehaviour behaviour;
 
   private float timeout;
 
@@ -15,24 +13,20 @@ public class ActionJoin : MonsterAction {
     timeout = joinTime;
   }
 
-  public override void SetupAction(MonsterBehaviour behaviour) {
+  public override void SetupAction(MonsterBehaviour behaviour, Monster monster) {}
 
-    this.behaviour = behaviour;
-    monster = behaviour.monster;
-  }
-
-  public override void Act() {
+  public override void Act(MonsterBehaviour behaviour, Monster monster) {
 
     if (!monster.owned && monster.CanOwn()) {
 
       if (behaviour.behaviourTime >= timeout) {
         monster.SetOwned(true);
-        behaviour.EndBehaviour();
+        monster.EndBehaviour();
       }
 
     } else {
 
-      behaviour.EndBehaviour();
+      monster.EndBehaviour();
     }
   }
 }

@@ -2,18 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 public class ActionWander : MonsterAction {
   // AI controller scripting monster behaviour
   //  Sets a random destination in the garden and enables movement towards it
 
-  private Vector3 destination;
-  private Vector3 step;
+  private SerializableVector3 destination;
+  private SerializableVector3 step;
   private bool hasStep;
-
-  private Monster monster;
-  private MonsterBehaviour behaviour;
-  private EntityMover mover;
-  private Garden garden;
 
   private static float destSize = 0.5f;
 
@@ -21,19 +17,18 @@ public class ActionWander : MonsterAction {
 
   public ActionWander() {}
 
-  public override void SetupAction(MonsterBehaviour behaviour) {
-
-    this.behaviour = behaviour;
-    monster = behaviour.monster;
-    mover = monster.mover;
-    garden = behaviour.garden;
+  public override void SetupAction(MonsterBehaviour behaviour, Monster monster) {
+    Garden garden = monster.garden;
 
     // Pick a random destination
     float limit = (garden.gardenSize / 2f);
     destination = new Vector3(Random.Range(-limit, limit), 0, Random.Range(-limit, limit));
   }
 
-  public override void Act() {
+  public override void Act(MonsterBehaviour behaviour, Monster monster) {
+
+    // Setup necessary variables
+    EntityMover mover = monster.mover;
 
     // If monster path isnt valid, update path
     // TODO
@@ -65,7 +60,7 @@ public class ActionWander : MonsterAction {
 
     if (destDistance < destSize) {
       mover.MoveStop();
-      behaviour.EndBehaviour();
+      monster.EndBehaviour();
     }
   }
 }

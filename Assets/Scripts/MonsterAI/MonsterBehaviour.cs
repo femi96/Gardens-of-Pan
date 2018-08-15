@@ -11,8 +11,6 @@ public class MonsterBehaviour {
   public string behaviourText;
 
   // Collection variables:
-  public Garden garden;
-  public Monster monster;
   public List<MonsterAction> actions;
   public List<MonsterFactor> factors;
   public List<MonsterRestrictor> restrictors;
@@ -27,9 +25,6 @@ public class MonsterBehaviour {
     behaviourName = name;
     behaviourText = name + "ing...";
 
-    garden = rMonster.garden;
-    monster = rMonster;
-
     actions = new List<MonsterAction>();
     factors = new List<MonsterFactor>();
     restrictors = new List<MonsterRestrictor>();
@@ -38,51 +33,44 @@ public class MonsterBehaviour {
   }
 
   // Starts state with initial fields and starts behaviours
-  public void StartBehaviour() {
+  public void StartBehaviour(Monster thisMonster) {
 
     behaviourTime = 0f;
     behavioursSince = -1;
 
     foreach (MonsterAction action in actions) {
-      action.SetupAction(this);
+      action.SetupAction(this, thisMonster);
     }
   }
 
-  // Ends state
-  public void EndBehaviour() {
-
-    timeSinceLastEnd = 0;
-    monster.currentBehaviourDone = true;
-  }
-
   // Called per frame, execute every action each frame
-  public void BehaviourUpdate() {
+  public void BehaviourUpdate(Monster thisMonster) {
 
     behaviourTime += Time.deltaTime;
 
     foreach (MonsterAction action in actions) {
-      action.Act();
+      action.Act(this, thisMonster);
     }
   }
 
   // Get behaviour priority, based on sum of all factors
-  public float GetPriority() {
+  public float GetPriority(Monster thisMonster) {
 
     float priority = 0;
 
     foreach (MonsterFactor factor in factors) {
-      priority += factor.GetPriority(this);
+      priority += factor.GetPriority(this, thisMonster);
     }
 
     return priority;
   }
 
   // Is behaviour allowed to start
-  public bool IsResticted() {
+  public bool IsResticted(Monster thisMonster) {
     bool restricted = false;
 
     foreach (MonsterRestrictor restrictor in restrictors) {
-      restricted = restricted || restrictor.Restrict(this);
+      restricted = restricted || restrictor.Restrict(this, thisMonster);
     }
 
     return restricted;

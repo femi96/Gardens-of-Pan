@@ -33,7 +33,7 @@ public abstract class Monster : Unit {
     foreach (MonsterBehaviour behaviour in behaviours)
       behaviour.timeSinceLastEnd += Time.deltaTime;
 
-    currentBehaviour.BehaviourUpdate();
+    currentBehaviour.BehaviourUpdate(this);
   }
 
   // Returns if garden meets visit conditions
@@ -67,11 +67,11 @@ public abstract class Monster : Unit {
       behaviour.behavioursSince += 1;
 
       // Is behaviour valid
-      if (behaviour.IsResticted())
+      if (behaviour.IsResticted(this))
         continue;
 
       // Find highest factor behaviour
-      float priority = behaviour.GetPriority();
+      float priority = behaviour.GetPriority(this);
 
       if (priority > maxPriority) {
         maxPriority = priority;
@@ -81,9 +81,15 @@ public abstract class Monster : Unit {
     }
 
     if (newState) {
-      currentBehaviour.StartBehaviour();
+      currentBehaviour.StartBehaviour(this);
       currentBehaviourDone = false;
     }
+  }
+
+  // End this monsters current behavior
+  public void EndBehaviour() {
+    currentBehaviour.timeSinceLastEnd = 0;
+    currentBehaviourDone = true;
   }
 
   // Set monster's behaviour states
@@ -105,8 +111,9 @@ public abstract class Monster : Unit {
   public override void SetFromSave(UnitSave save) {
     MonsterSave m = (MonsterSave)save;
     SetOwned(m.owned);
-    // currentBehaviour = m.currentBehaviour;
-    // behaviours = m.behaviours;
-    // currentBehaviourDone = m.currentBehaviourDone;
+
+    behaviours = m.behaviours;
+    currentBehaviour = behaviours[m.currentBehaviourIndex];
+    currentBehaviourDone = m.currentBehaviourDone;
   }
 }

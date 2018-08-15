@@ -9,7 +9,7 @@ public class RestrictorWildOnly : MonsterRestrictor {
 
   public RestrictorWildOnly() {}
 
-  public override bool Restrict(MonsterBehaviour behaviour) {
-    return behaviour.monster.owned;
+  public override bool Restrict(MonsterBehaviour behaviour, Monster monster) {
+    return monster.owned;
   }
 }

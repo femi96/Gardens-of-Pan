@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 public class FactorTimeout : MonsterFactor {
   // AI controller evaluating state priority
   //  Priority based on time (in seconds), after a timeout
@@ -22,7 +23,7 @@ public class FactorTimeout : MonsterFactor {
     timeout = UnityEngine.Random.Range(timeoutMin, timeoutMax);
   }
 
-  public override float GetPriority(MonsterBehaviour behaviour) {
+  public override float GetPriority(MonsterBehaviour behaviour, Monster monster) {
 
     float totalSeconds = behaviour.timeSinceLastEnd;
     return Mathf.Max(0, totalSeconds - timeout) * m;
