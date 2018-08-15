@@ -85,9 +85,8 @@ public class Garden : MonoBehaviour {
     }
   }
 
-  // ========================================
   // FILE MANAGEMENT or SAVING/LOADING garden
-  // ========================================
+  // ===========================================
 
   // Get file path for garden from its name and ID
   private string GetFilePath(string name, int iD) {
@@ -292,9 +291,8 @@ public class Garden : MonoBehaviour {
     }
   }
 
-  // ==========================
   // GARDEN MODE of game/garden
-  // ==========================
+  // =============================
 
   // Set garden mode and update related
   public void SetGardenMode(GardenMode m) {
@@ -310,9 +308,8 @@ public class Garden : MonoBehaviour {
       Time.timeScale = 0f;
   }
 
-  // ===============
   // UNITS in garden
-  // ===============
+  // ==================
 
   // Get total size of all units
   public float UnitSizeCount() {

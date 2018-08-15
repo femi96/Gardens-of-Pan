@@ -95,9 +95,8 @@ public class SquarerootPlant : Plant {
     grown = (growthStage >= 2);
   }
 
-  // ====================
   // SAVING/LOADING plant
-  // ====================
+  // =======================
 
   public override void SetFromSave(UnitSave save) {
     PlantSave p = (PlantSave)save;

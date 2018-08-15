@@ -141,9 +141,8 @@ public class SphFlowerPlant : Plant {
     grown = (growthStage >= 4);
   }
 
-  // ====================
   // SAVING/LOADING plant
-  // ====================
+  // =======================
 
   public override void SetFromSave(UnitSave save) {
     PlantSave p = (PlantSave)save;

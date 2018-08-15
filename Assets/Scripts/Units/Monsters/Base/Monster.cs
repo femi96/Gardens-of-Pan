@@ -91,6 +91,9 @@ public abstract class Monster : Unit {
     behaviours = Behaviours();
   }
 
+  // SAVING/LOADING monster
+  // ==========================
+
   // Get set of monster behaviour states based on monster type
   public abstract MonsterBehaviour[] Behaviours();
 
