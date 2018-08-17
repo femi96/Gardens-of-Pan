@@ -9,6 +9,16 @@ public abstract class Monster : Unit {
   public EntityMover mover;
   public bool owned = false;
 
+  // Monster data
+  public const float HappyMax = 10f;
+  public const float HappyMin = -10f;
+  public const float HappyPerSecLimit = 0.1f;
+  public const float HappyInternalPerSecDecay = 0.1f / 3f;
+  public float happy = 0f;
+  public float happyWell = 0f;
+  public float happyInternal = 0f;
+  public float happyTime = 0f;
+
   // Monster AI
   public MonsterBehaviour currentBehaviour;
   public MonsterBehaviour[] behaviours;
@@ -27,6 +37,7 @@ public abstract class Monster : Unit {
   }
 
   void Update() {
+    // Update Behaviour
     if (currentBehaviourDone)
       StartNewBehaviour();
 
@@ -34,6 +45,23 @@ public abstract class Monster : Unit {
       behaviour.timeSinceLastEnd += Time.deltaTime;
 
     currentBehaviour.BehaviourUpdate(this);
+
+    // Update Happy
+    float happyInteralDelta = -happyInternal * Time.deltaTime;
+    happyInternal = Mathf.Clamp(happyInteralDelta, -HappyInternalPerSecDecay * Time.deltaTime, HappyInternalPerSecDecay * Time.deltaTime);
+    happyInternal = Mathf.Clamp(happyInternal, HappyMin, HappyMax);
+
+    happyTime += Time.deltaTime;
+
+    if (happyTime >= 5f) {
+      happyTime -= 5f;
+      UpdateHappyWell();
+    }
+
+    float happyDelta = (happyWell - happy) * Time.deltaTime;
+    happyDelta = Mathf.Clamp(happyDelta, -HappyPerSecLimit * Time.deltaTime, HappyPerSecLimit * Time.deltaTime);
+    happy += happyDelta;
+    happy = Mathf.Clamp(happy, HappyMin, HappyMax);
   }
 
   // Returns if garden meets visit conditions
@@ -55,6 +83,22 @@ public abstract class Monster : Unit {
     modelOwned.SetActive(owned);
     modelWild.SetActive(!owned);
   }
+
+  // Monster Happiness
+  // ====================================
+
+  // Set the monster's happiness well
+  public void UpdateHappyWell() {
+    float happyTemp = 0f;
+    happyTemp += GetHappyExternal();
+    happyTemp += happyInternal;
+    happyWell = happyTemp;
+  }
+
+  public abstract float GetHappyExternal();
+
+  // Monster Behaviours
+  // ====================================
 
   // Chooses a new state, and starts it
   private void StartNewBehaviour() {
@@ -97,11 +141,11 @@ public abstract class Monster : Unit {
     behaviours = Behaviours();
   }
 
-  // SAVING/LOADING monster
-  // ==========================
-
   // Get set of monster behaviour states based on monster type
   public abstract MonsterBehaviour[] Behaviours();
+
+  // SAVING/LOADING monster
+  // ====================================
 
   public override UnitSave GetUnitSave() {
     UnitSave save = new MonsterSave(this);

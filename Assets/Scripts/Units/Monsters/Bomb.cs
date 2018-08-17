@@ -60,6 +60,10 @@ public class Bomb : Monster {
     return validSpawnPoints[r];
   }
 
+  public override float GetHappyExternal() {
+    return 0f;
+  }
+
   public override MonsterBehaviour[] Behaviours() {
 
     List<MonsterBehaviour> behaviors = new List<MonsterBehaviour>();
