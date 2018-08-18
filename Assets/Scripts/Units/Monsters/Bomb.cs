@@ -61,7 +61,22 @@ public class Bomb : Monster {
   }
 
   public override float GetHappyExternal() {
-    return 0f;
+    float happyFromBlocks = board.GetBlockTypeCount(BlockType.Scorch)
+                            + board.GetBlockTypeCount(BlockType.Ashland)
+                            + board.GetBlockTypeCount(BlockType.Lava)
+                            + board.GetBlockTypeCount(BlockType.LavaD)
+                            - board.GetBlockTypeCount(BlockType.Tundra)
+                            - board.GetBlockTypeCount(BlockType.Snow)
+                            - board.GetBlockTypeCount(BlockType.Ice)
+                            - board.GetBlockTypeCount(BlockType.IceD);
+    happyFromBlocks = happyFromBlocks / 2f;
+    happyFromBlocks = Mathf.Clamp(happyFromBlocks, 0f, 4f);
+
+    float happyFromUnits = (garden.GetUnitTypeCount(typeof(Bomb)) - 1);
+    happyFromUnits = happyFromUnits / 1.5f;
+    happyFromUnits = Mathf.Clamp(happyFromUnits, 0f, 2f);
+
+    return happyFromBlocks + happyFromUnits;
   }
 
   public override MonsterBehaviour[] Behaviours() {

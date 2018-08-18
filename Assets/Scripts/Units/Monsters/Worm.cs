@@ -58,7 +58,15 @@ public class Worm : Monster {
   }
 
   public override float GetHappyExternal() {
-    return 0f;
+    float happyFromBlocks = board.GetBlockTypeCount(BlockType.Dirt);
+    happyFromBlocks = happyFromBlocks / 2f;
+    happyFromBlocks = Mathf.Clamp(happyFromBlocks, 0f, 4f);
+
+    float happyFromUnits = (garden.GetUnitTypeCount(typeof(Worm)) - 1);
+    happyFromUnits = happyFromUnits / 1.5f;
+    happyFromUnits = Mathf.Clamp(happyFromUnits, 0f, 2f);
+
+    return happyFromBlocks + happyFromUnits;
   }
 
   public override MonsterBehaviour[] Behaviours() {

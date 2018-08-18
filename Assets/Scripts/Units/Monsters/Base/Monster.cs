@@ -47,23 +47,7 @@ public abstract class Monster : Unit {
     currentBehaviour.BehaviourUpdate(this);
 
     // Update Happy
-    float happyInteralDelta = Mathf.Sign(-happyInternal) * HappyInternalPerSecDecay * Time.deltaTime;
-    happyInteralDelta = Mathf.Clamp(happyInteralDelta, -Mathf.Abs(happyInternal), Mathf.Abs(happyInternal));
-    happyInternal += happyInteralDelta;
-    happyInternal = Mathf.Clamp(happyInternal, HappyMin, HappyMax);
-
-    happyTime += Time.deltaTime;
-
-    if (happyTime >= 5f) {
-      happyTime -= 5f;
-      UpdateHappyWell();
-    }
-
-    float happyWellDelta = happyWell - happy;
-    float happyDelta = Mathf.Sign(happyWellDelta) * HappyPerSec * Time.deltaTime;
-    happyDelta = Mathf.Clamp(happyDelta, -Mathf.Abs(happyWellDelta), Mathf.Abs(happyWellDelta));
-    happy += happyDelta;
-    happy = Mathf.Clamp(happy, HappyMin, HappyMax);
+    UpdateHappy();
   }
 
   // Returns if garden meets visit conditions
@@ -89,7 +73,28 @@ public abstract class Monster : Unit {
   // Monster Happiness
   // ====================================
 
-  // Set the monster's happiness well
+  // Update the monster's happiness
+  public void UpdateHappy() {
+    float happyInteralDelta = Mathf.Sign(-happyInternal) * HappyInternalPerSecDecay * Time.deltaTime;
+    happyInteralDelta = Mathf.Clamp(happyInteralDelta, -Mathf.Abs(happyInternal), Mathf.Abs(happyInternal));
+    happyInternal += happyInteralDelta;
+    happyInternal = Mathf.Clamp(happyInternal, HappyMin, HappyMax);
+
+    happyTime += Time.deltaTime;
+
+    if (happyTime >= 5f) {
+      happyTime -= 5f;
+      UpdateHappyWell();
+    }
+
+    float happyWellDelta = happyWell - happy;
+    float happyDelta = Mathf.Sign(happyWellDelta) * HappyPerSec * Time.deltaTime;
+    happyDelta = Mathf.Clamp(happyDelta, -Mathf.Abs(happyWellDelta), Mathf.Abs(happyWellDelta));
+    happy += happyDelta;
+    happy = Mathf.Clamp(happy, HappyMin, HappyMax);
+  }
+
+  // Update the monster's happiness well
   public void UpdateHappyWell() {
     float happyTemp = 0f;
     happyTemp += GetHappyExternal();
