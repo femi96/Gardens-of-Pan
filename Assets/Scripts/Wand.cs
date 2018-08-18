@@ -14,6 +14,7 @@ public class Wand : MonoBehaviour {
   public Garden garden;
   public GardenBoard gardenBoard;
   public WandCamera wandCamera;
+  public WandTools wandTools;
 
   // Movement:
   private float radius = 0.2f;
@@ -227,7 +228,7 @@ public class Wand : MonoBehaviour {
 
   // Update UI for hovered unit's tag
   private void UpdateTagUI() {
-    if (IsOnUnit()) {
+    if (IsOnUnit() && !wandTools.wandMenuOpen) {
       unitHoverUI.SetActive(true);
       unitHoverName.text = targetUnit.GetName();
       unitHoverBehavior.text = "";

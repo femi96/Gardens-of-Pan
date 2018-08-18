@@ -26,6 +26,7 @@ public class WandTools : MonoBehaviour {
   // UI:
   public GameObject toolGuide;
   public GameObject toolWheel;
+  public GameObject unitHoverUI;
 
   // Effect:
   public Transform effectContainer;
