@@ -35,6 +35,8 @@ public class Wand : MonoBehaviour {
   private Text unitHoverName;
   private Text unitHoverBehavior;
   private Image unitHoverBackground;
+  private Image unitHoverHappy;
+  private Text unitHoverHappyText;
 
   private readonly Color colorHoverDefault = new Color(0f, 0f, 0f, 0.7f);
   private readonly Color colorHoverWild = new Color(0.5f, 0f, 0f, 0.7f);
@@ -56,6 +58,8 @@ public class Wand : MonoBehaviour {
     unitHoverName = unitHoverUI.transform.Find("NameBG/Name").GetComponent<Text>();
     unitHoverBehavior = unitHoverUI.transform.Find("BehaviorBG/Behavior").GetComponent<Text>();
     unitHoverBackground = unitHoverUI.transform.Find("NameBG").GetComponent<Image>();
+    unitHoverHappy = unitHoverUI.transform.Find("HappyBG").GetComponent<Image>();
+    unitHoverHappyText = unitHoverUI.transform.Find("HappyBG/Name").GetComponent<Text>();
 
     screenshotText = screenshotUI.transform.Find("Text").GetComponent<Text>();
   }
@@ -236,8 +240,26 @@ public class Wand : MonoBehaviour {
         Monster targetMon = (Monster)targetUnit;
         unitHoverBehavior.text = targetMon.currentBehaviour.ToString();
 
-        if (!targetMon.owned)
+        if (targetMon.owned) {
+          unitHoverHappy.gameObject.SetActive(true);
+          float r = 1f - (0.5f * Mathf.Clamp(targetMon.happy, 0f, 2f) / 2f);
+          float g = 1f - (0.5f * Mathf.Clamp(targetMon.happy, -2f, 0f) / -2f);
+          Color happyColor = new Color(r, g, 0.5f);
+          unitHoverHappy.color = happyColor;
+
+          unitHoverHappyText.text = "Meh";
+
+          if (targetMon.happy < -1f)
+            unitHoverHappyText.text = "Sad";
+
+          if (targetMon.happy > 1f)
+            unitHoverHappyText.text = "Happy";
+
+        } else {
           unitHoverBackground.color = colorHoverWild;
+          unitHoverHappy.gameObject.SetActive(false);
+        }
+
       } else {
         unitHoverBehavior.transform.parent.gameObject.SetActive(false);
       }

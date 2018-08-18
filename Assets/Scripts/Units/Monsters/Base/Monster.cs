@@ -12,7 +12,7 @@ public abstract class Monster : Unit {
   // Monster data
   public const float HappyMax = 10f;
   public const float HappyMin = -10f;
-  public const float HappyPerSecLimit = 0.1f;
+  public const float HappyPerSec = 0.1f;
   public const float HappyInternalPerSecDecay = 0.1f / 3f;
   public float happy = 0f;
   public float happyWell = 0f;
@@ -47,8 +47,9 @@ public abstract class Monster : Unit {
     currentBehaviour.BehaviourUpdate(this);
 
     // Update Happy
-    float happyInteralDelta = -happyInternal * Time.deltaTime;
-    happyInternal = Mathf.Clamp(happyInteralDelta, -HappyInternalPerSecDecay * Time.deltaTime, HappyInternalPerSecDecay * Time.deltaTime);
+    float happyInteralDelta = Mathf.Sign(-happyInternal) * HappyInternalPerSecDecay * Time.deltaTime;
+    happyInteralDelta = Mathf.Clamp(happyInteralDelta, -Mathf.Abs(happyInternal), Mathf.Abs(happyInternal));
+    happyInternal += happyInteralDelta;
     happyInternal = Mathf.Clamp(happyInternal, HappyMin, HappyMax);
 
     happyTime += Time.deltaTime;
@@ -58,8 +59,9 @@ public abstract class Monster : Unit {
       UpdateHappyWell();
     }
 
-    float happyDelta = (happyWell - happy) * Time.deltaTime;
-    happyDelta = Mathf.Clamp(happyDelta, -HappyPerSecLimit * Time.deltaTime, HappyPerSecLimit * Time.deltaTime);
+    float happyWellDelta = happyWell - happy;
+    float happyDelta = Mathf.Sign(happyWellDelta) * HappyPerSec * Time.deltaTime;
+    happyDelta = Mathf.Clamp(happyDelta, -Mathf.Abs(happyWellDelta), Mathf.Abs(happyWellDelta));
     happy += happyDelta;
     happy = Mathf.Clamp(happy, HappyMin, HappyMax);
   }
