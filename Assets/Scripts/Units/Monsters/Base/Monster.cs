@@ -148,6 +148,12 @@ public abstract class Monster : Unit {
     behaviours = Behaviours();
   }
 
+  // Interrupt a monster's behavior
+  public void InterruptBehaviour(float interruptPriority) {
+    if (behaviour.interruptPriority <= interruptPriority)
+      EndBehaviour();
+  }
+
   // Get set of monster behaviour states based on monster type
   public abstract MonsterBehaviour[] Behaviours();
 

@@ -18,6 +18,7 @@ public class MonsterBehaviour {
   public int behavioursSince;
   public float behaviourTime;
   public float timeSinceLastEnd;
+  public float interruptPriority;
 
   // Creates MonsterBehaviour with name name for monster rMonster
   public MonsterBehaviour(string name, Monster rMonster) {
@@ -29,7 +30,8 @@ public class MonsterBehaviour {
     factors = new List<MonsterFactor>();
     restrictors = new List<MonsterRestrictor>();
 
-    timeSinceLastEnd = 0;
+    timeSinceLastEnd = 0f;
+    interruptPriority = 0f;
   }
 
   // Starts state with initial fields and starts behaviours
