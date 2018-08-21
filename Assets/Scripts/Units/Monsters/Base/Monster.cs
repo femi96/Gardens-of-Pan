@@ -150,7 +150,7 @@ public abstract class Monster : Unit {
 
   // Interrupt a monster's behavior
   public void InterruptBehaviour(float interruptPriority) {
-    if (behaviour.interruptPriority <= interruptPriority)
+    if (currentBehaviour.interruptPriority <= interruptPriority)
       EndBehaviour();
   }
 
