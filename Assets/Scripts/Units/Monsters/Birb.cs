@@ -75,11 +75,13 @@ public class Birb : Monster {
 
     MonsterBehaviour wander = new MonsterBehaviour("Wander", this);
     wander.actions.Add(new ActionWander());
+    wander.actions.Add(new ActionLookAtCamera(90f, 2f));
     wander.factors.Add(new FactorRepeat(1f));
     behaviors.Add(wander);
 
     MonsterBehaviour wait = new MonsterBehaviour("Wait", this);
     wait.actions.Add(new ActionTimeout(3f, 6f));
+    wait.actions.Add(new ActionLookAtCamera(90f, 2f));
     wait.factors.Add(new FactorRepeat(1f));
     behaviors.Add(wait);
 

@@ -19,12 +19,13 @@ public class Garden : MonoBehaviour {
   private UnitPrefabsFiller filler;
 
   // Garden meta:
+  [Header("Garden Meta")]
   public string gardenName;
   public int gardenID;
   public int gardenSize = 4;  // Garden dimensions 4x4
   public bool saveGarden = false;
   public bool noGarden = true;
-  public Text currentGardenText;
+  public GameObject wandCamera;
 
   // Garden contents:
   private float unitSizeLimit = 20;
@@ -32,10 +33,12 @@ public class Garden : MonoBehaviour {
   private Transform unitsCont; // GameObject container for unit gameObjects
 
   // Garden mode gameobjects:
+  [Header("Garden UI")]
   public GameObject mainMenuUI;
   public GameObject mainMenuCamera;
   public GameObject playUI;
   public GameObject playWand;
+  public Text currentGardenText;
 
   // Garden saving
   private float saveTime = 2f;

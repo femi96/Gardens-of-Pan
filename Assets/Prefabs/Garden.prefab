@@ -374,11 +374,12 @@ MonoBehaviour:
   gardenSize: 4
   saveGarden: 0
   noGarden: 1
-  currentGardenText: {fileID: 0}
+  wandCamera: {fileID: 0}
   mainMenuUI: {fileID: 0}
   mainMenuCamera: {fileID: 1193225085158376}
   playUI: {fileID: 0}
   playWand: {fileID: 0}
+  currentGardenText: {fileID: 0}
   saveUI: {fileID: 0}
 --- !u!124 &124426016132179466
 Behaviour:

@@ -322,6 +322,11 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d96d594c118107c4d8211182c82b4759, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &719776203 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1871917864286012, guid: 2d9406c1543516e47b17f5c6a188c7f9,
+    type: 2}
+  m_PrefabInternal: {fileID: 1437391602}
 --- !u!4 &740994464 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4667715751536946, guid: d96d594c118107c4d8211182c82b4759,
@@ -830,9 +835,9 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 114890702010952304, guid: 2842cd2331049b64da842e685550763d,
         type: 2}
-      propertyPath: currentGardenText
+      propertyPath: wandCamera
       value: 
-      objectReference: {fileID: 899348009}
+      objectReference: {fileID: 719776203}
     - target: {fileID: 114890702010952304, guid: 2842cd2331049b64da842e685550763d,
         type: 2}
       propertyPath: mainMenuUI
@@ -850,20 +855,14 @@ Prefab:
       objectReference: {fileID: 256640434}
     - target: {fileID: 114890702010952304, guid: 2842cd2331049b64da842e685550763d,
         type: 2}
+      propertyPath: currentGardenText
+      value: 
+      objectReference: {fileID: 899348009}
+    - target: {fileID: 114890702010952304, guid: 2842cd2331049b64da842e685550763d,
+        type: 2}
       propertyPath: saveUI
       value: 
       objectReference: {fileID: 802327675}
-    - target: {fileID: 114890702010952304, guid: 2842cd2331049b64da842e685550763d,
-        type: 2}
-      propertyPath: gardenSize
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 114890702010952304, guid: 2842cd2331049b64da842e685550763d,
-        type: 2}
-      propertyPath: debugUnitPrefab
-      value: 
-      objectReference: {fileID: 1541386915088780, guid: 0f617659039928045aeaf484a9c8e552,
-        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2842cd2331049b64da842e685550763d, type: 2}
   m_IsPrefabParent: 0

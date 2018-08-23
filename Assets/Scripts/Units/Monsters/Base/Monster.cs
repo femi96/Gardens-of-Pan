@@ -9,6 +9,11 @@ public abstract class Monster : Unit {
   public EntityMover mover;
   public bool owned = false;
 
+  // Monster models
+  public GameObject monsterHead;
+  private GameObject modelOwned;
+  private GameObject modelWild;
+
   // Monster data
   public const float HappyMax = 10f;
   public const float HappyMin = -10f;
@@ -20,13 +25,10 @@ public abstract class Monster : Unit {
   public float happyTime = 0f;
 
   // Monster AI
+  [Header("MonsterAI Fields")]
   public MonsterBehaviour currentBehaviour;
   public MonsterBehaviour[] behaviours;
   public bool currentBehaviourDone = true;
-
-  // Monster models
-  private GameObject modelOwned;
-  private GameObject modelWild;
 
   public override void Awake() {
     base.Awake();
