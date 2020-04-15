@@ -22,7 +22,7 @@ public class Garden : MonoBehaviour {
   [Header("Garden Meta")]
   public string gardenName;
   public int gardenID;
-  public int gardenSize = 4;  // Garden dimensions 4x4
+  public float gardenSize = 4;  // Garden dimensions is 4x4 in meters
   public bool saveGarden = false;
   public bool noGarden = true;
   public GameObject wandCamera;

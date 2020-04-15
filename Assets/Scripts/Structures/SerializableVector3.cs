@@ -8,17 +8,17 @@ public struct SerializableVector3 {
   public float y;
   public float z;
 
-  public SerializableVector3(float rX, float rY, float rZ) {
-    x = rX;
-    y = rY;
-    z = rZ;
+  public SerializableVector3(float x, float y, float z) {
+    this.x = x;
+    this.y = y;
+    this.z = z;
   }
 
-  public static implicit operator Vector3(SerializableVector3 rValue) {
-    return new Vector3(rValue.x, rValue.y, rValue.z);
+  public static implicit operator Vector3(SerializableVector3 v) {
+    return new Vector3(v.x, v.y, v.z);
   }
 
-  public static implicit operator SerializableVector3(Vector3 rValue) {
-    return new SerializableVector3(rValue.x, rValue.y, rValue.z);
+  public static implicit operator SerializableVector3(Vector3 v) {
+    return new SerializableVector3(v.x, v.y, v.z);
   }
 }

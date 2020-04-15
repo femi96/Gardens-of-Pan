@@ -18,13 +18,13 @@ public class ActionPetted : MonsterAction {
   public override void Act(MonsterBehaviour behaviour, Monster monster) {
 
     // Setup necessary variables
-    Garden garden = monster.garden;
+    // Garden garden = monster.garden;
 
     // Increase happiness
     monster.happyInternal = petHappiness;
 
     // Release hearts
-    garden = garden;
+    // garden = garden;
 
     // End behavior
     monster.EndBehaviour();
