@@ -26,8 +26,8 @@ public class SphFlowerSeed : Seed {
 
   // Seed functions
   public override void SeedBehavior() {
-    BlockType surfaceType = board.GetBlock(transform.position).GetBlockType();
-    bool validSurface = BlockTypes.InGroup(surfaceType, BlockTypes.DepthGround);
+    Block block = board.GetBlock(transform.position);
+    bool validSurface = block.height == 0;
 
     // If can plant, plant
     if (timeActive > 5f && validSurface)

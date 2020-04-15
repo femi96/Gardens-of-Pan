@@ -24,20 +24,20 @@ public class Birb : Monster {
 
   // Monster functions
   public override bool CanVisit() {
-    int blocks = board.GetBlockTypeCount(BlockType.Grassland)
-                 + board.GetBlockTypeCount(BlockType.Wetland);
+    int blocks = board.GetBlockTypeCount(BlockType.Grass)
+                 + board.GetBlockTypeCount(BlockType.Wet);
     return blocks >= 4 && garden.GetUnitTypeCount(typeof(Birb)) < 2;
   }
 
   public override bool CanOwn() {
-    return board.GetBlockTypeCount(BlockType.Grassland) >= 8;
+    return board.GetBlockTypeCount(BlockType.Grass) >= 8;
   }
 
   public override bool CanSpawn() {
     List<SpawnPoint> spawnPoints = board.GetSpawnPoints();
 
     foreach (SpawnPoint spawn in spawnPoints) {
-      if (spawn.GetBlock().GetBlockType() == BlockType.Grassland)
+      if (spawn.GetBlock().GetBlockType() == BlockType.Grass)
         return true;
     }
 
@@ -49,7 +49,7 @@ public class Birb : Monster {
     List<SpawnPoint> validSpawnPoints = new List<SpawnPoint>();
 
     foreach (SpawnPoint spawn in spawnPoints) {
-      if (spawn.GetBlock().GetBlockType() == BlockType.Grassland)
+      if (spawn.GetBlock().GetBlockType() == BlockType.Grass)
         validSpawnPoints.Add(spawn);
     }
 
@@ -58,7 +58,7 @@ public class Birb : Monster {
   }
 
   public override float GetHappyExternal() {
-    float happyFromBlocks = board.GetBlockTypeCount(BlockType.Grassland);
+    float happyFromBlocks = board.GetBlockTypeCount(BlockType.Grass);
     happyFromBlocks = happyFromBlocks / 2f;
     happyFromBlocks = Mathf.Clamp(happyFromBlocks, 0f, 4f);
 

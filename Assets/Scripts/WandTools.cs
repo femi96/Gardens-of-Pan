@@ -175,7 +175,7 @@ public class WandTools : MonoBehaviour {
   // Update UI and strings based on index
   private void UpdateToolActions() {
 
-    BlockType b = gardenBoard.GetType(transform.position);
+    Block b = gardenBoard.GetBlock(transform.position);
 
     toolActionMain = ToolAction.None;
     toolActionOff = ToolAction.None;
@@ -183,47 +183,32 @@ public class WandTools : MonoBehaviour {
     switch (tool) {
 
     case ToolType.Shovel:
-      if (b == BlockType.Rough) {
+      if (b.type == BlockType.Rough) {
         toolActionMain = ToolAction.Flatten;
         break;
       }
 
-      if (!BlockTypes.InGroup(b, BlockTypes.DepthDeep))
+      if (b.height > -2)
         toolActionMain = ToolAction.Dig;
 
-      if (!BlockTypes.InGroup(b, BlockTypes.DepthGround))
+      if (b.height < 0)
         toolActionOff = ToolAction.Fill;
 
       break;
 
     case ToolType.LifeOrb:
-
-      if (b == BlockType.Dirt || b == BlockType.Scorch || b == BlockType.Tundra)
-        toolActionMain = ToolAction.Grass;
-
-      if (b == BlockType.Grassland || b == BlockType.Ashland || b == BlockType.Snow)
-        toolActionOff = ToolAction.Remove;
-
+      toolActionMain = ToolAction.Grass;
+      toolActionOff = ToolAction.Remove;
       break;
 
     case ToolType.WetDryOrb:
-
-      if (b == BlockType.Sand || b == BlockType.Grassland)
-        toolActionMain = ToolAction.Wet;
-
-      if (b == BlockType.Dirt || b == BlockType.Wetland)
-        toolActionOff = ToolAction.Dry;
-
+      toolActionMain = ToolAction.Wet;
+      toolActionOff = ToolAction.Dry;
       break;
 
     case ToolType.HotColdOrb:
-
-      if (!BlockTypes.InGroup(b, BlockTypes.TempHot))
-        toolActionMain = ToolAction.Heat;
-
-      if (!BlockTypes.InGroup(b, BlockTypes.TempCold))
-        toolActionOff = ToolAction.Chill;
-
+      toolActionMain = ToolAction.Heat;
+      toolActionOff = ToolAction.Chill;
       break;
 
     case ToolType.Seed:

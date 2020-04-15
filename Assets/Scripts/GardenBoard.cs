@@ -78,7 +78,7 @@ public class GardenBoard : MonoBehaviour {
     // Start all blocks as Rough
     for (int z = 0; z < gardenGridSize; z++) {
       for (int x = 0; x < gardenGridSize; x++) {
-        blockInfoMap[x, z] = new Block(BlockType.Rough);
+        blockInfoMap[x, z] = new Block();
       }
     }
 

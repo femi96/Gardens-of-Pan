@@ -362,84 +362,35 @@ MonoBehaviour:
     blockSpawnPrefab: {fileID: 1533515035940110, guid: 33ca341d724551146a0612e2752ba0b5,
       type: 2}
   - blockType: 3
-    blockFullPrefab: {fileID: 1639887782283358, guid: aab0978b12922084d8fa5c4f125d82ea,
+    blockFullPrefab: {fileID: 1693199470762718, guid: a15e4288fdd927047a2a64c13c516a1e,
       type: 2}
     blockHalfPrefab: {fileID: 1204523385019874, guid: c1c56e3adfdc10442a0f95547205ffc2,
       type: 2}
     blockSpawnPrefab: {fileID: 1533515035940110, guid: 33ca341d724551146a0612e2752ba0b5,
       type: 2}
   - blockType: 4
-    blockFullPrefab: {fileID: 1932536665459220, guid: 334477d5077320640b66954b4e90ef23,
+    blockFullPrefab: {fileID: 1639887782283358, guid: aab0978b12922084d8fa5c4f125d82ea,
       type: 2}
     blockHalfPrefab: {fileID: 1204523385019874, guid: c1c56e3adfdc10442a0f95547205ffc2,
       type: 2}
     blockSpawnPrefab: {fileID: 1533515035940110, guid: 33ca341d724551146a0612e2752ba0b5,
       type: 2}
   - blockType: 5
-    blockFullPrefab: {fileID: 1717124984032146, guid: d3f38b562119c0f408b9f6d9a72dc1c3,
+    blockFullPrefab: {fileID: 1700998243648686, guid: 56e2f7145ea893945ad618a94126096d,
       type: 2}
     blockHalfPrefab: {fileID: 1204523385019874, guid: c1c56e3adfdc10442a0f95547205ffc2,
       type: 2}
     blockSpawnPrefab: {fileID: 1533515035940110, guid: 33ca341d724551146a0612e2752ba0b5,
       type: 2}
   - blockType: 6
-    blockFullPrefab: {fileID: 1298271725371602, guid: 2079c3d6c4fbc7b42973f4334d9885e6,
-      type: 2}
-    blockHalfPrefab: {fileID: 1204523385019874, guid: c1c56e3adfdc10442a0f95547205ffc2,
-      type: 2}
-    blockSpawnPrefab: {fileID: 1533515035940110, guid: 33ca341d724551146a0612e2752ba0b5,
-      type: 2}
-  - blockType: 7
-    blockFullPrefab: {fileID: 1297213664252482, guid: c6c6a051768fb6e4780742a7a2024d56,
-      type: 2}
-    blockHalfPrefab: {fileID: 1204523385019874, guid: c1c56e3adfdc10442a0f95547205ffc2,
-      type: 2}
-    blockSpawnPrefab: {fileID: 1533515035940110, guid: 33ca341d724551146a0612e2752ba0b5,
-      type: 2}
-  - blockType: 8
-    blockFullPrefab: {fileID: 1469114901355598, guid: 7c33f5b15c7144e43880ac429eed2c70,
-      type: 2}
-    blockHalfPrefab: {fileID: 1204523385019874, guid: c1c56e3adfdc10442a0f95547205ffc2,
-      type: 2}
-    blockSpawnPrefab: {fileID: 1533515035940110, guid: 33ca341d724551146a0612e2752ba0b5,
-      type: 2}
-  - blockType: 9
     blockFullPrefab: {fileID: 1920911878503668, guid: 171c63859869e0a4eb63accc0dda4003,
       type: 2}
     blockHalfPrefab: {fileID: 1204523385019874, guid: c1c56e3adfdc10442a0f95547205ffc2,
       type: 2}
     blockSpawnPrefab: {fileID: 1533515035940110, guid: 33ca341d724551146a0612e2752ba0b5,
       type: 2}
-  - blockType: 10
+  - blockType: 7
     blockFullPrefab: {fileID: 1907733716445580, guid: 302d394a24271d24a99eea8cdf281ef3,
-      type: 2}
-    blockHalfPrefab: {fileID: 1204523385019874, guid: c1c56e3adfdc10442a0f95547205ffc2,
-      type: 2}
-    blockSpawnPrefab: {fileID: 1533515035940110, guid: 33ca341d724551146a0612e2752ba0b5,
-      type: 2}
-  - blockType: 11
-    blockFullPrefab: {fileID: 1401020348571970, guid: 56d58d03c08e72447ba3e7d4fb24349f,
-      type: 2}
-    blockHalfPrefab: {fileID: 1204523385019874, guid: c1c56e3adfdc10442a0f95547205ffc2,
-      type: 2}
-    blockSpawnPrefab: {fileID: 1533515035940110, guid: 33ca341d724551146a0612e2752ba0b5,
-      type: 2}
-  - blockType: 12
-    blockFullPrefab: {fileID: 1449924615750502, guid: 8e58e9b63a06a00429ae2ea7777c8c90,
-      type: 2}
-    blockHalfPrefab: {fileID: 1204523385019874, guid: c1c56e3adfdc10442a0f95547205ffc2,
-      type: 2}
-    blockSpawnPrefab: {fileID: 1533515035940110, guid: 33ca341d724551146a0612e2752ba0b5,
-      type: 2}
-  - blockType: 13
-    blockFullPrefab: {fileID: 1095727349340642, guid: fce8114accaa9564e8acdf93ab60cbae,
-      type: 2}
-    blockHalfPrefab: {fileID: 1204523385019874, guid: c1c56e3adfdc10442a0f95547205ffc2,
-      type: 2}
-    blockSpawnPrefab: {fileID: 1533515035940110, guid: 33ca341d724551146a0612e2752ba0b5,
-      type: 2}
-  - blockType: 14
-    blockFullPrefab: {fileID: 1269738959364830, guid: 6c224f522443a3144b8ae90ec72a784d,
       type: 2}
     blockHalfPrefab: {fileID: 1204523385019874, guid: c1c56e3adfdc10442a0f95547205ffc2,
       type: 2}

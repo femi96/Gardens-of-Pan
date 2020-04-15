@@ -151,8 +151,8 @@ public class BlockberryPlant : Plant {
 
   // Plant Behavior when not grown
   private void Grow() {
-    BlockType surfaceType = board.GetBlock(transform.position).GetBlockType();
-    bool validSurface = BlockTypes.InGroup(surfaceType, BlockTypes.DepthGround);
+    Block block = board.GetBlock(transform.position);
+    bool validSurface = block.height == 0;
     bool toClose = IsToClose();
 
     if (validSurface && !toClose) {

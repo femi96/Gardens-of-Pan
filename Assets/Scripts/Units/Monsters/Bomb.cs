@@ -25,22 +25,20 @@ public class Bomb : Monster {
   // Monster functions
   public override bool CanVisit() {
     GardenBoard board = garden.GetBoard();
-    int blocks = board.GetBlockTypeCount(BlockType.Scorch)
-                 + board.GetBlockTypeCount(BlockType.Ashland)
-                 + board.GetBlockTypeCount(BlockType.Lava);
+    int blocks = board.GetBlockTypeCount(BlockType.Sand);
     return blocks >= 4 && garden.GetUnitTypeCount(typeof(Bomb)) < 2;
   }
 
   public override bool CanOwn() {
     GardenBoard board = garden.GetBoard();
-    return board.GetBlockTypeCount(BlockType.Scorch) >= 8;
+    return board.GetBlockTypeCount(BlockType.Sand) >= 8;
   }
 
   public override bool CanSpawn() {
     List<SpawnPoint> spawnPoints = board.GetSpawnPoints();
 
     foreach (SpawnPoint spawn in spawnPoints) {
-      if (spawn.GetBlock().GetBlockType() == BlockType.Scorch)
+      if (spawn.GetBlock().GetBlockType() == BlockType.Sand)
         return true;
     }
 
@@ -52,7 +50,7 @@ public class Bomb : Monster {
     List<SpawnPoint> validSpawnPoints  =  new List<SpawnPoint>();
 
     foreach (SpawnPoint spawn in spawnPoints) {
-      if (spawn.GetBlock().GetBlockType() == BlockType.Scorch)
+      if (spawn.GetBlock().GetBlockType() == BlockType.Sand)
         validSpawnPoints.Add(spawn);
     }
 
@@ -61,14 +59,10 @@ public class Bomb : Monster {
   }
 
   public override float GetHappyExternal() {
-    float happyFromBlocks = board.GetBlockTypeCount(BlockType.Scorch)
-                            + board.GetBlockTypeCount(BlockType.Ashland)
-                            + board.GetBlockTypeCount(BlockType.Lava)
-                            + board.GetBlockTypeCount(BlockType.LavaD)
-                            - board.GetBlockTypeCount(BlockType.Tundra)
-                            - board.GetBlockTypeCount(BlockType.Snow)
-                            - board.GetBlockTypeCount(BlockType.Ice)
-                            - board.GetBlockTypeCount(BlockType.IceD);
+    float happyFromBlocks = board.GetBlockTypeCount(BlockType.Sand)
+                            - board.GetBlockTypeCount(BlockType.Water)
+                            - board.GetBlockTypeCount(BlockType.Wet)
+                            - board.GetBlockTypeCount(BlockType.Mud);
     happyFromBlocks = happyFromBlocks / 2f;
     happyFromBlocks = Mathf.Clamp(happyFromBlocks, 0f, 4f);
 
