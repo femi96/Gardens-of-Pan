@@ -50,9 +50,6 @@ public class WandCamera : MonoBehaviour {
 
   void LateUpdate() {
 
-    // TODO: Make this frame independent (currently runs on main menu kinda)
-    //    may not be necessary with camera modes
-
     // Don't move camera if in menu
     if (!cameraInWandMode)
       return;

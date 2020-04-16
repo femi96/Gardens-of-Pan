@@ -17,22 +17,32 @@ public class WandTools : MonoBehaviour {
   private ToolAction toolActionMain;
   private ToolAction toolActionOff;
 
-  // Timing:
+  // Timing
   private float actionTime;
   private const float ActionCooldown = 0.1f;
 
-  // UI:
+  // UI
   public GameObject toolGuide;
   public GameObject toolWheel;
   public GameObject unitHoverUI;
 
-  // Effect:
+  private bool hasSetUIPointers = false;
+
+  private GameObject toolUI;
+  private Text toolText;
+  private GameObject mainUI;
+  private Text mainText;
+  private GameObject offUI;
+  private Text offText;
+  private Text spaceText;
+
+  // Effect
   public Transform effectContainer;
 
   public GameObject dirtCloud;
   public GameObject grassCloud;
 
-  // Seeds:
+  // Seeds
   public GameObject[] seedPrefabs;
   public int seedIndex;
 
@@ -69,6 +79,21 @@ public class WandTools : MonoBehaviour {
     wandMenuOpen = false;
     wandCamera.SetCameraMode(!wandMenuOpen);
     UpdateUI();
+  }
+
+  private void SetupUIPointers() {
+    toolUI = toolGuide.transform.Find("Tool/Active").gameObject;
+    toolText = toolGuide.transform.Find("Tool/Active/Text").gameObject.GetComponent<Text>();
+
+    mainUI = toolGuide.transform.Find("Main/Active").gameObject;
+    mainText = toolGuide.transform.Find("Main/Active/Text").gameObject.GetComponent<Text>();
+
+    offUI = toolGuide.transform.Find("Off/Active").gameObject;
+    offText = toolGuide.transform.Find("Off/Active/Text").gameObject.GetComponent<Text>();
+
+    spaceText = toolGuide.transform.Find("Space/Active/Text").gameObject.GetComponent<Text>();
+
+    hasSetUIPointers = true;
   }
 
   // Set wand tool
@@ -224,34 +249,26 @@ public class WandTools : MonoBehaviour {
   // Update tool wheel and guide based on current fields
   private void UpdateUI() {
 
-    // TODO OPTIMIZE: Move finds to start so they arent called every frame
-
     // Tool wheel
     toolWheel.SetActive(wandMenuOpen);
 
     // Tool guide
+    if (!hasSetUIPointers)
+      SetupUIPointers();
 
     // Update tool
-    GameObject toolUI = toolGuide.transform.Find("Tool/Active").gameObject;
-    Text toolText = toolGuide.transform.Find("Tool/Active/Text").gameObject.GetComponent<Text>();
     toolUI.SetActive(tool != ToolType.None);
     toolText.text = tool.ToString().Replace('_', ' ');
 
     // Enable UI main action
-    GameObject mainUI = toolGuide.transform.Find("Main/Active").gameObject;
-    Text mainText = toolGuide.transform.Find("Main/Active/Text").gameObject.GetComponent<Text>();
     mainUI.SetActive(toolActionMain != ToolAction.None);
     mainText.text = toolActionMain.ToString().Replace('_', ' ');
 
     // Enable UI off action
-    GameObject offUI = toolGuide.transform.Find("Off/Active").gameObject;
-    Text offText = toolGuide.transform.Find("Off/Active/Text").gameObject.GetComponent<Text>();
     offUI.SetActive(toolActionOff != ToolAction.None);
     offText.text = toolActionOff.ToString().Replace('_', ' ');
 
     // Enable UI off action
-    Text spaceText = toolGuide.transform.Find("Space/Active/Text").gameObject.GetComponent<Text>();
-
     if (!wandMenuOpen)
       spaceText.text = "Tool Wheel";
     else

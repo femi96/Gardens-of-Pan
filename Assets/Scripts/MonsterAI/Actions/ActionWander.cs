@@ -31,7 +31,6 @@ public class ActionWander : MonsterAction {
     EntityMover mover = monster.mover;
 
     // If monster path isnt valid, update path
-    // TODO
 
     // Get next step on path
     if (!hasStep) {
