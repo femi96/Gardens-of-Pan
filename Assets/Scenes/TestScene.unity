@@ -1256,6 +1256,26 @@ Prefab:
       propertyPath: m_SizeDelta.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114545456742822736, guid: fc2f18f8e8c9f484b8de7703ed49759e,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SetToolGrassSeed
+      objectReference: {fileID: 0}
+    - target: {fileID: 114987484621486644, guid: fc2f18f8e8c9f484b8de7703ed49759e,
+        type: 2}
+      propertyPath: m_Text
+      value: Grass Seed
+      objectReference: {fileID: 0}
+    - target: {fileID: 114442872970422258, guid: fc2f18f8e8c9f484b8de7703ed49759e,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SetToolHumidityPump
+      objectReference: {fileID: 0}
+    - target: {fileID: 114379116620074484, guid: fc2f18f8e8c9f484b8de7703ed49759e,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SetToolTemperatureControl
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: fc2f18f8e8c9f484b8de7703ed49759e, type: 2}
   m_IsPrefabParent: 0

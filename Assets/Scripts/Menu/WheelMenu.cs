@@ -16,18 +16,18 @@ public class WheelMenu : MonoBehaviour {
     tools.ToolWheelToggle();
   }
 
-  public void SetToolLifeOrb() {
-    tools.SetTool(ToolType.LifeOrb);
+  public void SetToolGrassSeed() {
+    tools.SetTool(ToolType.GrassSeed);
     tools.ToolWheelToggle();
   }
 
-  public void SetToolWetDryOrb() {
-    tools.SetTool(ToolType.WetDryOrb);
+  public void SetToolHumidityPump() {
+    tools.SetTool(ToolType.HumidityPump);
     tools.ToolWheelToggle();
   }
 
-  public void SetToolHotColdOrb() {
-    tools.SetTool(ToolType.HotColdOrb);
+  public void SetToolTemperatureControl() {
+    tools.SetTool(ToolType.TemperatureControl);
     tools.ToolWheelToggle();
   }
 

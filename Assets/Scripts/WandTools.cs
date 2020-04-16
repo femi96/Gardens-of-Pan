@@ -219,17 +219,17 @@ public class WandTools : MonoBehaviour {
 
       break;
 
-    case ToolType.LifeOrb:
+    case ToolType.GrassSeed:
       toolActionMain = ToolAction.Grass;
       toolActionOff = ToolAction.Remove;
       break;
 
-    case ToolType.WetDryOrb:
+    case ToolType.HumidityPump:
       toolActionMain = ToolAction.Wet;
       toolActionOff = ToolAction.Dry;
       break;
 
-    case ToolType.HotColdOrb:
+    case ToolType.TemperatureControl:
       toolActionMain = ToolAction.Heat;
       toolActionOff = ToolAction.Chill;
       break;
