@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class TitleCamera : MonoBehaviour {
-  // Controller that handles camera inputs and behaviors
+  // Handles camera inputs and behaviors
 
   public Transform target;
   public float speed = 0.1f;

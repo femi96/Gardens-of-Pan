@@ -4,9 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class WandTools : MonoBehaviour {
-  //  Controller that handles the player wand's behaviors:
-  //    TOOL ACTIONS
-  //    TOOL MENUS
+  // Handles the player wand's tool actions and menus
 
   // Assigned in Editor:
   public Garden garden;

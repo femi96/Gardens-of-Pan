@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class EntityMover : MonoBehaviour {
-  // Game controller that handles an entity's movement
+  // Handles entity's movement
 
   public bool locked = false;
   private bool moving;
@@ -32,6 +32,7 @@ public class EntityMover : MonoBehaviour {
   }
 
   // Basic velocity methods
+  // =========================
 
   // Applies gravity and normal forces to velocity
   private void ApplyGravity() {
@@ -100,6 +101,7 @@ public class EntityMover : MonoBehaviour {
   }
 
   // Monster movement
+  // ===================
 
   // Starts monster movement
   public void MoveStart(Vector3 destination) {

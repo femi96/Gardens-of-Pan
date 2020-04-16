@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class WandCamera : MonoBehaviour {
-  // Controller that handles wand camera inputs and behaviors
+  // Handles wand camera inputs and behaviors
 
   private Transform wand;
 

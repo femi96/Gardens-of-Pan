@@ -6,32 +6,30 @@ using System.Linq;
 using System.IO;
 
 public class Wand : MonoBehaviour {
-  //  Controller that handles the player wand's behaviors:
-  //    MOVEMENT
-  //    SCREENSHOT
+  // Controller that handles the player wand's movement and screenshots
 
-  // Assigned in Editor:
+  // Assigned in Editor
   public Garden garden;
   public GardenBoard gardenBoard;
   public WandCamera wandCamera;
   public WandTools wandTools;
 
-  // Movement:
+  // Movement
   private float radius = 0.2f;
   private float speed = 4f;
 
   private Unit targetUnit;
   private bool hadTarget = false;
 
-  // Timing:
+  // Timing
   private float moveTime = 0f;
   private const float followCooldown = 0.5f;
 
-  // Wand shape:
+  // Wand shape
   private GameObject wandShape;
   private Transform[] wandShapePieces;
 
-  // UI hover:
+  // UI hover
   public GameObject unitHoverUI;
   private Text unitHoverName;
   private Text unitHoverBehavior;
@@ -42,13 +40,11 @@ public class Wand : MonoBehaviour {
   private readonly Color colorHoverDefault = new Color(0f, 0f, 0f, 0.7f);
   private readonly Color colorHoverWild = new Color(0.5f, 0f, 0f, 0.7f);
 
-  // UI screenshot:
+  // UI screenshot
   public GameObject screenshotUI;
   private Text screenshotText;
   private float screenshotTime = 10f;
   private const float screenshotCooldown = 3f;
-
-  // All public variables are assigned in editor
 
   void Awake() {
 

@@ -11,10 +11,10 @@ public struct BlockPrefabEntry {
 }
 
 public class GardenBoard : MonoBehaviour {
-  // Game controller that handles garden's board data, board includes:
-  //    blockInfos - block's data
-  //    blockObjs - block's gameObject representation
-  //    spawns - blockInfo and blockObj for invisible out of garden blocks spawn points
+  // Handles garden's board data, board includes:
+  //  blockInfos - block's data
+  //  blockObjs - block's gameObject representation
+  //  spawns - blockInfo and blockObj for invisible out of garden blocks spawn points
 
   // Assigned in Editor
   public BlockPrefabEntry[] blockPrefabMap;  // Maps BlockType to prefabs

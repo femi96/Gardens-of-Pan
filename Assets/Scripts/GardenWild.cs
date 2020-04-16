@@ -5,12 +5,12 @@ using UnityEngine;
 using System.Reflection;
 
 public class GardenWild : MonoBehaviour {
-  // Game controller that handles garden's wilderness data
-  //    stores wild monsters, all possible visiting monsters
-  //    stores visit timer, for when monsters visit
-  //    pushes new monsters and their spawn point to the garden
+  // Handles garden's wilderness data
+  //  stores wild monsters, all possible visiting monsters
+  //  stores visit timer, for when monsters visit
+  //  pushes new monsters and their spawn point to the garden
 
-  // Assigned in Editor:
+  // Assigned in Editor
   public GameObject[] wildMonsterPrefabs; // Monsters that can visit garden
 
   private Garden garden;

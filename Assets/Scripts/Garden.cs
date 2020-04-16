@@ -7,11 +7,11 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class Garden : MonoBehaviour {
-  // Game controller that handles garden data, includes:
-  //    SIZE/NAME of garden
-  //    FILE MANAGEMENT or SAVING/LOADING garden
-  //    GARDEN MODE of game/garden
-  //    UNITS in garden
+  // Handles garden data, includes
+  //  size/name of garden
+  //  saving/loading garden
+  //  garden mode of game/garden
+  //  units in garden
 
   private GardenBoard gardenBoard;
   private GardenMode gardenMode;
@@ -46,8 +46,6 @@ public class Garden : MonoBehaviour {
 
   private string recentSaveFilePath;
   public GameObject saveUI;
-
-  // All public variables are assigned in editor
 
   void Awake() {
 
@@ -88,7 +86,7 @@ public class Garden : MonoBehaviour {
     }
   }
 
-  // FILE MANAGEMENT or SAVING/LOADING garden
+  // Saving/loading garden
   // ===========================================
 
   // Get file path for garden from its name and ID
@@ -294,7 +292,7 @@ public class Garden : MonoBehaviour {
     }
   }
 
-  // GARDEN MODE of game/garden
+  // Garden mode of game/garden
   // =============================
 
   // Set garden mode and update related
@@ -311,7 +309,7 @@ public class Garden : MonoBehaviour {
       Time.timeScale = 0f;
   }
 
-  // UNITS in garden
+  // Units in garden
   // ==================
 
   // Get total size of all units
