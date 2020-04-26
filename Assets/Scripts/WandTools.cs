@@ -143,16 +143,17 @@ public class WandTools : MonoBehaviour {
 
     switch (a) {
 
+    // TODO Add half directions for blocks, and expand area of effect
+
     case ToolAction.Dig:
-      Instantiate(dirtCloud, transform.position, Quaternion.identity, effectContainer);
-      gardenBoard.ApplyAction(v, a);
+      ApplyDig(v);
       break;
 
     case ToolAction.Fill:
-      gardenBoard.ApplyAction(v, a);
+      ApplyFill(v);
       break;
 
-    case ToolAction.Flatten:
+    case ToolAction.Soften:
       Instantiate(dirtCloud, transform.position, Quaternion.identity, effectContainer);
       gardenBoard.ApplyAction(v, a);
       break;
@@ -207,7 +208,7 @@ public class WandTools : MonoBehaviour {
 
     case ToolType.Shovel:
       if (b.type == BlockType.Rough) {
-        toolActionMain = ToolAction.Flatten;
+        toolActionMain = ToolAction.Soften;
         break;
       }
 
@@ -273,5 +274,91 @@ public class WandTools : MonoBehaviour {
       spaceText.text = "Tool Wheel";
     else
       spaceText.text = "Garden";
+  }
+
+  private void ApplyDig(Vector3 v) {
+    Instantiate(dirtCloud, v, Quaternion.identity, effectContainer);
+
+    Block z = gardenBoard.GetBlock(v);
+
+    Block f = gardenBoard.GetBlockNeighbor(v, Vector3.forward);
+    Block r = gardenBoard.GetBlockNeighbor(v, Vector3.right);
+    Block b = gardenBoard.GetBlockNeighbor(v, Vector3.back);
+    Block l = gardenBoard.GetBlockNeighbor(v, Vector3.left);
+
+    BlockDir digDir = BlockDir.None;
+
+    // If board conditions are right, then do a half dig instead
+    if (z.halfDir == BlockDir.None) {
+      if (f != null && r != null && b != null && l != null) {
+
+        bool fsame = f.height == z.height;
+        bool rsame = r.height == z.height;
+        bool bsame = b.height == z.height;
+        bool lsame = l.height == z.height;
+
+        bool flow = f.height == z.height - 1 || (fsame && f.halfDir != BlockDir.None);
+        bool rlow = r.height == z.height - 1 || (rsame && r.halfDir != BlockDir.None);
+        bool blow = b.height == z.height - 1 || (bsame && b.halfDir != BlockDir.None);
+        bool llow = l.height == z.height - 1 || (lsame && l.halfDir != BlockDir.None);
+
+        if (fsame && rsame && blow && llow)
+          digDir = BlockDir.Forward;
+
+        if (rsame && bsame && llow && flow)
+          digDir = BlockDir.Right;
+
+        if (bsame && lsame && flow && rlow)
+          digDir = BlockDir.Back;
+
+        if (lsame && fsame && rlow && blow)
+          digDir = BlockDir.Left;
+      }
+    }
+
+    // Undo half for neighbors
+    if (f != null && f.height == z.height && f.halfDir != BlockDir.None)
+      gardenBoard.ApplyActionNeighbor(v, Vector3.forward, ToolAction.Dig);
+
+    if (r != null && r.height == z.height && r.halfDir != BlockDir.None)
+      gardenBoard.ApplyActionNeighbor(v, Vector3.right, ToolAction.Dig);
+
+    if (b != null && b.height == z.height && b.halfDir != BlockDir.None)
+      gardenBoard.ApplyActionNeighbor(v, Vector3.back, ToolAction.Dig);
+
+    if (l != null && l.height == z.height && l.halfDir != BlockDir.None)
+      gardenBoard.ApplyActionNeighbor(v, Vector3.left, ToolAction.Dig);
+
+    // Apply to block
+    if (digDir == BlockDir.None)
+      gardenBoard.ApplyAction(v, ToolAction.Dig);
+    else
+      gardenBoard.ApplyHalfDig(v, digDir);
+  }
+
+  private void ApplyFill(Vector3 v) {
+    Instantiate(dirtCloud, v, Quaternion.identity, effectContainer);
+
+    Block z = gardenBoard.GetBlock(v);
+
+    Block f = gardenBoard.GetBlockNeighbor(v, Vector3.forward);
+    Block r = gardenBoard.GetBlockNeighbor(v, Vector3.right);
+    Block b = gardenBoard.GetBlockNeighbor(v, Vector3.back);
+    Block l = gardenBoard.GetBlockNeighbor(v, Vector3.left);
+
+    gardenBoard.ApplyAction(v, ToolAction.Fill);
+
+    // Undo half for neighbors
+    if (f != null && f.height == z.height && f.halfDir != BlockDir.None)
+      gardenBoard.ApplyActionNeighbor(v, Vector3.forward, ToolAction.Fill);
+
+    if (r != null && r.height == z.height && r.halfDir != BlockDir.None)
+      gardenBoard.ApplyActionNeighbor(v, Vector3.right, ToolAction.Fill);
+
+    if (b != null && b.height == z.height && b.halfDir != BlockDir.None)
+      gardenBoard.ApplyActionNeighbor(v, Vector3.back, ToolAction.Fill);
+
+    if (l != null && l.height == z.height && l.halfDir != BlockDir.None)
+      gardenBoard.ApplyActionNeighbor(v, Vector3.left, ToolAction.Fill);
   }
 }

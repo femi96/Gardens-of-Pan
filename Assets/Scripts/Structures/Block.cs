@@ -27,6 +27,7 @@ public class Block {
     humidity = 0;
     veg = false;
     soft = false;
+    halfDir = BlockDir.None;
   }
 
   // Returns BlockType of block
@@ -83,10 +84,14 @@ public class Block {
         veg = false;
       }
 
+      halfDir = BlockDir.None;
+
       break;
 
     case ToolAction.Fill:
-      if (height < 0) {
+      if (halfDir != BlockDir.None)
+        halfDir = BlockDir.None;
+      else if (height < 0) {
         height += 1;
         humidity = 0;
         veg = false;
@@ -94,7 +99,7 @@ public class Block {
 
       break;
 
-    case ToolAction.Flatten:
+    case ToolAction.Soften:
       if (!soft) {
         soft = true;
       }

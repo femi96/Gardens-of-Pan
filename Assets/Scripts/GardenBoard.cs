@@ -130,7 +130,16 @@ public class GardenBoard : MonoBehaviour {
   // Get block at Vector3 v
   public Block GetBlock(Vector3 v) {
     Vector2Int c = GetCoords(v);
-    return blockInfoMap[c.x, c.y];
+
+    if ((c.x < gardenGridSize && c.x >= 0) && (c.y < gardenGridSize && c.y >= 0))
+      return blockInfoMap[c.x, c.y];
+
+    return null;
+  }
+
+  // Get block that is neighbor of block at Vector3 v in direction dir
+  public Block GetBlockNeighbor(Vector3 v, Vector3 dir) {
+    return GetBlock(v + (blockSize * dir));
   }
 
   // Returns BlockType of block at Vector3 v
@@ -147,6 +156,15 @@ public class GardenBoard : MonoBehaviour {
   // Apply action to block at Vector3 v
   public void ApplyAction(Vector3 v, ToolAction a) {
     GetBlock(v).ApplyAction(a);
+    UpdateBlockObj(v);
+  }
+  public void ApplyActionNeighbor(Vector3 v, Vector3 dir, ToolAction a) {
+    GetBlock(v + (blockSize * dir)).ApplyAction(a);
+    UpdateBlockObj(v + (blockSize * dir));
+  }
+
+  public void ApplyHalfDig(Vector3 v, BlockDir dir) {
+    GetBlock(v).halfDir = dir;
     UpdateBlockObj(v);
   }
 
@@ -190,11 +208,17 @@ public class GardenBoard : MonoBehaviour {
 
 
   // Returns block obj prefab of BlockType t
-  private GameObject GetBlockPrefab(BlockType t) {
+  private GameObject GetBlockPrefab(Block b) {
+    BlockType t = b.GetBlockType();
     GameObject newBlockPrefab = blockPrefabMap[0].blockFullPrefab;
 
     for (int i = 0; i < blockPrefabMap.Length; i++) {
-      if (blockPrefabMap[i].blockType == t) newBlockPrefab = blockPrefabMap[i].blockFullPrefab;
+      if (blockPrefabMap[i].blockType == t) {
+        if (b.halfDir == BlockDir.None)
+          newBlockPrefab = blockPrefabMap[i].blockFullPrefab;
+        else
+          newBlockPrefab = blockPrefabMap[i].blockHalfPrefab;
+      }
     }
 
     return newBlockPrefab;
@@ -221,7 +245,7 @@ public class GardenBoard : MonoBehaviour {
     }
 
     // Base prefab on BlockType
-    GameObject newBlockPrefab = GetBlockPrefab(blockInfoMap[x, z].GetBlockType());
+    GameObject newBlockPrefab = GetBlockPrefab(blockInfoMap[x, z]);
 
     // Create new chunk gameObject
     Vector3 pos = GetPosition(new Vector2Int(x, z)) - 0.5f * Vector3.up;
@@ -229,6 +253,28 @@ public class GardenBoard : MonoBehaviour {
     GameObject go = Instantiate(newBlockPrefab, pos, Quaternion.identity, blockContainer);
     go.transform.localScale = new Vector3(blockSize, 1, blockSize);
     go.name = "BlockObj (" + x + ", " + z + ")";
+
+    switch (blockInfoMap[x, z].halfDir) {
+    case BlockDir.Forward:
+      go.transform.rotation = Quaternion.Euler(0, 180, 0);
+      break;
+
+    case BlockDir.Right:
+      go.transform.rotation = Quaternion.Euler(0, 270, 0);
+      break;
+
+    case BlockDir.Back:
+      go.transform.rotation = Quaternion.Euler(0, 0, 0);
+      break;
+
+    case BlockDir.Left:
+      go.transform.rotation = Quaternion.Euler(0, 90, 0);
+      break;
+
+    default:
+      break;
+    }
+
     blockObjMap[x, z] = go;
 
     UpdateAdjacentSpawnPoint(x, z);

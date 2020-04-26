@@ -5,7 +5,7 @@ using UnityEngine;
 // Global ToolAction Enum
 public enum ToolAction {
   None,
-  Dig, Fill, Flatten,
+  Dig, Fill, Soften,
   Grass, Remove,
   Wet, Dry,
   Heat, Chill,
