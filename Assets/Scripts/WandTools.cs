@@ -292,15 +292,15 @@ public class WandTools : MonoBehaviour {
     if (z.halfDir == BlockDir.None) {
       if (f != null && r != null && b != null && l != null) {
 
-        bool fsame = f.height == z.height;
-        bool rsame = r.height == z.height;
-        bool bsame = b.height == z.height;
-        bool lsame = l.height == z.height;
+        bool fsame = f.height == z.height && f.halfDir == BlockDir.None;
+        bool rsame = r.height == z.height && r.halfDir == BlockDir.None;
+        bool bsame = b.height == z.height && b.halfDir == BlockDir.None;
+        bool lsame = l.height == z.height && l.halfDir == BlockDir.None;
 
-        bool flow = f.height == z.height - 1 || (fsame && f.halfDir != BlockDir.None);
-        bool rlow = r.height == z.height - 1 || (rsame && r.halfDir != BlockDir.None);
-        bool blow = b.height == z.height - 1 || (bsame && b.halfDir != BlockDir.None);
-        bool llow = l.height == z.height - 1 || (lsame && l.halfDir != BlockDir.None);
+        bool flow = f.height < z.height || (f.height == z.height && f.halfDir != BlockDir.None);
+        bool rlow = r.height < z.height || (r.height == z.height && r.halfDir != BlockDir.None);
+        bool blow = b.height < z.height || (b.height == z.height && b.halfDir != BlockDir.None);
+        bool llow = l.height < z.height || (l.height == z.height && l.halfDir != BlockDir.None);
 
         if (fsame && rsame && blow && llow)
           digDir = BlockDir.Forward;
