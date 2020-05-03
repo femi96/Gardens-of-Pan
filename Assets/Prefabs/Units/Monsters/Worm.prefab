@@ -122,7 +122,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4320856549238700}
   m_Layer: 0
-  m_Name: ModelOwned
+  m_Name: ModelJoined
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1295,17 +1295,48 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   garden: {fileID: 0}
   board: {fileID: 0}
+  prefabID: 0
+  unitID: 13368
   mover: {fileID: 114143118557331900}
   owned: 0
-  currentBehavior:
-    behaviorName: 
-    garden: {fileID: 0}
-    monster: {fileID: 0}
-    behaviorsSince: 0
-    behaviorTime: 0
+  monsterHead: {fileID: 0}
+  happy: 0
+  happyWell: 0
+  happyInternal: 0
+  happyTime: 0
+  currentBehaviour:
+    behaviourName: 
+    behaviourText: 
+    behavioursSince: 0
+    behaviourTime: 0
     timeSinceLastEnd: 0
-  behaviors: []
-  currentBehaviorDone: 1
+    interruptPriority: 0
+  behaviours:
+  - behaviourName: Wander
+    behaviourText: Wandering...
+    behavioursSince: 0
+    behaviourTime: 0
+    timeSinceLastEnd: 0
+    interruptPriority: 0
+  - behaviourName: Wait
+    behaviourText: Waiting...
+    behavioursSince: 0
+    behaviourTime: 0
+    timeSinceLastEnd: 0
+    interruptPriority: 0
+  - behaviourName: Leave
+    behaviourText: Leaving...
+    behavioursSince: 0
+    behaviourTime: 0
+    timeSinceLastEnd: 0
+    interruptPriority: 0
+  - behaviourName: Join
+    behaviourText: Joining...
+    behavioursSince: 0
+    behaviourTime: 0
+    timeSinceLastEnd: 0
+    interruptPriority: 0
+  currentBehaviourDone: 1
 --- !u!136 &136359561604405690
 CapsuleCollider:
   m_ObjectHideFlags: 1

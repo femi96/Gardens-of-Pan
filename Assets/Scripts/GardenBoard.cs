@@ -169,7 +169,7 @@ public class GardenBoard : MonoBehaviour {
   }
 
   // Returns BlockType of block at Vector3 v
-  public int GetBlockTypeCount(BlockType t) {
+  public float GetBlockTypeCount(BlockType t) {
     int count = 0;
 
     for (int z = 0; z < gardenGridSize; z++) {
@@ -179,7 +179,7 @@ public class GardenBoard : MonoBehaviour {
       }
     }
 
-    return count;
+    return count * blockSize * blockSize;
   }
 
   // Returns list of spawn points on board

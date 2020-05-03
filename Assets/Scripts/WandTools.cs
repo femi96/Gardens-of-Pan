@@ -143,7 +143,7 @@ public class WandTools : MonoBehaviour {
 
     switch (a) {
 
-    // TODO Add half directions for blocks, and expand area of effect
+    // TODO: Expand area of effect
 
     case ToolAction.Dig:
       ApplyDig(v);

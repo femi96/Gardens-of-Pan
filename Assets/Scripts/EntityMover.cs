@@ -49,14 +49,16 @@ public class EntityMover : MonoBehaviour {
       velocity.x = 0;
       velocity.z = 0;
       return;
+    } else {
+      moving = false;
     }
-
-    // Turn then walk (turn is instant atm)
-    transform.forward = moveDirection;
 
     moveDirection.y = 0;
     moveDirection = Vector3.Normalize(moveDirection);
     moveDirection *= moveSpeed;
+
+    // Turn then walk (turn is instant atm)
+    transform.forward = moveDirection;
 
     velocity.x = moveDirection.x;
     velocity.z = moveDirection.z;
@@ -103,19 +105,9 @@ public class EntityMover : MonoBehaviour {
   // Monster movement
   // ===================
 
-  // Starts monster movement
-  public void MoveStart(Vector3 destination) {
+  // Causes monster to move in direction
+  public void MoveTo(Vector3 destination) {
     moveDirection = destination - transform.position;
     moving = true;
-  }
-
-  // Stops monster movement
-  public void MoveStop() {
-    moving = false;
-  }
-
-  // Returns if monster is moving
-  public bool IsMoving() {
-    return moving;
   }
 }

@@ -187,7 +187,7 @@ public class Wand : MonoBehaviour {
           rayLength = 0f;
       }
 
-      // Follow closes unit
+      // Follow closest unit
       Unit closeUnit = null;
       float closeDistance = float.MaxValue;
 
@@ -235,9 +235,9 @@ public class Wand : MonoBehaviour {
         unitHoverBehavior.transform.parent.gameObject.SetActive(true);
 
         Monster targetMon = (Monster)targetUnit;
-        unitHoverBehavior.text = targetMon.currentBehaviour.ToString();
+        unitHoverBehavior.text = targetMon.task.ToString();
 
-        if (targetMon.owned) {
+        if (targetMon.joined) {
           unitHoverHappy.gameObject.SetActive(true);
           float r = 1f - (0.5f * Mathf.Clamp(targetMon.happy, 0f, 2f) / 2f);
           float g = 1f - (0.5f * Mathf.Clamp(targetMon.happy, -2f, 0f) / -2f);

@@ -7,11 +7,11 @@ public abstract class Monster : Unit {
 
   [Header("Monster Fields")]
   public EntityMover mover;
-  public bool owned = false;
+  public bool joined = false;
 
   // Monster models
   public GameObject monsterHead;
-  private GameObject modelOwned;
+  private GameObject modelJoined;
   private GameObject modelWild;
 
   // Monster data
@@ -26,27 +26,33 @@ public abstract class Monster : Unit {
 
   // Monster AI
   [Header("MonsterAI Fields")]
-  public MonsterBehaviour currentBehaviour;
-  public MonsterBehaviour[] behaviours;
-  public bool currentBehaviourDone = true;
+  public bool interrupt = false;
+  private MonsterAIMotivation[] motivations;
+
+  public bool hasGoal = false;
+  public MonsterAIGoal goal;
+
+  public bool hasTask = false;
+  public MonsterAITask task;
 
   public override void Awake() {
     base.Awake();
     mover = gameObject.GetComponent<EntityMover>();
-    modelOwned = transform.Find("ModelOwned").gameObject;
+    modelJoined = transform.Find("ModelJoined").gameObject;
     modelWild = transform.Find("ModelWild").gameObject;
-    SetBehaviours();
+  }
+
+  void Start() {
+    motivations = new MonsterAIMotivation[] {
+      new MonsterAIMotivationIdle(),
+      new MonsterAIMotivationJoin(),
+      new MonsterAIMotivationLeave()
+    };
   }
 
   void Update() {
-    // Update Behaviour
-    if (currentBehaviourDone)
-      StartNewBehaviour();
-
-    foreach (MonsterBehaviour behaviour in behaviours)
-      behaviour.timeSinceLastEnd += Time.deltaTime;
-
-    currentBehaviour.BehaviourUpdate(this);
+    // Update AI
+    UpdateAI();
 
     // Update Happy
     UpdateHappy();
@@ -55,8 +61,8 @@ public abstract class Monster : Unit {
   // Returns if garden meets visit conditions
   public abstract bool CanVisit();
 
-  // Returns if monster can be owned
-  public abstract bool CanOwn();
+  // Returns if monster can be joined
+  public abstract bool CanJoin();
 
   // Returns if garden board has a valid spawn
   public abstract bool CanSpawn();
@@ -64,12 +70,11 @@ public abstract class Monster : Unit {
   // Returns a valid spawn from garden board, given it exists
   public abstract SpawnPoint GetSpawn();
 
-  // Set if monster is owned
-  public void SetOwned(bool own) {
-
-    owned = own;
-    modelOwned.SetActive(owned);
-    modelWild.SetActive(!owned);
+  // Set if monster is joined
+  public void SetJoined(bool join) {
+    joined = join;
+    modelJoined.SetActive(joined);
+    modelWild.SetActive(!joined);
   }
 
   // Monster Happiness
@@ -106,58 +111,75 @@ public abstract class Monster : Unit {
 
   public abstract float GetHappyExternal();
 
-  // Monster Behaviours
+  // Monster AI
   // ====================================
 
-  // Chooses a new state, and starts it
-  private void StartNewBehaviour() {
+  // Update function for monster AI
+  private void UpdateAI() {
+    if (interrupt) {
+      Interrupt();
+    }
 
-    bool newState = false;
-    float maxPriority = float.MinValue;
+    if (hasGoal) {
+      if (hasTask) {
+        MonsterAITaskStatus taskStatus = task.Do(this);
 
-    foreach (MonsterBehaviour behaviour in behaviours) {
+        switch (taskStatus) {
+        case MonsterAITaskStatus.Complete:
+          hasTask = false;
+          break;
 
-      behaviour.behavioursSince += 1;
+        case MonsterAITaskStatus.Failed:
+          hasTask = false;
+          hasGoal = false;
+          break;
 
-      // Is behaviour valid
-      if (behaviour.IsResticted(this))
-        continue;
+        default:
+          break;
+        }
+      } else {
+        GetNewTask();
+      }
+    } else {
+      GetNewGoal();
+    }
+  }
 
-      // Find highest factor behaviour
-      float priority = behaviour.GetPriority(this);
+  // Interrupts current goal/task
+  private void Interrupt() {
+    hasGoal = false;
+    hasTask = false;
+    interrupt = false;
+  }
 
-      if (priority > maxPriority) {
-        maxPriority = priority;
-        currentBehaviour = behaviour;
-        newState = true;
+  private void GetNewTask() {
+
+    if (goal.IsDone()) {
+      hasGoal = false;
+    } else {
+      task = goal.Driver(this);
+      hasTask = true;
+    }
+  }
+
+  private void GetNewGoal() {
+    float bestPriority = 0;
+    MonsterAIMotivation bestMotivation = null;
+
+    foreach (MonsterAIMotivation m in motivations) {
+      float p = m.GetPriority(this);
+
+      if (p > bestPriority) {
+        bestMotivation = m;
+        bestPriority = p;
       }
     }
 
-    if (newState) {
-      currentBehaviour.StartBehaviour(this);
-      currentBehaviourDone = false;
+    if (bestMotivation != null) {
+      goal = bestMotivation.GenerateGoal(this);
+      hasGoal = true;
     }
   }
-
-  // End this monsters current behavior
-  public void EndBehaviour() {
-    currentBehaviour.timeSinceLastEnd = 0;
-    currentBehaviourDone = true;
-  }
-
-  // Set monster's behaviour states
-  public void SetBehaviours() {
-    behaviours = Behaviours();
-  }
-
-  // Interrupt a monster's behavior
-  public void InterruptBehaviour(float interruptPriority) {
-    if (currentBehaviour.interruptPriority <= interruptPriority)
-      EndBehaviour();
-  }
-
-  // Get set of monster behaviour states based on monster type
-  public abstract MonsterBehaviour[] Behaviours();
 
   // SAVING/LOADING monster
   // ====================================
@@ -169,10 +191,12 @@ public abstract class Monster : Unit {
 
   public override void SetFromSave(UnitSave save) {
     MonsterSave m = (MonsterSave)save;
-    SetOwned(m.owned);
+    SetJoined(m.joined);
 
-    behaviours = m.behaviours;
-    currentBehaviour = behaviours[m.currentBehaviourIndex];
-    currentBehaviourDone = m.currentBehaviourDone;
+    hasGoal = m.hasGoal;
+    goal = m.goal;
+
+    hasTask = m.hasTask;
+    task = m.task;
   }
 }

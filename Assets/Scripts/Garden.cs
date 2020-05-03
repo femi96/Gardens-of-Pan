@@ -230,7 +230,7 @@ public class Garden : MonoBehaviour {
       // 3: Ending save
       // Post save operations if necessary
 
-    } catch (System.FormatException e) { Debug.Log(e); }
+    } catch (System.Exception e) { Debug.LogError(e); }
   }
 
   // Load the garden from the most recent file, or create an empty garden

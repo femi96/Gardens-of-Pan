@@ -25,12 +25,12 @@ public class Worm : Monster {
   // Monster functions
   public override bool CanVisit() {
     GardenBoard board = garden.GetBoard();
-    return board.GetBlockTypeCount(BlockType.Dirt) >= 4 && garden.GetUnitTypeCount(typeof(Worm)) < 2;
+    return board.GetBlockTypeCount(BlockType.Dirt) >= 4f && garden.GetUnitTypeCount(typeof(Worm)) < 2;
   }
 
-  public override bool CanOwn() {
+  public override bool CanJoin() {
     GardenBoard board = garden.GetBoard();
-    return board.GetBlockTypeCount(BlockType.Dirt) >= 8;
+    return board.GetBlockTypeCount(BlockType.Dirt) >= 8f;
   }
 
   public override bool CanSpawn() {
@@ -67,35 +67,5 @@ public class Worm : Monster {
     happyFromUnits = Mathf.Clamp(happyFromUnits, 0f, 2f);
 
     return happyFromBlocks + happyFromUnits;
-  }
-
-  public override MonsterBehaviour[] Behaviours() {
-
-    List<MonsterBehaviour> behaviors = new List<MonsterBehaviour>();
-
-    MonsterBehaviour wander = new MonsterBehaviour("Wander", this);
-    wander.actions.Add(new ActionWander());
-    wander.factors.Add(new FactorRepeat(1f));
-    behaviors.Add(wander);
-
-    MonsterBehaviour wait = new MonsterBehaviour("Wait", this);
-    wait.actions.Add(new ActionTimeout(3f, 6f));
-    wait.factors.Add(new FactorRepeat(1f));
-    behaviors.Add(wait);
-
-    MonsterBehaviour leave = new MonsterBehaviour("Leave", this);
-    leave.actions.Add(new ActionLeave());
-    leave.factors.Add(new FactorTimeout(10f, 30f));
-    leave.restrictors.Add(new RestrictorWildOnly());
-    leave.behaviourText = "Leaving...";
-    behaviors.Add(leave);
-
-    MonsterBehaviour join = new MonsterBehaviour("Join", this);
-    join.actions.Add(new ActionJoin(2f));
-    join.factors.Add(new FactorRepeat(10f));
-    join.restrictors.Add(new RestrictorWildOnly());
-    behaviors.Add(join);
-
-    return behaviors.ToArray();
   }
 }

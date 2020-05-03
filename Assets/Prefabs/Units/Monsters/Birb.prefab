@@ -137,7 +137,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4305023327277312}
   m_Layer: 0
-  m_Name: ModelOwned
+  m_Name: ModelJoined
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1150,7 +1150,7 @@ MonoBehaviour:
   garden: {fileID: 0}
   board: {fileID: 0}
   prefabID: 2
-  unitID: 12796
+  unitID: 13378
   mover: {fileID: 114120124692826524}
   owned: 0
   monsterHead: {fileID: 1580196513294316}

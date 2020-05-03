@@ -5,22 +5,22 @@ using UnityEngine;
 [System.Serializable]
 public class MonsterSave : UnitSave {
 
-  public bool owned = false;
+  public bool joined = false;
 
-  public bool currentBehaviourDone = true;
-  public MonsterBehaviour[] behaviours = new MonsterBehaviour[0];
+  public bool hasGoal = false;
+  public MonsterAIGoal goal;
 
-  public int currentBehaviourIndex = 0;
+  public bool hasTask = false;
+  public MonsterAITask task;
 
   // Creates MonsterSave for a given monster
   public MonsterSave(Monster m) : base(m) {
-    owned = m.owned;
-    behaviours = m.behaviours;
-    currentBehaviourDone = m.currentBehaviourDone;
+    joined = m.joined;
 
-    for (int i = 0; i < m.behaviours.Length; i++) {
-      if (m.currentBehaviour == m.behaviours[i])
-        currentBehaviourIndex = i;
-    }
+    hasGoal = m.hasGoal;
+    goal = m.goal;
+
+    hasTask = m.hasTask;
+    task = m.task;
   }
 }

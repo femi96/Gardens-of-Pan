@@ -24,13 +24,15 @@ public class Birb : Monster {
 
   // Monster functions
   public override bool CanVisit() {
-    int blocks = board.GetBlockTypeCount(BlockType.Grass)
-                 + board.GetBlockTypeCount(BlockType.Wet);
-    return blocks >= 4 && garden.GetUnitTypeCount(typeof(Birb)) < 2;
+    float blocks = board.GetBlockTypeCount(BlockType.Grass)
+                   + board.GetBlockTypeCount(BlockType.Wet);
+    return blocks >= 4f && garden.GetUnitTypeCount(typeof(Birb)) < 2;
   }
 
-  public override bool CanOwn() {
-    return board.GetBlockTypeCount(BlockType.Grass) >= 8;
+  public override bool CanJoin() {
+    float blocks = board.GetBlockTypeCount(BlockType.Grass)
+                   + board.GetBlockTypeCount(BlockType.Wet);
+    return blocks >= 8f;
   }
 
   public override bool CanSpawn() {
@@ -67,37 +69,5 @@ public class Birb : Monster {
     happyFromUnits = Mathf.Clamp(happyFromUnits, 0f, 2f);
 
     return happyFromBlocks + happyFromUnits;
-  }
-
-  public override MonsterBehaviour[] Behaviours() {
-
-    List<MonsterBehaviour> behaviors = new List<MonsterBehaviour>();
-
-    MonsterBehaviour wander = new MonsterBehaviour("Wander", this);
-    wander.actions.Add(new ActionWander());
-    wander.actions.Add(new ActionLookAtCamera(90f, 2f));
-    wander.factors.Add(new FactorRepeat(1f));
-    behaviors.Add(wander);
-
-    MonsterBehaviour wait = new MonsterBehaviour("Wait", this);
-    wait.actions.Add(new ActionTimeout(3f, 6f));
-    wait.actions.Add(new ActionLookAtCamera(90f, 2f));
-    wait.factors.Add(new FactorRepeat(1f));
-    behaviors.Add(wait);
-
-    MonsterBehaviour leave = new MonsterBehaviour("Leave", this);
-    leave.actions.Add(new ActionLeave());
-    leave.factors.Add(new FactorTimeout(10f, 30f));
-    leave.restrictors.Add(new RestrictorWildOnly());
-    leave.behaviourText = "Leaving...";
-    behaviors.Add(leave);
-
-    MonsterBehaviour join = new MonsterBehaviour("Join", this);
-    join.actions.Add(new ActionJoin(2f));
-    join.factors.Add(new FactorRepeat(10f));
-    join.restrictors.Add(new RestrictorWildOnly());
-    behaviors.Add(join);
-
-    return behaviors.ToArray();
   }
 }
