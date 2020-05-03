@@ -48,7 +48,7 @@ public class BlockberryPlant : Plant {
     }
   }
 
-  public override void PlantBehavior() {
+  public override void PlantUpdate() {
 
     if (plantLoadedFromFile) {
       // Load produce

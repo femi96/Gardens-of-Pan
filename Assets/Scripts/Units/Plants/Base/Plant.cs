@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class Plant : Unit {
-  // Game controller that handles a plant's state and behavior
+  // Handles a plant's state and behavior
 
   [Header("Plant Fields")]
   public bool grown;
@@ -22,14 +22,14 @@ public abstract class Plant : Unit {
   void Update() {
     timeActive += Time.deltaTime;
 
-    PlantBehavior();
+    PlantUpdate();
   }
 
   // Plants behavior on load (disabling objects etc)
   public abstract void PlantAwake();
 
   // Plant behavior per frame
-  public abstract void PlantBehavior();
+  public abstract void PlantUpdate();
 
   // Returns a plants width for suffocation
   public abstract float PlantRadius();
@@ -60,7 +60,7 @@ public abstract class Plant : Unit {
     return toClose;
   }
 
-  // SAVING/LOADING plant
+  // Saving/Loading plant
   // =======================
 
   public override UnitSave GetUnitSave() {

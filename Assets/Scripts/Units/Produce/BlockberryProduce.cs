@@ -23,7 +23,7 @@ public class BlockberryProduce : Produce {
   }
 
   // Produce functions
-  public override void ProduceBehavior() {
+  public override void ProduceUpdate() {
 
     if (timeActive > 90f)
       Break();

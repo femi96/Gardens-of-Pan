@@ -23,7 +23,7 @@ public class SphFlowerProduce : Produce {
   }
 
   // Produce functions
-  public override void ProduceBehavior() {
+  public override void ProduceUpdate() {
 
     if (timeActive > 30f)
       Break();

@@ -34,7 +34,7 @@ public class SphFlowerPlant : Plant {
     SetGrowthStage(0);
   }
 
-  public override void PlantBehavior() {
+  public override void PlantUpdate() {
 
     // If not grown, grow
     if (!grown)

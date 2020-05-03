@@ -31,7 +31,7 @@ public class SquarerootPlant : Plant {
     root.SetActive(false);
   }
 
-  public override void PlantBehavior() {
+  public override void PlantUpdate() {
 
     // If not grown, grow
     if (!grown)

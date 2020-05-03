@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class Unit : MonoBehaviour {
-  // Game controller that handles a unit's state and behavior
+  // Handles a unit's state and behavior
 
   [Header("Unit Fields")]
   public Garden garden;

@@ -23,7 +23,7 @@ public class SquarerootProduce : Produce {
   }
 
   // Produce functions
-  public override void ProduceBehavior() {
+  public override void ProduceUpdate() {
 
     if (timeActive > 45f)
       Break();

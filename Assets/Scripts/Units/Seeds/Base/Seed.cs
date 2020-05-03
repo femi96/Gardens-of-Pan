@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class Seed : Unit {
-  // Game controller that handles a seed's state and behavior
+  // Handles a seed's state and behavior
 
   [Header("Seed Fields")]
   public GameObject model;
@@ -18,10 +18,10 @@ public abstract class Seed : Unit {
   void Update() {
     timeActive += Time.deltaTime;
 
-    SeedBehavior();
+    SeedUpdate();
   }
 
-  public abstract void SeedBehavior();
+  public abstract void SeedUpdate();
 
   public abstract void Plant();
 

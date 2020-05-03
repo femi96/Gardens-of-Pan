@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class Produce : Unit {
-  // Game controller that handles a produce's state and behavior
+  // Handles a produce's state and behavior
 
   [Header("Produce Fields")]
   public EntityMover entityMover;
@@ -21,10 +21,10 @@ public abstract class Produce : Unit {
     timeActive += Time.deltaTime;
     entityMover.locked = held;
 
-    ProduceBehavior();
+    ProduceUpdate();
   }
 
-  public abstract void ProduceBehavior();
+  public abstract void ProduceUpdate();
 
   public void Break() {
     garden.RemoveUnit(this);

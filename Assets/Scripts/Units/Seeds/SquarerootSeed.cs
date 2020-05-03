@@ -25,7 +25,7 @@ public class SquarerootSeed : Seed {
   }
 
   // Seed functions
-  public override void SeedBehavior() {
+  public override void SeedUpdate() {
     Block block = board.GetBlock(transform.position);
     bool validSurface = block.height == 0;
 

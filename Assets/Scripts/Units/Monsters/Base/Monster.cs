@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class Monster : Unit {
-  // Game controller that handles a monster's state and behaviour
+  // Handles a monster's state and behaviour
 
   [Header("Monster Fields")]
   public EntityMover mover;
@@ -181,7 +181,7 @@ public abstract class Monster : Unit {
     }
   }
 
-  // SAVING/LOADING monster
+  // Saving/Loading monster
   // ====================================
 
   public override UnitSave GetUnitSave() {
