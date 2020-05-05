@@ -4,5 +4,5 @@ using UnityEngine;
 
 public class VersionConstants {
 
-  public const string GameVersion = "0.0.4 - 7/3/18";
+  public const string GameVersion = "0.1.0 - 2020/05/04";
 }
