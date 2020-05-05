@@ -27,17 +27,14 @@ public class MonsterAITaskGoTo : MonsterAITask {
     if (AtPoint(mon, dest))
       return MonsterAITaskStatus.Complete;
 
-    /* TODO: Add Pathing
     // If no valid path, generate new path
-    if (!IsPathValid(mon, pathToDest)) {
-      pathToDest = GetPath(mon, dest);
+    if (pathToDest == null) {
+      List<Vector3> path = mon.garden.GetBoard().GetPath(mon, dest);
+      pathToDest = new List<SerializableVector3>();
 
-      // If could not generate valid path, fail
-      if (!IsPathValid(mon, pathToDest))
-        return MonsterAITaskStatus.Failed;
+      foreach (Vector3 v in path)
+        pathToDest.Add(v);
     }
-    */
-    pathToDest = new List<SerializableVector3> { dest };
 
     // Move to voxel along path
     mon.mover.MoveTo(pathToDest[0]);

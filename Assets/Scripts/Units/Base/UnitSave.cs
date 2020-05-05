@@ -5,8 +5,8 @@ using UnityEngine;
 [System.Serializable]
 public class UnitSave {
   // Mutable data type for a unit's save data
-  //    Need to store all unit fields as public.
-  //    This is not data safe so instances of unit save should not be passed around.
+  //  Need to store all unit fields as public.
+  //  This is not data safe so instances of unit save should not be passed around.
 
   public int prefabID = 0;
   public int unitID = -1;

@@ -342,4 +342,17 @@ public class GardenBoard : MonoBehaviour {
     // Create new SpawnPoint
     spawnPointMap[x, z] = new SpawnPoint(b, posPoint);
   }
+
+  // Pathing
+  // ====================
+
+  private float GetPathHeuristic(Vector3 dest, Vector3 pos) {
+    return (dest - pos).magnitude;
+  }
+
+  // Returns path to dest as list of positions that monster can follow
+  // TODO: Implement weighted pathing so that monster stays on preferred terrain
+  public List<Vector3> GetPath(Monster mon, Vector3 dest) {
+    return new List<Vector3> { dest };
+  }
 }

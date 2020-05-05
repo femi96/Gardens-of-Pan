@@ -18,6 +18,8 @@ public class MonsterAIGoalWander : MonsterAIGoal {
     Vector3 dest = start + 3 * Random.onUnitSphere;
     float limit = (mon.garden.gardenSize / 2f);
 
+    dest = new Vector3(dest.x, 0, dest.z);
+
     if (dest.x > limit)
       dest = new Vector3(2 * limit - dest.x, dest.y, dest.z);
 

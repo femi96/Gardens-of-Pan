@@ -21,4 +21,8 @@ public struct SerializableVector3 {
   public static implicit operator SerializableVector3(Vector3 v) {
     return new SerializableVector3(v.x, v.y, v.z);
   }
+
+  public override string ToString() {
+    return ((Vector3)this).ToString();
+  }
 }

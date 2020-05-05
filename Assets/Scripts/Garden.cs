@@ -129,7 +129,7 @@ public class Garden : MonoBehaviour {
           file.Close();
 
           saves.Add(save);
-        } catch (System.FormatException e) { Debug.Log(e); }
+        } catch (System.Exception e) { Debug.LogError(e); }
       }
     }
 
@@ -254,7 +254,7 @@ public class Garden : MonoBehaviour {
           SetGardenFromSave(save);
           return;
         }
-      } catch (System.FormatException e) { Debug.Log(e); }
+      } catch (System.Exception e) { Debug.LogError(e); }
     }
 
     // If no recent file, try to find another file, and load the first
