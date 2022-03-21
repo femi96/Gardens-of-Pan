@@ -7,101 +7,71 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class Garden : MonoBehaviour {
-  // Handles garden data, includes
-  //  size/name of garden
-  //  saving/loading garden
-  //  garden mode of game/garden
-  //  units in garden
+  /*
+  Handles garden meta data, file management, & game mode
+  */
 
   private GardenBoard gardenBoard;
-  private GardenMode gardenMode;
+  private GameMode gameMode;
 
-  private UnitPrefabsFiller filler;
+  [Header("Debug")]
+  public bool debugSaveGarden = false;
 
-  // Garden meta:
   [Header("Garden Meta")]
   public string gardenName;
-  public int gardenID;
-  public float gardenSize = 4;  // Garden dimensions is 4x4 in meters
-  public bool saveGarden = false;
-  public bool noGarden = true;
-  public GameObject wandCamera;
+  public int gardenId;
+  public int gardenSize = 25;
+  private bool gardenLoaded = false;
 
-  // Garden contents:
-  private float unitSizeLimit = 20;
-  private List<Unit> units = new List<Unit>();  // List of units in garden
-  private Transform unitsCont; // GameObject container for unit gameObjects
-
-  // Garden mode gameobjects:
-  [Header("Garden UI")]
+  [Header("Game Mode")]
   public GameObject mainMenuUI;
   public GameObject mainMenuCamera;
   public GameObject playUI;
   public GameObject playWand;
   public Text currentGardenText;
 
-  // Garden saving
-  private float saveTime = 2f;
-  private const float saveInterval = 60; // Saves every 60s
-
-  private string recentSaveFilePath;
+  [Header("Saving")]
   public GameObject saveUI;
+  private float saveTime = 5f;
+  private string recentSaveFilePath;
+  private const float AutoSaveInterval = 60;
 
   void Awake() {
-
-    // Awake with components
     gardenBoard = GetComponent<GardenBoard>();
-
     recentSaveFilePath = Application.persistentDataPath + "/recent_garden.path";
-    unitsCont = transform.Find("Units");
-
-    filler = GameObject.Find("UnitPrefabs").GetComponent<UnitPrefabsFiller>();
-    filler.Fill();
-
-    // Try load garden so title can start
-    SetGardenMode(GardenMode.Title);
-    LoadGarden();
+    SetGameMode(GameMode.Title);
+    TryInitialLoad();
   }
 
   void Update() {
+    if (gameMode == GameMode.Play) {
+      // Autosave
+      saveTime += Time.deltaTime;
+      saveUI.SetActive(saveTime <= 2f);
 
-    // Autosave on interval
-    saveTime += Time.deltaTime;
-
-    if (saveGarden || saveTime >= saveInterval) {
-      SaveGarden();
-      saveGarden = false;
-      saveTime -= saveInterval;
-      saveTime = Mathf.Max(saveTime, 0);
-    }
-
-    saveUI.SetActive(saveTime <= 2f);
-
-    // Fastforward
-    if (gardenMode == GardenMode.Play) {
-      if (PanInputs.FastForward())
-        Time.timeScale = 2f;
-      else
-        Time.timeScale = 1f;
+      if (debugSaveGarden || saveTime >= AutoSaveInterval) {
+        SaveGarden();
+        debugSaveGarden = false;
+        saveTime = 0;
+      }
     }
   }
 
-  // Saving/loading garden
-  // ===========================================
+  /*
+  File management
+  */
 
-  // Get file path for garden from its name and ID
-  private string GetFilePath(string name, int iD) {
-    return Application.persistentDataPath + "/garden_" + name + "_" + iD + ".garden";
+  private string GetFilePath(string name, int id) {
+    return Application.persistentDataPath + "/garden_" + name + "_" + id + ".garden";
   }
 
-  // Get title for garden from its name and ID
-  public string GetGardenTitle(string name, int iD) {
+  public string GetGardenTitle(string name, int id) {
     string title = name;
 
-    if (iD > 0)
+    if (id > 0)
       title += " ";
 
-    for (int i = 0; i < iD; i++) {
+    for (int i = 0; i < id; i++) {
       title += "I";
     }
 
@@ -109,12 +79,11 @@ public class Garden : MonoBehaviour {
   }
 
   public string GetGardenTitle() {
-    return GetGardenTitle(gardenName, gardenID);
+    return GetGardenTitle(gardenName, gardenId);
   }
 
   // Get a list of all garden save files
   public List<GardenSave> GetAllGardenSaves() {
-
     DirectoryInfo info = new DirectoryInfo(Application.persistentDataPath);
     FileInfo[] files = info.GetFiles("garden_*.garden");
     List<GardenSave> saves = new List<GardenSave>();
@@ -127,7 +96,6 @@ public class Garden : MonoBehaviour {
           FileStream file = File.Open(fileInfo.FullName, FileMode.Open);
           GardenSave save = (GardenSave)bf.Deserialize(file);
           file.Close();
-
           saves.Add(save);
         } catch (System.Exception e) { Debug.LogError(e); }
       }
@@ -138,69 +106,36 @@ public class Garden : MonoBehaviour {
 
   // Creates a garden save representation of this garden
   private GardenSave CreateGardenSave() {
-
     GardenSave save = new GardenSave();
     save.gardenName = gardenName;
-    save.gardenID = gardenID;
-    save.blockMap = gardenBoard.GetBlockMap();
-
-    List<UnitSave> unitSaves = new List<UnitSave>();
-
-    foreach (Unit unit in units)
-      unitSaves.Add(unit.GetUnitSave());
-
-    save.unitSaves = unitSaves.ToArray();
-
+    save.gardenId = gardenId;
+    save.voxelMap = gardenBoard.GetVoxelMap();
     return save;
   }
 
   // Sets this garden from a garden save representation
   public void SetGardenFromSave(GardenSave save) {
-
     gardenName = save.gardenName;
-    gardenID = save.gardenID;
-    gardenBoard.SetBlockMap(save.blockMap);
-
-    foreach (Unit unit in units)
-      Destroy(unit.gameObject);
-
-    units = new List<Unit>();
-
-    foreach (UnitSave unitSave in save.unitSaves) {
-      GameObject go = Instantiate(UnitPrefabs.PrefabFromID(unitSave.prefabID), unitSave.position, unitSave.rotation, unitsCont);
-      Unit unit = go.GetComponent<Unit>();
-      units.Add(unit);
-      unit.SetFromSave(unitSave);
-    }
-
-    noGarden = false;
+    gardenId = save.gardenId;
+    gardenBoard.SetVoxelMap(save.voxelMap);
+    gardenLoaded = true;
     currentGardenText.text = "Current Garden: " + GetGardenTitle();
   }
 
   // Setup garden as a new garden with given name
   public void NewGarden(string name) {
-
-    // Setup garden class
     gardenName = name;
-    gardenID = 0;
+    gardenId = 0;
 
-    string filePath = GetFilePath(gardenName, gardenID);
+    string filePath = GetFilePath(gardenName, gardenId);
 
     while (File.Exists(filePath)) {
-      gardenID += 1;
-      filePath = GetFilePath(gardenName, gardenID);
+      gardenId += 1;
+      filePath = GetFilePath(gardenName, gardenId);
     }
 
     gardenBoard.NewBoard();
-
-    foreach (Unit unit in units)
-      Destroy(unit.gameObject);
-
-    units = new List<Unit>();
-
-    noGarden = false;
-
-    // Create save file
+    gardenLoaded = true;
     SaveGarden();
   }
 
@@ -209,7 +144,7 @@ public class Garden : MonoBehaviour {
     try {
 
       // 0: Get file path
-      string saveFilePath = GetFilePath(gardenName, gardenID);
+      string saveFilePath = GetFilePath(gardenName, gardenId);
 
       // 1: Create save instance
       GardenSave save = CreateGardenSave();
@@ -234,7 +169,7 @@ public class Garden : MonoBehaviour {
   }
 
   // Load the garden from the most recent file, or create an empty garden
-  public void LoadGarden() {
+  public void TryInitialLoad() {
 
     // Try to find recent save file path
     if (File.Exists(recentSaveFilePath)) {
@@ -266,17 +201,17 @@ public class Garden : MonoBehaviour {
     }
 
     // If no garden files at all
-    noGarden = true;
+    gardenLoaded = false;
   }
 
   // Delete garden save file given garden save
   public void DeleteGarden(GardenSave save) {
-    string filePath = GetFilePath(save.gardenName, save.gardenID);
+    string filePath = GetFilePath(save.gardenName, save.gardenId);
     Debug.Log("Garden " + save.gardenName + " deleted from " + filePath);
     File.Delete(filePath);
 
     // Deleted current garden
-    if (save.gardenName == gardenName && save.gardenID == gardenID) {
+    if (save.gardenName == gardenName && save.gardenId == gardenId) {
 
       // Try to load next
       List<GardenSave> saves = GetAllGardenSaves();
@@ -287,126 +222,30 @@ public class Garden : MonoBehaviour {
       }
 
       // Cant load next, no garden
-      noGarden = true;
+      gardenLoaded = false;
       // also clear garden
     }
   }
 
-  // Garden mode of game/garden
-  // =============================
+  public bool Loaded() {
+    return gardenLoaded;
+  }
+
+  /*
+  Game mode
+  */
 
   // Set garden mode and update related
-  public void SetGardenMode(GardenMode m) {
-    gardenMode = m;
-    mainMenuUI.SetActive(gardenMode == GardenMode.Title);
-    mainMenuCamera.SetActive(gardenMode == GardenMode.Title);
-    playUI.SetActive(gardenMode == GardenMode.Play);
-    playWand.SetActive(gardenMode == GardenMode.Play);
+  public void SetGameMode(GameMode m) {
+    gameMode = m;
+    mainMenuUI.SetActive(gameMode == GameMode.Title);
+    mainMenuCamera.SetActive(gameMode == GameMode.Title);
+    playUI.SetActive(gameMode == GameMode.Play);
+    playWand.SetActive(gameMode == GameMode.Play);
 
-    if (gardenMode == GardenMode.Play)
+    if (gameMode == GameMode.Play)
       Time.timeScale = 1f;
     else
       Time.timeScale = 0f;
-  }
-
-  // Units in garden
-  // ==================
-
-  // Get total size of all units
-  public float UnitSizeCount() {
-
-    float sizeTotal = 0;
-
-    foreach (Unit unit in units) {
-      sizeTotal += unit.GetSize();
-    }
-
-    return sizeTotal;
-  }
-
-  // Get remaining room for new units
-  public float FreeRoom() {
-    return unitSizeLimit - UnitSizeCount();
-  }
-
-  // Returns if garden has enough room to add unity
-  public bool RoomForUnit(Unit unit) {
-    return FreeRoom() >= unit.GetSize();
-  }
-
-  // Create monster from prefab newMonster and add it to garden at spawn
-  public void AddMonster(GameObject newMonster, SpawnPoint spawn) {
-
-    GameObject go = Instantiate(newMonster, spawn.GetPosition(), spawn.GetRotation(), unitsCont);
-    go.transform.position += new Vector3(0, go.GetComponent<EntityMover>().height, 0);
-
-    Unit unit = go.GetComponent<Unit>();
-    units.Add(unit);
-  }
-
-  // Remove a unit from the garden, and destroy it's gameObject
-  public void RemoveUnit(Unit unit) {
-    units.Remove(unit);
-    Destroy(unit.gameObject);
-  }
-
-  // Try to add a unit at a position
-  public bool TryAddUnit(GameObject unitPrefab, Vector3 pos, Quaternion rot) {
-    Unit unit = unitPrefab.GetComponent<Unit>();
-
-    if (RoomForUnit(unit) && gardenBoard.InGarden(pos)) {
-      GameObject go = Instantiate(unitPrefab, pos, rot, unitsCont);
-      unit = go.GetComponent<Unit>();
-      units.Add(unit);
-      return true;
-    }
-
-    return false;
-  }
-
-  // Gets the first unit with unit id id
-  public Unit GetUnit(int id) {
-    foreach (Unit unit in units)
-      if (unit.GetID() == id)
-        return unit;
-
-    return null;
-  }
-
-  // Gets the last unit added to the garden
-  public Unit GetLastUnit() {
-    return units[units.Count - 1];
-  }
-
-  // Get garden's board
-  public GardenBoard GetBoard() {
-    return gardenBoard;
-  }
-
-  // Get number of units of type in garden
-  public int GetUnitTypeCount(Type t) {
-
-    int count = 0;
-
-    foreach (Unit unit in units) {
-
-      if (t.IsAssignableFrom(unit.GetType()))
-        count += 1;
-    }
-
-    return count;
-  }
-
-  // Get list of units of type in garden
-  public List<Unit> GetUnitListOfType(Type t) {
-    List<Unit> unitsOfType = new List<Unit>();
-
-    foreach (Unit unit in units) {
-
-      if (t.IsAssignableFrom(unit.GetType()))
-        unitsOfType.Add(unit);
-    }
-
-    return unitsOfType;
   }
 }
